@@ -1,0 +1,11 @@
+﻿global using AuthService.Application.Common.Interfaces;
+global using AuthService.Domain.Entities;
+global using AuthService.Domain.Enums;
+global using Common.Application.Interfaces;
+global using Common.Contracts.Events;
+global using Common.Domain.Exceptions;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using MassTransit;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;

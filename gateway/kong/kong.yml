@@ -1,0 +1,36 @@
+﻿_format_version: "3.0"
+
+services:
+  - name: auth-service
+    url: http://auth-service:8080
+    routes:
+      - name: auth-public
+        paths: [ "/auth" ]
+        strip_path: false
+
+  - name: user-service
+    url: http://user-service:8080
+    routes:
+      - name: user-protected
+        paths: ["/users"]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+consumers:
+  - username: auth-service-issuer
+    jwt_secrets:
+      - algorithm: RS256
+        key: "https://auth.shopee.com"
+        rsa_public_key: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAksp+vx/IM8XpeKahaxAk
+          1/3jST0OrKQSIt9ip9FRWfTlmKy63EyZPoENJXAwX+2PpId39HugpYioCs6sx/4P
+          h4X0N7mGuNNY6IIJoLTRgGG36/tv/N/P2pYvkbMQTFjNyzQhB9qXxlpeecbVdtMz
+          z17LVBfMk6qa23d4U3WHtKBx1CtiwxC7GiXmhT8q0ga371GkFSSTO/691W3eb8p0
+          2gRr2Oal/EymjTaQIYZq4Hk8pp57H9hkvxeCJYqtRcf26ZhhTYoVkYjb1b82Gnbw
+          uWZlvFTIdY5bgwib7Zxs47sRvGsXaJWFzs+lFTdk9isn/yhS1e1Gs2kHX8cI0Lx2
+          CwIDAQAB
+          -----END PUBLIC KEY-----
+        secret: "unused"
+          

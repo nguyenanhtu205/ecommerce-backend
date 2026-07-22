@@ -1,0 +1,54 @@
+﻿# IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Node.js
+node_modules/
+dist/
+coverage/
+.npm/
+.pnpm-store/
+
+# .NET
+bin/
+obj/
+.vs/
+**/appsettings.Development.json
+
+# Go
+*.exe
+*.test
+*.out
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# Build / Temp
+tmp/
+temp/
+.cache/
+
+# Docker
+docker-compose.override.yml
+
+# Keys
+**/keys/*.pem
