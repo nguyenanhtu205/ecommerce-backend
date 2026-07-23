@@ -4,12 +4,14 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_MULTIPLE_DATABASES: auth_db,user_db,seller_db,inventory_db,order_db,payment_db,shipping_db,notification_db,wishlist_db,promotion_db
+      POSTGRES_MULTIPLE_DATABASES: auth_db,user_db,seller_db,inventory_db,order_db,payment_db,shipping_db,notification_db,wishlist_db,promotion_db,media_db
     ports:
       - '5432:5432'
     volumes:
       - pgdata:/var/lib/postgresql
       - ./infra/postgres/init-multi-db.sh:/docker-entrypoint-initdb.d/init-multi-db.sh
+      - ./infra/postgres/init-notification-db.sh:/docker-entrypoint-initdb.d/init-notification-db.sh
+      - ./infra/postgres/migrations/notification-service/0001_init.sql:/docker-entrypoint-initdb.d/notification/0001_init.sql
   
   #  mongo:
   #    image: mongo:7
