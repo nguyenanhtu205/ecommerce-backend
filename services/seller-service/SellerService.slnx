@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="src/SellerService.API/SellerService.API.csproj" />
+  <Project Path="src/SellerService.Application/SellerService.Application.csproj" />
+  <Project Path="src/SellerService.Domain/SellerService.Domain.csproj" />
+  <Project Path="src/SellerService.Infrastructure/SellerService.Infrastructure.csproj" />
 </Solution>

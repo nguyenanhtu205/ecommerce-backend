@@ -12,11 +12,38 @@ services:
     url: http://user-service:8080
     routes:
       - name: user-protected
-        paths: ["/users"]
+        paths: ["/user"]
         strip_path: false
         plugins:
           - name: jwt
-
+            
+  - name: seller-service
+    url: http://seller-service:8080
+    routes:
+      - name: seller-protected
+        paths: [ "/seller" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            
+  - name: notification-service
+    url: http://notification-service:8080
+    routes:
+      - name: notification-protected
+        paths: [ "/notification" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            
+  - name: media-service
+    url: http://media-service:8080
+    routes:
+      - name: media-protected
+        paths: [ "/media" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            
 consumers:
   - username: auth-service-issuer
     jwt_secrets:
@@ -33,4 +60,3 @@ consumers:
           CwIDAQAB
           -----END PUBLIC KEY-----
         secret: "unused"
-          

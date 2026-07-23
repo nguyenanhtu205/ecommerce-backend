@@ -2,8 +2,8 @@ services:
   postgres:
     image: postgres:18-alpine
     environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
       POSTGRES_MULTIPLE_DATABASES: auth_db,user_db,seller_db,inventory_db,order_db,payment_db,shipping_db,notification_db,wishlist_db,promotion_db,media_db
     ports:
       - '5432:5432'
@@ -27,18 +27,41 @@ services:
     ports:
       - '6379:6379'
   
-  #  minio:
-  #    image: minio/minio:RELEASE.2025-10-15T17-29-55Z
-  #    command: server /data --console-address ":9001"
-  #    environment:
-  #      MINIO_ROOT_USER: minioadmin
-  #      MINIO_ROOT_PASSWORD: minioadmin
-  #    ports:
-  #      - '9000:9000'
-  #      - '9001:9001'
-  #    volumes:
-  #      - miniodata:/data
+  redis-insight:
+    image: redis/redisinsight:latest
+    container_name: redis-insight
+    ports:
+      - "5540:5540"
+    volumes:
+      - redisinsightdata:/data
+    depends_on:
+      - redis
   
+  minio:
+    image: minio/minio:RELEASE.2025-09-07T16-13-09Z
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - miniodata:/data
+
+  minio-init:
+    image: minio/mc:RELEASE.2025-08-13T08-35-41Z
+    depends_on:
+      - minio
+    entrypoint:
+      - /bin/sh
+      - -c
+      - |
+        until mc alias set local http://minio:9000 minioadmin minioadmin; do
+          echo "waiting for minio..."; sleep 2;
+        done
+        mc mb --ignore-existing local/media      
+        
   kong:
     image: kong:3.6
     environment:
@@ -55,6 +78,8 @@ services:
       - auth-service
       - user-service
       - notification-service
+      - seller-service
+      - media-service
   
   kafka:
     image: apache/kafka:4.1.0
@@ -90,13 +115,28 @@ services:
     volumes:
       - ./infra/kafka/create-topics.sh:/create-topics.sh:ro
     entrypoint: [ "/bin/bash", "/create-topics.sh" ]
-
+    
+  akhq:
+    image: tchiotludo/akhq:latest
+    ports:
+      - "8082:8080"
+    depends_on:
+      kafka:
+        condition: service_healthy
+    environment:
+      AKHQ_CONFIGURATION: |
+        akhq:
+          connections:
+            local:
+              properties:
+                bootstrap.servers: "kafka:9092"
+        
   auth-service:
     build:
       context: .
       dockerfile: services/auth-service/Dockerfile
     environment:
-      ConnectionStrings__DefaultConnection: Host=postgres;Database=auth_db;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=auth_db;Username=root;Password=root
       Jwt__Issuer: https://auth.shopee.com
       Jwt__Audience: shopee-api
       Jwt__AccessTokenExpirationMinutes: 15
@@ -121,7 +161,7 @@ services:
       context: .
       dockerfile: services/user-service/Dockerfile
     environment:
-      ConnectionStrings__DefaultConnection: Host=postgres;Database=user_db;Username=${POSTGRES_USER};Password=${POSTGRES_PASSWORD}
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=user_db;Username=root;Password=root
       Kafka__BootstrapServers: kafka:9092
     volumes:
       - ./services/user-service/keys:/app/keys:ro
@@ -133,13 +173,27 @@ services:
       kafka-init:
         condition: service_completed_successfully
 
+  seller-service:
+    build:
+      context: .
+      dockerfile: services/seller-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=seller_db;Username=root;Password=root
+    volumes:
+      - ./services/seller-service/keys:/app/keys:ro
+    ports:
+      - '5003:8080'
+    depends_on:
+      postgres:
+        condition: service_started
+
   notification-service:
     build:
       context: ./services/notification-service
       dockerfile: Dockerfile
     environment:
       PORT: 3000
-      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/notification_db
+      DATABASE_URL: postgresql://root:root@postgres:5432/notification_db
       KAFKA_BROKERS: kafka:9092
       KAFKA_CLIENT_ID: notification-service
       KAFKA_GROUP_ID: notification-service-group
@@ -156,8 +210,46 @@ services:
       kafka-init:
         condition: service_completed_successfully
 
+  media-service:
+    build:
+      context: .
+      dockerfile: services/media-service/Dockerfile
+      target: runtime
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://root:root@postgres:5432/media_db?sslmode=disable
+      MINIO_ENDPOINT: minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+      MINIO_BUCKET: media
+      MINIO_USE_SSL: "false"
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_TOPIC: media-events
+    ports:
+      - '5007:8080'
+    depends_on:
+      media-migrate:
+        condition: service_completed_successfully
+      minio-init:
+        condition: service_completed_successfully
+      kafka-init:
+        condition: service_completed_successfully
+
+  media-migrate:
+    build:
+      context: .
+      dockerfile: services/media-service/Dockerfile
+      target: migrate
+    environment:
+      DATABASE_URL: postgres://root:root@postgres:5432/media_db?sslmode=disable
+    depends_on:
+      postgres:
+        condition: service_started
+    command: [ "up" ]
+
 volumes:
   pgdata:
   kafkadata:
 #  mongodata:
-#  miniodata:
+  miniodata:
+  redisinsightdata:

@@ -1,0 +1,318 @@
+basePath: /media
+definitions:
+  httpapi.assetResponse:
+    properties:
+      bucket:
+        type: string
+      content_type:
+        type: string
+      created_at:
+        type: string
+      duration_seconds:
+        type: integer
+      height:
+        type: integer
+      id:
+        type: string
+      media_type:
+        type: string
+      object_key:
+        type: string
+      public_url:
+        type: string
+      size_bytes:
+        type: integer
+      status:
+        type: string
+      uploaded_by:
+        type: string
+      width:
+        type: integer
+    type: object
+  httpapi.attachmentResponse:
+    properties:
+      created_at:
+        type: string
+      id:
+        type: string
+      media_asset_id:
+        type: string
+      owner_id:
+        type: string
+      owner_service:
+        type: string
+      owner_type:
+        type: string
+      position:
+        type: integer
+      role:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  httpapi.confirmUploadRequest:
+    properties:
+      duration_seconds:
+        type: integer
+      height:
+        type: integer
+      width:
+        type: integer
+    type: object
+  httpapi.createAttachmentRequest:
+    properties:
+      media_asset_id:
+        type: string
+      owner_id:
+        type: string
+      owner_service:
+        type: string
+      owner_type:
+        type: string
+      position:
+        type: integer
+      role:
+        type: string
+    type: object
+  httpapi.errorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  httpapi.requestUploadRequest:
+    properties:
+      checksum:
+        type: string
+      content_type:
+        type: string
+      media_type:
+        type: string
+      uploaded_by:
+        type: string
+    type: object
+  httpapi.requestUploadResponse:
+    properties:
+      asset_id:
+        type: string
+      bucket:
+        type: string
+      expires_in_seconds:
+        type: integer
+      object_key:
+        type: string
+      upload_url:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: Media Service của Shopee clone
+  title: Media Service API
+  version: "1.0"
+paths:
+  /assets/{id}:
+    get:
+      description: Lấy thông tin chi tiết của một media asset theo ID
+      parameters:
+      - description: Asset ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/httpapi.assetResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Get asset
+      tags:
+      - Asset
+  /attachments:
+    get:
+      description: Lấy danh sách attachment, có thể lọc theo owner_service, owner_type,
+        owner_id, role
+      parameters:
+      - description: Owner service
+        in: query
+        name: owner_service
+        type: string
+      - description: Owner type
+        in: query
+        name: owner_type
+        type: string
+      - description: Owner ID
+        in: query
+        name: owner_id
+        type: string
+      - description: Role
+        in: query
+        name: role
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/httpapi.attachmentResponse'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: List attachments
+      tags:
+      - Attachment
+    post:
+      consumes:
+      - application/json
+      description: Gắn một media asset vào một entity (owner) cụ thể
+      parameters:
+      - description: Create attachment request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/httpapi.createAttachmentRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/httpapi.attachmentResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Create attachment
+      tags:
+      - Attachment
+  /attachments/{id}:
+    delete:
+      description: Xoá một attachment theo ID
+      parameters:
+      - description: Attachment ID
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Delete attachment
+      tags:
+      - Attachment
+  /uploads:
+    post:
+      consumes:
+      - application/json
+      description: Tạo presigned URL để upload media
+      parameters:
+      - description: Upload request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/httpapi.requestUploadRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/httpapi.requestUploadResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Request upload
+      tags:
+      - Upload
+  /uploads/{id}/confirm:
+    post:
+      consumes:
+      - application/json
+      description: Xác nhận upload đã hoàn tất và cập nhật metadata (kích thước, thời
+        lượng...) cho asset
+      parameters:
+      - description: Asset ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Confirm upload request
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/httpapi.confirmUploadRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/httpapi.assetResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "409":
+          description: Conflict
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Confirm upload
+      tags:
+      - Upload
+swagger: "2.0"
