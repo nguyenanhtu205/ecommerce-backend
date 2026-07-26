@@ -13,14 +13,12 @@ services:
       - ./infra/postgres/init-notification-db.sh:/docker-entrypoint-initdb.d/init-notification-db.sh
       - ./infra/postgres/migrations/notification-service/0001_init.sql:/docker-entrypoint-initdb.d/notification/0001_init.sql
   
-  #  mongo:
-  #    image: mongo:7
-  #    ports:
-  #      - '27017:27017'
-  #    volumes:
-  #      - mongodata:/data/db
-  #    # Mỗi service tự connect với connection string khác nhau,
-  #    # ví dụ mongodb://mongo:27017/product_catalog_db, .../review_db, .../chat_db
+  mongo:
+    image: mongo:7
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodata:/data/db
 
   redis:
     image: redis:7-alpine
@@ -60,7 +58,7 @@ services:
         until mc alias set local http://minio:9000 minioadmin minioadmin; do
           echo "waiting for minio..."; sleep 2;
         done
-        mc mb --ignore-existing local/media      
+        mc mb --ignore-existing local/media        
         
   kong:
     image: kong:3.6
@@ -129,7 +127,7 @@ services:
           connections:
             local:
               properties:
-                bootstrap.servers: "kafka:9092"
+                bootstrap.servers: "kafka:9092"       
         
   auth-service:
     build:
@@ -246,10 +244,27 @@ services:
       postgres:
         condition: service_started
     command: [ "up" ]
+    
+  product-catalog-service:
+    build:
+      context: .
+      dockerfile: services/product-catalog-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: mongodb://mongo:27017/product_catalog_db
+      Kafka__BootstrapServers: kafka:9092
+    volumes:
+      - ./services/product-catalog-service/keys:/app/keys:ro
+    ports:
+      - '5004:8080'
+    depends_on:
+      mongo:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
 
 volumes:
   pgdata:
   kafkadata:
-#  mongodata:
+  mongodata:
   miniodata:
   redisinsightdata:

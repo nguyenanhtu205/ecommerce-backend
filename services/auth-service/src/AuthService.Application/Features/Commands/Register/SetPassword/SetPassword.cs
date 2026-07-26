@@ -21,7 +21,7 @@ public class SetPasswordCommandHandler(
         if (role is null)
         {
             throw new ValidationException(
-                [new ValidationFailure("Invalid", "The email address has not been verified.")]);
+                [new ValidationFailure("Email", "The email address has not been verified.")]);
         }
 
         Role roleEntity = await context.Roles.SingleAsync(r => r.Name == role, cancellationToken);

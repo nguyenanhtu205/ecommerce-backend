@@ -1,7 +1,6 @@
 ﻿namespace UserService.Application.Consumers;
 
-public class
-    UserRegisteredConsumer(IApplicationDbContext db) : IConsumer<UserRegisteredEvent>
+public class UserRegisteredConsumer(IApplicationDbContext db) : IConsumer<UserRegisteredEvent>
 {
     public async Task Consume(ConsumeContext<UserRegisteredEvent> context)
     {

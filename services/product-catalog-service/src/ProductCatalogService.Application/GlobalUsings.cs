@@ -1,0 +1,13 @@
+﻿global using Common.Contracts.Events;
+global using Common.Domain.Exceptions;
+global using FluentValidation;
+global using FluentValidation.Results;
+global using MassTransit;
+global using MediatR;
+global using MongoDB.Bson;
+global using MongoDB.Driver;
+global using ProductCatalogService.Application.Common.Dtos;
+global using ProductCatalogService.Application.Common.Interfaces;
+global using ProductCatalogService.Application.Common.Mappers;
+global using ProductCatalogService.Domain.Entities;
+global using ProductCatalogService.Domain.Enums;

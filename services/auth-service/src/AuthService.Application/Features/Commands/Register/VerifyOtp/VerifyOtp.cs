@@ -12,7 +12,7 @@ public class VerifyOtpCommandHandler(IOtpStore otpStore) : IRequestHandler<Verif
         if (!result.IsValid || result.Role is null)
         {
             throw new ValidationException([
-                new ValidationFailure("Invalid", "The OTP code is invalid or has expired.")
+                new ValidationFailure("Otp", "The OTP code is invalid or has expired.")
             ]);
         }
 

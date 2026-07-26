@@ -1,2 +1,6 @@
 <Solution>
+    <Project Path="src/ProductCatalogService.API/ProductCatalogService.API.csproj"/>
+    <Project Path="src/ProductCatalogService.Application/ProductCatalogService.Application.csproj"/>
+    <Project Path="src/ProductCatalogService.Domain/ProductCatalogService.Domain.csproj"/>
+    <Project Path="src/ProductCatalogService.Infrastructure/ProductCatalogService.Infrastructure.csproj"/>
 </Solution>
