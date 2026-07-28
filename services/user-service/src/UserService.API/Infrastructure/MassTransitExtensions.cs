@@ -28,12 +28,12 @@ public static class MassTransitExtensions
             x.AddRider(rider =>
             {
                 rider.AddConsumer<UserRegisteredConsumer>();
-                
+
                 rider.UsingKafka((context, k) =>
                 {
                     k.Host(configuration["Kafka:BootstrapServers"]);
 
-                    k.TopicEndpoint<UserRegisteredEvent>(
+                    k.TopicEndpoint<UserRegistered>(
                         "user.registered.v1",
                         "user-service-group",
                         e =>

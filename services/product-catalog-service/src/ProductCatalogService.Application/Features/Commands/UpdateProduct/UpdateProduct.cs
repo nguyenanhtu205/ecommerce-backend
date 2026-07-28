@@ -1,6 +1,4 @@
-﻿using CategoryPathItem = ProductCatalogService.Domain.Entities.CategoryPathItem;
-
-namespace ProductCatalogService.Application.Features.Commands.UpdateProduct;
+﻿namespace ProductCatalogService.Application.Features.Commands.UpdateProduct;
 
 public record UpdateProductCommand(
     string Id,
@@ -24,9 +22,8 @@ public record UpdateProductCommand(
 
 public class UpdateProduct(
     IApplicationDbContext context,
-    ITopicProducer<ProductCreated> producer
-    // , ITopicProducer<ProductListingViewUpdated> listingViewProducer
-) : IRequestHandler<UpdateProductCommand, ProductDto>
+    ITopicProducer<ProductCreated> producer,
+    ITopicProducer<ProductListingViewUpdated> listingViewProducer) : IRequestHandler<UpdateProductCommand, ProductDto>
 {
     public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
@@ -117,17 +114,20 @@ public class UpdateProduct(
         await context.ProductListingViews.UpdateOneAsync(v => v.Id == product.Id, viewUpdate,
             cancellationToken: cancellationToken);
 
-        // ProductListingView updatedView = await context.ProductListingViews
-        //     .Find(v => v.Id == product.Id)
-        //     .FirstAsync(cancellationToken);
+        ProductListingView updatedView = await context.ProductListingViews
+            .Find(v => v.Id == product.Id)
+            .FirstAsync(cancellationToken);
 
-        // await listingViewProducer.Produce(new ProductListingViewUpdated(
-        //     updatedView.Id, updatedView.ShopId, updatedView.ShopName, updatedView.Name,
-        //     updatedView.Description, updatedView.Brand, updatedView.Tags, updatedView.SearchableSpecs,
-        //     updatedView.ThumbnailUrl, updatedView.CategoryPath, updatedView.PriceMin, updatedView.PriceMax,
-        //     updatedView.OriginalPriceMin, updatedView.DiscountPercent, updatedView.StockTotal,
-        //     updatedView.IsOutOfStock, updatedView.RatingAverage, updatedView.RatingCount,
-        //     updatedView.SoldCount, updatedView.SyncedAt), cancellationToken);
+        await listingViewProducer.Produce(new ProductListingViewUpdated(
+            updatedView.Id, updatedView.ShopId, updatedView.ShopName, updatedView.Name,
+            updatedView.Description, updatedView.Brand, updatedView.Tags, updatedView.SearchableSpecs,
+            updatedView.ThumbnailUrl, [
+                .. updatedView.CategoryPath
+                    .Select(x => new CategoryPathItemEvent(x.Id, x.Name))
+            ], updatedView.PriceMin, updatedView.PriceMax,
+            updatedView.OriginalPriceMin, updatedView.DiscountPercent, updatedView.StockTotal,
+            updatedView.IsOutOfStock, updatedView.RatingAverage, updatedView.RatingCount,
+            updatedView.SoldCount, updatedView.SyncedAt), cancellationToken);
 
         List<VariantCombinationInit> newCombinations =
         [

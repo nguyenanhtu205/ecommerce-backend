@@ -11,7 +11,7 @@ public class SetPasswordCommandHandler(
     IOtpStore otpStore,
     IPasswordHasher passwordHasher,
     IJwtProvider jwtProvider,
-    ITopicProducer<UserRegisteredEvent> producer,
+    ITopicProducer<UserRegistered> producer,
     IRefreshTokenGenerator refreshTokenGenerator,
     IRefreshTokenHasher refreshTokenHasher) : IRequestHandler<SetPasswordCommand, SetPasswordResponse>
 {
@@ -43,7 +43,7 @@ public class SetPasswordCommandHandler(
         context.UserRoles.Add(userRole);
 
         await producer.Produce(
-            new UserRegisteredEvent(user.Id, user.Email, DateTimeOffset.UtcNow), cancellationToken);
+            new UserRegistered(user.Id, user.Email, DateTimeOffset.UtcNow), cancellationToken);
 
         string accessToken = jwtProvider.Generate(user);
         string refreshToken = refreshTokenGenerator.Generate();

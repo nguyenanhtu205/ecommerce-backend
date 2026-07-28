@@ -22,6 +22,10 @@ echo "=== Creating Kafka topics ==="
 # --- user / auth ---
 create_topic user.registered.v1
 
+# --- product ---
+create_topic product-catalog.product-created.v1
+create_topic product-catalog.product-listing-view-updated.v1
+
 # --- notification ---
 create_topic notification.otp-requested.v1
 

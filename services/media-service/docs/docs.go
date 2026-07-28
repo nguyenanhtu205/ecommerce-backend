@@ -17,7 +17,7 @@ const docTemplate = `{
     "paths": {
         "/assets/{id}": {
             "get": {
-                "description": "Lấy thông tin chi tiết của một media asset theo ID",
+                "description": "Get detail information of media asset by ID",
                 "produces": [
                     "application/json"
                 ],
@@ -58,7 +58,7 @@ const docTemplate = `{
         },
         "/attachments": {
             "get": {
-                "description": "Lấy danh sách attachment, có thể lọc theo owner_service, owner_type, owner_id, role",
+                "description": "Get attachment list, filter by owner_service, owner_type, owner_id, role",
                 "produces": [
                     "application/json"
                 ],
@@ -117,7 +117,7 @@ const docTemplate = `{
                 }
             },
             "post": {
-                "description": "Gắn một media asset vào một entity (owner) cụ thể",
+                "description": "Assign media asset to specific entity (owner)",
                 "consumes": [
                     "application/json"
                 ],
@@ -175,7 +175,7 @@ const docTemplate = `{
         },
         "/attachments/{id}": {
             "delete": {
-                "description": "Xoá một attachment theo ID",
+                "description": "Delete attachment by ID",
                 "tags": [
                     "Attachment"
                 ],
@@ -210,7 +210,7 @@ const docTemplate = `{
         },
         "/uploads": {
             "post": {
-                "description": "Tạo presigned URL để upload media",
+                "description": "Create presigned URL to upload media",
                 "consumes": [
                     "application/json"
                 ],
@@ -256,7 +256,7 @@ const docTemplate = `{
         },
         "/uploads/{id}/confirm": {
             "post": {
-                "description": "Xác nhận upload đã hoàn tất và cập nhật metadata (kích thước, thời lượng...) cho asset",
+                "description": "Confirm upload completed and update metadata (size, duration...) for asset",
                 "consumes": [
                     "application/json"
                 ],
@@ -495,7 +495,7 @@ var SwaggerInfo = &swag.Spec{
 	BasePath:         "/media",
 	Schemes:          []string{},
 	Title:            "Media Service API",
-	Description:      "Media Service của Shopee clone",
+	Description:      "",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

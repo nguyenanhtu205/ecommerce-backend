@@ -17,7 +17,8 @@ public static class MassTransitExtensions
 
             x.AddRider(rider =>
             {
-                rider.AddProducer<ProductCreated>("product.created.v1");
+                rider.AddProducer<ProductCreated>("product-catalog.product-created.v1");
+                rider.AddProducer<ProductListingViewUpdated>("product-catalog.product-listing-view-updated.v1");
 
                 rider.UsingKafka((_, k) =>
                 {

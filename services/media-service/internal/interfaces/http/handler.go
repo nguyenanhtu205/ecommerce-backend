@@ -21,7 +21,7 @@ func NewHandler(svc *application.MediaService) *Handler {
 // RequestUpload godoc
 //
 //	@Summary		Request upload
-//	@Description	Tạo presigned URL để upload media
+//	@Description	Create presigned URL to upload media
 //	@Tags			Upload
 //	@Accept			json
 //	@Produce		json
@@ -60,7 +60,7 @@ func (h *Handler) RequestUpload(c echo.Context) error {
 // ConfirmUpload godoc
 //
 //	@Summary		Confirm upload
-//	@Description	Xác nhận upload đã hoàn tất và cập nhật metadata (kích thước, thời lượng...) cho asset
+//	@Description	Confirm upload completed and update metadata (size, duration...) for asset
 //	@Tags			Upload
 //	@Accept			json
 //	@Produce		json
@@ -99,7 +99,7 @@ func (h *Handler) ConfirmUpload(c echo.Context) error {
 // GetAsset godoc
 //
 //	@Summary		Get asset
-//	@Description	Lấy thông tin chi tiết của một media asset theo ID
+//	@Description	Get detail information of media asset by ID
 //	@Tags			Asset
 //	@Produce		json
 //	@Param			id	path		string	true	"Asset ID"
@@ -122,7 +122,7 @@ func (h *Handler) GetAsset(c echo.Context) error {
 // CreateAttachment godoc
 //
 //	@Summary		Create attachment
-//	@Description	Gắn một media asset vào một entity (owner) cụ thể
+//	@Description	Assign media asset to specific entity (owner)
 //	@Tags			Attachment
 //	@Accept			json
 //	@Produce		json
@@ -159,7 +159,7 @@ func (h *Handler) CreateAttachment(c echo.Context) error {
 // ListAttachments godoc
 //
 //	@Summary		List attachments
-//	@Description	Lấy danh sách attachment, có thể lọc theo owner_service, owner_type, owner_id, role
+//	@Description	Get attachment list, filter by owner_service, owner_type, owner_id, role
 //	@Tags			Attachment
 //	@Produce		json
 //	@Param			owner_service	query		string	false	"Owner service"
@@ -202,7 +202,7 @@ func (h *Handler) ListAttachments(c echo.Context) error {
 // DeleteAttachment godoc
 //
 //	@Summary		Delete attachment
-//	@Description	Xoá một attachment theo ID
+//	@Description	Delete attachment by ID
 //	@Tags			Attachment
 //	@Param			id	path	string	true	"Attachment ID"
 //	@Success		204	"No Content"

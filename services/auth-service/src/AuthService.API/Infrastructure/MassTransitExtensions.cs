@@ -28,7 +28,7 @@ public static class MassTransitExtensions
 
             x.AddRider(rider =>
             {
-                rider.AddProducer<UserRegisteredEvent>("user.registered.v1");
+                rider.AddProducer<UserRegistered>("user.registered.v1");
                 rider.AddProducer<OtpRequested>("notification.otp-requested.v1");
 
                 rider.UsingKafka((_, k) =>

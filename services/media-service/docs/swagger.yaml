@@ -105,13 +105,12 @@ definitions:
     type: object
 info:
   contact: {}
-  description: Media Service của Shopee clone
   title: Media Service API
   version: "1.0"
 paths:
   /assets/{id}:
     get:
-      description: Lấy thông tin chi tiết của một media asset theo ID
+      description: Get detail information of media asset by ID
       parameters:
       - description: Asset ID
         in: path
@@ -138,8 +137,8 @@ paths:
       - Asset
   /attachments:
     get:
-      description: Lấy danh sách attachment, có thể lọc theo owner_service, owner_type,
-        owner_id, role
+      description: Get attachment list, filter by owner_service, owner_type, owner_id,
+        role
       parameters:
       - description: Owner service
         in: query
@@ -180,7 +179,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Gắn một media asset vào một entity (owner) cụ thể
+      description: Assign media asset to specific entity (owner)
       parameters:
       - description: Create attachment request
         in: body
@@ -216,7 +215,7 @@ paths:
       - Attachment
   /attachments/{id}:
     delete:
-      description: Xoá một attachment theo ID
+      description: Delete attachment by ID
       parameters:
       - description: Attachment ID
         in: path
@@ -241,7 +240,7 @@ paths:
     post:
       consumes:
       - application/json
-      description: Tạo presigned URL để upload media
+      description: Create presigned URL to upload media
       parameters:
       - description: Upload request
         in: body
@@ -271,8 +270,8 @@ paths:
     post:
       consumes:
       - application/json
-      description: Xác nhận upload đã hoàn tất và cập nhật metadata (kích thước, thời
-        lượng...) cho asset
+      description: Confirm upload completed and update metadata (size, duration...)
+        for asset
       parameters:
       - description: Asset ID
         in: path

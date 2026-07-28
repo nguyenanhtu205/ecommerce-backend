@@ -1,10 +1,10 @@
 ﻿namespace UserService.Application.Consumers;
 
-public class UserRegisteredConsumer(IApplicationDbContext db) : IConsumer<UserRegisteredEvent>
+public class UserRegisteredConsumer(IApplicationDbContext db) : IConsumer<UserRegistered>
 {
-    public async Task Consume(ConsumeContext<UserRegisteredEvent> context)
+    public async Task Consume(ConsumeContext<UserRegistered> context)
     {
-        UserRegisteredEvent message = context.Message;
+        UserRegistered message = context.Message;
 
         bool exists = await db.Profiles.AnyAsync(
             p => p.Id == message.UserId, context.CancellationToken);

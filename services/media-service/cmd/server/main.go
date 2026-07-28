@@ -1,6 +1,5 @@
 // @title Media Service API
 // @version 1.0
-// @description Media Service của Shopee clone
 // @BasePath /media
 package main
 
@@ -8,6 +7,7 @@ import (
 	"database/sql"
 	"log"
 	kafkainfra "media-service/internal/infrastructure/kafka"
+	"net/http"
 
 	_ "github.com/jackc/pgx/v5/stdlib"
 	"github.com/joho/godotenv"
@@ -62,6 +62,9 @@ func main() {
 	handler := httpapi.NewHandler(svc)
 
 	e := echo.New()
+	e.GET("/", func(c echo.Context) error {
+		return c.Redirect(http.StatusMovedPermanently, "/swagger/index.html")
+	})
 	e.GET("/swagger/*", echoSwagger.WrapHandler)
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())

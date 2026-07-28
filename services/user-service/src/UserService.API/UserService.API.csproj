@@ -11,6 +11,7 @@
     <ProjectReference Include="..\UserService.Infrastructure\UserService.Infrastructure.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Application\Common.Application.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.API\Common.API.csproj"/>
+    <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Contracts\Common.Contracts.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

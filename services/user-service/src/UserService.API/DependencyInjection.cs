@@ -12,6 +12,8 @@ public static class DependencyInjection
         builder.Services.AddHttpContextAccessor();
         builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 
+        builder.Services.AddAuthentication();
+
         builder.Services.AddCors();
 
         builder.Services.AddUserServiceMassTransit(builder.Configuration);

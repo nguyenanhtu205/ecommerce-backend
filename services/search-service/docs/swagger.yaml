@@ -1,0 +1,162 @@
+basePath: /search
+definitions:
+  domain.CategoryPathItem:
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+    type: object
+  domain.ProductListing:
+    properties:
+      brand:
+        type: string
+      categoryPath:
+        items:
+          $ref: '#/definitions/domain.CategoryPathItem'
+        type: array
+      description:
+        type: string
+      discountPercent:
+        type: integer
+      isOutOfStock:
+        type: boolean
+      name:
+        type: string
+      originalPriceMin:
+        type: integer
+      priceMax:
+        type: integer
+      priceMin:
+        type: integer
+      productId:
+        type: string
+      ratingAverage:
+        type: number
+      ratingCount:
+        type: integer
+      searchableSpecs:
+        type: string
+      shopId:
+        type: string
+      shopName:
+        type: string
+      soldCount:
+        type: integer
+      stockTotal:
+        type: integer
+      syncedAt:
+        type: string
+      tags:
+        items:
+          type: string
+        type: array
+      thumbnailUrl:
+        type: string
+    type: object
+  http.SearchResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/domain.ProductListing'
+        type: array
+      total:
+        type: integer
+    type: object
+  http.SuggestResponse:
+    properties:
+      suggestions:
+        items:
+          type: string
+        type: array
+    type: object
+  http.TrendingItem:
+    properties:
+      keyword:
+        type: string
+      score:
+        type: number
+    type: object
+  http.TrendingResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/http.TrendingItem'
+        type: array
+    type: object
+info:
+  contact: {}
+  title: Search Service API
+  version: "1.0"
+paths:
+  /:
+    get:
+      parameters:
+      - description: search keyword
+        in: query
+        name: q
+        type: string
+      - description: minimum price
+        in: query
+        name: priceMin
+        type: integer
+      - description: maximum price
+        in: query
+        name: priceMax
+        type: integer
+      - description: category id
+        in: query
+        name: category
+        type: string
+      - description: price|rating|soldCount, append :asc or :desc, e.g. price:asc
+        in: query
+        name: sort
+        type: string
+      - description: page number, starting from 1
+        in: query
+        name: page
+        type: integer
+      - description: items per page
+        in: query
+        name: size
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/http.SearchResponse'
+      summary: Full-text search products
+      tags:
+      - search
+  /suggest:
+    get:
+      parameters:
+      - description: prefix to suggest against
+        in: query
+        name: q
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/http.SuggestResponse'
+      summary: Autocomplete product name
+      tags:
+      - search
+  /trending:
+    get:
+      parameters:
+      - description: number of keywords to return
+        in: query
+        name: limit
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/http.TrendingResponse'
+      summary: Top trending search keywords
+      tags:
+      - search
+swagger: "2.0"

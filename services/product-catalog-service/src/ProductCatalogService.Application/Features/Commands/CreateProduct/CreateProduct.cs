@@ -22,10 +22,8 @@ public record CreateProductCommand(
 
 public class CreateProduct(
     IApplicationDbContext context,
-    ITopicProducer<ProductCreated> producer
-    // ,ITopicProducer<ProductListingViewUpdated> listingViewProducer
-)
-    : IRequestHandler<CreateProductCommand, ProductDto>
+    ITopicProducer<ProductCreated> producer,
+    ITopicProducer<ProductListingViewUpdated> listingViewProducer) : IRequestHandler<CreateProductCommand, ProductDto>
 {
     public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
@@ -41,14 +39,15 @@ public class CreateProduct(
             ]);
         }
 
-        string productId = ObjectId.GenerateNewId().ToString();
+        string productId = Guid.CreateVersion7().ToString();
         DateTimeOffset now = DateTimeOffset.UtcNow;
 
         List<VariantCombination> combinations =
         [
             .. request.VariantCombinations.Select(c => new VariantCombination
             {
-                CombinationId = string.IsNullOrEmpty(c.CombinationId) ? Guid.NewGuid().ToString() : c.CombinationId,
+                CombinationId =
+                    string.IsNullOrEmpty(c.CombinationId) ? Guid.CreateVersion7().ToString() : c.CombinationId,
                 OptionValues = c.OptionValues,
                 Sku = c.Sku
             })
@@ -144,12 +143,15 @@ public class CreateProduct(
             ],
             now), cancellationToken);
 
-        // await listingViewProducer.Produce(new ProductListingViewUpdated(
-        //     view.Id, view.ShopId, view.ShopName, view.Name, view.Description, view.Brand,
-        //     view.Tags, view.SearchableSpecs, view.ThumbnailUrl, view.CategoryPath,
-        //     view.PriceMin, view.PriceMax, view.OriginalPriceMin, view.DiscountPercent,
-        //     view.StockTotal, view.IsOutOfStock, view.RatingAverage, view.RatingCount,
-        //     view.SoldCount, view.SyncedAt), cancellationToken);
+        await listingViewProducer.Produce(new ProductListingViewUpdated(
+            view.Id, view.ShopId, view.ShopName, view.Name, view.Description, view.Brand,
+            view.Tags, view.SearchableSpecs, view.ThumbnailUrl, [
+                .. view.CategoryPath
+                    .Select(x => new CategoryPathItemEvent(x.Id, x.Name))
+            ],
+            view.PriceMin, view.PriceMax, view.OriginalPriceMin, view.DiscountPercent,
+            view.StockTotal, view.IsOutOfStock, view.RatingAverage, view.RatingCount,
+            view.SoldCount, view.SyncedAt), cancellationToken);
 
         return ProductMapper.ToDto(product);
     }
