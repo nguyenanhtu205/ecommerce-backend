@@ -28,7 +28,7 @@ func NewSearchHandler(usecase *application.SearchUseCase) *SearchHandler {
 // @Param        page       query int    false "page number, starting from 1"
 // @Param        size       query int    false "items per page"
 // @Success      200 {object} SearchResponse
-// @Router       / [get]
+// @Router       /search [get]
 func (h *SearchHandler) Search(c echo.Context) error {
 	ctx := c.Request().Context()
 	q := c.QueryParam("q")
@@ -37,14 +37,15 @@ func (h *SearchHandler) Search(c echo.Context) error {
 		Category: c.QueryParam("category"),
 	}
 	if v := c.QueryParam("priceMin"); v != "" {
-		if parsed, err := strconv.Atoi(v); err == nil {
+		if parsed, err := strconv.ParseInt(v, 10, 64); err == nil {
 			filters.PriceMin = &parsed
 		} else {
 			return c.JSON(http.StatusBadRequest, errResponse("invalid priceMin"))
 		}
 	}
+
 	if v := c.QueryParam("priceMax"); v != "" {
-		if parsed, err := strconv.Atoi(v); err == nil {
+		if parsed, err := strconv.ParseInt(v, 10, 64); err == nil {
 			filters.PriceMax = &parsed
 		} else {
 			return c.JSON(http.StatusBadRequest, errResponse("invalid priceMax"))
@@ -84,7 +85,7 @@ func (h *SearchHandler) Search(c echo.Context) error {
 // @Tags         search
 // @Param        q query string true "prefix to suggest against"
 // @Success      200 {object} SuggestResponse
-// @Router       /suggest [get]
+// @Router       /search/suggest [get]
 func (h *SearchHandler) Suggest(c echo.Context) error {
 	ctx := c.Request().Context()
 	q := c.QueryParam("q")
@@ -106,7 +107,7 @@ func errResponse(msg string) map[string]string {
 // @Tags         search
 // @Param        limit query int false "number of keywords to return"
 // @Success      200 {object} TrendingResponse
-// @Router       /trending [get]
+// @Router       /search/trending [get]
 func (h *SearchHandler) Trending(c echo.Context) error {
 	ctx := c.Request().Context()
 

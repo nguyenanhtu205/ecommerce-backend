@@ -16,7 +16,7 @@ public class Category
 
     public bool IsLeaf { get; init; }
 
-    public DateTime CreatedAt { get; init; }
+    public DateTimeOffset CreatedAt { get; init; }
 }
 
 public class CategoryPathItem

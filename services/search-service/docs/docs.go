@@ -15,7 +15,7 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/": {
+        "/search": {
             "get": {
                 "tags": [
                     "search"
@@ -75,7 +75,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/suggest": {
+        "/search/suggest": {
             "get": {
                 "tags": [
                     "search"
@@ -100,7 +100,7 @@ const docTemplate = `{
                 }
             }
         },
-        "/trending": {
+        "/search/trending": {
             "get": {
                 "tags": [
                     "search"
@@ -162,13 +162,16 @@ const docTemplate = `{
                     "type": "string"
                 },
                 "originalPriceMin": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "priceMax": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "priceMin": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "productId": {
                     "type": "string"
@@ -262,7 +265,7 @@ const docTemplate = `{
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
 	Host:             "",
-	BasePath:         "/search",
+	BasePath:         "",
 	Schemes:          []string{},
 	Title:            "Search Service API",
 	Description:      "",

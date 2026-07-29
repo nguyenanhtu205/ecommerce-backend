@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"strings"
 
 	es "github.com/elastic/go-elasticsearch/v8"
 	"github.com/elastic/go-elasticsearch/v8/esapi"
@@ -57,11 +58,40 @@ func (r *ESSearchRepository) Upsert(ctx context.Context, doc domain.ProductListi
 func (r *ESSearchRepository) Search(ctx context.Context, query string, filters application.SearchFilters, sort *application.SortOption, page application.Page) (*application.SearchResult, error) {
 	var must []map[string]any
 	if query != "" {
+		foldedFields := []string{
+			"name.folded^3", "description.folded", "brand.folded^2",
+			"tags.folded", "shopName.folded", "searchableSpecs.folded", "categoryText.folded",
+		}
+
 		must = append(must, map[string]any{
-			"multi_match": map[string]any{
-				"query":  query,
-				"fields": []string{"name^3", "description", "brand^2", "tags", "shopName", "searchableSpecs"},
-				"type":   "best_fields",
+			"bool": map[string]any{
+				"should": []map[string]any{
+					{
+						"multi_match": map[string]any{
+							"query":     query,
+							"fields":    foldedFields,
+							"type":      "best_fields",
+							"fuzziness": "AUTO",
+						},
+					},
+					{
+						"multi_match": map[string]any{
+							"query":  query,
+							"fields": foldedFields,
+							"type":   "phrase",
+							"boost":  3,
+						},
+					},
+					{
+						"multi_match": map[string]any{
+							"query":  query,
+							"fields": []string{"name.en^2", "description.en"},
+							"type":   "best_fields",
+							"boost":  0.5,
+						},
+					},
+				},
+				"minimum_should_match": 1,
 			},
 		})
 	} else {
@@ -151,13 +181,15 @@ func (r *ESSearchRepository) Search(ctx context.Context, query string, filters a
 }
 
 func (r *ESSearchRepository) Suggest(ctx context.Context, prefix string, limit int) ([]string, error) {
+	prefix = strings.ToLower(strings.TrimSpace(prefix))
+
 	queryBody := map[string]any{
 		"size":    limit,
 		"_source": []string{"name"},
 		"query": map[string]any{
-			"match": map[string]any{
+			"prefix": map[string]any{
 				"name.suggest": map[string]any{
-					"query": prefix,
+					"value": prefix,
 				},
 			},
 		},

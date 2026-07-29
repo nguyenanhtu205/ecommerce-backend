@@ -1,7 +1,7 @@
 ﻿namespace Common.Contracts.Events;
 
 public record ProductListingViewUpdated(
-    string Id,
+    string ProductId,
     string ShopId,
     string ShopName,
     string Name,

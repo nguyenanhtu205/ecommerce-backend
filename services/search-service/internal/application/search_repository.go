@@ -22,8 +22,8 @@ const (
 )
 
 type SearchFilters struct {
-	PriceMin *int
-	PriceMax *int
+	PriceMin *int64
+	PriceMax *int64
 	Category string
 }
 

@@ -1,6 +1,5 @@
 // @title Search Service API
 // @version 1.0
-// @BasePath /search
 package main
 
 import (

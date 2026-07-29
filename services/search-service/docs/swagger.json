@@ -5,9 +5,8 @@
         "contact": {},
         "version": "1.0"
     },
-    "basePath": "/search",
     "paths": {
-        "/": {
+        "/search": {
             "get": {
                 "tags": [
                     "search"
@@ -67,7 +66,7 @@
                 }
             }
         },
-        "/suggest": {
+        "/search/suggest": {
             "get": {
                 "tags": [
                     "search"
@@ -92,7 +91,7 @@
                 }
             }
         },
-        "/trending": {
+        "/search/trending": {
             "get": {
                 "tags": [
                     "search"
@@ -154,13 +153,16 @@
                     "type": "string"
                 },
                 "originalPriceMin": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "priceMax": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "priceMin": {
-                    "type": "integer"
+                    "type": "string",
+                    "example": "0"
                 },
                 "productId": {
                     "type": "string"

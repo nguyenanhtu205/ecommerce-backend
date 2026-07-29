@@ -1,4 +1,3 @@
-basePath: /search
 definitions:
   domain.CategoryPathItem:
     properties:
@@ -24,11 +23,14 @@ definitions:
       name:
         type: string
       originalPriceMin:
-        type: integer
+        example: "0"
+        type: string
       priceMax:
-        type: integer
+        example: "0"
+        type: string
       priceMin:
-        type: integer
+        example: "0"
+        type: string
       productId:
         type: string
       ratingAverage:
@@ -89,7 +91,7 @@ info:
   title: Search Service API
   version: "1.0"
 paths:
-  /:
+  /search:
     get:
       parameters:
       - description: search keyword
@@ -128,7 +130,7 @@ paths:
       summary: Full-text search products
       tags:
       - search
-  /suggest:
+  /search/suggest:
     get:
       parameters:
       - description: prefix to suggest against
@@ -144,7 +146,7 @@ paths:
       summary: Autocomplete product name
       tags:
       - search
-  /trending:
+  /search/trending:
     get:
       parameters:
       - description: number of keywords to return

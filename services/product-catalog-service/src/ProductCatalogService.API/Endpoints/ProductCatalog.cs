@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using ProductCatalogService.Application.Common.Dtos;
+using ProductCatalogService.Application.Features.Commands.CreateCategory;
+using ProductCatalogService.Application.Features.Commands.CreateCategoryAttributes;
 using ProductCatalogService.Application.Features.Commands.CreateProduct;
 using ProductCatalogService.Application.Features.Commands.UpdateProduct;
 using ProductCatalogService.Application.Features.Queries.GetCategories;
@@ -26,6 +28,13 @@ public class ProductCatalog : IEndpointGroup
             //.RequireAuthorization()
             .RequireRateLimiting("post");
 
+        groupBuilder.MapPost(CreateCategory, "category")
+            .Produces<CreateCategoryResponse>()
+            .RequireRateLimiting("post");
+
+        groupBuilder.MapPost(CreateCategoryAttribute, "category-attribute")
+            .RequireRateLimiting("post");
+
         groupBuilder.MapGet(GetProductById, "products/{id}");
 
         groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}");
@@ -41,6 +50,22 @@ public class ProductCatalog : IEndpointGroup
     [EndpointDescription("Seller creates a new product. Status defaults to Draft.")]
     public static async Task<IResult> CreateProduct(
         CreateProductCommand command, ISender sender, CancellationToken cancellationToken)
+    {
+        await sender.Send(command, cancellationToken);
+        return Results.NoContent();
+    }
+
+    [EndpointSummary("Create category")]
+    public static async Task<IResult> CreateCategory(
+        CreateCategoryCommand command, ISender sender, CancellationToken cancellationToken)
+    {
+        CreateCategoryResponse result = await sender.Send(command, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Create category attribute")]
+    public static async Task<IResult> CreateCategoryAttribute(
+        CreateCategoryAttributesCommand command, ISender sender, CancellationToken cancellationToken)
     {
         await sender.Send(command, cancellationToken);
         return Results.NoContent();

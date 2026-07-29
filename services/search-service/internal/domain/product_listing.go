@@ -16,10 +16,10 @@ type ProductListing struct {
 	SearchableSpecs  string             `json:"searchableSpecs"`
 	ThumbnailURL     string             `json:"thumbnailUrl"`
 	CategoryPath     []CategoryPathItem `json:"categoryPath"`
-	PriceMin         int                `json:"priceMin"`
-	PriceMax         int                `json:"priceMax"`
-	OriginalPriceMin int                `json:"originalPriceMin"`
-	DiscountPercent  int                `json:"discountPercent"`
+	PriceMin         int64              `json:"priceMin,string"`
+	PriceMax         int64              `json:"priceMax,string"`
+	OriginalPriceMin *int64             `json:"originalPriceMin,string"`
+	DiscountPercent  *int               `json:"discountPercent"`
 	StockTotal       int                `json:"stockTotal"`
 	IsOutOfStock     bool               `json:"isOutOfStock"`
 	RatingAverage    float64            `json:"ratingAverage"`

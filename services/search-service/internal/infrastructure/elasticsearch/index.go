@@ -14,7 +14,17 @@ const indexMapping = `{
   "settings": {
     "analysis": {
       "analyzer": {
-        "edge_ngram_analyzer": { "type": "custom", "tokenizer": "edge_ngram_tokenizer" }
+        "vi_folding_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        },
+        "vi_synonym_search_analyzer": {
+          "type": "custom",
+          "tokenizer": "standard",
+          "filter": ["lowercase", "asciifolding"]
+        },
+        "edge_ngram_analyzer": { "type": "custom", "tokenizer": "edge_ngram_tokenizer", "filter": ["lowercase"] }
       },
       "tokenizer": {
         "edge_ngram_tokenizer": {
@@ -27,29 +37,94 @@ const indexMapping = `{
   "mappings": {
     "properties": {
       "shopId": { "type": "keyword" },
-      "shopName": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
+      "shopName": {
+        "type": "text",
+        "fields": {
+          "raw": { "type": "keyword" },
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
       "name": {
         "type": "text",
         "fields": {
           "raw": { "type": "keyword" },
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          },
+          "en": { "type": "text", "analyzer": "english" },
           "suggest": { "type": "text", "analyzer": "edge_ngram_analyzer", "search_analyzer": "standard" }
         }
       },
-      "description": { "type": "text" },
-      "brand": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
-      "tags": { "type": "text", "fields": { "raw": { "type": "keyword" } } },
-      "searchableSpecs": { "type": "text" },
+      "description": {
+        "type": "text",
+        "fields": {
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          },
+          "en": { "type": "text", "analyzer": "english" }
+        }
+      },
+      "brand": {
+        "type": "text",
+        "fields": {
+          "raw": { "type": "keyword" },
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
+      "tags": {
+        "type": "text",
+        "fields": {
+          "raw": { "type": "keyword" },
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
+      "searchableSpecs": {
+        "type": "text",
+        "fields": {
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
       "thumbnailUrl": { "type": "keyword" },
       "categoryPath": {
         "type": "nested",
         "properties": {
           "id": { "type": "keyword" },
-          "name": { "type": "keyword" }
+          "name": { "type": "keyword", "copy_to": "categoryText" }
         }
       },
-      "priceMin": { "type": "integer" },
-      "priceMax": { "type": "integer" },
-      "originalPriceMin": { "type": "integer" },
+      "categoryText": {
+        "type": "text",
+        "fields": {
+          "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
+      "priceMin": { "type": "long" },
+      "priceMax": { "type": "long" },
+      "originalPriceMin": { "type": "long" },
       "discountPercent": { "type": "integer" },
       "stockTotal": { "type": "integer" },
       "isOutOfStock": { "type": "boolean" },
