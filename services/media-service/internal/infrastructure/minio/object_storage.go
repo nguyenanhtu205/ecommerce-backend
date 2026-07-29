@@ -3,6 +3,7 @@ package minio
 import (
 	"context"
 	"fmt"
+	"io"
 	"time"
 
 	"github.com/minio/minio-go/v7"
@@ -57,4 +58,8 @@ func (s *ObjectStorage) GetPublicURL(bucket, objectKey string) string {
 
 func (s *ObjectStorage) DeleteObject(ctx context.Context, bucket, objectKey string) error {
 	return s.client.RemoveObject(ctx, bucket, objectKey, minio.RemoveObjectOptions{})
+}
+
+func (s *ObjectStorage) GetObjectStream(ctx context.Context, bucket, objectKey string) (io.ReadCloser, error) {
+	return s.client.GetObject(ctx, bucket, objectKey, minio.GetObjectOptions{})
 }

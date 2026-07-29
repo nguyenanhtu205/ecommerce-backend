@@ -5,12 +5,14 @@ go 1.25.7
 require (
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.10.0
+	github.com/joho/godotenv v1.5.1
 	github.com/labstack/echo/v4 v4.15.4
 	github.com/minio/minio-go/v7 v7.2.1
 	github.com/pressly/goose/v3 v3.27.3
 	github.com/segmentio/kafka-go v0.4.51
 	github.com/swaggo/echo-swagger v1.5.2
 	github.com/swaggo/swag v1.16.2
+	golang.org/x/image v0.44.0
 )
 
 require (
@@ -24,7 +26,6 @@ require (
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20240606120523-5a60cdf6a761 // indirect
 	github.com/jackc/puddle/v2 v2.2.2 // indirect
-	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/josharian/intern v1.0.0 // indirect
 	github.com/klauspost/compress v1.19.1 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.11 // indirect

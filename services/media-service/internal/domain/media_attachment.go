@@ -6,13 +6,12 @@ const (
 	RoleAvatar    = "avatar"
 	RoleThumbnail = "thumbnail"
 	RoleCover     = "cover"
-	RoleGallery   = "gallery"
 	RoleVideo     = "video"
 )
 
 func IsUniqueRole(role string) bool {
 	switch role {
-	case RoleAvatar, RoleThumbnail, RoleCover:
+	case RoleAvatar, RoleThumbnail, RoleCover, RoleVideo:
 		return true
 	}
 	return false
@@ -28,5 +27,4 @@ type MediaAttachment struct {
 	Position     int
 	CreatedAt    time.Time
 	UpdatedAt    *time.Time
-	DeletedAt    *time.Time
 }

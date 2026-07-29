@@ -32,6 +32,22 @@ public class Validator : AbstractValidator<CreateProductCommand>
         RuleFor(x => x.Condition)
             .IsInEnum().WithMessage("Condition is invalid.");
 
+        RuleFor(x => x.MediaAttachments)
+            .NotEmpty().WithMessage("At least one media attachment is required.");
+
+        RuleForEach(x => x.MediaAttachments)
+            .ChildRules(media =>
+            {
+                media.RuleFor(m => m.MediaAssetId)
+                    .NotEmpty().WithMessage("MediaAssetId is required.");
+
+                media.RuleFor(m => m.Role)
+                    .NotEmpty().WithMessage("Role is required.");
+
+                media.RuleFor(m => m.Position)
+                    .GreaterThanOrEqualTo(0).WithMessage("Position must be greater than or equal to 0.");
+            });
+
         RuleFor(x => x.ThumbnailMediaId)
             .NotEmpty().WithMessage("ThumbnailMediaId is required.");
 

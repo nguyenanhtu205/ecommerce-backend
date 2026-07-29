@@ -90,16 +90,16 @@ func (r *MediaRepository) CreateAttachment(ctx context.Context, at *domain.Media
 		return err
 	}
 	defer func(tx *sql.Tx) {
-        err := tx.Rollback()
-        if err != nil {
+		err := tx.Rollback()
+		if err != nil {
 
-        }
-    }(tx)
+		}
+	}(tx)
 
 	if domain.IsUniqueRole(at.Role) {
 		const del = `
-			UPDATE media_attachments SET deleted_at = now()
-			WHERE owner_service=$1 AND owner_type=$2 AND owner_id=$3 AND role=$4 AND deleted_at IS NULL`
+			DELETE FROM media_attachments
+			WHERE owner_service=$1 AND owner_type=$2 AND owner_id=$3 AND role=$4`
 		if _, err := tx.ExecContext(ctx, del, at.OwnerService, at.OwnerType, at.OwnerID, at.Role); err != nil {
 			return fmt.Errorf("replace existing unique-role attachment: %w", err)
 		}
@@ -120,17 +120,17 @@ func (r *MediaRepository) CreateAttachment(ctx context.Context, at *domain.Media
 func (r *MediaRepository) GetAttachmentByID(ctx context.Context, id string) (*domain.MediaAttachment, error) {
 	const q = `
 		SELECT id, media_asset_id, owner_service, owner_type, owner_id, role, position,
-		       created_at, updated_at, deleted_at
-		FROM media_attachments WHERE id = $1 AND deleted_at IS NULL`
+		       created_at, updated_at
+		FROM media_attachments WHERE id = $1`
 	return scanAttachment(r.db.QueryRowContext(ctx, q, id))
 }
 
 func (r *MediaRepository) ListAttachments(ctx context.Context, filter application.AttachmentFilter) ([]*domain.MediaAttachment, error) {
 	q := `
 		SELECT id, media_asset_id, owner_service, owner_type, owner_id, role, position,
-		       created_at, updated_at, deleted_at
+		       created_at, updated_at
 		FROM media_attachments
-		WHERE owner_service=$1 AND owner_type=$2 AND owner_id=$3 AND deleted_at IS NULL`
+		WHERE owner_service=$1 AND owner_type=$2 AND owner_id=$3`
 	args := []any{filter.OwnerService, filter.OwnerType, filter.OwnerID}
 	if filter.Role != "" {
 		q += " AND role=$4"
@@ -143,17 +143,17 @@ func (r *MediaRepository) ListAttachments(ctx context.Context, filter applicatio
 		return nil, err
 	}
 	defer func(rows *sql.Rows) {
-        err := rows.Close()
-        if err != nil {
+		err := rows.Close()
+		if err != nil {
 
-        }
-    }(rows)
+		}
+	}(rows)
 
 	var result []*domain.MediaAttachment
 	for rows.Next() {
 		var a domain.MediaAttachment
 		if err := rows.Scan(&a.ID, &a.MediaAssetID, &a.OwnerService, &a.OwnerType, &a.OwnerID,
-			&a.Role, &a.Position, &a.CreatedAt, &a.UpdatedAt, &a.DeletedAt); err != nil {
+			&a.Role, &a.Position, &a.CreatedAt, &a.UpdatedAt); err != nil {
 			return nil, err
 		}
 		result = append(result, &a)
@@ -162,7 +162,7 @@ func (r *MediaRepository) ListAttachments(ctx context.Context, filter applicatio
 }
 
 func (r *MediaRepository) DeleteAttachment(ctx context.Context, id string) error {
-	const q = `UPDATE media_attachments SET deleted_at = now() WHERE id=$1 AND deleted_at IS NULL`
+	const q = `DELETE FROM media_attachments WHERE id=$1`
 	res, err := r.db.ExecContext(ctx, q, id)
 	if err != nil {
 		return err
@@ -173,7 +173,7 @@ func (r *MediaRepository) DeleteAttachment(ctx context.Context, id string) error
 func scanAttachment(row *sql.Row) (*domain.MediaAttachment, error) {
 	var a domain.MediaAttachment
 	err := row.Scan(&a.ID, &a.MediaAssetID, &a.OwnerService, &a.OwnerType, &a.OwnerID,
-		&a.Role, &a.Position, &a.CreatedAt, &a.UpdatedAt, &a.DeletedAt)
+		&a.Role, &a.Position, &a.CreatedAt, &a.UpdatedAt)
 	if errors.Is(err, sql.ErrNoRows) {
 		return nil, domain.ErrNotFound
 	}

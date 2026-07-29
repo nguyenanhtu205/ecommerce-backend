@@ -19,6 +19,7 @@ public static class MassTransitExtensions
             {
                 rider.AddProducer<ProductCreated>("product-catalog.product-created.v1");
                 rider.AddProducer<ProductListingViewUpdated>("product-catalog.product-listing-view-updated.v1");
+                rider.AddProducer<ProductMediaAttached>("product-catalog.product-media-attached.v1");
 
                 rider.UsingKafka((_, k) =>
                 {

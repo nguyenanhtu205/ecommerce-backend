@@ -2,6 +2,7 @@ package application
 
 import (
 	"context"
+	"io"
 	"time"
 )
 
@@ -13,6 +14,8 @@ type ObjectStorage interface {
 	GetPublicURL(bucket, objectKey string) string
 
 	DeleteObject(ctx context.Context, bucket, objectKey string) error
+
+	GetObjectStream(ctx context.Context, bucket, objectKey string) (io.ReadCloser, error)
 }
 
 type ObjectInfo struct {

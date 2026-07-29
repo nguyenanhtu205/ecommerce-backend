@@ -3,9 +3,15 @@ package application
 import (
 	"context"
 	"fmt"
+	"image"
+	_ "image/gif"
+	_ "image/jpeg"
+	_ "image/png"
+	"io"
 	"time"
 
 	"github.com/google/uuid"
+	_ "golang.org/x/image/webp"
 
 	"media-service/internal/domain"
 )
@@ -88,6 +94,12 @@ func (s *MediaService) ConfirmUpload(ctx context.Context, in ConfirmUploadInput)
 	asset.SizeBytes = &size
 	if info.ContentType != "" {
 		asset.ContentType = info.ContentType
+	}
+	if asset.MediaType == domain.MediaTypeImage {
+		if w, h, err := s.detectImageDimensions(ctx, asset.Bucket, asset.ObjectKey); err == nil {
+			asset.Width = &w
+			asset.Height = &h
+		}
 	}
 	if in.Width != nil {
 		asset.Width = in.Width
@@ -173,4 +185,22 @@ func mediaTypeFolder(mt domain.MediaType) string {
 		return "videos"
 	}
 	return "images"
+}
+
+func (s *MediaService) detectImageDimensions(ctx context.Context, bucket, objectKey string) (width, height int, err error) {
+	reader, err := s.storage.GetObjectStream(ctx, bucket, objectKey)
+	if err != nil {
+		return 0, 0, err
+	}
+	defer func(reader io.ReadCloser) {
+		err := reader.Close()
+		if err != nil {
+		}
+	}(reader)
+
+	cfg, _, err := image.DecodeConfig(reader)
+	if err != nil {
+		return 0, 0, err
+	}
+	return cfg.Width, cfg.Height, nil
 }

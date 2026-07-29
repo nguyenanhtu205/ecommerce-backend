@@ -10,6 +10,7 @@ public record CreateProductCommand(
     string Description,
     List<string> Tags,
     ProductCondition Condition,
+    List<MediaAttachmentItem> MediaAttachments,
     string ThumbnailMediaId,
     string? VideoMediaId,
     List<string> GalleryMediaIds,
@@ -23,7 +24,9 @@ public record CreateProductCommand(
 public class CreateProduct(
     IApplicationDbContext context,
     ITopicProducer<ProductCreated> producer,
-    ITopicProducer<ProductListingViewUpdated> listingViewProducer) : IRequestHandler<CreateProductCommand, ProductDto>
+    ITopicProducer<ProductListingViewUpdated> listingViewProducer,
+    ITopicProducer<ProductMediaAttached> mediaAttachedProducer
+) : IRequestHandler<CreateProductCommand, ProductDto>
 {
     public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
@@ -142,6 +145,9 @@ public class CreateProduct(
                     c.Sku, c.InitialPrice, c.InitialStock))
             ],
             now), cancellationToken);
+
+        await mediaAttachedProducer.Produce(new ProductMediaAttached(productId, request.ShopId,
+            request.MediaAttachments, DateTimeOffset.UtcNow), cancellationToken);
 
         await listingViewProducer.Produce(new ProductListingViewUpdated(
             view.Id, view.ShopId, view.ShopName, view.Name, view.Description, view.Brand,

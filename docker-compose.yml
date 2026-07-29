@@ -243,6 +243,8 @@ services:
       MINIO_USE_SSL: "false"
       KAFKA_BROKERS: kafka:9092
       KAFKA_TOPIC: media-events
+      KAFKA_PRODUCT_MEDIA_ATTACHED_TOPIC: product-catalog.product-media-attached.v1
+      KAFKA_PRODUCT_MEDIA_ATTACHED_GROUP_ID: media-service-group
     ports:
       - '5007:8080'
     depends_on:
