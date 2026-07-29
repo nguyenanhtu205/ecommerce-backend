@@ -1,5 +1,6 @@
 ﻿using Common.API;
-using Common.API.RateLimiting; 
+using Common.API.RateLimiting;
+using SellerService.API.Infrastructure;
 using SellerService.API.Services;
 
 namespace SellerService.API;
@@ -12,6 +13,10 @@ public static class DependencyInjection
         builder.Services.AddScoped<ICurrentUser, CurrentUser>();
 
         builder.Services.AddCors();
+
+        builder.Services.AddAuthentication();
+
+        builder.Services.AddSellerServiceMassTransit(builder.Configuration);
 
         builder.Services.AddCommonRateLimiter(
             new RateLimitPolicy(30, 10, 5),

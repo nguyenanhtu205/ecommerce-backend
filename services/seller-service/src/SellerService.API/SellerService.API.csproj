@@ -11,9 +11,13 @@
     <ProjectReference Include="..\SellerService.Infrastructure\SellerService.Infrastructure.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Application\Common.Application.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.API\Common.API.csproj"/>
+    <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Contracts\Common.Contracts.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.5.10"/>
+    <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.5.10"/>
+    <PackageReference Include="MassTransit.Kafka" Version="8.5.10"/>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.10">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -23,10 +27,6 @@
     <PackageReference Include="Microsoft.OpenApi" Version="2.7.5"/>
     <PackageReference Include="Scalar.AspNetCore" Version="2.16.15"/>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.19.2"/>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Endpoints\"/>
   </ItemGroup>
 
 </Project>

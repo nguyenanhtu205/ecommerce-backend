@@ -1,4 +1,4 @@
-﻿using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
 
 namespace ProductCatalogService.API.Services;
 
@@ -8,10 +8,32 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUse
     {
         get
         {
-            string? sub = httpContextAccessor.HttpContext?.User
-                .FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            string? token = httpContextAccessor.HttpContext?
+                .Request
+                .Headers["auth"]
+                .ToString();
 
-            return Guid.TryParse(sub, out Guid userId) ? userId : null;
+            if (string.IsNullOrEmpty(token))
+            {
+                return null;
+            }
+
+            JwtSecurityTokenHandler handler = new();
+
+            if (!handler.CanReadToken(token))
+            {
+                return null;
+            }
+
+            JwtSecurityToken jwt = handler.ReadJwtToken(token);
+
+            string? sub = jwt.Claims
+                .FirstOrDefault(x => x.Type == "sub")
+                ?.Value;
+
+            return Guid.TryParse(sub, out Guid userId)
+                ? userId
+                : null;
         }
     }
 }

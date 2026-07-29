@@ -28,6 +28,7 @@ create_topic product-catalog.product-listing-view-updated.v1
 
 # --- notification ---
 create_topic notification.otp-requested.v1
+create_topic notification.shop-activated.v1
 
 echo "=== All topics created ==="
 

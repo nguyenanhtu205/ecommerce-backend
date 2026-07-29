@@ -194,6 +194,7 @@ services:
       dockerfile: services/seller-service/Dockerfile
     environment:
       ConnectionStrings__DefaultConnection: Host=postgres;Database=seller_db;Username=root;Password=root
+      Kafka__BootstrapServers: kafka:9092
     volumes:
       - ./services/seller-service/keys:/app/keys:ro
     ports:
@@ -201,6 +202,8 @@ services:
     depends_on:
       postgres:
         condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
 
   notification-service:
     build:

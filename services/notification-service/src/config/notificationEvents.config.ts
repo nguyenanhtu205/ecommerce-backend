@@ -17,6 +17,14 @@ export const NOTIFICATION_EVENTS = {
     checkPreference: false,
   },
 
+  SHOP_ACTIVATED: {
+    eventType: 'notification.shop-activated.v1',
+    category: null,
+    createInApp: false,
+    createEmail: false,
+    checkPreference: false,
+  }
+
   // ORDER_CONFIRMED: {
   //   eventType: 'order.confirmed.v1',
   //   category: 'ORDER',

@@ -11,6 +11,7 @@ const TEMPLATE_CODE = 'otp_requested';
 
 export const otpNotificationService = {
   async handleOtpRequested(eventId: string, payload: OtpRequestedPayload): Promise<void> {
+    console.log(`[otp-requested] Receive event ${eventId}, purpose=${payload.purpose}`);
     const idempotencyKey = `otp:${payload.purpose}:${eventId}`;
 
     let deliveryId: string;
@@ -40,6 +41,7 @@ export const otpNotificationService = {
     try {
       await emailService.send({to: payload.email, subject: email.subject, html: email.html});
       await messageDeliveryRepository.markSent(deliveryId);
+      console.log(`[otp-requested] Sent email to ${payload.email} (delivery=${deliveryId})`);
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unknown error while sending email';
       console.error(`[otp-requested] Failed to send email for delivery ${deliveryId}:`, message);
