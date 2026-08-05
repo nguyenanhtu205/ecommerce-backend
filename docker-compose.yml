@@ -70,8 +70,8 @@ services:
     volumes:
       - ./gateway/kong/kong.yml:/kong/kong.yml
     ports:
-      - '8000:8000'   # client port
-      - '8001:8001'   # dev port
+      - '8000:8000'   
+      - '8001:8001'   
     depends_on:
       - auth-service
       - user-service
@@ -178,8 +178,6 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: Host=postgres;Database=user_db;Username=root;Password=root
       Kafka__BootstrapServers: kafka:9092
-    volumes:
-      - ./services/user-service/keys:/app/keys:ro
     ports:
       - '5002:8080'
     depends_on:
@@ -195,10 +193,9 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: Host=postgres;Database=seller_db;Username=root;Password=root
       Kafka__BootstrapServers: kafka:9092
-    volumes:
-      - ./services/seller-service/keys:/app/keys:ro
     ports:
       - '5003:8080'
+      - '6003:8081'
     depends_on:
       postgres:
         condition: service_started
@@ -274,8 +271,6 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: mongodb://mongo:27017/product_catalog_db
       Kafka__BootstrapServers: kafka:9092
-    volumes:
-      - ./services/product-catalog-service/keys:/app/keys:ro
     ports:
       - '5004:8080'
     depends_on:
@@ -291,10 +286,9 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: Host=postgres;Database=inventory_db;Username=root;Password=root
       Kafka__BootstrapServers: kafka:9092
-    volumes:
-      - ./services/inventory-service/keys:/app/keys:ro
     ports:
       - '5005:8080'
+      - '6005:8081'
     depends_on:
       mongo:
         condition: service_started
@@ -320,6 +314,76 @@ services:
       elasticsearch:
         condition: service_healthy
       redis:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+
+  order-service:
+    build:
+      context: .
+      dockerfile: services/order-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=order_db;Username=root;Password=root
+      Kafka__BootstrapServers: kafka:9092
+      Services__ShopGrpc: http://seller-service:8081
+      Services__InventoryGrpc: http://inventory-service:8081
+      Services__PromotionGrpc: http://promotion-service:8081
+      Services__ShippingGrpc: http://shipping-service:8081
+    ports:
+      - '5009:8080'
+    depends_on:
+      postgres:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+
+  payment-service:
+    build:
+      context: .
+      dockerfile: services/payment-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=payment_db;Username=root;Password=root
+      Kafka__BootstrapServers: kafka:9092
+      VnPay__TmnCode: ${VNPAY_TMN_CODE}
+      VnPay__HashSecret: ${VNPAY_HASH_SECRET}
+      VnPay__PaymentBaseUrl: https://sandbox.vnpayment.vn/paymentv2/vpcpay.html
+      VnPay__ReturnUrl: ${VNPAY_RETURN_URL}
+    ports:
+      - '5010:8080'
+    depends_on:
+      postgres:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+
+  promotion-service:
+    build:
+      context: .
+      dockerfile: services/promotion-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=promotion_db;Username=root;Password=root
+      Kafka__BootstrapServers: kafka:9092
+    ports:
+      - '5011:8080'
+      - '6011:8081'
+    depends_on:
+      postgres:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+
+  shipping-service:
+    build:
+      context: .
+      dockerfile: services/shipping-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: Host=postgres;Port=5432;Database=shipping_db;Username=root;Password=root
+      Kafka__BootstrapServers: kafka:9092
+    ports:
+      - '5012:8080'
+      - '6012:8081'
+    depends_on:
+      postgres:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully

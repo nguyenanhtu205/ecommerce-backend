@@ -10,6 +10,8 @@ public class Shop : BaseEntity
 
     public Guid? PickupAddressId { get; init; }
 
+    public required AddressSnapshot PickupAddressSnapshot { get; set; }
+
     public required ShopStatus Status { get; set; } = ShopStatus.PendingSetup;
 
     public required bool IsLinkedToMainAccount { get; init; }

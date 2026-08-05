@@ -1,8 +1,11 @@
-﻿namespace SellerService.Application.Features.Commands.CreateShop;
+﻿using SellerService.Domain.Common;
+
+namespace SellerService.Application.Features.Commands.CreateShop;
 
 public record CreateShopResponse(Guid ShopId);
 
-public record CreateShopCommand(string Name, string Email, Guid PickupAddressId) : IRequest<CreateShopResponse>;
+public record CreateShopCommand(string Name, string Email, Guid PickupAddressId, AddressSnapshot PickupAddressSnapshot)
+    : IRequest<CreateShopResponse>;
 
 public class CreateShop(IApplicationDbContext context, ICurrentUser currentUser)
     : IRequestHandler<CreateShopCommand, CreateShopResponse>
@@ -22,6 +25,7 @@ public class CreateShop(IApplicationDbContext context, ICurrentUser currentUser)
             Name = request.Name,
             Email = request.Email,
             PickupAddressId = request.PickupAddressId,
+            PickupAddressSnapshot = request.PickupAddressSnapshot,
             Status = ShopStatus.PendingSetup,
             IsLinkedToMainAccount = false,
             CreatedAt = DateTimeOffset.UtcNow

@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="src/ShippingService.API/ShippingService.API.csproj" />
+  <Project Path="src/ShippingService.Application/ShippingService.Application.csproj" />
+  <Project Path="src/ShippingService.Domain/ShippingService.Domain.csproj" />
+  <Project Path="src/ShippingService.Infrastructure/ShippingService.Infrastructure.csproj" />
 </Solution>

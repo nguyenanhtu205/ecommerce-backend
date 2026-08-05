@@ -1,0 +1,21 @@
+syntax = "proto3";
+option csharp_namespace = "Common.Contracts.Grpc.Inventory";
+package inventory;
+
+service InventoryGrpcService {
+  rpc GetCombinationPrices (GetCombinationPricesRequest) returns (GetCombinationPricesResponse);
+}
+
+message GetCombinationPricesRequest {
+  repeated string combination_ids = 1;
+}
+
+message CombinationPrice {
+  string combination_id = 1;
+  string shop_id = 2;
+  int32 price = 3;
+}
+
+message GetCombinationPricesResponse {
+  repeated CombinationPrice items = 1;
+}

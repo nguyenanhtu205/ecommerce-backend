@@ -1,0 +1,35 @@
+syntax = "proto3";
+option csharp_namespace = "Common.Contracts.Grpc.Shipping";
+package shipping;
+
+service ShippingGrpcService {
+  rpc CalculateFee (CalculateFeeRequest) returns (CalculateFeeResponse);
+}
+
+message AddressSnapshot {
+  string user_id = 1;
+  string full_name = 2;
+  string phone = 3;
+  string province = 4;
+  string ward = 5;
+  string address_detail = 6;
+  string full_address_text = 7;
+  optional string latitude = 8;
+  optional string longitude = 9;
+  string address_type = 10;
+}
+
+message CalculateFeeRequest {
+  string carrier_id = 1;
+  AddressSnapshot pickup_address_snapshot = 2;
+  AddressSnapshot delivery_address_snapshot = 3;
+}
+
+message CalculateFeeResponse {
+  bool is_valid = 1;
+  int32 fee = 2;
+  optional string estimated_start = 3;
+  optional string estimated_end = 4;
+  optional string carrier_name = 5;
+  optional string failure_reason = 6;
+}

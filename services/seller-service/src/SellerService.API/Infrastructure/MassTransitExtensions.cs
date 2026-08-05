@@ -1,5 +1,6 @@
 ﻿using Common.Contracts.Events;
 using MassTransit;
+using SellerService.Application.Consumers;
 using SellerService.Infrastructure.Data;
 
 namespace SellerService.API.Infrastructure;
@@ -11,11 +12,7 @@ public static class MassTransitExtensions
     {
         services.AddMassTransit(x =>
         {
-            x.AddEntityFrameworkOutbox<ApplicationDbContext>(o =>
-            {
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
+            x.AddConsumer<PickupAddressSnapshotUpdatedConsumer>();
 
             x.UsingInMemory((context, cfg) =>
             {
@@ -24,11 +21,22 @@ public static class MassTransitExtensions
 
             x.AddRider(rider =>
             {
+                rider.AddConsumer<PickupAddressSnapshotUpdatedConsumer>();
+
                 rider.AddProducer<ShopActivated>("notification.shop-activated.v1");
 
-                rider.UsingKafka((_, k) =>
+                rider.UsingKafka((context, k) =>
                 {
                     k.Host(configuration["Kafka:BootstrapServers"]);
+
+                    k.TopicEndpoint<PickupAddressSnapshotUpdated>(
+                        "user.pickup-address-snapshot-updated.v1",
+                        "seller-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<PickupAddressSnapshotUpdatedConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
                 });
             });
         });

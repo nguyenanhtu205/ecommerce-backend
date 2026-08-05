@@ -17,10 +17,9 @@ public class JwtProvider(
         [
             new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
             new(JwtRegisteredClaimNames.Email, user.Email),
-            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            .. user.UserRoles.Select(ur => new Claim(ClaimTypes.Role, ur.Role!.Name))
         ];
-
-        claims.AddRange(user.UserRoles.Select(ur => new Claim(ClaimTypes.Role, ur.Role!.Name)));
 
         RSA privateKey = rsaKeyProvider.GetPrivateKey();
 

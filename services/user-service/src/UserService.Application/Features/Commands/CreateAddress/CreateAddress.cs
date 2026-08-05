@@ -1,6 +1,18 @@
 ﻿namespace UserService.Application.Features.Commands.CreateAddress;
 
-public record CreateAddressResponse(Guid AddressId);
+public record CreateAddressResponse(
+    Guid AddressId,
+    Guid UserId,
+    string FullName,
+    string Phone,
+    string Province,
+    string Ward,
+    string AddressDetail,
+    string FullAddressText,
+    decimal? Latitude,
+    decimal? Longitude,
+    string AddressType
+);
 
 public record CreateAddressCommand(
     string FullName,
@@ -44,6 +56,17 @@ public class CreateAddress(IApplicationDbContext context, ICurrentUser currentUs
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return new CreateAddressResponse(address.Id);
+        return new CreateAddressResponse(
+            address.Id,
+            address.UserId,
+            address.FullName,
+            address.Phone,
+            address.Province,
+            address.Ward,
+            address.AddressDetail,
+            address.FullAddressText,
+            address.Latitude,
+            address.Longitude,
+            address.AddressType == AddressType.Home ? "Home" : "Office");
     }
 }

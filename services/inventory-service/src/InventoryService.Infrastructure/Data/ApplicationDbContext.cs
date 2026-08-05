@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using MassTransit;
 
 namespace InventoryService.Infrastructure.Data;
 
@@ -16,11 +15,5 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     {
         base.OnModelCreating(builder);
         builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-
-        builder.AddInboxStateEntity();
-
-        builder.AddOutboxMessageEntity();
-
-        builder.AddOutboxStateEntity();
     }
 }

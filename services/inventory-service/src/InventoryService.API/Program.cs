@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using InventoryService.API;
+using InventoryService.API.Grpc;
 using InventoryService.Application;
 using InventoryService.Infrastructure;
 using InventoryService.Infrastructure.Data;
@@ -7,8 +9,18 @@ using Scalar.AspNetCore;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-string port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
-builder.WebHost.UseUrls($"http://*:{port}");
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(8080, o =>
+    {
+        o.Protocols = HttpProtocols.Http1;
+    });
+    
+    options.ListenAnyIP(8081, o =>
+    {
+        o.Protocols = HttpProtocols.Http2;
+    });
+});
 
 builder.AddApplicationServices();
 builder.AddInfrastructureServices();
@@ -35,5 +47,7 @@ app.MapScalarApiReference();
 app.Map("/", () => Results.Redirect("/scalar"));
 
 app.MapEndpoints(typeof(Program).Assembly);
+
+app.MapGrpcService<InventoryGrpcServiceImpl>();
 
 app.Run();

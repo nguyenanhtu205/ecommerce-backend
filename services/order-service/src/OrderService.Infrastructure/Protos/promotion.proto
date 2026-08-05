@@ -1,0 +1,20 @@
+syntax = "proto3";
+option csharp_namespace = "Common.Contracts.Grpc.Promotion";
+package promotion;
+
+service PromotionGrpcService {
+  rpc DryRunCalculateDiscount (DryRunCalculateDiscountRequest) returns (DryRunCalculateDiscountResponse);
+}
+
+message DryRunCalculateDiscountRequest {
+  string voucher_code = 1;
+  optional string shop_id = 2;  
+  string buyer_id = 3;
+  int32 applicable_amount = 4;
+}
+
+message DryRunCalculateDiscountResponse {
+  bool is_valid = 1;
+  int32 discount_amount = 2;
+  optional string failure_reason = 3;
+}

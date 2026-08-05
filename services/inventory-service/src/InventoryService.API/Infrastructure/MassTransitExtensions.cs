@@ -13,12 +13,8 @@ public static class MassTransitExtensions
         services.AddMassTransit(x =>
         {
             x.AddConsumer<ProductCreatedConsumer>();
-
-            x.AddEntityFrameworkOutbox<ApplicationDbContext>(o =>
-            {
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
+            x.AddConsumer<ReserveStockConsumer>();
+            x.AddConsumer<ReleaseStockCommandConsumer>();
 
             x.UsingInMemory((context, cfg) =>
             {
@@ -28,6 +24,11 @@ public static class MassTransitExtensions
             x.AddRider(rider =>
             {
                 rider.AddConsumer<ProductCreatedConsumer>();
+                rider.AddConsumer<ReserveStockConsumer>();
+                rider.AddConsumer<ReleaseStockCommandConsumer>();
+
+                rider.AddProducer<StockReserved>("inventory.stock-reserved.v1");
+                rider.AddProducer<StockReservationFailed>("inventory.stock-reservation-failed.v1");
 
                 rider.UsingKafka((context, k) =>
                 {
@@ -39,11 +40,25 @@ public static class MassTransitExtensions
                         e =>
                         {
                             e.ConfigureConsumer<ProductCreatedConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
 
-                            e.UseEntityFrameworkOutbox<ApplicationDbContext>(context);
+                    k.TopicEndpoint<ReserveStock>(
+                        "inventory.reserve-stock.v1",
+                        "inventory-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<ReserveStockConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
 
-                            e.UseMessageRetry(r =>
-                                r.Interval(3, TimeSpan.FromSeconds(5)));
+                    k.TopicEndpoint<ReleaseStockCommand>(
+                        "inventory.release-stock.v1",
+                        "inventory-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<ReleaseStockCommandConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
                         });
                 });
             });

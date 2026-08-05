@@ -1,0 +1,12 @@
+﻿global using Common.Application.Interfaces;
+global using Common.Domain.Exceptions;
+global using Common.Contracts.Events;
+global using FluentValidation;
+global using MassTransit;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using OrderService.Application.Common.Interfaces;
+global using OrderService.Application.Common.Mappers;
+global using OrderService.Domain.Entities;
+global using OrderService.Domain.Enums;
+global using OrderService.Domain.Common;

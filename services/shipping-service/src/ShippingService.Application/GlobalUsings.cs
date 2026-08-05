@@ -1,0 +1,10 @@
+﻿global using Common.Application.Interfaces;
+global using Common.Domain.Exceptions;
+global using Common.Contracts.Events;
+global using FluentValidation;
+global using MassTransit;
+global using MediatR;
+global using Microsoft.EntityFrameworkCore;
+global using ShippingService.Application.Common.Interfaces;
+global using ShippingService.Domain.Entities;
+global using ShippingService.Domain.Enums;

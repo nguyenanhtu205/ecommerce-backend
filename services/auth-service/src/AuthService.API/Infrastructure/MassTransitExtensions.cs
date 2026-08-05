@@ -1,5 +1,4 @@
-﻿using AuthService.Infrastructure.Data;
-using Common.Contracts.Events;
+﻿using Common.Contracts.Events;
 using MassTransit;
 
 namespace AuthService.API.Infrastructure;
@@ -15,12 +14,6 @@ public static class MassTransitExtensions
 
         services.AddMassTransit(x =>
         {
-            x.AddEntityFrameworkOutbox<ApplicationDbContext>(o =>
-            {
-                o.UsePostgres();
-                o.UseBusOutbox();
-            });
-
             x.UsingInMemory((context, cfg) =>
             {
                 cfg.ConfigureEndpoints(context);

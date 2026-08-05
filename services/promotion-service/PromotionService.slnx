@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="src/PromotionService.API/PromotionService.API.csproj" />
+  <Project Path="src/PromotionService.Application/PromotionService.Application.csproj" />
+  <Project Path="src/PromotionService.Domain/PromotionService.Domain.csproj" />
+  <Project Path="src/PromotionService.Infrastructure/PromotionService.Infrastructure.csproj" />
 </Solution>

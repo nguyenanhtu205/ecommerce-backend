@@ -29,6 +29,11 @@ public class ShopsConfiguration : IEntityTypeConfiguration<Shop>
         builder.Property(x => x.PickupAddressId)
             .HasColumnName("pickup_address_id");
 
+        builder.Property(x => x.PickupAddressSnapshot)
+            .HasColumnName("pickup_address_snapshot")
+            .HasColumnType("jsonb")
+            .IsRequired();
+
         builder.Property(x => x.Status)
             .HasColumnName("status")
             .HasConversion<string>()

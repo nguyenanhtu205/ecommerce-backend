@@ -1,0 +1,227 @@
+definitions:
+  application.AddItemRequest:
+    properties:
+      combinationId:
+        type: string
+      priceSnapshot:
+        type: integer
+      productId:
+        type: string
+      productName:
+        type: string
+      quantity:
+        type: integer
+      shopId:
+        type: string
+      thumbnailUrl:
+        type: string
+      variation:
+        type: string
+    type: object
+  application.CartItemResponse:
+    properties:
+      addedAt:
+        type: string
+      combinationId:
+        type: string
+      isSelected:
+        type: boolean
+      priceSnapshot:
+        type: integer
+      productId:
+        type: string
+      productName:
+        type: string
+      quantity:
+        type: integer
+      shopId:
+        type: string
+      thumbnailUrl:
+        type: string
+      variation:
+        type: string
+    type: object
+  application.CheckoutItem:
+    properties:
+      combinationId:
+        type: string
+      productId:
+        type: string
+      productName:
+        type: string
+      quantity:
+        type: integer
+      shopId:
+        type: string
+      thumbnailUrl:
+        type: string
+      variation:
+        type: string
+    type: object
+  application.RemoveItemsRequest:
+    properties:
+      combinationIds:
+        items:
+          type: string
+        type: array
+    type: object
+  application.ShopCartGroup:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/application.CartItemResponse'
+        type: array
+      shopId:
+        type: string
+    type: object
+  application.ShopCheckoutInfo:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/application.CheckoutItem'
+        type: array
+      shopId:
+        type: string
+    type: object
+  application.UpdateItemRequest:
+    properties:
+      isSelected:
+        type: boolean
+      quantity:
+        type: integer
+    type: object
+info:
+  contact: {}
+  title: Cart Service API
+  version: "1.0"
+paths:
+  /cart:
+    delete:
+      responses:
+        "204":
+          description: No Content
+      summary: Clear the entire cart (used after checkout succeeds)
+      tags:
+      - cart
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/application.ShopCartGroup'
+            type: array
+      summary: Get full cart grouped by shop
+      tags:
+      - cart
+  /cart/items:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: combination ids to remove
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/application.RemoveItemsRequest'
+      responses:
+        "204":
+          description: No Content
+      summary: Remove multiple items from cart at once
+      tags:
+      - cart
+    post:
+      consumes:
+      - application/json
+      description: If combinationId already exists in the cart, quantity is added
+        on top of the existing quantity.
+      parameters:
+      - description: item to add
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/application.AddItemRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Add item to cart
+      tags:
+      - cart
+  /cart/items/{combinationId}:
+    delete:
+      parameters:
+      - description: combination id
+        in: path
+        name: combinationId
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Remove one item from cart
+      tags:
+      - cart
+    patch:
+      consumes:
+      - application/json
+      parameters:
+      - description: combination id
+        in: path
+        name: combinationId
+        required: true
+        type: string
+      - description: fields to update
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/application.UpdateItemRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Update item quantity or selection
+      tags:
+      - cart
+  /cart/selected-summary:
+    get:
+      description: priceSnapshot is intentionally omitted from this response — Order
+        Service always re-fetches real price from Inventory Service at checkout.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/application.ShopCheckoutInfo'
+            type: array
+      summary: Get selected items grouped by shop, for building CheckoutCommand
+      tags:
+      - cart
+swagger: "2.0"

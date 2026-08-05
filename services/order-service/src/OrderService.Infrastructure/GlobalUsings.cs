@@ -1,0 +1,10 @@
+﻿global using Common.Contracts.Events;
+global using OrderService.Application.Common.Interfaces;
+global using OrderService.Application.Sagas.Checkout;
+global using OrderService.Application.Sagas.OrderReservation;
+global using OrderService.Domain.Entities;
+global using OrderService.Domain.Enums;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.ChangeTracking;
+global using Microsoft.EntityFrameworkCore.Metadata.Builders;
+global using System.Text.Json;

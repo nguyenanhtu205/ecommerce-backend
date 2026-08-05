@@ -14,11 +14,11 @@ public class ProductVariantCombination
 
     public required int Stock { get; init; }
 
-    public required int ReservedStock { get; init; }
+    public required int ReservedStock { get; set; }
 
-    public required int Version { get; init; }
+    public required int Version { get; set; }
 
-    public required DateTimeOffset UpdatedAt { get; init; }
+    public required DateTimeOffset UpdatedAt { get; set; }
 
     public ICollection<StockReservation> StockReservations { get; private set; } = new List<StockReservation>();
 }

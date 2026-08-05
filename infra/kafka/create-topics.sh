@@ -21,6 +21,7 @@ echo "=== Creating Kafka topics ==="
 
 # --- user / auth ---
 create_topic user.registered.v1
+create_topic user.pickup-address-snapshot-updated.v1
 
 # --- product ---
 create_topic product-catalog.product-created.v1
@@ -30,6 +31,40 @@ create_topic product-catalog.product-media-attached.v1
 # --- notification ---
 create_topic notification.otp-requested.v1
 create_topic notification.shop-activated.v1
+
+# --- order ---
+create_topic order.payment-succeeded.v1
+create_topic order.payment-failed.v1
+create_topic order.stock-reserved.v1
+create_topic order.stock-reservation-failed.v1
+create_topic order.cancel-order.v1
+
+# --- checkout ---
+create_topic checkout.initiated.v1
+create_topic checkout.reserve-order-stock.v1
+
+# --- promotion ---
+create_topic promotion.redeem-voucher.v1
+create_topic promotion.release-voucher.v1
+create_topic promotion.voucher-redeemed.v1
+create_topic promotion.voucher-redemption-failed.v1
+
+# --- payment ---
+create_topic payment.create-payment.v1
+create_topic payment.vnpay-confirmed.v1
+create_topic payment.redirect-created.v1
+
+# --- inventory ---
+create_topic inventory.release-stock.v1
+create_topic inventory.reserve-stock.v1
+create_topic inventory.stock-reserved.v1
+create_topic inventory.stock-reservation-failed.v1
+
+# --- shipping ---
+create_topic shipping.create-shipment.v1
+create_topic shipping.shipment-created.v1
+create_topic shipping.shipment-creation-failed.v1
+create_topic shipping.order-delivered.v1
 
 echo "=== All topics created ==="
 
