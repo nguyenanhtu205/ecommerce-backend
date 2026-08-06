@@ -1,0 +1,10 @@
+﻿{
+  "$schema": "https://www.krakend.io/schema/krakend.json",
+  "version": 3,
+  "name": "shopee-krakend-gateway",
+  "port": 8080,
+  "timeout": "5s",
+  "cache_ttl": "0s",
+  "output_encoding": "json",
+  "endpoints": []
+}

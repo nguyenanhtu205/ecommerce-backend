@@ -1,6 +1,13 @@
 ﻿_format_version: "3.0"
 
 services:
+  - name: gateway-aggregation
+    url: http://krakend:8080
+    routes:
+      - name: gateway-aggregation-route
+        paths: [ "/gateway" ]
+        strip_path: true
+    
   - name: auth-service
     url: http://auth-service:8080
     routes:

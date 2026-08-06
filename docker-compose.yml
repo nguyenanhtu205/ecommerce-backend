@@ -91,6 +91,13 @@ services:
       - review-service
       - cart-service
       - chat-service
+    
+  krakend:
+    image: krakend:2.13.8
+    volumes:
+      - ./gateway/krakend/krakend.json:/etc/krakend/krakend.json
+    ports:
+      - "8090:8080"
   
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
