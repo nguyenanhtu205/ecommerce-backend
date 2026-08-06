@@ -1,4 +1,4 @@
-﻿namespace OrderService.API.Services;
+﻿namespace PaymentService.API.Services;
 
 public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUser
 {

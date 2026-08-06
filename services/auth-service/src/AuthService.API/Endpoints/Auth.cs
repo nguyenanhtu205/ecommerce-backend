@@ -21,7 +21,6 @@ public class Auth : IEndpointGroup
             .RequireRateLimiting("post");
 
         groupBuilder.MapPost(Logout, "logout")
-            .RequireAuthorization()
             .RequireRateLimiting("post");
 
         groupBuilder.MapPost(RefreshUserToken, "refresh-user-token")

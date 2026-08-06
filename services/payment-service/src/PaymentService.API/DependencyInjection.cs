@@ -1,6 +1,7 @@
 ﻿using Common.API;
 using Common.API.RateLimiting;
 using PaymentService.API.Infrastructure;
+using PaymentService.API.Services;
 
 namespace PaymentService.API;
 
@@ -8,6 +9,9 @@ public static class DependencyInjection
 {
     public static void AddApiServices(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddHttpContextAccessor();
+        builder.Services.AddScoped<ICurrentUser, CurrentUser>();
+
         builder.Services.AddAuthentication();
 
         builder.Services.AddCors();

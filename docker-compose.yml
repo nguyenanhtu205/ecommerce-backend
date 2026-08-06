@@ -61,7 +61,7 @@ services:
           echo "waiting for minio..."; sleep 2;
         done
         mc mb --ignore-existing local/media         
-        
+  
   kong:
     image: kong:3.6
     environment:
@@ -69,11 +69,12 @@ services:
       KONG_DECLARATIVE_CONFIG: /kong/kong.yml
       KONG_PROXY_LISTEN: '0.0.0.0:8000'
       KONG_ADMIN_LISTEN: '0.0.0.0:8001'
+      KONG_UNTRUSTED_LUA_SANDBOX_REQUIRES: kong.plugins.jwt.jwt_parser
     volumes:
       - ./gateway/kong/kong.yml:/kong/kong.yml
     ports:
-      - '8000:8000'   
-      - '8001:8001'   
+      - '8000:8000'
+      - '8001:8001'
     depends_on:
       - auth-service
       - user-service
@@ -90,7 +91,7 @@ services:
       - review-service
       - cart-service
       - chat-service
-    
+  
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
     environment:
@@ -142,7 +143,7 @@ services:
     volumes:
       - ./infra/kafka/create-topics.sh:/create-topics.sh:ro
     entrypoint: [ "/bin/bash", "/create-topics.sh" ]
-    
+  
   akhq:
     image: tchiotludo/akhq:latest
     ports:
@@ -157,7 +158,7 @@ services:
             local:
               properties:
                 bootstrap.servers: "kafka:9092"            
-        
+  
   auth-service:
     build:
       context: .
@@ -275,7 +276,7 @@ services:
       postgres:
         condition: service_started
     command: [ "up" ]
-    
+  
   product-catalog-service:
     build:
       context: .
@@ -289,8 +290,8 @@ services:
       mongo:
         condition: service_started
       kafka-init:
-        condition: service_completed_successfully   
-        
+        condition: service_completed_successfully
+  
   inventory-service:
     build:
       context: .
@@ -306,7 +307,7 @@ services:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully
-        
+  
   search-service:
     build:
       context: .
@@ -399,7 +400,7 @@ services:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully
-        
+  
   review-service:
     build:
       context: .

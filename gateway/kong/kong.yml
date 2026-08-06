@@ -4,6 +4,12 @@ services:
   - name: auth-service
     url: http://auth-service:8080
     routes:
+      - name: auth-logout-protected
+        paths: [ "/auth/logout" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
       - name: auth-public
         paths: [ "/auth" ]
         strip_path: false
@@ -12,11 +18,11 @@ services:
     url: http://user-service:8080
     routes:
       - name: user-protected
-        paths: ["/user"]
+        paths: [ "/user" ]
         strip_path: false
         plugins:
           - name: jwt
-            
+
   - name: seller-service
     url: http://seller-service:8080
     routes:
@@ -25,7 +31,7 @@ services:
         strip_path: false
         plugins:
           - name: jwt
-            
+
   - name: notification-service
     url: http://notification-service:8080
     routes:
@@ -34,7 +40,7 @@ services:
         strip_path: false
         plugins:
           - name: jwt
-            
+
   - name: media-service
     url: http://media-service:8080
     routes:
@@ -43,7 +49,101 @@ services:
         strip_path: false
         plugins:
           - name: jwt
-            
+
+  - name: product-catalog-service
+    url: http://product-catalog-service:8080
+    routes:
+      - name: product-catalog-public
+        paths: [ "/product-catalog" ]
+        methods: [ "GET" ]
+        strip_path: false
+
+      - name: product-catalog-protected
+        paths: [ "/product-catalog" ]
+        methods: [ "POST", "PUT", "PATCH", "DELETE" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: inventory-service
+    url: http://inventory-service:8080
+    routes:
+      - name: inventory-protected
+        paths: [ "/inventory" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: search-service
+    url: http://search-service:8080
+    routes:
+      - name: search-public
+        paths: [ "/search" ]
+        strip_path: false
+
+  - name: order-service
+    url: http://order-service:8080
+    routes:
+      - name: order-protected
+        paths: [ "/order" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: payment-service
+    url: http://payment-service:8080
+    routes:
+      - name: payment-protected
+        paths: [ "/payment" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: promotion-service
+    url: http://promotion-service:8080
+    routes:
+      - name: promotion-protected
+        paths: [ "/promotion" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: shipping-service
+    url: http://shipping-service:8080
+    routes:
+      - name: shipping-protected
+        paths: [ "/shipping" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: review-service
+    url: http://review-service:8080
+    routes:
+      - name: review-protected
+        paths: [ "/review" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: cart-service
+    url: http://cart-service:8080
+    routes:
+      - name: cart-protected
+        paths: [ "/cart" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+  - name: chat-service
+    url: http://chat-service:8080
+    routes:
+      - name: chat-protected
+        paths: [ "/chat" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
 consumers:
   - username: auth-service-issuer
     jwt_secrets:
@@ -60,3 +160,30 @@ consumers:
           CwIDAQAB
           -----END PUBLIC KEY-----
         secret: "unused"
+
+plugins:
+  - name: post-function
+    config:
+      access:
+        - |
+          local jwt_parser = require "kong.plugins.jwt.jwt_parser"
+
+          local token = kong.ctx.shared.authenticated_jwt_token
+          if token then
+            local jwt_obj = jwt_parser:new(token)
+
+            if jwt_obj and jwt_obj.claims then
+              if jwt_obj.claims.sub then
+                kong.service.request.set_header("X-User-Id", jwt_obj.claims.sub)
+              end
+
+              local roleClaim = jwt_obj.claims["role"]
+              if roleClaim then
+                if type(roleClaim) == "table" then
+                  kong.service.request.set_header("X-User-Roles", table.concat(roleClaim, ","))
+                else
+                  kong.service.request.set_header("X-User-Roles", roleClaim)
+                end
+              end
+            end
+          end

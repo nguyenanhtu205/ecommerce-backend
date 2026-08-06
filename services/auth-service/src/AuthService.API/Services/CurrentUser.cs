@@ -1,6 +1,4 @@
-﻿using System.Security.Claims;
-
-namespace AuthService.API.Services;
+﻿namespace AuthService.API.Services;
 
 public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUser
 {
@@ -8,12 +6,21 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUse
     {
         get
         {
-            string? sub = httpContextAccessor.HttpContext?.User
-                .FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            string? userId = httpContextAccessor.HttpContext?
+                .Request.Headers["X-User-Id"].FirstOrDefault();
 
-            return Guid.TryParse(sub, out Guid userId) ? userId : null;
+            return Guid.TryParse(userId, out Guid id) ? id : null;
         }
     }
 
-    public bool IsSeller => httpContextAccessor.HttpContext?.User.IsInRole("seller") ?? false;
+    public bool IsSeller
+    {
+        get
+        {
+            string? roles = httpContextAccessor.HttpContext?
+                .Request.Headers["X-User-Roles"].FirstOrDefault();
+
+            return roles?.Split(',').Contains("seller") ?? false;
+        }
+    }
 }

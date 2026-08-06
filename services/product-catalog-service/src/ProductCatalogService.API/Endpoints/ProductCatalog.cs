@@ -20,12 +20,10 @@ public class ProductCatalog : IEndpointGroup
     {
         groupBuilder.MapPost(CreateProduct, "products")
             .Produces<ProductDto>()
-            //.RequireAuthorization()
             .RequireRateLimiting("post");
 
         groupBuilder.MapPut(UpdateProduct, "products/{id}")
             .Produces<ProductDto>()
-            //.RequireAuthorization()
             .RequireRateLimiting("post");
 
         groupBuilder.MapPost(CreateCategory, "category")
@@ -35,15 +33,20 @@ public class ProductCatalog : IEndpointGroup
         groupBuilder.MapPost(CreateCategoryAttribute, "category-attribute")
             .RequireRateLimiting("post");
 
-        groupBuilder.MapGet(GetProductById, "products/{id}");
+        groupBuilder.MapGet(GetProductById, "products/{id}")
+            .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}");
+        groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}")
+            .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetCategories, "categories");
+        groupBuilder.MapGet(GetCategories, "categories")
+            .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetCategoryAttributes, "categories/{categoryId}/attributes");
+        groupBuilder.MapGet(GetCategoryAttributes, "categories/{categoryId}/attributes")
+            .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetProductListings, "listings");
+        groupBuilder.MapGet(GetProductListings, "listings")
+            .RequireRateLimiting("get");
     }
 
     [EndpointSummary("Create product")]
