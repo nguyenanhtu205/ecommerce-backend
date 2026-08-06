@@ -5,7 +5,6 @@ import "time"
 type requestUploadRequest struct {
 	MediaType   string  `json:"media_type"`
 	ContentType string  `json:"content_type"`
-	UploadedBy  string  `json:"uploaded_by"`
 	Checksum    *string `json:"checksum,omitempty"`
 }
 

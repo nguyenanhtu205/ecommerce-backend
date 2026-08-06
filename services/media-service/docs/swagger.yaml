@@ -87,8 +87,6 @@ definitions:
         type: string
       media_type:
         type: string
-      uploaded_by:
-        type: string
     type: object
   httpapi.requestUploadResponse:
     properties:

@@ -40,13 +40,17 @@ type wsIncomingMessage struct {
 //
 // @Tags         chat
 // @Param        conversationId query string true "conversationId to subscribe to"
-// @Param        role           query string true "buyer or shop"
 // @Router       /chat/ws [get]
 func (h *ChatWSHandler) Upgrade(c echo.Context) error {
 	conversationID := c.QueryParam("conversationId")
-	role := domain.SenderType(c.QueryParam("role"))
-	if conversationID == "" || (role != domain.SenderBuyer && role != domain.SenderShop) {
-		return c.JSON(http.StatusBadRequest, errResponse("conversationId and a valid role are required"))
+	if conversationID == "" {
+		return c.JSON(http.StatusBadRequest, errResponse("conversationId is required"))
+	}
+
+	roleStr, _ := c.Get("role").(string)
+	role := domain.SenderType(roleStr)
+	if role != domain.SenderBuyer && role != domain.SenderShop {
+		return c.JSON(http.StatusUnauthorized, errResponse("missing role in context, check auth middleware"))
 	}
 
 	conn, err := upgrader.Upgrade(c.Response(), c.Request(), nil)

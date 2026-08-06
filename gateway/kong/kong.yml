@@ -33,7 +33,7 @@ services:
           - name: jwt
 
   - name: notification-service
-    url: http://notification-service:8080
+    url: http://notification-service:3000
     routes:
       - name: notification-protected
         paths: [ "/notification" ]

@@ -2,6 +2,7 @@ package httpapi
 
 import (
 	"errors"
+	"media-service/internal/interfaces/http/middleware"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -37,10 +38,15 @@ func (h *Handler) RequestUpload(c echo.Context) error {
 		return respondError(c, domain.ErrInvalidInput)
 	}
 
+	userID, ok := middleware.GetUserID(c)
+	if !ok {
+		return respondError(c, domain.ErrInvalidInput)
+	}
+
 	out, err := h.svc.RequestUpload(c.Request().Context(), application.RequestUploadInput{
 		MediaType:   domain.MediaType(req.MediaType),
 		ContentType: req.ContentType,
-		UploadedBy:  req.UploadedBy,
+		UploadedBy:  userID,
 		Checksum:    req.Checksum,
 	})
 	if err != nil {

@@ -170,11 +170,6 @@ paths:
         name: conversationId
         required: true
         type: string
-      - description: buyer or shop
-        in: query
-        name: role
-        required: true
-        type: string
       responses: {}
       summary: WebSocket endpoint for real-time chat on a conversation — used only
         to push/receive

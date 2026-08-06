@@ -25,7 +25,7 @@ import (
 	"media-service/internal/infrastructure/minio"
 	"media-service/internal/infrastructure/postgres"
 	httpapi "media-service/internal/interfaces/http"
-	//kongauth "media-service/internal/interfaces/http/middleware"
+	kongauth "media-service/internal/interfaces/http/middleware"
 
 	_ "media-service/docs"
 )
@@ -42,9 +42,8 @@ func main() {
 		log.Fatalf("connect postgres: %v", err)
 	}
 	defer func(db *sql.DB) {
-		err := db.Close()
-		if err != nil {
-			log.Fatalf("close postgres: %v", err)
+		if err := db.Close(); err != nil {
+			log.Printf("close postgres: %v", err)
 		}
 	}(db)
 	if err := db.Ping(); err != nil {
@@ -58,9 +57,8 @@ func main() {
 
 	events := kafkainfra.NewPublisher(cfg.KafkaBrokers, cfg.KafkaTopic)
 	defer func(events *kafkainfra.Publisher) {
-		err := events.Close()
-		if err != nil {
-			log.Fatalf("close kafka publisher: %v", err)
+		if err := events.Close(); err != nil {
+			log.Printf("close kafka publisher: %v", err)
 		}
 	}(events)
 
@@ -87,7 +85,7 @@ func main() {
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
 
-	//e.Use(kongauth.KongAuth())
+	e.Use(kongauth.KongAuth())
 
 	httpapi.RegisterRoutes(e, handler)
 

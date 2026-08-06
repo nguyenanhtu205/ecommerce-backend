@@ -3,7 +3,7 @@ package http
 import "github.com/labstack/echo/v4"
 
 func RegisterRoutes(e *echo.Echo, h *ChatHandler, ws *ChatWSHandler) {
-	chat := e.Group("/chat")
+	chat := e.Group("/chat", CurrentUserMiddleware)
 
 	chat.GET("/conversations", h.ListConversations)
 	chat.POST("/conversations", h.CreateConversation)

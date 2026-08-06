@@ -175,13 +175,6 @@ const docTemplate = `{
                         "name": "conversationId",
                         "in": "query",
                         "required": true
-                    },
-                    {
-                        "type": "string",
-                        "description": "buyer or shop",
-                        "name": "role",
-                        "in": "query",
-                        "required": true
                     }
                 ],
                 "responses": {}

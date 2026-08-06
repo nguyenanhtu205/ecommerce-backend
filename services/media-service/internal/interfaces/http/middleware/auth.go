@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"net/http"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 )
@@ -39,4 +40,15 @@ func GetUserID(c echo.Context) (string, bool) {
 func GetRoles(c echo.Context) string {
 	v, _ := c.Get(contextKeyRoles).(string)
 	return v
+}
+
+// IsSeller reports whether the authenticated caller has the "seller" role,
+// mirroring ICurrentUser.IsSeller in the .NET services.
+func IsSeller(c echo.Context) bool {
+	for r := range strings.SplitSeq(GetRoles(c), ",") {
+		if strings.TrimSpace(r) == "seller" {
+			return true
+		}
+	}
+	return false
 }

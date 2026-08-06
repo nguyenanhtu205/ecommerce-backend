@@ -459,9 +459,6 @@ const docTemplate = `{
                 },
                 "media_type": {
                     "type": "string"
-                },
-                "uploaded_by": {
-                    "type": "string"
                 }
             }
         },

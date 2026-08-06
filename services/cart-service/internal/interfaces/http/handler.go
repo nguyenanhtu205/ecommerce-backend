@@ -4,6 +4,7 @@ import (
 	"errors"
 	"net/http"
 
+	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 
 	"cart-service/internal/application"
@@ -25,6 +26,9 @@ func userIdFromRequest(c echo.Context) (string, error) {
 	userId := c.Request().Header.Get("X-User-Id")
 	if userId == "" {
 		return "", errors.New("missing X-User-Id header")
+	}
+	if _, err := uuid.Parse(userId); err != nil {
+		return "", errors.New("invalid X-User-Id header")
 	}
 	return userId, nil
 }
