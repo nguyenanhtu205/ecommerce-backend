@@ -12,7 +12,7 @@ public class ProductVariantCombination
 
     public required int Price { get; init; }
 
-    public required int Stock { get; init; }
+    public required int Stock { get; set; }
 
     public required int ReservedStock { get; set; }
 

@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ProductCatalogService.Application\ProductCatalogService.Application.csproj"/>
-    <ProjectReference Include="..\ProductCatalogService.Infrastructure\ProductCatalogService.Infrastructure.csproj"/>
+    <ProjectReference Include="..\ReviewService.Application\ReviewService.Application.csproj"/>
+    <ProjectReference Include="..\ReviewService.Infrastructure\ReviewService.Infrastructure.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Application\Common.Application.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.API\Common.API.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Contracts\Common.Contracts.csproj"/>

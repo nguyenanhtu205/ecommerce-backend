@@ -47,6 +47,7 @@ public static class MassTransitExtensions
                 rider.AddProducer<OrderPaymentSucceeded>("order.payment-succeeded.v1");
                 rider.AddProducer<OrderPaymentFailed>("order.payment-failed.v1");
                 rider.AddProducer<ReleaseStockCommand>("inventory.release-stock.v1");
+                rider.AddProducer<CommitStockCommand>("inventory.commit-stock.v1");
                 rider.AddProducer<ReserveStock>("inventory.reserve-stock.v1");
                 rider.AddProducer<OrderStockReserved>("order.stock-reserved.v1");
                 rider.AddProducer<OrderStockReservationFailed>("order.stock-reservation-failed.v1");

@@ -24,6 +24,8 @@ services:
     image: redis:7-alpine
     ports:
       - '6379:6379'
+    volumes:
+      - redisdata:/data
   
   redis-insight:
     image: redis/redisinsight:latest
@@ -78,6 +80,16 @@ services:
       - notification-service
       - seller-service
       - media-service
+      - product-catalog-service
+      - inventory-service
+      - search-service
+      - order-service
+      - payment-service
+      - promotion-service
+      - shipping-service
+      - review-service
+      - cart-service
+      - chat-service
     
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:8.15.0
@@ -290,7 +302,7 @@ services:
       - '5005:8080'
       - '6005:8081'
     depends_on:
-      mongo:
+      postgres:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully
@@ -387,6 +399,54 @@ services:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully
+        
+  review-service:
+    build:
+      context: .
+      dockerfile: services/review-service/Dockerfile
+    environment:
+      ConnectionStrings__DefaultConnection: mongodb://mongo:27017/review_db
+      Kafka__BootstrapServers: kafka:9092
+    ports:
+      - '5013:8080'
+    depends_on:
+      mongo:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
+  
+  cart-service:
+    build:
+      context: .
+      dockerfile: services/cart-service/Dockerfile
+      target: runtime
+    environment:
+      REDIS_ADDR: redis:6379
+      PORT: 8080
+    ports:
+      - '5014:8080'
+    depends_on:
+      redis:
+        condition: service_started
+  
+  chat-service:
+    build:
+      context: .
+      dockerfile: services/chat-service/Dockerfile
+      target: runtime
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB_NAME: chat_db
+      KAFKA_BROKERS: kafka:9092
+      KAFKA_TOPIC_MESSAGE_SENT: chat.message-sent.v1
+      PORT: 8080
+    ports:
+      - '5015:8080'
+    depends_on:
+      mongo:
+        condition: service_started
+      kafka-init:
+        condition: service_completed_successfully
 
 volumes:
   pgdata:
@@ -395,3 +455,4 @@ volumes:
   miniodata:
   redisinsightdata:
   esdata:
+  redisdata:

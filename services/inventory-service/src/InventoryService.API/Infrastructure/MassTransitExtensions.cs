@@ -1,6 +1,5 @@
 ﻿using Common.Contracts.Events;
 using InventoryService.Application.Consumers;
-using InventoryService.Infrastructure.Data;
 using MassTransit;
 
 namespace InventoryService.API.Infrastructure;
@@ -15,6 +14,7 @@ public static class MassTransitExtensions
             x.AddConsumer<ProductCreatedConsumer>();
             x.AddConsumer<ReserveStockConsumer>();
             x.AddConsumer<ReleaseStockCommandConsumer>();
+            x.AddConsumer<CommitStockCommandConsumer>();
 
             x.UsingInMemory((context, cfg) =>
             {
@@ -26,6 +26,7 @@ public static class MassTransitExtensions
                 rider.AddConsumer<ProductCreatedConsumer>();
                 rider.AddConsumer<ReserveStockConsumer>();
                 rider.AddConsumer<ReleaseStockCommandConsumer>();
+                rider.AddConsumer<CommitStockCommandConsumer>();
 
                 rider.AddProducer<StockReserved>("inventory.stock-reserved.v1");
                 rider.AddProducer<StockReservationFailed>("inventory.stock-reservation-failed.v1");
@@ -58,6 +59,15 @@ public static class MassTransitExtensions
                         e =>
                         {
                             e.ConfigureConsumer<ReleaseStockCommandConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
+
+                    k.TopicEndpoint<CommitStockCommand>(
+                        "inventory.commit-stock.v1",
+                        "inventory-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<CommitStockCommandConsumer>(context);
                             e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
                         });
                 });

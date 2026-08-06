@@ -59,12 +59,16 @@ create_topic inventory.release-stock.v1
 create_topic inventory.reserve-stock.v1
 create_topic inventory.stock-reserved.v1
 create_topic inventory.stock-reservation-failed.v1
+create_topic inventory.commit-stock.v1
 
 # --- shipping ---
 create_topic shipping.create-shipment.v1
 create_topic shipping.shipment-created.v1
 create_topic shipping.shipment-creation-failed.v1
 create_topic shipping.order-delivered.v1
+
+# --- chat ---
+create_topic chat.message-sent.v1
 
 echo "=== All topics created ==="
 

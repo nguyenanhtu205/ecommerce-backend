@@ -1,2 +1,6 @@
 <Solution>
+  <Project Path="src/ReviewService.API/ReviewService.API.csproj" />
+  <Project Path="src/ReviewService.Application/ReviewService.Application.csproj" />
+  <Project Path="src/ReviewService.Domain/ReviewService.Domain.csproj" />
+  <Project Path="src/ReviewService.Infrastructure/ReviewService.Infrastructure.csproj" />
 </Solution>

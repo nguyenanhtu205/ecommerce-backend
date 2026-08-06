@@ -75,3 +75,5 @@ public record CreateShipment(
     CheckoutAddressSnapshot PickupAddressSnapshot,
     CheckoutAddressSnapshot DeliveryAddressSnapshot,
     Guid CarrierId);
+
+public record CommitStockCommand(Guid OrderId);

@@ -1,0 +1,183 @@
+definitions:
+  domain.Conversation:
+    properties:
+      buyerId:
+        type: string
+      buyerUnreadCount:
+        type: integer
+      createdAt:
+        type: string
+      id:
+        type: string
+      lastMessage:
+        type: string
+      lastMessageAt:
+        type: string
+      sellerUnreadCount:
+        type: integer
+      shopId:
+        type: string
+    type: object
+  domain.Message:
+    properties:
+      attachmentMediaAssetIds:
+        items:
+          type: string
+        type: array
+      content:
+        type: string
+      conversationId:
+        type: string
+      createdAt:
+        type: string
+      id:
+        type: string
+      isRead:
+        type: boolean
+      senderType:
+        $ref: '#/definitions/domain.SenderType'
+    type: object
+  domain.SenderType:
+    enum:
+    - buyer
+    - shop
+    type: string
+    x-enum-varnames:
+    - SenderBuyer
+    - SenderShop
+  http.createConversationRequest:
+    properties:
+      buyerId:
+        type: string
+      shopId:
+        type: string
+    type: object
+  http.sendMessageRequest:
+    properties:
+      attachmentMediaAssetIds:
+        items:
+          type: string
+        type: array
+      content:
+        type: string
+    type: object
+info:
+  contact: {}
+  title: Chat Service API
+  version: "1.0"
+paths:
+  /chat/conversations:
+    get:
+      parameters:
+      - description: buyer or shop
+        in: query
+        name: role
+        required: true
+        type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Conversation'
+            type: array
+      summary: List conversations of the current user
+      tags:
+      - chat
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: buyerId + shopId
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/http.createConversationRequest'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/domain.Conversation'
+      summary: Create or get a buyer-shop conversation (idempotent)
+      tags:
+      - chat
+  /chat/conversations/{id}/messages:
+    get:
+      parameters:
+      - description: conversationId
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: page number, starting from 1
+        in: query
+        name: page
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/domain.Message'
+            type: array
+      summary: Paginated message history of a conversation
+      tags:
+      - chat
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: conversationId
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: message content
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/http.sendMessageRequest'
+      responses:
+        "201":
+          description: Created
+          schema:
+            $ref: '#/definitions/domain.Message'
+      summary: Send a message via REST — also the entrypoint reused by the WebSocket
+        handler
+      tags:
+      - chat
+  /chat/conversations/{id}/read:
+    post:
+      parameters:
+      - description: conversationId
+        in: path
+        name: id
+        required: true
+        type: string
+      responses:
+        "204":
+          description: No Content
+      summary: Mark all messages from the other party as read
+      tags:
+      - chat
+  /chat/ws:
+    get:
+      parameters:
+      - description: conversationId to subscribe to
+        in: query
+        name: conversationId
+        required: true
+        type: string
+      - description: buyer or shop
+        in: query
+        name: role
+        required: true
+        type: string
+      responses: {}
+      summary: WebSocket endpoint for real-time chat on a conversation — used only
+        to push/receive
+      tags:
+      - chat
+swagger: "2.0"

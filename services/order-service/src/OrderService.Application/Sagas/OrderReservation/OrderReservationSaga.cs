@@ -72,9 +72,18 @@ public class OrderReservationSaga : MassTransitStateMachine<OrderReservationSaga
             When(OrderPaymentSucceededEvent)
                 .ThenAsync(async context =>
                 {
-                    ITopicProducer<CreateShipment> producer = context.GetPayload<IServiceProvider>()
+                    IServiceProvider provider = context.GetPayload<IServiceProvider>();
+
+                    ITopicProducer<CommitStockCommand> commitStockProducer = provider
+                        .GetRequiredService<ITopicProducer<CommitStockCommand>>();
+                    ITopicProducer<CreateShipment> createShipmentProducer = provider
                         .GetRequiredService<ITopicProducer<CreateShipment>>();
-                    await producer.Produce(
+
+                    await commitStockProducer.Produce(
+                        new CommitStockCommand(context.Saga.CorrelationId),
+                        context.CancellationToken);
+
+                    await createShipmentProducer.Produce(
                         new CreateShipment(
                             context.Saga.CorrelationId,
                             AddressMapper.ToCheckoutAddressSnapshot(context.Saga.PickupAddressSnapshot!),
