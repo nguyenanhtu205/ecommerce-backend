@@ -325,13 +325,13 @@
                 "bucket": {
                     "type": "string"
                 },
-                "content_type": {
+                "contentType": {
                     "type": "string"
                 },
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
-                "duration_seconds": {
+                "durationSeconds": {
                     "type": "integer"
                 },
                 "height": {
@@ -340,22 +340,22 @@
                 "id": {
                     "type": "string"
                 },
-                "media_type": {
+                "mediaType": {
                     "type": "string"
                 },
-                "object_key": {
+                "objectKey": {
                     "type": "string"
                 },
-                "public_url": {
+                "publicUrl": {
                     "type": "string"
                 },
-                "size_bytes": {
+                "sizeBytes": {
                     "type": "integer"
                 },
                 "status": {
                     "type": "string"
                 },
-                "uploaded_by": {
+                "uploadedBy": {
                     "type": "string"
                 },
                 "width": {
@@ -366,22 +366,22 @@
         "httpapi.attachmentResponse": {
             "type": "object",
             "properties": {
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "media_asset_id": {
+                "mediaAssetId": {
                     "type": "string"
                 },
-                "owner_id": {
+                "ownerId": {
                     "type": "string"
                 },
-                "owner_service": {
+                "ownerService": {
                     "type": "string"
                 },
-                "owner_type": {
+                "ownerType": {
                     "type": "string"
                 },
                 "position": {
@@ -390,7 +390,7 @@
                 "role": {
                     "type": "string"
                 },
-                "updated_at": {
+                "updatedAt": {
                     "type": "string"
                 }
             }
@@ -398,7 +398,7 @@
         "httpapi.confirmUploadRequest": {
             "type": "object",
             "properties": {
-                "duration_seconds": {
+                "durationSeconds": {
                     "type": "integer"
                 },
                 "height": {
@@ -412,16 +412,16 @@
         "httpapi.createAttachmentRequest": {
             "type": "object",
             "properties": {
-                "media_asset_id": {
+                "mediaAssetId": {
                     "type": "string"
                 },
-                "owner_id": {
+                "ownerId": {
                     "type": "string"
                 },
-                "owner_service": {
+                "ownerService": {
                     "type": "string"
                 },
-                "owner_type": {
+                "ownerType": {
                     "type": "string"
                 },
                 "position": {
@@ -446,10 +446,10 @@
                 "checksum": {
                     "type": "string"
                 },
-                "content_type": {
+                "contentType": {
                     "type": "string"
                 },
-                "media_type": {
+                "mediaType": {
                     "type": "string"
                 }
             }
@@ -457,19 +457,19 @@
         "httpapi.requestUploadResponse": {
             "type": "object",
             "properties": {
-                "asset_id": {
+                "assetId": {
                     "type": "string"
                 },
                 "bucket": {
                     "type": "string"
                 },
-                "expires_in_seconds": {
+                "expiresInSeconds": {
                     "type": "integer"
                 },
-                "object_key": {
+                "objectKey": {
                     "type": "string"
                 },
-                "upload_url": {
+                "uploadUrl": {
                     "type": "string"
                 }
             }

@@ -20,6 +20,8 @@ import (
 	"chat-service/internal/infrastructure/mongodb"
 	wsinfra "chat-service/internal/infrastructure/websocket"
 	chathttp "chat-service/internal/interfaces/http"
+
+	_ "chat-service/docs"
 )
 
 func main() {

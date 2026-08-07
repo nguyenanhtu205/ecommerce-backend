@@ -4,55 +4,55 @@ definitions:
     properties:
       bucket:
         type: string
-      content_type:
+      contentType:
         type: string
-      created_at:
+      createdAt:
         type: string
-      duration_seconds:
+      durationSeconds:
         type: integer
       height:
         type: integer
       id:
         type: string
-      media_type:
+      mediaType:
         type: string
-      object_key:
+      objectKey:
         type: string
-      public_url:
+      publicUrl:
         type: string
-      size_bytes:
+      sizeBytes:
         type: integer
       status:
         type: string
-      uploaded_by:
+      uploadedBy:
         type: string
       width:
         type: integer
     type: object
   httpapi.attachmentResponse:
     properties:
-      created_at:
+      createdAt:
         type: string
       id:
         type: string
-      media_asset_id:
+      mediaAssetId:
         type: string
-      owner_id:
+      ownerId:
         type: string
-      owner_service:
+      ownerService:
         type: string
-      owner_type:
+      ownerType:
         type: string
       position:
         type: integer
       role:
         type: string
-      updated_at:
+      updatedAt:
         type: string
     type: object
   httpapi.confirmUploadRequest:
     properties:
-      duration_seconds:
+      durationSeconds:
         type: integer
       height:
         type: integer
@@ -61,13 +61,13 @@ definitions:
     type: object
   httpapi.createAttachmentRequest:
     properties:
-      media_asset_id:
+      mediaAssetId:
         type: string
-      owner_id:
+      ownerId:
         type: string
-      owner_service:
+      ownerService:
         type: string
-      owner_type:
+      ownerType:
         type: string
       position:
         type: integer
@@ -83,22 +83,22 @@ definitions:
     properties:
       checksum:
         type: string
-      content_type:
+      contentType:
         type: string
-      media_type:
+      mediaType:
         type: string
     type: object
   httpapi.requestUploadResponse:
     properties:
-      asset_id:
+      assetId:
         type: string
       bucket:
         type: string
-      expires_in_seconds:
+      expiresInSeconds:
         type: integer
-      object_key:
+      objectKey:
         type: string
-      upload_url:
+      uploadUrl:
         type: string
     type: object
 info:

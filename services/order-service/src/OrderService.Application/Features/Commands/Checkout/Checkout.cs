@@ -15,6 +15,7 @@ public record CheckoutResult(
     bool Success,
     Guid CheckoutBatchId,
     List<Guid> OrderIds,
+    int? TotalAmount,
     string? RedirectUrl,
     string? FailureReason);
 
@@ -46,7 +47,7 @@ public class CheckoutCommandHandler(
 
         if (command.CartItems.Count == 0 || command.ShopInfos.Count == 0)
         {
-            return new CheckoutResult(false, Guid.Empty, [], null, "Empty cart");
+            return new CheckoutResult(false, Guid.Empty, [], null, null, "Empty cart");
         }
 
         Dictionary<Guid, List<CheckoutItem>> itemsByShop =
@@ -55,7 +56,7 @@ public class CheckoutCommandHandler(
 
         if (itemsByShop.Keys.Any(shopId => !infoByShop.ContainsKey(shopId)))
         {
-            return new CheckoutResult(false, Guid.Empty, [], null,
+            return new CheckoutResult(false, Guid.Empty, [], null, null,
                 "Missing carrier/voucher information for one shop in the cart.");
         }
 
@@ -64,7 +65,7 @@ public class CheckoutCommandHandler(
             await inventoryClient.GetPricesAsync(combinationIds, cancellationToken);
         if (command.CartItems.Any(i => !priceMap.ContainsKey(i.CombinationId)))
         {
-            return new CheckoutResult(false, Guid.Empty, [], null,
+            return new CheckoutResult(false, Guid.Empty, [], null, null,
                 "Some products no longer exist or are no longer available for sale.");
         }
 
@@ -89,7 +90,7 @@ public class CheckoutCommandHandler(
                 await shopClient.GetPickupAddressAsync(shopId, cancellationToken);
             if (!pickupAddressResult.IsValid || pickupAddressResult.PickupAddressSnapshot is null)
             {
-                return new CheckoutResult(false, Guid.Empty, [], null,
+                return new CheckoutResult(false, Guid.Empty, [], null, null,
                     $"Failed to retrieve pickup address for shop {shopId}: {pickupAddressResult.FailureReason}");
             }
 
@@ -100,7 +101,7 @@ public class CheckoutCommandHandler(
                 cancellationToken);
             if (!feeResult.IsValid)
             {
-                return new CheckoutResult(false, Guid.Empty, [], null,
+                return new CheckoutResult(false, Guid.Empty, [], null, null,
                     $"Unable to calculate the shipping fee for shop {shopId}: {feeResult.FailureReason}");
             }
 
@@ -114,7 +115,7 @@ public class CheckoutCommandHandler(
                     cancellationToken);
                 if (!dryRun.IsValid)
                 {
-                    return new CheckoutResult(false, Guid.Empty, [], null,
+                    return new CheckoutResult(false, Guid.Empty, [], null, null,
                         $"Voucher shop {info.ShopVoucherCode} invalid: {dryRun.FailureReason}");
                 }
 
@@ -133,7 +134,7 @@ public class CheckoutCommandHandler(
                 cancellationToken);
             if (!dryRun.IsValid)
             {
-                return new CheckoutResult(false, Guid.Empty, [], null,
+                return new CheckoutResult(false, Guid.Empty, [], null, null,
                     $"Voucher platform không hợp lệ: {dryRun.FailureReason}");
             }
 
@@ -256,6 +257,6 @@ public class CheckoutCommandHandler(
 
         await context.SaveChangesAsync(cancellationToken);
 
-        return new CheckoutResult(true, checkoutBatchId, orderIds, null, null);
+        return new CheckoutResult(true, checkoutBatchId, orderIds, totalAmount, null, null);
     }
 }

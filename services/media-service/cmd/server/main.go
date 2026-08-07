@@ -9,6 +9,7 @@ import (
 	"errors"
 	"log"
 	kafkainfra "media-service/internal/infrastructure/kafka"
+	kongauth "media-service/internal/interfaces/http/middleware"
 	"net/http"
 	"os/signal"
 	"syscall"
@@ -21,13 +22,11 @@ import (
 	echoSwagger "github.com/swaggo/echo-swagger"
 
 	"media-service/config"
+	_ "media-service/docs"
 	"media-service/internal/application"
 	"media-service/internal/infrastructure/minio"
 	"media-service/internal/infrastructure/postgres"
 	httpapi "media-service/internal/interfaces/http"
-	kongauth "media-service/internal/interfaces/http/middleware"
-
-	_ "media-service/docs"
 )
 
 const httpShutdownTimeout = 10 * time.Second
@@ -85,9 +84,7 @@ func main() {
 	e.Use(middleware.RequestLogger())
 	e.Use(middleware.Recover())
 
-	e.Use(kongauth.KongAuth())
-
-	httpapi.RegisterRoutes(e, handler)
+	httpapi.RegisterRoutes(e, handler, kongauth.KongAuth())
 
 	go func() {
 		log.Printf("media-service listening on :%s", cfg.Port)

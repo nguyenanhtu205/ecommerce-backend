@@ -333,13 +333,13 @@ const docTemplate = `{
                 "bucket": {
                     "type": "string"
                 },
-                "content_type": {
+                "contentType": {
                     "type": "string"
                 },
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
-                "duration_seconds": {
+                "durationSeconds": {
                     "type": "integer"
                 },
                 "height": {
@@ -348,22 +348,22 @@ const docTemplate = `{
                 "id": {
                     "type": "string"
                 },
-                "media_type": {
+                "mediaType": {
                     "type": "string"
                 },
-                "object_key": {
+                "objectKey": {
                     "type": "string"
                 },
-                "public_url": {
+                "publicUrl": {
                     "type": "string"
                 },
-                "size_bytes": {
+                "sizeBytes": {
                     "type": "integer"
                 },
                 "status": {
                     "type": "string"
                 },
-                "uploaded_by": {
+                "uploadedBy": {
                     "type": "string"
                 },
                 "width": {
@@ -374,22 +374,22 @@ const docTemplate = `{
         "httpapi.attachmentResponse": {
             "type": "object",
             "properties": {
-                "created_at": {
+                "createdAt": {
                     "type": "string"
                 },
                 "id": {
                     "type": "string"
                 },
-                "media_asset_id": {
+                "mediaAssetId": {
                     "type": "string"
                 },
-                "owner_id": {
+                "ownerId": {
                     "type": "string"
                 },
-                "owner_service": {
+                "ownerService": {
                     "type": "string"
                 },
-                "owner_type": {
+                "ownerType": {
                     "type": "string"
                 },
                 "position": {
@@ -398,7 +398,7 @@ const docTemplate = `{
                 "role": {
                     "type": "string"
                 },
-                "updated_at": {
+                "updatedAt": {
                     "type": "string"
                 }
             }
@@ -406,7 +406,7 @@ const docTemplate = `{
         "httpapi.confirmUploadRequest": {
             "type": "object",
             "properties": {
-                "duration_seconds": {
+                "durationSeconds": {
                     "type": "integer"
                 },
                 "height": {
@@ -420,16 +420,16 @@ const docTemplate = `{
         "httpapi.createAttachmentRequest": {
             "type": "object",
             "properties": {
-                "media_asset_id": {
+                "mediaAssetId": {
                     "type": "string"
                 },
-                "owner_id": {
+                "ownerId": {
                     "type": "string"
                 },
-                "owner_service": {
+                "ownerService": {
                     "type": "string"
                 },
-                "owner_type": {
+                "ownerType": {
                     "type": "string"
                 },
                 "position": {
@@ -454,10 +454,10 @@ const docTemplate = `{
                 "checksum": {
                     "type": "string"
                 },
-                "content_type": {
+                "contentType": {
                     "type": "string"
                 },
-                "media_type": {
+                "mediaType": {
                     "type": "string"
                 }
             }
@@ -465,19 +465,19 @@ const docTemplate = `{
         "httpapi.requestUploadResponse": {
             "type": "object",
             "properties": {
-                "asset_id": {
+                "assetId": {
                     "type": "string"
                 },
                 "bucket": {
                     "type": "string"
                 },
-                "expires_in_seconds": {
+                "expiresInSeconds": {
                     "type": "integer"
                 },
-                "object_key": {
+                "objectKey": {
                     "type": "string"
                 },
-                "upload_url": {
+                "uploadUrl": {
                     "type": "string"
                 }
             }

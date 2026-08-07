@@ -34,18 +34,23 @@ public class ProductCatalog : IEndpointGroup
             .RequireRateLimiting("post");
 
         groupBuilder.MapGet(GetProductById, "products/{id}")
+            .Produces<ProductDto>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}")
+            .Produces<PagedResult<ProductDto>>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetCategories, "categories")
+            .Produces<List<CategoryDto>>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetCategoryAttributes, "categories/{categoryId}/attributes")
+            .Produces<List<CategoryAttributeDto>>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetProductListings, "listings")
+            .Produces<PagedResult<ProductListingDto>>()
             .RequireRateLimiting("get");
     }
 
