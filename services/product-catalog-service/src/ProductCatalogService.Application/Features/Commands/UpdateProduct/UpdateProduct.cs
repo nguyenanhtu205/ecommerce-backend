@@ -1,8 +1,9 @@
-﻿namespace ProductCatalogService.Application.Features.Commands.UpdateProduct;
+﻿using Common.Application.Interfaces;
+
+namespace ProductCatalogService.Application.Features.Commands.UpdateProduct;
 
 public record UpdateProductCommand(
     string Id,
-    string ShopId,
     string CategoryId,
     string Name,
     string Description,
@@ -23,16 +24,24 @@ public record UpdateProductCommand(
 public class UpdateProduct(
     IApplicationDbContext context,
     ITopicProducer<ProductCreated> producer,
-    ITopicProducer<ProductListingViewUpdated> listingViewProducer) : IRequestHandler<UpdateProductCommand, ProductDto>
+    ITopicProducer<ProductListingViewUpdated> listingViewProducer,
+    ICurrentUser currentUser) : IRequestHandler<UpdateProductCommand, ProductDto>
 {
     public async Task<ProductDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
     {
+        if (currentUser.ShopId == null)
+        {
+            throw new ForbiddenAccessException();
+        }
+
+        Guid shopId = currentUser.ShopId.Value;
+
         Product product = await context.Products
                               .Find(p => p.Id == request.Id)
                               .FirstOrDefaultAsync(cancellationToken)
                           ?? throw new NotFoundException($"Product '{request.Id}' does not exist.");
 
-        if (product.ShopId != request.ShopId)
+        if (product.ShopId != shopId.ToString())
         {
             throw new ForbiddenAccessException("Shop does not have this product.");
         }
@@ -121,7 +130,7 @@ public class UpdateProduct(
         await listingViewProducer.Produce(new ProductListingViewUpdated(
             updatedView.Id, updatedView.ShopId, updatedView.ShopName, updatedView.Name,
             updatedView.Description, updatedView.Brand, updatedView.Tags, updatedView.SearchableSpecs,
-            updatedView.ThumbnailUrl, [
+            updatedView.ThumbnailUrl, updatedView.Location, [
                 .. updatedView.CategoryPath
                     .Select(x => new CategoryPathItemEvent(x.Id, x.Name))
             ], updatedView.PriceMin, updatedView.PriceMax,

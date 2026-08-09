@@ -20,6 +20,8 @@ public class ProductListingView
 
     public required string ThumbnailUrl { get; init; }
 
+    public required string Location { get; init; }
+
     public List<CategoryPathItem> CategoryPath { get; init; } = [];
 
     public decimal PriceMin { get; init; }

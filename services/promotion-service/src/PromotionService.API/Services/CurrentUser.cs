@@ -1,4 +1,6 @@
-﻿namespace PromotionService.API.Services;
+﻿using System.Text;
+
+namespace PromotionService.API.Services;
 
 public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUser
 {
@@ -21,6 +23,41 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUse
                 .Request.Headers["X-User-Roles"].FirstOrDefault();
 
             return roles?.Split(',').Contains("seller") ?? false;
+        }
+    }
+
+    public Guid? ShopId
+    {
+        get
+        {
+            string? shopId = httpContextAccessor.HttpContext?
+                .Request.Headers["X-Shop-Id"].FirstOrDefault();
+
+            return Guid.TryParse(shopId, out Guid id) ? id : null;
+        }
+    }
+
+    public string? ShopName
+    {
+        get
+        {
+            string? encoded = httpContextAccessor.HttpContext?
+                .Request.Headers["X-Shop-Name"].FirstOrDefault();
+
+            if (string.IsNullOrEmpty(encoded))
+            {
+                return null;
+            }
+
+            try
+            {
+                byte[] bytes = Convert.FromBase64String(encoded);
+                return Encoding.UTF8.GetString(bytes);
+            }
+            catch (FormatException)
+            {
+                return null;
+            }
         }
     }
 }

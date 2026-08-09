@@ -15,6 +15,7 @@ type ProductListing struct {
 	Tags             []string           `json:"tags"`
 	SearchableSpecs  string             `json:"searchableSpecs"`
 	ThumbnailURL     string             `json:"thumbnailUrl"`
+	Location         string             `json:"location"`
 	CategoryPath     []CategoryPathItem `json:"categoryPath"`
 	PriceMin         int64              `json:"priceMin,string"`
 	PriceMax         int64              `json:"priceMax,string"`

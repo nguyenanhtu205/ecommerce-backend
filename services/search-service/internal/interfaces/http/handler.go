@@ -27,6 +27,7 @@ func NewSearchHandler(usecase *application.SearchUseCase) *SearchHandler {
 // @Param        sort       query string false "price|rating|soldCount, append :asc or :desc, e.g. price:asc"
 // @Param        page       query int    false "page number, starting from 1"
 // @Param        size       query int    false "items per page"
+// @Param        location   query string false "location filter"
 // @Success      200 {object} SearchResponse
 // @Router       /search [get]
 func (h *SearchHandler) Search(c echo.Context) error {
@@ -35,6 +36,7 @@ func (h *SearchHandler) Search(c echo.Context) error {
 
 	filters := application.SearchFilters{
 		Category: c.QueryParam("category"),
+		Location: c.QueryParam("location"),
 	}
 	if v := c.QueryParam("priceMin"); v != "" {
 		if parsed, err := strconv.ParseInt(v, 10, 64); err == nil {

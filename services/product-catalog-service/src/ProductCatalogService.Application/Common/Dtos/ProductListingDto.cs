@@ -16,6 +16,8 @@ public class ProductListingDto
 
     public required string ThumbnailUrl { get; set; }
 
+    public required string Location { get; init; }
+
     public List<CategoryPathItemDto> CategoryPath { get; set; } = [];
 
     public decimal PriceMin { get; set; }

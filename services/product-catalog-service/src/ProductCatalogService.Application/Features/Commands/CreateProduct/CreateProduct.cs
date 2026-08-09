@@ -1,10 +1,9 @@
-﻿using ValidationException = Common.Domain.Exceptions.ValidationException;
+﻿using Common.Application.Interfaces;
+using ValidationException = Common.Domain.Exceptions.ValidationException;
 
 namespace ProductCatalogService.Application.Features.Commands.CreateProduct;
 
 public record CreateProductCommand(
-    string ShopId,
-    string ShopName, // TODO: tạm nhận từ FE, sau này thay bằng tra shop_name_cache nội bộ
     string CategoryId,
     string Name,
     string Description,
@@ -12,6 +11,7 @@ public record CreateProductCommand(
     ProductCondition Condition,
     List<MediaAttachmentItem> MediaAttachments,
     string ThumbnailMediaId,
+    string Location,
     string? VideoMediaId,
     List<string> GalleryMediaIds,
     List<SpecificationDto> Specifications,
@@ -22,6 +22,7 @@ public record CreateProductCommand(
     int? PreOrderDays) : IRequest<ProductDto>;
 
 public class CreateProduct(
+    ICurrentUser currentUser,
     IApplicationDbContext context,
     ITopicProducer<ProductCreated> producer,
     ITopicProducer<ProductListingViewUpdated> listingViewProducer,
@@ -30,6 +31,13 @@ public class CreateProduct(
 {
     public async Task<ProductDto> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
+        if (currentUser.ShopId == null)
+        {
+            throw new ForbiddenAccessException();
+        }
+
+        Guid shopId = currentUser.ShopId.Value;
+
         Category category = await context.Categories
                                 .Find(c => c.Id == request.CategoryId)
                                 .FirstOrDefaultAsync(cancellationToken)
@@ -59,14 +67,14 @@ public class CreateProduct(
         Product product = new()
         {
             Id = productId,
-            ShopId = request.ShopId,
+            ShopId = shopId.ToString(),
             CategoryId = request.CategoryId,
             CategoryPath = category.Path,
             Name = request.Name,
             Description = request.Description,
             Tags = request.Tags,
             Condition = request.Condition,
-            Status = ProductStatus.Draft,
+            Status = ProductStatus.Active,
             ThumbnailMediaId = request.ThumbnailMediaId,
             VideoMediaId = request.VideoMediaId,
             GalleryMediaIds = request.GalleryMediaIds,
@@ -113,14 +121,15 @@ public class CreateProduct(
         ProductListingView view = new()
         {
             Id = productId,
-            ShopId = request.ShopId,
-            ShopName = request.ShopName,
+            ShopId = shopId.ToString(),
+            ShopName = currentUser.ShopName ?? "Unknown",
             Name = request.Name,
             Description = request.Description,
             Brand = brand,
             Tags = request.Tags,
             SearchableSpecs = searchableSpecs,
             ThumbnailUrl = request.ThumbnailMediaId,
+            Location = request.Location,
             CategoryPath = category.Path,
             PriceMin = priceMin,
             PriceMax = priceMax,
@@ -138,7 +147,7 @@ public class CreateProduct(
 
         await producer.Produce(new ProductCreated(
             productId,
-            request.ShopId,
+            shopId.ToString(),
             [
                 .. request.VariantCombinations.Select(c => new VariantCombinationInit(
                     combinations.First(x => x.OptionValues.SequenceEqual(c.OptionValues)).CombinationId,
@@ -146,12 +155,12 @@ public class CreateProduct(
             ],
             now), cancellationToken);
 
-        await mediaAttachedProducer.Produce(new ProductMediaAttached(productId, request.ShopId,
+        await mediaAttachedProducer.Produce(new ProductMediaAttached(productId, shopId.ToString(),
             request.MediaAttachments, DateTimeOffset.UtcNow), cancellationToken);
 
         await listingViewProducer.Produce(new ProductListingViewUpdated(
             view.Id, view.ShopId, view.ShopName, view.Name, view.Description, view.Brand,
-            view.Tags, view.SearchableSpecs, view.ThumbnailUrl, [
+            view.Tags, view.SearchableSpecs, view.ThumbnailUrl, view.Location, [
                 .. view.CategoryPath
                     .Select(x => new CategoryPathItemEvent(x.Id, x.Name))
             ],

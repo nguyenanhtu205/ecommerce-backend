@@ -13,24 +13,43 @@ import (
 )
 
 type ObjectStorage struct {
-	client   *minio.Client
-	endpoint string
-	useSSL   bool
+	internalClient *minio.Client
+	publicClient   *minio.Client
+	publicEndpoint string
+	publicUseSSL   bool
 }
 
-func NewObjectStorage(endpoint, accessKey, secretKey string, useSSL bool) (*ObjectStorage, error) {
-	client, err := minio.New(endpoint, &minio.Options{
-		Creds:  credentials.NewStaticV4(accessKey, secretKey, ""),
-		Secure: useSSL,
+func NewObjectStorage(internalEndpoint, publicEndpoint, accessKey, secretKey string, internalUseSSL, publicUseSSL bool) (*ObjectStorage, error) {
+	creds := credentials.NewStaticV4(accessKey, secretKey, "")
+
+	internalClient, err := minio.New(internalEndpoint, &minio.Options{
+		Creds:  creds,
+		Secure: internalUseSSL,
+		Region: "us-east-1",
 	})
 	if err != nil {
-		return nil, fmt.Errorf("init minio client: %w", err)
+		return nil, fmt.Errorf("init internal minio client: %w", err)
 	}
-	return &ObjectStorage{client: client, endpoint: endpoint, useSSL: useSSL}, nil
+
+	publicClient, err := minio.New(publicEndpoint, &minio.Options{
+		Creds:  creds,
+		Secure: publicUseSSL,
+		Region: "us-east-1",
+	})
+	if err != nil {
+		return nil, fmt.Errorf("init public minio client: %w", err)
+	}
+
+	return &ObjectStorage{
+		internalClient: internalClient,
+		publicClient:   publicClient,
+		publicEndpoint: publicEndpoint,
+		publicUseSSL:   publicUseSSL,
+	}, nil
 }
 
 func (s *ObjectStorage) GeneratePresignedUploadURL(ctx context.Context, bucket, objectKey, _ string, expiry time.Duration) (string, error) {
-	u, err := s.client.PresignedPutObject(ctx, bucket, objectKey, expiry)
+	u, err := s.publicClient.PresignedPutObject(ctx, bucket, objectKey, expiry)
 	if err != nil {
 		return "", err
 	}
@@ -38,7 +57,7 @@ func (s *ObjectStorage) GeneratePresignedUploadURL(ctx context.Context, bucket, 
 }
 
 func (s *ObjectStorage) HeadObject(ctx context.Context, bucket, objectKey string) (*application.ObjectInfo, error) {
-	info, err := s.client.StatObject(ctx, bucket, objectKey, minio.StatObjectOptions{})
+	info, err := s.internalClient.StatObject(ctx, bucket, objectKey, minio.StatObjectOptions{})
 	if err != nil {
 		return nil, err
 	}
@@ -48,18 +67,18 @@ func (s *ObjectStorage) HeadObject(ctx context.Context, bucket, objectKey string
 	}, nil
 }
 
+func (s *ObjectStorage) GetObjectStream(ctx context.Context, bucket, objectKey string) (io.ReadCloser, error) {
+	return s.internalClient.GetObject(ctx, bucket, objectKey, minio.GetObjectOptions{})
+}
+
 func (s *ObjectStorage) GetPublicURL(bucket, objectKey string) string {
 	scheme := "http"
-	if s.useSSL {
+	if s.publicUseSSL {
 		scheme = "https"
 	}
-	return fmt.Sprintf("%s://%s/%s/%s", scheme, s.endpoint, bucket, objectKey)
+	return fmt.Sprintf("%s://%s/%s/%s", scheme, s.publicEndpoint, bucket, objectKey)
 }
 
 func (s *ObjectStorage) DeleteObject(ctx context.Context, bucket, objectKey string) error {
-	return s.client.RemoveObject(ctx, bucket, objectKey, minio.RemoveObjectOptions{})
-}
-
-func (s *ObjectStorage) GetObjectStream(ctx context.Context, bucket, objectKey string) (io.ReadCloser, error) {
-	return s.client.GetObject(ctx, bucket, objectKey, minio.GetObjectOptions{})
+	return s.internalClient.RemoveObject(ctx, bucket, objectKey, minio.RemoveObjectOptions{})
 }

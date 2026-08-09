@@ -1,7 +1,6 @@
 ﻿using Common.Contracts.Events;
 using MassTransit;
 using SellerService.Application.Consumers;
-using SellerService.Infrastructure.Data;
 
 namespace SellerService.API.Infrastructure;
 
@@ -24,6 +23,7 @@ public static class MassTransitExtensions
                 rider.AddConsumer<PickupAddressSnapshotUpdatedConsumer>();
 
                 rider.AddProducer<ShopActivated>("notification.shop-activated.v1");
+                rider.AddProducer<ShopCreated>("seller.shop-created.v1");
 
                 rider.UsingKafka((context, k) =>
                 {

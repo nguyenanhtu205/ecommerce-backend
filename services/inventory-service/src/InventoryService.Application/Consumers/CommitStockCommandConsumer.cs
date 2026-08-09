@@ -37,12 +37,17 @@ public class CommitStockCommandConsumer(IApplicationDbContext dbContext) : ICons
                 reservation.Status = StockReservationStatus.Commited;
             }
 
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                EventId = eventId, EventType = nameof(CommitStockCommand), ProcessedAt = DateTimeOffset.UtcNow
+            });
+
             try
             {
                 await dbContext.SaveChangesAsync(context.CancellationToken);
                 return;
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 dbContext.ChangeTracker.Clear();
 

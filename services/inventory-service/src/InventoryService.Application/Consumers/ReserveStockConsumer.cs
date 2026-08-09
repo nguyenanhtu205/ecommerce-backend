@@ -76,7 +76,7 @@ public class ReserveStockConsumer(
                     new StockReserved(context.Message.OrderId), context.CancellationToken);
                 return;
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 dbContext.ChangeTracker.Clear();
 

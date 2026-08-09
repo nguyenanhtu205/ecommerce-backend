@@ -31,6 +31,8 @@ namespace AuthService.Infrastructure.Data.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     email = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    shop_id = table.Column<Guid>(type: "uuid", nullable: true),
+                    shop_name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: true),
                     email_verified_at = table.Column<DateTimeOffset>(type: "timestamptz", nullable: true),
                     status = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
                     created_at = table.Column<DateTimeOffset>(type: "timestamptz", nullable: false)

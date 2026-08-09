@@ -17,6 +17,13 @@ public class UsersConfiguration : IEntityTypeConfiguration<User>
             .HasMaxLength(255)
             .IsRequired();
 
+        builder.Property(x => x.ShopId)
+            .HasColumnName("shop_id");
+
+        builder.Property(x => x.ShopName)
+            .HasColumnName("shop_name")
+            .HasMaxLength(255);
+
         builder.Property(x => x.EmailVerifiedAt)
             .HasColumnName("email_verified_at")
             .HasColumnType("timestamptz");

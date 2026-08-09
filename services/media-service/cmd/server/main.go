@@ -49,7 +49,14 @@ func main() {
 		log.Fatalf("ping postgres: %v", err)
 	}
 
-	storage, err := minio.NewObjectStorage(cfg.MinioEndpoint, cfg.MinioAccessKey, cfg.MinioSecretKey, cfg.MinioUseSSL)
+	storage, err := minio.NewObjectStorage(
+		cfg.MinioEndpoint,       
+		cfg.MinioPublicEndpoint,
+		cfg.MinioAccessKey,
+		cfg.MinioSecretKey,
+		cfg.MinioUseSSL,
+		cfg.MinioPublicUseSSL,
+	)
 	if err != nil {
 		log.Fatalf("init minio: %v", err)
 	}

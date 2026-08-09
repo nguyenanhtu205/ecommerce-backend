@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AuthService.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260804055936_InitialCreate")]
+    [Migration("20260809002439_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -179,6 +179,15 @@ namespace AuthService.Infrastructure.Data.Migrations
                     b.Property<DateTimeOffset?>("EmailVerifiedAt")
                         .HasColumnType("timestamptz")
                         .HasColumnName("email_verified_at");
+
+                    b.Property<Guid?>("ShopId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("shop_id");
+
+                    b.Property<string>("ShopName")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("shop_name");
 
                     b.Property<string>("Status")
                         .IsRequired()

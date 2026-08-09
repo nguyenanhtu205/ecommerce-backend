@@ -20,6 +20,7 @@ public record ProductListingViewUpdated(
     List<string> Tags,
     string SearchableSpecs,
     string ThumbnailUrl,
+    string Location,
     List<CategoryPathItemEvent> CategoryPath,
     decimal PriceMin,
     decimal PriceMax,

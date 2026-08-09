@@ -7,9 +7,6 @@ public class Validator : AbstractValidator<UpdateProductCommand>
         RuleFor(x => x.Id)
             .NotEmpty().WithMessage("Id is required.");
 
-        RuleFor(x => x.ShopId)
-            .NotEmpty().WithMessage("ShopId is required.");
-
         RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("CategoryId is required.");
 

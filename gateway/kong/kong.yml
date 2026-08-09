@@ -60,6 +60,11 @@ services:
   - name: product-catalog-service
     url: http://product-catalog-service:8080
     routes:
+      - name: product-catalog-preflight
+        paths: [ "/product-catalog" ]
+        methods: [ "OPTIONS" ]
+        strip_path: false
+        
       - name: product-catalog-public
         paths: [ "/product-catalog" ]
         methods: [ "GET" ]
@@ -191,6 +196,16 @@ plugins:
                 else
                   kong.service.request.set_header("X-User-Roles", roleClaim)
                 end
+              end
+
+              local shopId = jwt_obj.claims["shop_id"]
+              if shopId then
+                kong.service.request.set_header("X-Shop-Id", shopId)
+              end
+          
+              local shopName = jwt_obj.claims["shop_name"]
+              if shopName then
+                kong.service.request.set_header("X-Shop-Name", shopName)
               end
             end
           end

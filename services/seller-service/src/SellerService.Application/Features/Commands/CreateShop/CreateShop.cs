@@ -7,8 +7,10 @@ public record CreateShopResponse(Guid ShopId);
 public record CreateShopCommand(string Name, string Email, Guid PickupAddressId, AddressSnapshot PickupAddressSnapshot)
     : IRequest<CreateShopResponse>;
 
-public class CreateShop(IApplicationDbContext context, ICurrentUser currentUser)
-    : IRequestHandler<CreateShopCommand, CreateShopResponse>
+public class CreateShop(
+    IApplicationDbContext context,
+    ICurrentUser currentUser,
+    ITopicProducer<ShopCreated> producer) : IRequestHandler<CreateShopCommand, CreateShopResponse>
 {
     public async Task<CreateShopResponse> Handle(CreateShopCommand request, CancellationToken cancellationToken)
     {
@@ -32,6 +34,8 @@ public class CreateShop(IApplicationDbContext context, ICurrentUser currentUser)
         };
 
         context.Shops.Add(shop);
+
+        await producer.Produce(new ShopCreated(userId, shop.Id, shop.Name, DateTimeOffset.UtcNow), cancellationToken);
 
         await context.SaveChangesAsync(cancellationToken);
 

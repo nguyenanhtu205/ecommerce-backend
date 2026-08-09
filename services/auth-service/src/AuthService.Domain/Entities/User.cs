@@ -1,8 +1,12 @@
 ﻿namespace AuthService.Domain.Entities;
 
 public class User : BaseEntity
-{ 
+{
     public required string Email { get; init; }
+
+    public Guid? ShopId { get; set; }
+
+    public string? ShopName { get; set; }
 
     public DateTimeOffset? EmailVerifiedAt { get; init; }
 
@@ -14,7 +18,7 @@ public class User : BaseEntity
 
     public ICollection<AuthProvider> AuthProviders { get; private set; } = new List<AuthProvider>();
 
-    public ICollection<RefreshToken> RefreshTokens { get;  } = new List<RefreshToken>();
+    public ICollection<RefreshToken> RefreshTokens { get; } = new List<RefreshToken>();
 
-    public ICollection<UserRole> UserRoles { get; private set;  } = new List<UserRole>();
+    public ICollection<UserRole> UserRoles { get; private set; } = new List<UserRole>();
 }

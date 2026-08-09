@@ -177,6 +177,15 @@ namespace AuthService.Infrastructure.Data.Migrations
                         .HasColumnType("timestamptz")
                         .HasColumnName("email_verified_at");
 
+                    b.Property<Guid?>("ShopId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("shop_id");
+
+                    b.Property<string>("ShopName")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("shop_name");
+
                     b.Property<string>("Status")
                         .IsRequired()
                         .HasMaxLength(50)

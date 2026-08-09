@@ -46,7 +46,7 @@ public class ReleaseStockCommandConsumer(IApplicationDbContext dbContext) : ICon
                 await dbContext.SaveChangesAsync(context.CancellationToken);
                 return;
             }
-            catch (DbUpdateConcurrencyException ex)
+            catch (DbUpdateConcurrencyException)
             {
                 dbContext.ChangeTracker.Clear();
 

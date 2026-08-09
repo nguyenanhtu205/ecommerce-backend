@@ -63,6 +63,12 @@ const docTemplate = `{
                         "description": "items per page",
                         "name": "size",
                         "in": "query"
+                    },
+                    {
+                        "type": "string",
+                        "description": "location filter",
+                        "name": "location",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -157,6 +163,9 @@ const docTemplate = `{
                 },
                 "isOutOfStock": {
                     "type": "boolean"
+                },
+                "location": {
+                    "type": "string"
                 },
                 "name": {
                     "type": "string"

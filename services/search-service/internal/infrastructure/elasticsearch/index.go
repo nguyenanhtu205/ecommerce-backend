@@ -72,6 +72,16 @@ const indexMapping = `{
           "en": { "type": "text", "analyzer": "english" }
         }
       },
+      "location": {
+  		"type": "keyword",
+  		"fields": {
+		  "folded": {
+            "type": "text",
+            "analyzer": "vi_folding_analyzer",
+            "search_analyzer": "vi_synonym_search_analyzer"
+          }
+        }
+      },
       "brand": {
         "type": "text",
         "fields": {

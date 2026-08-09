@@ -4,13 +4,6 @@ public class Validator : AbstractValidator<CreateProductCommand>
 {
     public Validator()
     {
-        RuleFor(x => x.ShopId)
-            .NotEmpty().WithMessage("ShopId is required.");
-
-        RuleFor(x => x.ShopName)
-            .NotEmpty().WithMessage("ShopName is required.")
-            .MaximumLength(200).WithMessage("ShopName must not exceed 200 characters.");
-
         RuleFor(x => x.CategoryId)
             .NotEmpty().WithMessage("CategoryId is required.");
 

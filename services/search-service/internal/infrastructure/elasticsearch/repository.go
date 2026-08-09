@@ -60,7 +60,7 @@ func (r *ESSearchRepository) Search(ctx context.Context, query string, filters a
 	if query != "" {
 		foldedFields := []string{
 			"name.folded^3", "description.folded", "brand.folded^2",
-			"tags.folded", "shopName.folded", "searchableSpecs.folded", "categoryText.folded",
+			"tags.folded", "shopName.folded", "searchableSpecs.folded", "categoryText.folded", "location.folded",
 		}
 
 		must = append(must, map[string]any{
@@ -119,6 +119,11 @@ func (r *ESSearchRepository) Search(ctx context.Context, query string, filters a
 					"term": map[string]any{"categoryPath.id": filters.Category},
 				},
 			},
+		})
+	}
+	if filters.Location != "" {
+		filter = append(filter, map[string]any{
+			"term": map[string]any{"location": filters.Location},
 		})
 	}
 

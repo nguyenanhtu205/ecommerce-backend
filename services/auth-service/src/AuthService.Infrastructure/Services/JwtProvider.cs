@@ -1,5 +1,6 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AuthService.Infrastructure.Services;
@@ -20,6 +21,17 @@ public class JwtProvider(
             new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             .. user.UserRoles.Select(ur => new Claim("role", ur.Role!.Name))
         ];
+
+        if (user.ShopId.HasValue)
+        {
+            claims.Add(new Claim("shop_id", user.ShopId.Value.ToString()));
+        }
+
+        if (!string.IsNullOrEmpty(user.ShopName))
+        {
+            string encodedShopName = Convert.ToBase64String(Encoding.UTF8.GetBytes(user.ShopName));
+            claims.Add(new Claim("shop_name", encodedShopName));
+        }
 
         RSA privateKey = rsaKeyProvider.GetPrivateKey();
 

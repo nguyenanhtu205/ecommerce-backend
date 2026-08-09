@@ -87,6 +87,7 @@ public class GetProductListings(IApplicationDbContext context)
             Brand = v.Brand,
             Tags = v.Tags,
             ThumbnailUrl = v.ThumbnailUrl,
+            Location = v.Location,
             CategoryPath = [.. v.CategoryPath.Select(c => new CategoryPathItemDto { Id = c.Id, Name = c.Name })],
             PriceMin = v.PriceMin,
             PriceMax = v.PriceMax,

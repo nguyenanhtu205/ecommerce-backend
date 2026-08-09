@@ -25,6 +25,7 @@ type SearchFilters struct {
 	PriceMin *int64
 	PriceMax *int64
 	Category string
+	Location string
 }
 
 type SortOption struct {
