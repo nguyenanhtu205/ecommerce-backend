@@ -3,6 +3,8 @@ definitions:
     properties:
       combinationId:
         type: string
+      isSelected:
+        type: boolean
       priceSnapshot:
         type: integer
       productId:
@@ -12,6 +14,8 @@ definitions:
       quantity:
         type: integer
       shopId:
+        type: string
+      shopName:
         type: string
       thumbnailUrl:
         type: string
@@ -72,6 +76,8 @@ definitions:
           $ref: '#/definitions/application.CartItemResponse'
         type: array
       shopId:
+        type: string
+      shopName:
         type: string
     type: object
   application.ShopCheckoutInfo:

@@ -64,12 +64,18 @@ public class CreateProduct(
             })
         ];
 
+        List<CategoryPathItem> categoryPath =
+        [
+            .. category.Path,
+            new() { Id = category.Id, Slug = category.Slug, Name = category.Name }
+        ];
+
         Product product = new()
         {
             Id = productId,
             ShopId = shopId.ToString(),
             CategoryId = request.CategoryId,
-            CategoryPath = category.Path,
+            CategoryPath = categoryPath,
             Name = request.Name,
             Description = request.Description,
             Tags = request.Tags,
@@ -137,7 +143,7 @@ public class CreateProduct(
             VideoUrl = request.VideoMediaId,
             GalleryUrls = request.GalleryMediaIds,
             Location = request.Location,
-            CategoryPath = category.Path,
+            CategoryPath = categoryPath,
             VariantGroups =
             [
                 .. request.VariantGroups.Select(g => new ListingVariantGroup
@@ -170,7 +176,9 @@ public class CreateProduct(
             RatingAverage = 0,
             RatingCount = 0,
             SoldCount = 0,
-            SyncedAt = now
+            SyncedAt = now,
+            IsPreOrder = request.IsPreOrder,
+            PreOrderDays = request.PreOrderDays
         };
 
         await context.ProductListingViews.InsertOneAsync(view, cancellationToken: cancellationToken);

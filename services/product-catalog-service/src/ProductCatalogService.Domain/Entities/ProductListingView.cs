@@ -55,6 +55,10 @@ public class ProductListingView
     public required long SoldCount { get; init; }
 
     public required DateTimeOffset SyncedAt { get; set; }
+
+    public required bool IsPreOrder { get; set; }
+
+    public int? PreOrderDays { get; set; }
 }
 
 public class ListingSpecification

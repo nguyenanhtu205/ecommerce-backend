@@ -3,6 +3,7 @@ package domain
 type CartItem struct {
 	ProductId     string  `json:"productId"`
 	ShopId        string  `json:"shopId"`
+	ShopName      string  `json:"shopName"`
 	ProductName   string  `json:"productName"`
 	ThumbnailUrl  string  `json:"thumbnailUrl"`
 	Variation     *string `json:"variation"`

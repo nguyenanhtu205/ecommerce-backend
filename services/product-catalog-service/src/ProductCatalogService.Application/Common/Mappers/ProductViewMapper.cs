@@ -57,7 +57,9 @@ public static class ProductViewMapper
             RatingAverage = view.RatingAverage,
             RatingCount = view.RatingCount,
             SoldCount = view.SoldCount,
-            SyncedAt = view.SyncedAt
+            SyncedAt = view.SyncedAt,
+            IsPreOrder = view.IsPreOrder,
+            PreOrderDays = view.PreOrderDays
         };
     }
 }

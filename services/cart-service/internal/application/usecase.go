@@ -21,11 +21,12 @@ func (uc *CartUseCase) AddItem(ctx context.Context, userId string, req AddItemRe
 	item := domain.CartItem{
 		ProductId:     req.ProductId,
 		ShopId:        req.ShopId,
+		ShopName:      req.ShopName,
 		ProductName:   req.ProductName,
 		ThumbnailUrl:  req.ThumbnailUrl,
 		Variation:     req.Variation,
 		Quantity:      req.Quantity,
-		IsSelected:    true,
+		IsSelected:    req.IsSelected,
 		PriceSnapshot: req.PriceSnapshot,
 		AddedAt:       time.Now().UTC().Format(time.RFC3339),
 	}
@@ -53,13 +54,15 @@ func (uc *CartUseCase) GetCart(ctx context.Context, userId string) ([]ShopCartGr
 		return nil, err
 	}
 	grouped := make(map[string][]CartItemResponse)
+	shopNames := make(map[string]string)
 	for combinationId, it := range items {
 		grouped[it.ShopId] = append(grouped[it.ShopId], toCartItemResponse(combinationId, it))
+		shopNames[it.ShopId] = it.ShopName
 	}
 	shopIds := sortedKeys(grouped)
 	result := make([]ShopCartGroup, 0, len(shopIds))
 	for _, shopId := range shopIds {
-		result = append(result, ShopCartGroup{ShopId: shopId, Items: grouped[shopId]})
+		result = append(result, ShopCartGroup{ShopId: shopId, ShopName: shopNames[shopId], Items: grouped[shopId]})
 	}
 	return result, nil
 }

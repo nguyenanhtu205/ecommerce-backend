@@ -4,11 +4,13 @@ type AddItemRequest struct {
 	CombinationId string  `json:"combinationId"`
 	ProductId     string  `json:"productId"`
 	ShopId        string  `json:"shopId"`
+	ShopName      string  `json:"shopName"`
 	ProductName   string  `json:"productName"`
 	ThumbnailUrl  string  `json:"thumbnailUrl"`
 	Variation     *string `json:"variation"`
 	Quantity      int     `json:"quantity"`
 	PriceSnapshot int     `json:"priceSnapshot"`
+	IsSelected    bool    `json:"isSelected"`
 }
 
 type UpdateItemRequest struct {
@@ -34,8 +36,9 @@ type CartItemResponse struct {
 }
 
 type ShopCartGroup struct {
-	ShopId string             `json:"shopId"`
-	Items  []CartItemResponse `json:"items"`
+	ShopId   string             `json:"shopId"`
+	ShopName string             `json:"shopName"`
+	Items    []CartItemResponse `json:"items"`
 }
 
 type CheckoutItem struct {

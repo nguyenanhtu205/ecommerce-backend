@@ -219,6 +219,9 @@ const docTemplate = `{
                 "combinationId": {
                     "type": "string"
                 },
+                "isSelected": {
+                    "type": "boolean"
+                },
                 "priceSnapshot": {
                     "type": "integer"
                 },
@@ -232,6 +235,9 @@ const docTemplate = `{
                     "type": "integer"
                 },
                 "shopId": {
+                    "type": "string"
+                },
+                "shopName": {
                     "type": "string"
                 },
                 "thumbnailUrl": {
@@ -324,6 +330,9 @@ const docTemplate = `{
                     }
                 },
                 "shopId": {
+                    "type": "string"
+                },
+                "shopName": {
                     "type": "string"
                 }
             }

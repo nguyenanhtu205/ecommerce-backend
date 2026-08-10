@@ -210,6 +210,9 @@
                 "combinationId": {
                     "type": "string"
                 },
+                "isSelected": {
+                    "type": "boolean"
+                },
                 "priceSnapshot": {
                     "type": "integer"
                 },
@@ -223,6 +226,9 @@
                     "type": "integer"
                 },
                 "shopId": {
+                    "type": "string"
+                },
+                "shopName": {
                     "type": "string"
                 },
                 "thumbnailUrl": {
@@ -315,6 +321,9 @@
                     }
                 },
                 "shopId": {
+                    "type": "string"
+                },
+                "shopName": {
                     "type": "string"
                 }
             }
