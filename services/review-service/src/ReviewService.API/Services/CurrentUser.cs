@@ -60,4 +60,8 @@ public class CurrentUser(IHttpContextAccessor httpContextAccessor) : ICurrentUse
             }
         }
     }
+
+    public string Email =>
+        httpContextAccessor.HttpContext?
+            .Request.Headers["X-User-Email"].FirstOrDefault() ?? "Unknown";
 }

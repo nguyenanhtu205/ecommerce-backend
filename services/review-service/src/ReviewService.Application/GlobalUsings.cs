@@ -1,2 +1,12 @@
-﻿global using MongoDB.Driver;
+﻿global using Common.Application.Interfaces;
+global using Common.Contracts.Events;
+global using Common.Domain.Exceptions;
+global using FluentValidation;
+global using MassTransit;
+global using MediatR;
+global using MongoDB.Driver;
+global using MongoDB.Bson;
+global using ReviewService.Application.Common.Dtos;
+global using ReviewService.Application.Common.Interfaces;
+global using ReviewService.Application.Common.Mappers;
 global using ReviewService.Domain.Entities;

@@ -71,6 +71,9 @@ create_topic shipping.order-delivered.v1
 # --- chat ---
 create_topic chat.message-sent.v1
 
+# --- review ---
+create_topic review.review-aggregate-updated.v1
+
 echo "=== All topics created ==="
 
 echo "--- Topic list ---"

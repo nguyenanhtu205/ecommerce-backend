@@ -6,20 +6,15 @@ public class ReviewAggregate
 
     public required double RatingAverage { get; init; }
 
+    public required int RatingSum { get; set; }
+
     public required int RatingCount { get; init; }
 
-    public List<StarCount> StarCounts { get; init; } = [];
+    public Dictionary<string, int> StarCounts { get; init; } = [];
 
     public required int CommentCount { get; init; }
 
     public required int MediaCount { get; init; }
 
     public required DateTimeOffset UpdatedAt { get; init; }
-}
-
-public class StarCount
-{
-    public required string Star { get; init; }
-
-    public required int Count { get; init; }
 }

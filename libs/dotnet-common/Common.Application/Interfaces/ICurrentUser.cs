@@ -9,4 +9,6 @@ public interface ICurrentUser
     Guid? ShopId { get; }
 
     string? ShopName { get; }
+
+    string Email => "Unknown";
 }

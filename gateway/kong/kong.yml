@@ -199,6 +199,10 @@ plugins:
               if jwt_obj.claims.sub then
                 kong.service.request.set_header("X-User-Id", jwt_obj.claims.sub)
               end
+          
+              if jwt_obj.claims.email then
+                kong.service.request.set_header("X-User-Email", jwt_obj.claims.email)
+              end
 
               local roleClaim = jwt_obj.claims["role"]
               if roleClaim then
