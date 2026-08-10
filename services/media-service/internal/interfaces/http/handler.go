@@ -2,13 +2,14 @@ package httpapi
 
 import (
 	"errors"
-	"media-service/internal/interfaces/http/middleware"
+	"fmt"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
 
 	"media-service/internal/application"
 	"media-service/internal/domain"
+	"media-service/internal/interfaces/http/middleware"
 )
 
 type Handler struct {
@@ -123,6 +124,49 @@ func (h *Handler) GetAsset(c echo.Context) error {
 	}
 
 	return c.JSON(http.StatusOK, toAssetResponse(asset, publicURL))
+}
+
+// GetAssetsBulk godoc
+//
+//	@Summary		Get multiple assets
+//	@Description	Get detail information for multiple media assets in one call. Response items preserve the exact order of the requested assetIds, including duplicates and not-found ids (found=false)
+//	@Tags			Asset
+//	@Accept			json
+//	@Produce		json
+//	@Param			payload	body		bulkAssetsRequest	true	"List of asset IDs (max 100)"
+//	@Success		200		{object}	bulkAssetsResponse
+//	@Failure		400		{object}	errorResponse
+//	@Failure		500		{object}	errorResponse
+//	@Router			/assets/bulk [post]
+func (h *Handler) GetAssetsBulk(c echo.Context) error {
+	var req bulkAssetsRequest
+	if err := c.Bind(&req); err != nil {
+		return respondError(c, domain.ErrInvalidInput)
+	}
+	if len(req.AssetIDs) == 0 {
+		return c.JSON(http.StatusOK, bulkAssetsResponse{Items: []bulkAssetItem{}})
+	}
+	if len(req.AssetIDs) > 100 {
+		return respondError(c, fmt.Errorf("%w: assetIds exceeds max of %d", domain.ErrInvalidInput, 100))
+	}
+
+	results, err := h.svc.GetAssets(c.Request().Context(), req.AssetIDs)
+	if err != nil {
+		return respondError(c, err)
+	}
+
+	items := make([]bulkAssetItem, 0, len(req.AssetIDs))
+	for _, id := range req.AssetIDs {
+		r, ok := results[id]
+		if !ok {
+			items = append(items, bulkAssetItem{ID: id, Found: false})
+			continue
+		}
+		resp := toAssetResponse(r.Asset, r.PublicURL)
+		items = append(items, bulkAssetItem{ID: id, Found: true, Asset: &resp})
+	}
+
+	return c.JSON(http.StatusOK, bulkAssetsResponse{Items: items})
 }
 
 // CreateAttachment godoc

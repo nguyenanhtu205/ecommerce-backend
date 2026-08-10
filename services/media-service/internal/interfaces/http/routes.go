@@ -12,4 +12,6 @@ func RegisterRoutes(e *echo.Echo, h *Handler, authMiddleware echo.MiddlewareFunc
 	g.POST("/attachments", h.CreateAttachment)
 	g.GET("/attachments", h.ListAttachments)
 	g.DELETE("/attachments/:id", h.DeleteAttachment)
+
+	e.POST("/media/assets/bulk", h.GetAssetsBulk)
 }

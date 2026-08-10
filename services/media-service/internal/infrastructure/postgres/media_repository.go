@@ -46,6 +46,38 @@ func (r *MediaRepository) GetAssetByObjectKey(ctx context.Context, objectKey str
 	return scanAsset(r.db.QueryRowContext(ctx, q, objectKey))
 }
 
+func (r *MediaRepository) GetAssetsByIDs(ctx context.Context, ids []string) ([]*domain.MediaAsset, error) {
+	if len(ids) == 0 {
+		return nil, nil
+	}
+
+	const q = `
+		SELECT id, bucket, object_key, media_type, content_type, size_bytes, width, height,
+		       duration_seconds, status, checksum, uploaded_by, created_at
+		FROM media_assets WHERE id = ANY($1)`
+
+	rows, err := r.db.QueryContext(ctx, q, ids)
+	if err != nil {
+		return nil, err
+	}
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+		}
+	}(rows)
+
+	var result []*domain.MediaAsset
+	for rows.Next() {
+		var a domain.MediaAsset
+		if err := rows.Scan(&a.ID, &a.Bucket, &a.ObjectKey, &a.MediaType, &a.ContentType, &a.SizeBytes,
+			&a.Width, &a.Height, &a.DurationSeconds, &a.Status, &a.Checksum, &a.UploadedBy, &a.CreatedAt); err != nil {
+			return nil, err
+		}
+		result = append(result, &a)
+	}
+	return result, rows.Err()
+}
+
 func (r *MediaRepository) UpdateAsset(ctx context.Context, a *domain.MediaAsset) error {
 	const q = `
 		UPDATE media_assets SET

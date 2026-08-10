@@ -131,6 +131,27 @@ func (s *MediaService) GetAsset(ctx context.Context, id string) (asset *domain.M
 	return asset, publicURL, nil
 }
 
+func (s *MediaService) GetAssets(ctx context.Context, ids []string) (map[string]*AssetResult, error) {
+	if len(ids) == 0 {
+		return map[string]*AssetResult{}, nil
+	}
+
+	assets, err := s.repo.GetAssetsByIDs(ctx, ids)
+	if err != nil {
+		return nil, fmt.Errorf("get assets: %w", err)
+	}
+
+	result := make(map[string]*AssetResult, len(assets))
+	for _, a := range assets {
+		publicURL := ""
+		if a.Status == domain.StatusReady {
+			publicURL = s.storage.GetPublicURL(a.Bucket, a.ObjectKey)
+		}
+		result[a.ID] = &AssetResult{Asset: a, PublicURL: publicURL}
+	}
+	return result, nil
+}
+
 func (s *MediaService) CreateAttachment(ctx context.Context, in CreateAttachmentInput) (*domain.MediaAttachment, error) {
 	if in.MediaAssetID == "" || in.OwnerService == "" || in.OwnerType == "" || in.OwnerID == "" || in.Role == "" {
 		return nil, fmt.Errorf("%w: media_asset_id, owner_service, owner_type, owner_id, role are required", domain.ErrInvalidInput)

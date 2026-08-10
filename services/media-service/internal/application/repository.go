@@ -18,6 +18,8 @@ type MediaRepository interface {
 
 	GetAssetByID(ctx context.Context, id string) (*domain.MediaAsset, error)
 
+	GetAssetsByIDs(ctx context.Context, ids []string) ([]*domain.MediaAsset, error)
+
 	GetAssetByObjectKey(ctx context.Context, objectKey string) (*domain.MediaAsset, error)
 
 	UpdateAsset(ctx context.Context, asset *domain.MediaAsset) error

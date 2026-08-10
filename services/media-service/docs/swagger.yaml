@@ -50,6 +50,29 @@ definitions:
       updatedAt:
         type: string
     type: object
+  httpapi.bulkAssetItem:
+    properties:
+      asset:
+        $ref: '#/definitions/httpapi.assetResponse'
+      found:
+        type: boolean
+      id:
+        type: string
+    type: object
+  httpapi.bulkAssetsRequest:
+    properties:
+      assetIds:
+        items:
+          type: string
+        type: array
+    type: object
+  httpapi.bulkAssetsResponse:
+    properties:
+      items:
+        items:
+          $ref: '#/definitions/httpapi.bulkAssetItem'
+        type: array
+    type: object
   httpapi.confirmUploadRequest:
     properties:
       durationSeconds:
@@ -131,6 +154,38 @@ paths:
           schema:
             $ref: '#/definitions/httpapi.errorResponse'
       summary: Get asset
+      tags:
+      - Asset
+  /assets/bulk:
+    post:
+      consumes:
+      - application/json
+      description: Get detail information for multiple media assets in one call. Response
+        items preserve the exact order of the requested assetIds, including duplicates
+        and not-found ids (found=false)
+      parameters:
+      - description: List of asset IDs (max 100)
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/httpapi.bulkAssetsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/httpapi.bulkAssetsResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/httpapi.errorResponse'
+      summary: Get multiple assets
       tags:
       - Asset
   /attachments:

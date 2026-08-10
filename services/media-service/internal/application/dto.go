@@ -32,3 +32,8 @@ type CreateAttachmentInput struct {
 	Role         string
 	Position     int
 }
+
+type AssetResult struct {
+	Asset     *domain.MediaAsset
+	PublicURL string
+}

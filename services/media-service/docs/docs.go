@@ -15,6 +15,52 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/assets/bulk": {
+            "post": {
+                "description": "Get detail information for multiple media assets in one call. Response items preserve the exact order of the requested assetIds, including duplicates and not-found ids (found=false)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Asset"
+                ],
+                "summary": "Get multiple assets",
+                "parameters": [
+                    {
+                        "description": "List of asset IDs (max 100)",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.bulkAssetsRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.bulkAssetsResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/assets/{id}": {
             "get": {
                 "description": "Get detail information of media asset by ID",
@@ -400,6 +446,42 @@ const docTemplate = `{
                 },
                 "updatedAt": {
                     "type": "string"
+                }
+            }
+        },
+        "httpapi.bulkAssetItem": {
+            "type": "object",
+            "properties": {
+                "asset": {
+                    "$ref": "#/definitions/httpapi.assetResponse"
+                },
+                "found": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                }
+            }
+        },
+        "httpapi.bulkAssetsRequest": {
+            "type": "object",
+            "properties": {
+                "assetIds": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "httpapi.bulkAssetsResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/httpapi.bulkAssetItem"
+                    }
                 }
             }
         },

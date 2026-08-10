@@ -62,3 +62,17 @@ type attachmentResponse struct {
 type errorResponse struct {
 	Error string `json:"error"`
 }
+
+type bulkAssetsRequest struct {
+	AssetIDs []string `json:"assetIds"`
+}
+
+type bulkAssetItem struct {
+	ID    string         `json:"id"`
+	Found bool           `json:"found"`
+	Asset *assetResponse `json:"asset,omitempty"`
+}
+
+type bulkAssetsResponse struct {
+	Items []bulkAssetItem `json:"items"`
+}

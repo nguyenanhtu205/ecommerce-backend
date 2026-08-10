@@ -51,11 +51,22 @@ services:
   - name: media-service
     url: http://media-service:8080
     routes:
-      - name: media-protected
+      - name: media-preflight
         paths: [ "/media" ]
+        methods: [ "OPTIONS" ]
+        strip_path: false                      
+                      
+      - name: media-uploads-protected
+        paths: [ "/media/uploads" ]
+        methods: [ "POST" ]
         strip_path: false
         plugins:
           - name: jwt
+
+      - name: media-assets-bulk-public
+        paths: [ "/media/assets/bulk" ]
+        methods: [ "POST" ]
+        strip_path: false
 
   - name: product-catalog-service
     url: http://product-catalog-service:8080
