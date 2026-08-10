@@ -23,7 +23,7 @@ public class GetCategories(IApplicationDbContext context) : IRequestHandler<GetC
                 Name = c.Name,
                 Slug = c.Slug,
                 ParentId = c.ParentId,
-                Path = [.. c.Path.Select(p => new CategoryPathItemDto { Id = p.Id, Name = p.Name })],
+                Path = [.. c.Path.Select(p => new CategoryPathItemDto { Id = p.Id, Slug = p.Slug, Name = p.Name })],
                 Level = c.Level,
                 IsLeaf = c.IsLeaf
             })

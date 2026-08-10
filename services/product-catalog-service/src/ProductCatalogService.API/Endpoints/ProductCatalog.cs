@@ -9,6 +9,7 @@ using ProductCatalogService.Application.Features.Queries.GetCategoryAttributes;
 using ProductCatalogService.Application.Features.Queries.GetProductById;
 using ProductCatalogService.Application.Features.Queries.GetProductListings;
 using ProductCatalogService.Application.Features.Queries.GetProductsByShop;
+using ProductCatalogService.Application.Features.Queries.GetProductViewById;
 
 namespace ProductCatalogService.API.Endpoints;
 
@@ -35,6 +36,10 @@ public class ProductCatalog : IEndpointGroup
 
         groupBuilder.MapGet(GetProductById, "products/{id}")
             .Produces<ProductDto>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetProductViewById, "products/view/{id}")
+            .Produces<ProductViewDto>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}")
@@ -97,6 +102,14 @@ public class ProductCatalog : IEndpointGroup
         [AsParameters] GetProductByIdQuery query, ISender sender, CancellationToken cancellationToken)
     {
         ProductDto result = await sender.Send(query, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get product view by id")]
+    public static async Task<IResult> GetProductViewById(
+        [AsParameters] GetProductViewByIdQuery query, ISender sender, CancellationToken cancellationToken)
+    {
+        ProductViewDto result = await sender.Send(query, cancellationToken);
         return Results.Ok(result);
     }
 

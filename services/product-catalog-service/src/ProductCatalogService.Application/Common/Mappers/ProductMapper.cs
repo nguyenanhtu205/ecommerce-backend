@@ -10,7 +10,9 @@ public static class ProductMapper
             ShopId = product.ShopId,
             CategoryId = product.CategoryId,
             CategoryPath =
-                [.. product.CategoryPath.Select(c => new CategoryPathItemDto { Id = c.Id, Name = c.Name })],
+            [
+                .. product.CategoryPath.Select(c => new CategoryPathItemDto { Id = c.Id, Slug = c.Slug, Name = c.Name })
+            ],
             Name = product.Name,
             Description = product.Description,
             Tags = product.Tags,

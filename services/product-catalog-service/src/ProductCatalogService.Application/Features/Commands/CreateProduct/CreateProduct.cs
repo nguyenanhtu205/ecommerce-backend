@@ -127,10 +127,40 @@ public class CreateProduct(
             Description = request.Description,
             Brand = brand,
             Tags = request.Tags,
+            Condition = request.Condition,
             SearchableSpecs = searchableSpecs,
+            Specifications =
+            [
+                .. request.Specifications.Select(s => new ListingSpecification { Title = s.Title, Value = s.Value })
+            ],
             ThumbnailUrl = request.ThumbnailMediaId,
+            VideoUrl = request.VideoMediaId,
+            GalleryUrls = request.GalleryMediaIds,
             Location = request.Location,
             CategoryPath = category.Path,
+            VariantGroups =
+            [
+                .. request.VariantGroups.Select(g => new ListingVariantGroup
+                {
+                    Name = g.Name,
+                    Options =
+                    [
+                        .. g.Options.Select(o => new ListingVariantOption { Value = o.Value, MediaId = o.MediaId })
+                    ]
+                })
+            ],
+            VariantCombinations =
+            [
+                .. request.VariantCombinations.Select(c => new ListingVariantCombination
+                {
+                    CombinationId =
+                        combinations.First(x => x.OptionValues.SequenceEqual(c.OptionValues)).CombinationId,
+                    OptionValues = c.OptionValues,
+                    Sku = c.Sku,
+                    Price = c.InitialPrice,
+                    Stock = c.InitialStock
+                })
+            ],
             PriceMin = priceMin,
             PriceMax = priceMax,
             OriginalPriceMin = null,

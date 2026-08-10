@@ -4,5 +4,7 @@ public class CategoryPathItemDto
 {
     public required string Id { get; set; }
 
+    public required string Slug { get; set; }
+
     public required string Name { get; set; }
 }
