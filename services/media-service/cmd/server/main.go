@@ -50,7 +50,7 @@ func main() {
 	}
 
 	storage, err := minio.NewObjectStorage(
-		cfg.MinioEndpoint,       
+		cfg.MinioEndpoint,
 		cfg.MinioPublicEndpoint,
 		cfg.MinioAccessKey,
 		cfg.MinioSecretKey,
@@ -75,13 +75,31 @@ func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
 	defer stop()
 
-	consumer := kafkainfra.NewConsumer(
-		cfg.KafkaBrokers, cfg.ProductMediaAttachedTopic, cfg.ProductMediaAttachedGroupID, svc)
-	go func() {
-		if err := consumer.Start(ctx); err != nil {
-			log.Printf("kafka consumer stopped with error: %v", err)
-		}
-	}()
+	productConsumer := kafkainfra.NewConsumer(
+		cfg.KafkaBrokers, cfg.ProductMediaAttachedTopic, cfg.MediaConsumerGroupID,
+		kafkainfra.NewProductMediaAttachedHandler(svc))
+
+	reviewConsumer := kafkainfra.NewConsumer(
+		cfg.KafkaBrokers, cfg.ReviewMediaAttachedTopic, cfg.MediaConsumerGroupID,
+		kafkainfra.NewReviewMediaAttachedHandler(svc))
+
+	consumers := []*kafkainfra.Consumer{productConsumer, reviewConsumer}
+	for _, cons := range consumers {
+		go func(c *kafkainfra.Consumer) {
+			const retryDelay = 5 * time.Second
+			for {
+				if err := c.Start(ctx); err != nil {
+					log.Printf("kafka consumer stopped with error: %v", err)
+				}
+				select {
+				case <-ctx.Done():
+					return
+				case <-time.After(retryDelay):
+					log.Println("retrying kafka consumer connection...")
+				}
+			}
+		}(cons)
+	}
 
 	e := echo.New()
 	e.GET("/", func(c echo.Context) error {
@@ -103,8 +121,10 @@ func main() {
 	<-ctx.Done()
 	log.Println("received shutdown signal, cleaning up...")
 
-	if err := consumer.Close(); err != nil {
-		log.Printf("close kafka consumer error: %v", err)
+	for _, cons := range consumers {
+		if err := cons.Close(); err != nil {
+			log.Printf("close kafka consumer error: %v", err)
+		}
 	}
 
 	shutdownCtx, cancel := context.WithTimeout(context.Background(), httpShutdownTimeout)

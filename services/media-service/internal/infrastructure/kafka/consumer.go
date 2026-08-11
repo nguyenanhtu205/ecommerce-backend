@@ -16,14 +16,25 @@ import (
 const (
 	ownerServiceProductCatalog = "product-catalog-service"
 	ownerTypeProduct           = "product"
+
+	ownerServiceReview = "review-service"
+	ownerTypeReview    = "review"
 )
 
-type Consumer struct {
-	reader *kafkago.Reader
-	svc    *application.MediaService
+type mediaAttachmentItem struct {
+	MediaAssetID string `json:"mediaAssetId"`
+	Role         string `json:"role"`
+	Position     int    `json:"position"`
 }
 
-func NewConsumer(brokers []string, topic string, groupID string, svc *application.MediaService) *Consumer {
+type EventHandler func(ctx context.Context, raw []byte) error
+
+type Consumer struct {
+	reader  *kafkago.Reader
+	handler EventHandler
+}
+
+func NewConsumer(brokers []string, topic, groupID string, handler EventHandler) *Consumer {
 	reader := kafkago.NewReader(kafkago.ReaderConfig{
 		Brokers:     brokers,
 		Topic:       topic,
@@ -33,8 +44,7 @@ func NewConsumer(brokers []string, topic string, groupID string, svc *applicatio
 		MaxBytes:    10e6,
 		MaxWait:     time.Second,
 	})
-
-	return &Consumer{reader: reader, svc: svc}
+	return &Consumer{reader: reader, handler: handler}
 }
 
 func (c *Consumer) Start(ctx context.Context) error {
@@ -47,20 +57,38 @@ func (c *Consumer) Start(ctx context.Context) error {
 			return fmt.Errorf("fetch message: %w", err)
 		}
 
-		if err := c.handleProductMediaAttached(ctx, msg.Value); err != nil {
-			log.Printf("handle message failed (partition=%d offset=%d key=%s): %v",
-				msg.Partition, msg.Offset, string(msg.Key), err)
+		if err := c.handler(ctx, msg.Value); err != nil {
+			log.Printf("handle message failed (topic=%s partition=%d offset=%d key=%s): %v",
+				c.reader.Config().Topic, msg.Partition, msg.Offset, string(msg.Key), err)
 		}
 
 		if err := c.reader.CommitMessages(ctx, msg); err != nil {
-			log.Printf("commit offset failed (partition=%d offset=%d): %v",
-				msg.Partition, msg.Offset, err)
+			log.Printf("commit offset failed (topic=%s partition=%d offset=%d): %v",
+				c.reader.Config().Topic, msg.Partition, msg.Offset, err)
 		}
 	}
 }
 
 func (c *Consumer) Close() error {
 	return c.reader.Close()
+}
+
+func attachAll(ctx context.Context, svc *application.MediaService, ownerService, ownerType, ownerID string, items []mediaAttachmentItem) error {
+	var firstErr error
+	for _, item := range items {
+		_, err := svc.CreateAttachment(ctx, application.CreateAttachmentInput{
+			MediaAssetID: item.MediaAssetID,
+			OwnerService: ownerService,
+			OwnerType:    ownerType,
+			OwnerID:      ownerID,
+			Role:         item.Role,
+			Position:     item.Position,
+		})
+		if err != nil && firstErr == nil {
+			firstErr = fmt.Errorf("attach media_asset_id=%s role=%s: %w", item.MediaAssetID, item.Role, err)
+		}
+	}
+	return firstErr
 }
 
 type productMediaAttachedEvent struct {
@@ -70,34 +98,35 @@ type productMediaAttachedEvent struct {
 	OccurredAt       time.Time             `json:"occurredAt"`
 }
 
-type mediaAttachmentItem struct {
-	MediaAssetID string `json:"mediaAssetId"`
-	Role         string `json:"role"`
-	Position     int    `json:"position"`
+func NewProductMediaAttachedHandler(svc *application.MediaService) EventHandler {
+	return func(ctx context.Context, raw []byte) error {
+		var evt productMediaAttachedEvent
+		if err := json.Unmarshal(raw, &evt); err != nil {
+			return fmt.Errorf("unmarshal event: %w", err)
+		}
+		if evt.ProductID == "" {
+			return fmt.Errorf("event missing productId")
+		}
+		return attachAll(ctx, svc, ownerServiceProductCatalog, ownerTypeProduct, evt.ProductID, evt.MediaAttachments)
+	}
 }
 
-func (c *Consumer) handleProductMediaAttached(ctx context.Context, raw []byte) error {
-	var evt productMediaAttachedEvent
-	if err := json.Unmarshal(raw, &evt); err != nil {
-		return fmt.Errorf("unmarshal event: %w", err)
-	}
-	if evt.ProductID == "" {
-		return fmt.Errorf("event missing productId")
-	}
+type reviewMediaAttachedEvent struct {
+	ReviewID         string                `json:"reviewId"`
+	BuyerID          string                `json:"buyerId"`
+	MediaAttachments []mediaAttachmentItem `json:"mediaAttachments"`
+	OccurredAt       time.Time             `json:"occurredAt"`
+}
 
-	var firstErr error
-	for _, item := range evt.MediaAttachments {
-		_, err := c.svc.CreateAttachment(ctx, application.CreateAttachmentInput{
-			MediaAssetID: item.MediaAssetID,
-			OwnerService: ownerServiceProductCatalog,
-			OwnerType:    ownerTypeProduct,
-			OwnerID:      evt.ProductID,
-			Role:         item.Role,
-			Position:     item.Position,
-		})
-		if err != nil && firstErr == nil {
-			firstErr = fmt.Errorf("attach media_asset_id=%s role=%s: %w", item.MediaAssetID, item.Role, err)
+func NewReviewMediaAttachedHandler(svc *application.MediaService) EventHandler {
+	return func(ctx context.Context, raw []byte) error {
+		var evt reviewMediaAttachedEvent
+		if err := json.Unmarshal(raw, &evt); err != nil {
+			return fmt.Errorf("unmarshal event: %w", err)
 		}
+		if evt.ReviewID == "" {
+			return fmt.Errorf("event missing reviewId")
+		}
+		return attachAll(ctx, svc, ownerServiceReview, ownerTypeReview, evt.ReviewID, evt.MediaAttachments)
 	}
-	return firstErr
 }

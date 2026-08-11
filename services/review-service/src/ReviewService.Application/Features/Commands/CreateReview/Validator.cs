@@ -29,8 +29,21 @@ public class Validator : AbstractValidator<CreateReviewCommand>
                     .MaximumLength(255).WithMessage("Attribute value must not exceed 255 characters.");
             });
 
-        RuleFor(x => x.MediaAssetIds)
-            .NotNull().WithMessage("Media asset ids must not be null.")
-            .Must(x => x.Count <= 10).WithMessage("You can attach up to 10 media assets per review.");
+        RuleFor(x => x.MediaAttachments)
+            .NotNull().WithMessage("Media attachments are required.")
+            .Must(x => x.Count <= 4).WithMessage("Media attachments cannot exceed 4 items.");
+
+        RuleForEach(x => x.MediaAttachments)
+            .ChildRules(media =>
+            {
+                media.RuleFor(m => m.MediaAssetId)
+                    .NotEmpty().WithMessage("MediaAssetId is required.");
+
+                media.RuleFor(m => m.Role)
+                    .NotEmpty().WithMessage("Role is required.");
+
+                media.RuleFor(m => m.Position)
+                    .GreaterThanOrEqualTo(0).WithMessage("Position must be greater than or equal to 0.");
+            });
     }
 }

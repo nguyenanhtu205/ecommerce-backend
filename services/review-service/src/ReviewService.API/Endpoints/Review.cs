@@ -3,6 +3,8 @@ using ReviewService.Application.Common.Dtos;
 using ReviewService.Application.Features.Commands.CreateReview;
 using ReviewService.Application.Features.Commands.DeleteReview;
 using ReviewService.Application.Features.Commands.LikeReview;
+using ReviewService.Application.Features.Commands.ReplyToReview;
+using ReviewService.Application.Features.Commands.UnlikeReview;
 using ReviewService.Application.Features.Queries;
 
 namespace ReviewService.API.Endpoints;
@@ -13,27 +15,33 @@ public class Review : IEndpointGroup
 
     public static void Map(RouteGroupBuilder groupBuilder)
     {
-        groupBuilder.MapPost(CreateReview, "reviews")
+        groupBuilder.MapPost(CreateReview)
             .Produces<ReviewDto>()
             .RequireRateLimiting("post");
 
-        groupBuilder.MapPost(LikeReview, "reviews/{id}/like")
+        groupBuilder.MapPost(LikeReview, "{id}/like")
             .RequireRateLimiting("post");
 
-        groupBuilder.MapDelete(DeleteReview, "reviews/{id}")
+        groupBuilder.MapDelete(UnlikeReview, "{id}/like")
             .RequireRateLimiting("post");
 
-        groupBuilder.MapGet(GetReviewsByProduct, "products/{productId}/reviews")
+        groupBuilder.MapDelete(DeleteReview, "{id}")
+            .RequireRateLimiting("post");
+
+        groupBuilder.MapGet(GetReviewsByProduct, "products/{productId}")
             .Produces<List<ReviewDto>>()
             .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetReviewAggregateByProduct, "products/{productId}/reviews/aggregate")
+        groupBuilder.MapGet(GetReviewAggregateByProduct, "products/{productId}/aggregate")
             .Produces<ReviewAggregateDto>()
             .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetPendingReviews, "reviews/pending")
+        groupBuilder.MapGet(GetPendingReviews, "pending")
             .Produces<List<ReviewableOrderItemDto>>()
             .RequireRateLimiting("get");
+
+        groupBuilder.MapPatch(ReplyToReview, "{id}/reply")
+            .RequireRateLimiting("post");
     }
 
     [EndpointSummary("Create review")]
@@ -54,12 +62,34 @@ public class Review : IEndpointGroup
         return Results.NoContent();
     }
 
+    [EndpointSummary("Unlike review")]
+    public static async Task<IResult> UnlikeReview(
+        string id, ISender sender, CancellationToken cancellationToken)
+    {
+        await sender.Send(new UnlikeReviewCommand(id), cancellationToken);
+        return Results.NoContent();
+    }
+
     [EndpointSummary("Delete review")]
     [EndpointDescription("Used by seller/admin to remove a review that violates policy.")]
     public static async Task<IResult> DeleteReview(
         string id, ISender sender, CancellationToken cancellationToken)
     {
         await sender.Send(new DeleteReviewCommand(id), cancellationToken);
+        return Results.NoContent();
+    }
+
+    [EndpointSummary("Reply to review")]
+    [EndpointDescription("Seller replies to a review on their own product. A review can only be replied to once.")]
+    public static async Task<IResult> ReplyToReview(
+        string id, ReplyToReviewCommand command, ISender sender, CancellationToken cancellationToken)
+    {
+        if (id != command.ReviewId)
+        {
+            return Results.BadRequest("The ID in the route does not match the ID in the request body.");
+        }
+
+        await sender.Send(command, cancellationToken);
         return Results.NoContent();
     }
 

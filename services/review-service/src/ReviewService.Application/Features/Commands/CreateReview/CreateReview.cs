@@ -7,12 +7,13 @@ public record CreateReviewCommand(
     int Rating,
     string Comment,
     List<ReviewAttributeDto> Attributes,
-    List<string> MediaAssetIds) : IRequest<ReviewDto>;
+    List<MediaAttachmentItem> MediaAttachments) : IRequest<ReviewDto>;
 
 public class CreateReview(
     ICurrentUser currentUser,
     IApplicationDbContext context,
-    ITopicProducer<ReviewAggregateUpdated> producer
+    ITopicProducer<ReviewAggregateUpdated> producer,
+    ITopicProducer<ReviewMediaAttached> mediaAttachedProducer
 ) : IRequestHandler<CreateReviewCommand, ReviewDto>
 {
     public async Task<ReviewDto> Handle(CreateReviewCommand request, CancellationToken cancellationToken)
@@ -55,7 +56,7 @@ public class CreateReview(
                 .. request.Attributes.Select(a => new Attribute { Label = a.Label, Value = a.Value })
             ],
             Comment = request.Comment,
-            MediaAssetIds = request.MediaAssetIds,
+            MediaAssetIds = [.. request.MediaAttachments.Select(m => m.MediaAssetId)],
             LikeCount = 0,
             CreatedAt = now
         };
@@ -69,7 +70,7 @@ public class CreateReview(
 
         DateTimeOffset aggregateUpdatedAt = DateTimeOffset.UtcNow;
         bool hasComment = !string.IsNullOrWhiteSpace(request.Comment);
-        bool hasMedia = request.MediaAssetIds.Count > 0;
+        bool hasMedia = request.MediaAttachments.Count > 0;
         string starField = $"starCounts.{request.Rating}";
 
         UpdateDefinition<ReviewAggregate> update = Builders<ReviewAggregate>.Update.Pipeline(
@@ -119,6 +120,9 @@ public class CreateReview(
                 orderItem.ProductId, aggregate.RatingAverage, aggregate.RatingCount, aggregateUpdatedAt),
             cancellationToken);
 
-        return ReviewMapper.ToDto(review);
+        await mediaAttachedProducer.Produce(new ReviewMediaAttached(reviewId, review.BuyerId, request.MediaAttachments,
+            now), cancellationToken);
+
+        return ReviewMapper.ToDto(review, false);
     }
 }

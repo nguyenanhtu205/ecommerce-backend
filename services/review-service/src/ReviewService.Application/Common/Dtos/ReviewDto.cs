@@ -13,4 +13,6 @@ public record ReviewDto(
     string Comment,
     List<string> MediaAssetIds,
     int LikeCount,
-    DateTimeOffset CreatedAt);
+    DateTimeOffset CreatedAt,
+    Reply? SellerReply,
+    bool IsLikedByCurrentUser);

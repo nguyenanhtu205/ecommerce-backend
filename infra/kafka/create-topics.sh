@@ -73,6 +73,7 @@ create_topic chat.message-sent.v1
 
 # --- review ---
 create_topic review.review-aggregate-updated.v1
+create_topic review.review-media-attached.v1
 
 echo "=== All topics created ==="
 

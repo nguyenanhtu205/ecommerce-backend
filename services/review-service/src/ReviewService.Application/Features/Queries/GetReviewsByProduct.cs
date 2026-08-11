@@ -8,7 +8,7 @@ public record GetReviewsByProductQuery(
     int Page = 1,
     int PageSize = 20) : IRequest<List<ReviewDto>>;
 
-public class GetReviewsByProduct(IApplicationDbContext context)
+public class GetReviewsByProduct(ICurrentUser currentUser, IApplicationDbContext context)
     : IRequestHandler<GetReviewsByProductQuery, List<ReviewDto>>
 {
     public async Task<List<ReviewDto>> Handle(GetReviewsByProductQuery request, CancellationToken cancellationToken)
@@ -38,6 +38,20 @@ public class GetReviewsByProduct(IApplicationDbContext context)
             .Limit(request.PageSize)
             .ToListAsync(cancellationToken);
 
-        return [.. reviews.Select(ReviewMapper.ToDto)];
+        if (currentUser.UserId is null)
+        {
+            return [.. reviews.Select(r => ReviewMapper.ToDto(r, false))];
+        }
+
+        string buyerId = currentUser.UserId.Value.ToString();
+        List<string> reviewIds = [.. reviews.Select(r => r.Id)];
+
+        List<ReviewLike> likes = await context.ReviewLikes
+            .Find(l => l.BuyerId == buyerId && reviewIds.Contains(l.ReviewId))
+            .ToListAsync(cancellationToken);
+
+        HashSet<string> likedReviewIds = [.. likes.Select(l => l.ReviewId)];
+
+        return [.. reviews.Select(r => ReviewMapper.ToDto(r, likedReviewIds.Contains(r.Id)))];
     }
 }

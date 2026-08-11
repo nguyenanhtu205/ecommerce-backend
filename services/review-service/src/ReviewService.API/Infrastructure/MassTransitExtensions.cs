@@ -18,6 +18,7 @@ public static class MassTransitExtensions
             x.AddRider(rider =>
             {
                 rider.AddProducer<ReviewAggregateUpdated>("review.review-aggregate-updated.v1");
+                rider.AddProducer<ReviewMediaAttached>("review.review-media-attached.v1");
 
                 rider.UsingKafka((_, k) =>
                 {

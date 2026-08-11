@@ -143,6 +143,20 @@ services:
   - name: review-service
     url: http://review-service:8080
     routes:
+      - name: review-preflight
+        paths: [ "/review" ]
+        methods: [ "OPTIONS" ]
+        strip_path: false
+
+      - name: review-public
+        paths: [ "/review/products" ]
+        methods: [ "GET" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            config:
+              anonymous: anonymous-consumer  
+
       - name: review-protected
         paths: [ "/review" ]
         strip_path: false
@@ -183,6 +197,8 @@ consumers:
           CwIDAQAB
           -----END PUBLIC KEY-----
         secret: "unused"
+        
+  - username: anonymous-consumer
 
 plugins:
   - name: post-function

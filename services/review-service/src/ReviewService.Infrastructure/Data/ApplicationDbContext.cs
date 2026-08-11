@@ -9,4 +9,7 @@ public class ApplicationDbContext(IMongoDatabase database) : IApplicationDbConte
 
     public IMongoCollection<ReviewAggregate> ReviewAggregates =>
         database.GetCollection<ReviewAggregate>("review_aggregates");
+
+    public IMongoCollection<ReviewLike> ReviewLikes =>
+        database.GetCollection<ReviewLike>("review_likes");
 }

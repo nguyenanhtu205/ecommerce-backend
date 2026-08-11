@@ -7,4 +7,6 @@ public interface IApplicationDbContext
     IMongoCollection<ReviewableOrderItem> ReviewableOrderItems { get; }
 
     IMongoCollection<ReviewAggregate> ReviewAggregates { get; }
+
+    IMongoCollection<ReviewLike> ReviewLikes { get; }
 }

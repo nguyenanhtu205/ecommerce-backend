@@ -34,8 +34,6 @@ public record ProductListingViewUpdated(
     DateTimeOffset SyncedAt
 );
 
-public record MediaAttachmentItem(string MediaAssetId, string Role, int Position);
-
 public record ProductMediaAttached(
     string ProductId,
     string ShopId,

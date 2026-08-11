@@ -27,6 +27,8 @@ public class Review
     public required int LikeCount { get; init; }
 
     public required DateTimeOffset CreatedAt { get; init; }
+
+    public Reply? SellerReply { get; set; }
 }
 
 public class Attribute
@@ -34,4 +36,11 @@ public class Attribute
     public required string Label { get; init; }
 
     public required string Value { get; init; }
+}
+
+public class Reply
+{
+    public required string Content { get; init; }
+
+    public required DateTimeOffset RepliedAt { get; init; }
 }

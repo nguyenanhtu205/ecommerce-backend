@@ -2,7 +2,7 @@
 
 public static class ReviewMapper
 {
-    public static ReviewDto ToDto(Review review)
+    public static ReviewDto ToDto(Review review, bool isLikedByCurrentUser)
     {
         return new ReviewDto(
             review.Id,
@@ -17,6 +17,8 @@ public static class ReviewMapper
             review.Comment,
             review.MediaAssetIds,
             review.LikeCount,
-            review.CreatedAt);
+            review.CreatedAt,
+            review.SellerReply,
+            isLikedByCurrentUser);
     }
 }
