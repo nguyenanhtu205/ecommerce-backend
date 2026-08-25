@@ -28,68 +28,54 @@ public class OrderReservationSaga : MassTransitStateMachine<OrderReservationSaga
                         AddressMapper.ToAddressSnapshot(context.Message.DeliveryAddressSnapshot);
                     context.Saga.Items = context.Message.Items;
                 })
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    ITopicProducer<ReserveStock> producer = context.GetPayload<IServiceProvider>()
-                        .GetRequiredService<ITopicProducer<ReserveStock>>();
-                    await producer.Produce(
-                        new ReserveStock(
-                            context.Saga.CorrelationId,
-                            [.. context.Saga.Items.Select(i => new ReserveStockItem(i.CombinationId, i.Quantity))]),
-                        context.CancellationToken);
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
+                    outboxWriter.Enqueue(new ReserveStock(
+                        context.Saga.CorrelationId,
+                        [.. context.Saga.Items.Select(i => new ReserveStockItem(i.CombinationId, i.Quantity))]));
                 })
                 .TransitionTo(AwaitingReservation)
         );
 
         During(AwaitingReservation,
             When(StockReservedEvent)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    ITopicProducer<OrderStockReserved> producer = context.GetPayload<IServiceProvider>()
-                        .GetRequiredService<ITopicProducer<OrderStockReserved>>();
-                    await producer.Produce(
-                        new OrderStockReserved(context.Saga.CheckoutBatchId, context.Saga.CorrelationId),
-                        context.CancellationToken);
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
+                    outboxWriter.Enqueue(new OrderStockReserved(context.Saga.CheckoutBatchId,
+                        context.Saga.CorrelationId));
                 })
                 .TransitionTo(AwaitingPaymentConfirmation),
             When(StockReservationFailedEvent)
                 .Then(context => context.Saga.FailReason = context.Message.Reason)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    ITopicProducer<OrderStockReservationFailed> producer = context.GetPayload<IServiceProvider>()
-                        .GetRequiredService<ITopicProducer<OrderStockReservationFailed>>();
-                    await producer.Produce(
-                        new OrderStockReservationFailed(
-                            context.Saga.CheckoutBatchId,
-                            context.Saga.CorrelationId,
-                            context.Saga.FailReason ?? "stock reservation failed"),
-                        context.CancellationToken);
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
+                    outboxWriter.Enqueue(new OrderStockReservationFailed(
+                        context.Saga.CheckoutBatchId, context.Saga.CorrelationId,
+                        context.Saga.FailReason ?? "stock reservation failed"));
                 })
                 .TransitionTo(Cancelled)
         );
 
         During(AwaitingPaymentConfirmation,
             When(OrderPaymentSucceededEvent)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    IServiceProvider provider = context.GetPayload<IServiceProvider>();
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
 
-                    ITopicProducer<CommitStockCommand> commitStockProducer = provider
-                        .GetRequiredService<ITopicProducer<CommitStockCommand>>();
-                    ITopicProducer<CreateShipment> createShipmentProducer = provider
-                        .GetRequiredService<ITopicProducer<CreateShipment>>();
+                    outboxWriter.Enqueue(new CommitStockCommand(context.Saga.CorrelationId));
 
-                    await commitStockProducer.Produce(
-                        new CommitStockCommand(context.Saga.CorrelationId),
-                        context.CancellationToken);
-
-                    await createShipmentProducer.Produce(
-                        new CreateShipment(
-                            context.Saga.CorrelationId,
-                            AddressMapper.ToCheckoutAddressSnapshot(context.Saga.PickupAddressSnapshot!),
-                            AddressMapper.ToCheckoutAddressSnapshot(context.Saga.DeliveryAddressSnapshot!),
-                            context.Saga.CarrierId),
-                        context.CancellationToken);
+                    outboxWriter.Enqueue(new CreateShipment(
+                        context.Saga.CorrelationId,
+                        AddressMapper.ToCheckoutAddressSnapshot(context.Saga.PickupAddressSnapshot!),
+                        AddressMapper.ToCheckoutAddressSnapshot(context.Saga.DeliveryAddressSnapshot!),
+                        context.Saga.CarrierId));
                 })
                 .TransitionTo(AwaitingShipment)
         );

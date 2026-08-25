@@ -22,7 +22,11 @@ echo "=== Creating Kafka topics ==="
 # --- user / auth ---
 create_topic user.registered.v1
 create_topic user.pickup-address-snapshot-updated.v1
+create_topic user.avatar-media-attached.v1
 create_topic seller.shop-created.v1
+create_topic seller.shop-name-changed.v1
+create_topic seller.shop-chat-settings-updated.v1
+create_topic seller.shop-vacation-settings-updated.v1
 
 # --- product ---
 create_topic product-catalog.product-created.v1
@@ -39,6 +43,7 @@ create_topic order.payment-failed.v1
 create_topic order.stock-reserved.v1
 create_topic order.stock-reservation-failed.v1
 create_topic order.cancel-order.v1
+create_topic order.order-completed.v1
 
 # --- checkout ---
 create_topic checkout.initiated.v1
@@ -61,6 +66,7 @@ create_topic inventory.reserve-stock.v1
 create_topic inventory.stock-reserved.v1
 create_topic inventory.stock-reservation-failed.v1
 create_topic inventory.commit-stock.v1
+create_topic inventory.stock-commited.v1
 
 # --- shipping ---
 create_topic shipping.create-shipment.v1
@@ -70,6 +76,7 @@ create_topic shipping.order-delivered.v1
 
 # --- chat ---
 create_topic chat.message-sent.v1
+create_topic chat.message-media-attached.v1
 
 # --- review ---
 create_topic review.review-aggregate-updated.v1

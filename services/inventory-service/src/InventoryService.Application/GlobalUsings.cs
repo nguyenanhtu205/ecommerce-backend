@@ -1,6 +1,9 @@
-﻿global using Common.Contracts.Events;
+﻿global using Common.Application.Interfaces;
+global using Common.Contracts.Events;
+global using Common.Outbox;
 global using InventoryService.Application.Common.Interfaces;
 global using InventoryService.Domain.Entities;
 global using FluentValidation;
 global using MassTransit;
+global using MediatR;
 global using Microsoft.EntityFrameworkCore;

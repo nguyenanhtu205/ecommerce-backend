@@ -10,7 +10,7 @@ public record CheckoutInitiated(
     string? PlatformVoucherCode,
     List<ShopVoucherRedemption> ShopVouchers);
 
-public record OrderPaymentShare(Guid OrderId, int Amount);
+public record OrderPaymentShare(Guid OrderId, Guid ShopId, int Amount);
 
 public record ShopVoucherRedemption(Guid ShopId, Guid OrderId, string VoucherCode, int DiscountAmount);
 
@@ -69,7 +69,6 @@ public record OrderStockReserved(Guid CheckoutBatchId, Guid OrderId);
 
 public record OrderStockReservationFailed(Guid CheckoutBatchId, Guid OrderId, string Reason);
 
-
 public record CreateShipment(
     Guid OrderId,
     CheckoutAddressSnapshot PickupAddressSnapshot,
@@ -77,3 +76,12 @@ public record CreateShipment(
     Guid CarrierId);
 
 public record CommitStockCommand(Guid OrderId);
+
+public record OrderCompletedItem(Guid OrderItemId, Guid ProductId, Guid CombinationId, string? Variation, int Quantity);
+
+public record OrderCompleted(
+    Guid OrderId,
+    Guid ShopId,
+    Guid BuyerId,
+    DateTimeOffset CompletedAt,
+    List<OrderCompletedItem> Items);

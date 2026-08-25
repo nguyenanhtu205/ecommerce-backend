@@ -38,7 +38,10 @@ public class ReleaseStockCommandConsumer(IApplicationDbContext dbContext) : ICon
 
             dbContext.ProcessedEvents.Add(new ProcessedEvent
             {
-                EventId = eventId, EventType = nameof(ReleaseStockCommand), ProcessedAt = DateTimeOffset.UtcNow
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(ReleaseStockCommand),
+                ProcessedAt = DateTimeOffset.UtcNow
             });
 
             try

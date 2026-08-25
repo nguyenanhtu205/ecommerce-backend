@@ -12,6 +12,8 @@ public static class MassTransitExtensions
         services.AddMassTransit(x =>
         {
             x.AddConsumer<ReviewAggregateUpdatedConsumer>();
+            x.AddConsumer<ShopNameChangedConsumer>();
+            x.AddConsumer<StockCommitedConsumer>();
 
             x.UsingInMemory((context, cfg) =>
             {
@@ -21,6 +23,8 @@ public static class MassTransitExtensions
             x.AddRider(rider =>
             {
                 rider.AddConsumer<ReviewAggregateUpdatedConsumer>();
+                rider.AddConsumer<ShopNameChangedConsumer>();
+                rider.AddConsumer<StockCommitedConsumer>();
 
                 rider.AddProducer<ProductCreated>("product-catalog.product-created.v1");
                 rider.AddProducer<ProductListingViewUpdated>("product-catalog.product-listing-view-updated.v1");
@@ -36,6 +40,24 @@ public static class MassTransitExtensions
                         e =>
                         {
                             e.ConfigureConsumer<ReviewAggregateUpdatedConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
+
+                    k.TopicEndpoint<ShopNameChanged>(
+                        "seller.shop-name-changed.v1",
+                        "product-catalog-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<ShopNameChangedConsumer>(context);
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
+
+                    k.TopicEndpoint<StockCommited>(
+                        "inventory.stock-commited.v1",
+                        "product-catalog-service-group",
+                        e =>
+                        {
+                            e.ConfigureConsumer<StockCommitedConsumer>(context);
                             e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
                         });
                 });

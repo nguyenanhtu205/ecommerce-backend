@@ -22,7 +22,46 @@ namespace InventoryService.Infrastructure.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("InventoryService.Domain.Entities.ProcessedEvent", b =>
+            modelBuilder.Entity("Common.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AttemptCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("attempt_count");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Error")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MessageType")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("message_type");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("payload");
+
+                    b.Property<DateTimeOffset?>("ProcessedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("processed_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedAt", "CreatedAt");
+
+                    b.ToTable("outbox_messages", (string)null);
+                });
+
+            modelBuilder.Entity("Common.Outbox.ProcessedEvent", b =>
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")

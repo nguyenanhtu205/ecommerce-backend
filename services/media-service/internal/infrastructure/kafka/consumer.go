@@ -19,6 +19,12 @@ const (
 
 	ownerServiceReview = "review-service"
 	ownerTypeReview    = "review"
+
+	ownerServiceChat = "chat-service"
+	ownerTypeChat    = "chat_message"
+
+	ownerServiceUser = "user-service"
+	ownerTypeUser    = "user_avatar"
 )
 
 type mediaAttachmentItem struct {
@@ -128,5 +134,44 @@ func NewReviewMediaAttachedHandler(svc *application.MediaService) EventHandler {
 			return fmt.Errorf("event missing reviewId")
 		}
 		return attachAll(ctx, svc, ownerServiceReview, ownerTypeReview, evt.ReviewID, evt.MediaAttachments)
+	}
+}
+
+type chatMediaAttachedEvent struct {
+	MessageID        string                `json:"messageId"`
+	OwnerID          string                `json:"ownerId"`
+	MediaAttachments []mediaAttachmentItem `json:"mediaAttachments"`
+	OccurredAt       time.Time             `json:"occurredAt"`
+}
+
+func NewChatMediaAttachedHandler(svc *application.MediaService) EventHandler {
+	return func(ctx context.Context, raw []byte) error {
+		var evt chatMediaAttachedEvent
+		if err := json.Unmarshal(raw, &evt); err != nil {
+			return fmt.Errorf("unmarshal event: %w", err)
+		}
+		if evt.MessageID == "" {
+			return fmt.Errorf("event missing messageId")
+		}
+		return attachAll(ctx, svc, ownerServiceChat, ownerTypeChat, evt.MessageID, evt.MediaAttachments)
+	}
+}
+
+type avatarMediaAttachedEvent struct {
+	UserID           string                `json:"userId"`
+	MediaAttachments []mediaAttachmentItem `json:"mediaAttachments"`
+	OccurredAt       time.Time             `json:"occurredAt"`
+}
+
+func NewAvatarMediaAttachedHandler(svc *application.MediaService) EventHandler {
+	return func(ctx context.Context, raw []byte) error {
+		var evt avatarMediaAttachedEvent
+		if err := json.Unmarshal(raw, &evt); err != nil {
+			return fmt.Errorf("unmarshal event: %w", err)
+		}
+		if evt.UserID == "" {
+			return fmt.Errorf("event missing userId")
+		}
+		return attachAll(ctx, svc, ownerServiceUser, ownerTypeUser, evt.UserID, evt.MediaAttachments)
 	}
 }

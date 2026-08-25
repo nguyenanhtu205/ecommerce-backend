@@ -2,15 +2,11 @@
 
 namespace InventoryService.Application.Common.Interfaces;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IOutboxDbContext
 {
     DbSet<ProductVariantCombination> ProductVariantCombinations { get; }
 
     DbSet<StockReservation> StockReservations { get; }
 
-    DbSet<ProcessedEvent> ProcessedEvents { get; }
-
     ChangeTracker ChangeTracker { get; }
-
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

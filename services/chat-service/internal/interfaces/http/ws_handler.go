@@ -5,12 +5,13 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strconv"
+	"time"
 
 	"github.com/gorilla/websocket"
 	"github.com/labstack/echo/v4"
 
 	"chat-service/internal/application"
-	"chat-service/internal/domain"
 	wsinfra "chat-service/internal/infrastructure/websocket"
 )
 
@@ -27,30 +28,42 @@ func NewChatWSHandler(hub *wsinfra.Hub, usecase *application.ChatUseCase) *ChatW
 	return &ChatWSHandler{hub: hub, usecase: usecase}
 }
 
+type wsAttachmentInput struct {
+	MediaAssetID string `json:"mediaAssetId"`
+	Role         string `json:"role"`
+}
+
 type wsIncomingMessage struct {
-	Content       string   `json:"content"`
-	AttachmentIDs []string `json:"attachmentMediaAssetIds"`
+	Content     string              `json:"content"`
+	Attachments []wsAttachmentInput `json:"attachments"`
 }
 
 // Upgrade godoc
-// @Summary      WebSocket endpoint for real-time chat on a conversation — used only to push/receive
-//
-//	messages; REST remains the source of truth (this handler calls the same SendMessage
-//	use case as the REST endpoint).
-//
+// @Summary      WebSocket endpoint for real-time chat on a conversation
 // @Tags         chat
 // @Param        conversationId query string true "conversationId to subscribe to"
+// @Failure      403 {object} map[string]string
 // @Router       /chat/ws [get]
 func (h *ChatWSHandler) Upgrade(c echo.Context) error {
+	ctx := c.Request().Context()
 	conversationID := c.QueryParam("conversationId")
 	if conversationID == "" {
 		return c.JSON(http.StatusBadRequest, errResponse("conversationId is required"))
 	}
 
-	roleStr, _ := c.Get("role").(string)
-	role := domain.SenderType(roleStr)
-	if role != domain.SenderBuyer && role != domain.SenderShop {
-		return c.JSON(http.StatusUnauthorized, errResponse("missing role in context, check auth middleware"))
+	userID, shopID, role := currentUser(c)
+
+	if err := h.usecase.AuthorizeConversationAccess(ctx, conversationID, userID, shopID, role); err != nil {
+		return respondUseCaseError(c, err)
+	}
+
+	var expiresAt time.Time
+	hasExpiry := false
+	if expHeader := c.Request().Header.Get("X-Token-Exp"); expHeader != "" {
+		if expUnix, err := strconv.ParseInt(expHeader, 10, 64); err == nil {
+			expiresAt = time.Unix(expUnix, 0)
+			hasExpiry = true
+		}
 	}
 
 	conn, err := upgrader.Upgrade(c.Response(), c.Request(), nil)
@@ -60,6 +73,19 @@ func (h *ChatWSHandler) Upgrade(c echo.Context) error {
 
 	client := h.hub.Register(conversationID, conn)
 	defer h.hub.Unregister(client)
+
+	if hasExpiry && !time.Now().Before(expiresAt) {
+		closeWithTokenExpired(conn)
+		return nil
+	}
+
+	var expiryTimer *time.Timer
+	if hasExpiry {
+		expiryTimer = time.AfterFunc(time.Until(expiresAt), func() {
+			closeWithTokenExpired(conn)
+		})
+		defer expiryTimer.Stop()
+	}
 
 	for {
 		_, raw, err := client.ReadMessage()
@@ -71,19 +97,38 @@ func (h *ChatWSHandler) Upgrade(c echo.Context) error {
 		if err := json.Unmarshal(raw, &in); err != nil {
 			continue
 		}
-		if in.Content == "" {
+		if in.Content == "" && len(in.Attachments) == 0 {
 			continue
+		}
+
+		attachments := make([]application.MediaAttachmentInput, 0, len(in.Attachments))
+		for _, a := range in.Attachments {
+			attachments = append(attachments, application.MediaAttachmentInput{
+				MediaAssetID: a.MediaAssetID,
+				Role:         a.Role,
+			})
 		}
 
 		if _, err := h.usecase.SendMessage(context.Background(), application.SendMessageInput{
 			ConversationID: conversationID,
+			UserID:         userID,
+			ShopID:         shopID,
 			SenderType:     role,
 			Content:        in.Content,
-			AttachmentIDs:  in.AttachmentIDs,
+			Attachments:    attachments,
 		}); err != nil {
 			log.Printf("chat-service: send message via ws error: %v", err)
 		}
 	}
 
 	return nil
+}
+
+func closeWithTokenExpired(conn *websocket.Conn) {
+	_ = conn.WriteControl(
+		websocket.CloseMessage,
+		websocket.FormatCloseMessage(websocket.ClosePolicyViolation, "token expired"),
+		time.Now().Add(5*time.Second),
+	)
+	_ = conn.Close()
 }

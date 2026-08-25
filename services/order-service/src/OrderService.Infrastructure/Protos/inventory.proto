@@ -13,7 +13,8 @@ message GetCombinationPricesRequest {
 message CombinationPrice {
   string combination_id = 1;
   string shop_id = 2;
-  int32 price = 3;
+  string product_id = 3;
+  int32 price = 4;
 }
 
 message GetCombinationPricesResponse {

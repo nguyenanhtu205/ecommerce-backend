@@ -6,49 +6,52 @@ using ShippingService.Domain.Entities;
 
 namespace ShippingService.API.Grpc;
 
-public class ShippingGrpcServiceImpl(IApplicationDbContext dbContext) : ShippingGrpcService.ShippingGrpcServiceBase
+public class ShippingGrpcServiceImpl(IApplicationDbContext dbContext, ICarrierAdapterFactory adapterFactory)
+    : ShippingGrpcService.ShippingGrpcServiceBase
 {
-    public override async Task<CalculateFeeResponse> CalculateFee(
-        CalculateFeeRequest request, ServerCallContext context)
+    public override async Task<CalculateFeeResponse> CalculateFee(CalculateFeeRequest request, 
+        ServerCallContext context)
     {
-        Guid carrierId = Guid.Parse(request.CarrierId);
-
         Carrier? carrier = await dbContext.Carriers
-            .FirstOrDefaultAsync(c => c.Id == carrierId, context.CancellationToken);
+            .FirstOrDefaultAsync(c => c.Code == request.CarrierCode, context.CancellationToken);
 
         if (carrier is null)
         {
-            return new CalculateFeeResponse { IsValid = false, FailureReason = "Carrier does not exist." };
+            return new CalculateFeeResponse
+            {
+                IsValid = false, FailureReason = $"Carrier '{request.CarrierCode}' does not exist."
+            };
         }
 
-        // TODO: thay bằng call thật sang API carrier (GHN/GHTK/J&T...) để tính phí
-        int fee = EstimateFee(carrier.Code, request.PickupAddressSnapshot, request.DeliveryAddressSnapshot);
-        DateOnly estimatedStart = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(1));
-        DateOnly estimatedEnd = DateOnly.FromDateTime(DateTime.UtcNow.AddDays(3));
+        if (request.Items.Count == 0)
+        {
+            return new CalculateFeeResponse { IsValid = false, FailureReason = "Items must not be empty." };
+        }
+
+        int totalWeight = request.Items.Sum(i => i.WeightGram * i.Quantity);
+        int packageLength = request.Items.Max(i => i.Length);
+        int packageWidth = request.Items.Max(i => i.Width);
+        int packageHeight = request.Items.Sum(i => i.Height * i.Quantity);
+
+        ICarrierShippingAdapter adapter = adapterFactory.GetAdapter(carrier.Code);
+        CarrierFeeResult result = await adapter.CalculateFeeAsync(
+            new CarrierShippingRequest(
+                request.PickupProvince, request.PickupWard,
+                request.DeliveryProvince, request.DeliveryWard,
+                totalWeight, packageLength, packageWidth, packageHeight),
+            context.CancellationToken);
+
+        if (!result.IsValid)
+        {
+            return new CalculateFeeResponse { IsValid = false, FailureReason = result.FailureReason };
+        }
 
         return new CalculateFeeResponse
         {
             IsValid = true,
-            Fee = fee,
-            EstimatedStart = estimatedStart.ToString("yyyy-MM-dd"),
-            EstimatedEnd = estimatedEnd.ToString("yyyy-MM-dd"),
-            CarrierName = carrier.Name
+            Fee = result.Fee,
+            EstimatedStart = result.EstimatedStart?.ToString("yyyy-MM-dd"),
+            EstimatedEnd = result.EstimatedEnd?.ToString("yyyy-MM-dd")
         };
-    }
-
-    private static int EstimateFee(
-        string carrierCode,
-        AddressSnapshot pickup,
-        AddressSnapshot delivery)
-    {
-        int baseFee = carrierCode switch
-        {
-            "ghn" => 20000,
-            "ghtk" => 18000,
-            "jnt" => 19000,
-            _ => 25000
-        };
-
-        return pickup.Province == delivery.Province ? baseFee : baseFee + 10000;
     }
 }

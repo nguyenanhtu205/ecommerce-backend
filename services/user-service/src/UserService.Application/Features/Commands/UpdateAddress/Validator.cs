@@ -1,6 +1,9 @@
 ﻿namespace UserService.Application.Features.Commands.UpdateAddress;
 
-public class Validator
+public class Validator : AbstractValidator<UpdateAddressCommand>
 {
-    
+    public Validator()
+    {
+        
+    }
 }

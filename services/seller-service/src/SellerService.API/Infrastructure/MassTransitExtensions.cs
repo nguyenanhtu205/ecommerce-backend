@@ -24,6 +24,9 @@ public static class MassTransitExtensions
 
                 rider.AddProducer<ShopActivated>("notification.shop-activated.v1");
                 rider.AddProducer<ShopCreated>("seller.shop-created.v1");
+                rider.AddProducer<ShopNameChanged>("seller.shop-name-changed.v1");
+                rider.AddProducer<ShopVacationSettingUpdated>("seller.shop-vacation-settings-updated.v1");
+                rider.AddProducer<ShopChatSettingUpdated>("seller.shop-chat-settings-updated.v1");
 
                 rider.UsingKafka((context, k) =>
                 {

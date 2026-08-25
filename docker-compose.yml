@@ -92,7 +92,7 @@ services:
       - review-service
       - cart-service
       - chat-service
-    
+  
   krakend:
     image: krakend:2.13.8
     volumes:
@@ -180,6 +180,10 @@ services:
       Jwt__KeyId: auth-key-2026-07
       Redis__ConnectionString: redis:6379
       Kafka__BootstrapServers: kafka:9092
+      GoogleOAuth__ClientId: ${GoogleOAuth__ClientId}
+      GoogleOAuth__ClientSecret: ${GoogleOAuth__ClientSecret}
+      GoogleOAuth__RedirectUri: ${GoogleOAuth__RedirectUri}
+      GoogleOAuth__Scope: openid email profile
     volumes:
       - ./services/auth-service/keys:/app/keys:ro
     ports:
@@ -201,6 +205,7 @@ services:
       Kafka__BootstrapServers: kafka:9092
     ports:
       - '5002:8080'
+      - '6002:8081'
     depends_on:
       postgres:
         condition: service_started
@@ -263,6 +268,8 @@ services:
       KAFKA_TOPIC: media-events
       KAFKA_PRODUCT_MEDIA_ATTACHED_TOPIC: product-catalog.product-media-attached.v1
       KAFKA_REVIEW_MEDIA_ATTACHED_TOPIC: review.review-media-attached.v1
+      KAFKA_CHAT_MEDIA_ATTACHED_TOPIC: chat.message-media-attached.v1
+      KAFKA_AVATAR_MEDIA_ATTACHED_TOPIC: user.avatar-media-attached.v1
       KAFKA_CONSUMER_GROUP_ID: media-service-group
       MINIO_PUBLIC_ENDPOINT: localhost:9000
       MINIO_PUBLIC_USE_SSL: "false"
@@ -295,13 +302,17 @@ services:
     environment:
       ConnectionStrings__DefaultConnection: mongodb://mongo:27017/product_catalog_db
       Kafka__BootstrapServers: kafka:9092
+      Redis__ConnectionString: redis:6379
     ports:
       - '5004:8080'
+      - '6004:8081'
     depends_on:
       mongo:
         condition: service_started
       kafka-init:
         condition: service_completed_successfully
+      redis:
+        condition: service_started
   
   inventory-service:
     build:
@@ -353,6 +364,8 @@ services:
       Services__InventoryGrpc: http://inventory-service:8081
       Services__PromotionGrpc: http://promotion-service:8081
       Services__ShippingGrpc: http://shipping-service:8081
+      Services__UserGrpc: http://user-service:8081
+      Services__ProductGrpc: http://product-catalog-service:8081
     ports:
       - '5009:8080'
     depends_on:
@@ -451,6 +464,10 @@ services:
       MONGO_DB_NAME: chat_db
       KAFKA_BROKERS: kafka:9092
       KAFKA_TOPIC_MESSAGE_SENT: chat.message-sent.v1
+      KAFKA_TOPIC_MEDIA_ATTACHED: chat.message-media-attached.v1
+      KAFKA_TOPIC_SHOP_CHAT_SETTINGS: seller.shop-chat-settings-updated.v1
+      KAFKA_TOPIC_SHOP_VACATION_SETTINGS: seller.shop-vacation-settings-updated.v1
+      KAFKA_CONSUMER_GROUP_ID: chat-service-group
       PORT: 8080
     ports:
       - '5015:8080'

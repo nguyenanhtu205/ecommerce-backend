@@ -16,6 +16,10 @@ public class PaymentOrderLinksConfiguration : IEntityTypeConfiguration<PaymentOr
             .HasColumnName("payment_id")
             .IsRequired();
 
+        builder.Property(x => x.ShopId)
+            .HasColumnName("shop_id")
+            .IsRequired();
+
         builder.Property(x => x.OrderId)
             .HasColumnName("order_id")
             .IsRequired();
@@ -28,6 +32,8 @@ public class PaymentOrderLinksConfiguration : IEntityTypeConfiguration<PaymentOr
 
         builder.HasIndex(x => x.OrderId)
             .IsUnique();
+
+        builder.HasIndex(x => x.ShopId);
 
         builder.HasOne(x => x.Payment)
             .WithMany(x => x.PaymentOrderLinks)

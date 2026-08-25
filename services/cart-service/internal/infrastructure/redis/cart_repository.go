@@ -40,6 +40,7 @@ func (r *CartRepository) AddOrIncrementItem(ctx context.Context, userId, combina
 		existing.ProductName = item.ProductName
 		existing.ThumbnailUrl = item.ThumbnailUrl
 		existing.Variation = item.Variation
+		existing.ShippingInfo = item.ShippingInfo
 		item = existing
 	}
 	raw, err := json.Marshal(item)

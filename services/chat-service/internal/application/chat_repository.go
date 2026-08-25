@@ -9,6 +9,8 @@ import (
 type ChatRepository interface {
 	GetOrCreateConversation(ctx context.Context, buyerID, shopID string) (*domain.Conversation, error)
 
+	GetConversationByID(ctx context.Context, id string) (*domain.Conversation, error)
+
 	InsertMessage(ctx context.Context, msg *domain.Message) error
 
 	UpdateConversationOnNewMessage(ctx context.Context, conversationID, lastMessage string, sender domain.SenderType) (*domain.Conversation, error)

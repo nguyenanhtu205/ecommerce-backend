@@ -19,14 +19,18 @@ public static class DependencyInjection
 
         NpgsqlDataSource dataSource = dataSourceBuilder.Build();
 
-        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseNpgsql(dataSource);
-        });
+        builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseNpgsql(dataSource));
+        builder.Services.AddScoped<IApplicationDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
+        builder.Services.AddScoped<IOutboxDbContext>(sp => sp.GetRequiredService<ApplicationDbContext>());
+        
+        builder.Services.AddScoped<IOutboxWriter, OutboxWriter>();
 
-        builder.Services.AddScoped<IApplicationDbContext>(provider =>
-            provider.GetRequiredService<ApplicationDbContext>());
-
+        builder.Services.AddScoped<IOutboxMessageDispatcher, OutboxMessageDispatcher<StockReserved>>();
+        builder.Services.AddScoped<IOutboxMessageDispatcher, OutboxMessageDispatcher<StockReservationFailed>>();
+        builder.Services.AddScoped<IOutboxMessageDispatcher, OutboxMessageDispatcher<StockCommited>>();
+        
+        builder.Services.AddHostedService<OutboxDispatcherBackgroundService<ApplicationDbContext>>();
+        
         builder.Services.AddSingleton(TimeProvider.System);
     }
 }

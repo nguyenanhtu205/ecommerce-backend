@@ -76,3 +76,25 @@ type bulkAssetItem struct {
 type bulkAssetsResponse struct {
 	Items []bulkAssetItem `json:"items"`
 }
+
+type ownerRolePairRequest struct {
+	OwnerID string `json:"ownerId"`
+	Role    string `json:"role"`
+}
+
+type bulkAssetsByOwnerRoleRequest struct {
+	OwnerService string                 `json:"ownerService"`
+	OwnerType    string                 `json:"ownerType"`
+	Items        []ownerRolePairRequest `json:"items"`
+}
+
+type bulkAssetsByOwnerRoleItem struct {
+	OwnerID string         `json:"ownerId"`
+	Role    string         `json:"role"`
+	Found   bool           `json:"found"`
+	Asset   *assetResponse `json:"asset,omitempty"`
+}
+
+type bulkAssetsByOwnerRoleResponse struct {
+	Items []bulkAssetsByOwnerRoleItem `json:"items"`
+}

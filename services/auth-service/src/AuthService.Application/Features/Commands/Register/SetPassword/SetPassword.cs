@@ -24,26 +24,52 @@ public class SetPasswordCommandHandler(
                 [new ValidationFailure("Email", "The email address has not been verified.")]);
         }
 
-        Role roleEntity = await context.Roles.SingleAsync(r => r.Name == role, cancellationToken);
+        User? existingUser = await context.Users
+            .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);
 
-        User user = new()
+        User user;
+        bool isNewRegistration = existingUser is null;
+
+        if (existingUser is not null)
         {
-            Email = request.Email,
-            Status = UserStatus.Active,
-            EmailVerifiedAt = DateTimeOffset.UtcNow,
-            CreatedAt = DateTimeOffset.UtcNow
-        };
+            if (existingUser.Status == UserStatus.Banned)
+            {
+                throw new ForbiddenAccessException("Your account has been banned.");
+            }
+
+            if (existingUser.Status == UserStatus.PendingVerification)
+            {
+                throw new ForbiddenAccessException("Please verify your email before logging in.");
+            }
+
+            user = existingUser;
+        }
+        else
+        {
+            Role roleEntity = await context.Roles.SingleAsync(r => r.Name == role, cancellationToken);
+
+            user = new User
+            {
+                Email = request.Email,
+                Status = UserStatus.Active,
+                EmailVerifiedAt = DateTimeOffset.UtcNow,
+                CreatedAt = DateTimeOffset.UtcNow
+            };
+
+            UserRole userRole = new() { UserId = user.Id, RoleId = roleEntity.Id };
+
+            context.Users.Add(user);
+            context.UserRoles.Add(userRole);
+        }
 
         AuthCredential credential = new() { UserId = user.Id, PasswordHash = passwordHasher.Hash(request.Password) };
-
-        UserRole userRole = new() { UserId = user.Id, RoleId = roleEntity.Id };
-
-        context.Users.Add(user);
         context.AuthCredentials.Add(credential);
-        context.UserRoles.Add(userRole);
 
-        await producer.Produce(
-            new UserRegistered(user.Id, user.Email, DateTimeOffset.UtcNow), cancellationToken);
+        if (isNewRegistration)
+        {
+            await producer.Produce(
+                new UserRegistered(user.Id, user.Email, DateTimeOffset.UtcNow), cancellationToken);
+        }
 
         string accessToken = jwtProvider.Generate(user);
         string refreshToken = refreshTokenGenerator.Generate();

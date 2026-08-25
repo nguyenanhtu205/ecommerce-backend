@@ -4,9 +4,13 @@ public class Shop : BaseEntity
 {
     public required Guid OwnerUserId { get; init; }
 
-    public required string Name { get; init; }
+    public required string Name { get; set; }
 
     public required string Email { get; init; }
+
+    public string? Description { get; set; }
+
+    public string? ShopAvatarUrl { get; set; }
 
     public Guid? PickupAddressId { get; init; }
 

@@ -1,5 +1,10 @@
 package domain
 
+import (
+	"fmt"
+	"time"
+)
+
 type CategoryPathItem struct {
 	ID   string `json:"id"`
 	Name string `json:"name"`
@@ -30,5 +35,13 @@ type ProductListing struct {
 }
 
 func (p ProductListing) DocumentID() string {
-	return p.ProductID + "-" + p.SyncedAt
+	return p.ProductID
+}
+
+func (p ProductListing) SyncedAtUnixNano() (int64, error) {
+	t, err := time.Parse(time.RFC3339Nano, p.SyncedAt)
+	if err != nil {
+		return 0, fmt.Errorf("parse syncedAt %q: %w", p.SyncedAt, err)
+	}
+	return t.UnixNano(), nil
 }

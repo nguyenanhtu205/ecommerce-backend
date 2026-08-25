@@ -8,7 +8,7 @@ public class Shipment : BaseEntity
 
     public string? TrackingCode { get; init; }
 
-    public required ShipmentStatus Status { get; init; }
+    public required ShipmentStatus Status { get; set; }
 
     public required AddressSnapshot PickupAddressSnapshot { get; init; }
 
@@ -20,7 +20,7 @@ public class Shipment : BaseEntity
 
     public required DateTimeOffset CreatedAt { get; init; }
 
-    public required DateTimeOffset UpdatedAt { get; init; }
+    public required DateTimeOffset UpdatedAt { get; set; }
 
     public Carrier? Carrier { get; init; }
 

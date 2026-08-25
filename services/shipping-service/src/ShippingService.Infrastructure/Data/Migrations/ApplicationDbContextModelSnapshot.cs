@@ -23,6 +23,77 @@ namespace ShippingService.Infrastructure.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Common.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AttemptCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("attempt_count");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Error")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MessageType")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("message_type");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("payload");
+
+                    b.Property<DateTimeOffset?>("ProcessedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("processed_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedAt", "CreatedAt");
+
+                    b.ToTable("outbox_messages", (string)null);
+                });
+
+            modelBuilder.Entity("Common.Outbox.ProcessedEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("EventId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("event_id");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("event_type");
+
+                    b.Property<DateTimeOffset>("ProcessedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("processed_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.HasIndex("EventType");
+
+                    b.ToTable("processed_events", (string)null);
+                });
+
             modelBuilder.Entity("ShippingService.Domain.Entities.Carrier", b =>
                 {
                     b.Property<Guid>("Id")
@@ -47,6 +118,26 @@ namespace ShippingService.Infrastructure.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("carriers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Code = "mock",
+                            Name = "Giao Hàng Thử Nghiệm"
+                        },
+                        new
+                        {
+                            Id = new Guid("22222222-2222-2222-2222-222222222222"),
+                            Code = "ghn",
+                            Name = "Giao Hàng Nhanh"
+                        },
+                        new
+                        {
+                            Id = new Guid("33333333-3333-3333-3333-333333333333"),
+                            Code = "ghtk",
+                            Name = "Giao Hàng Tiết Kiệm"
+                        });
                 });
 
             modelBuilder.Entity("ShippingService.Domain.Entities.PickupPoint", b =>
@@ -76,6 +167,29 @@ namespace ShippingService.Infrastructure.Data.Migrations
                     b.HasIndex("CarrierId");
 
                     b.ToTable("pickup_points", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                            Address = "123 Nguyễn Trãi, Thanh Xuân, Hà Nội",
+                            CarrierId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "Điểm lấy hàng ở Hà Nội"
+                        },
+                        new
+                        {
+                            Id = new Guid("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                            Address = "456 Nguyễn Thị Minh Khai, Quận 3, TP. Hồ Chí Minh",
+                            CarrierId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "Điểm lấy hàng ở Hồ Chí Minh"
+                        },
+                        new
+                        {
+                            Id = new Guid("cccccccc-cccc-cccc-cccc-cccccccccccc"),
+                            Address = "789 Nguyễn Văn Linh, Hải Châu, Đà Nẵng",
+                            CarrierId = new Guid("11111111-1111-1111-1111-111111111111"),
+                            Name = "Điểm lấy hàng ở Đà Nẵng"
+                        });
                 });
 
             modelBuilder.Entity("ShippingService.Domain.Entities.Shipment", b =>

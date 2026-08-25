@@ -37,3 +37,11 @@ type AssetResult struct {
 	Asset     *domain.MediaAsset
 	PublicURL string
 }
+
+type OwnerRoleAssetResult struct {
+	OwnerID   string
+	Role      string
+	Found     bool
+	Asset     *domain.MediaAsset
+	PublicURL string
+}

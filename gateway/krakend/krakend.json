@@ -6,5 +6,70 @@
   "timeout": "5s",
   "cache_ttl": "0s",
   "output_encoding": "json",
-  "endpoints": []
+  "endpoints": [
+    {
+      "endpoint": "/gateway/seller/products",
+      "method": "GET",
+      "input_headers": [
+        "X-User-Id",
+        "X-User-Roles",
+        "X-Shop-Id",
+        "X-Shop-Name"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://product-catalog-service:8080"
+          ],
+          "url_pattern": "/product-catalog/products/shop/me",
+          "is_collection": true,
+          "mapping": {
+            "collection": "products"
+          }
+        },
+        {
+          "host": [
+            "http://inventory-service:8080"
+          ],
+          "url_pattern": "/inventory/stocks/shop/me",
+          "is_collection": true,
+          "mapping": {
+            "collection": "stocks"
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/gateway/seller/shop/shipping-connections",
+      "method": "GET",
+      "input_headers": [
+        "X-User-Id",
+        "X-User-Roles",
+        "X-Shop-Id",
+        "X-Shop-Name"
+      ],
+      "backend": [
+        {
+          "host": [
+            "http://seller-service:8080"
+          ],
+          "url_pattern": "/seller/shop/shipping-connections",
+          "is_collection": true,
+          "mapping": {
+            "collection": "connections"
+          }
+        },
+        {
+          "host": [
+            "http://shipping-service:8080"
+          ],
+          "url_pattern": "/shipping/carriers",
+          "is_collection": true,
+          "mapping": {
+            "collection": "carriers"
+          }
+        }
+      ]
+    }
+  ]
 }

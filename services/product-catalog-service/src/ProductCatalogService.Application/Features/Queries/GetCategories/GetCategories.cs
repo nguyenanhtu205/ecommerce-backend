@@ -2,10 +2,21 @@
 
 public record GetCategoriesQuery(string? ParentId) : IRequest<List<CategoryDto>>;
 
-public class GetCategories(IApplicationDbContext context) : IRequestHandler<GetCategoriesQuery, List<CategoryDto>>
+public class GetCategories(IApplicationDbContext context, ICacheService cache)
+    : IRequestHandler<GetCategoriesQuery, List<CategoryDto>>
 {
+    private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
+
     public async Task<List<CategoryDto>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
     {
+        string cacheKey = $"categories:{request.ParentId ?? "root"}";
+
+        List<CategoryDto>? cached = await cache.GetAsync<List<CategoryDto>>(cacheKey, cancellationToken);
+        if (cached is not null)
+        {
+            return cached;
+        }
+
         FilterDefinition<Category> filter = string.IsNullOrEmpty(request.ParentId)
             ? Builders<Category>.Filter.Eq(c => c.ParentId, null)
             : Builders<Category>.Filter.Eq(c => c.ParentId, request.ParentId);
@@ -15,7 +26,7 @@ public class GetCategories(IApplicationDbContext context) : IRequestHandler<GetC
             .SortBy(c => c.Name)
             .ToListAsync(cancellationToken);
 
-        return
+        List<CategoryDto> result =
         [
             .. categories.Select(c => new CategoryDto
             {
@@ -28,5 +39,9 @@ public class GetCategories(IApplicationDbContext context) : IRequestHandler<GetC
                 IsLeaf = c.IsLeaf
             })
         ];
+
+        await cache.SetAsync(cacheKey, result, CacheDuration, cancellationToken);
+
+        return result;
     }
 }

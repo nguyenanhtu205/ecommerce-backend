@@ -1,0 +1,25 @@
+syntax = "proto3";
+option csharp_namespace = "Common.Contracts.Grpc.Product";
+package product;
+
+service ProductGrpcService {
+  rpc GetProductInfos (GetProductInfosRequest) returns (GetProductInfosResponse);
+}
+
+message GetProductInfosRequest {
+  repeated string product_ids = 1;
+}
+
+message ProductInfoItem {
+  string product_id = 1;
+  string product_name = 2;
+  string thumbnail_url = 3;
+  int32 weight_gram = 4;
+  int32 length = 5;
+  int32 width = 6;
+  int32 height = 7;
+}
+
+message GetProductInfosResponse {
+  repeated ProductInfoItem items = 1;
+}

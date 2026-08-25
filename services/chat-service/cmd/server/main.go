@@ -46,7 +46,7 @@ func main() {
 	}
 
 	kafkaBrokers := strings.Split(cfg.KafkaBrokers, ",")
-	publisher := kafkainfra.NewPublisher(kafkaBrokers, cfg.KafkaTopicMessageSent)
+	publisher := kafkainfra.NewPublisher(kafkaBrokers, cfg.KafkaTopicMessageSent, cfg.KafkaTopicMediaAttached)
 	defer func(publisher *kafkainfra.Publisher) {
 		err := publisher.Close()
 		if err != nil {
@@ -55,7 +55,34 @@ func main() {
 
 	hub := wsinfra.NewHub()
 
-	uc := application.NewChatUseCase(repo, publisher, hub)
+	shopChatSettingsRepo := mongodb.NewShopChatSettingsRepository(db)
+	ingestUseCase := application.NewShopChatSettingsIngestUseCase(shopChatSettingsRepo)
+
+	chatSettingsConsumer := kafkainfra.NewConsumer(kafkaBrokers, cfg.KafkaTopicShopChatSettings, cfg.KafkaConsumerGroupID, ingestUseCase.HandleChatSettingsUpdated)
+	vacationConsumer := kafkainfra.NewConsumer(kafkaBrokers, cfg.KafkaTopicShopVacationSettings, cfg.KafkaConsumerGroupID, ingestUseCase.HandleVacationSettingsUpdated)
+
+	go func() {
+		if err := chatSettingsConsumer.Start(ctx); err != nil {
+			log.Printf("chat settings consumer stopped: %v", err)
+		}
+	}()
+	go func() {
+		if err := vacationConsumer.Start(ctx); err != nil {
+			log.Printf("vacation settings consumer stopped: %v", err)
+		}
+	}()
+	defer func(chatSettingsConsumer *kafkainfra.Consumer) {
+		err := chatSettingsConsumer.Close()
+		if err != nil {
+		}
+	}(chatSettingsConsumer)
+	defer func(vacationConsumer *kafkainfra.Consumer) {
+		err := vacationConsumer.Close()
+		if err != nil {
+		}
+	}(vacationConsumer)
+
+	uc := application.NewChatUseCase(repo, shopChatSettingsRepo, publisher, hub)
 
 	handler := chathttp.NewChatHandler(uc)
 	wsHandler := chathttp.NewChatWSHandler(hub, uc)

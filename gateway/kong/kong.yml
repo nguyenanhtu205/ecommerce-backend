@@ -6,13 +6,21 @@ services:
     routes:
       - name: gateway-aggregation-route
         paths: [ "/gateway" ]
-        strip_path: true
-    
+        strip_path: false
+        plugins:
+          - name: jwt
+
   - name: auth-service
     url: http://auth-service:8080
     routes:
       - name: auth-logout-protected
         paths: [ "/auth/logout" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            
+      - name: auth-user-protected
+        paths: ["/auth/user"]
         strip_path: false
         plugins:
           - name: jwt
@@ -33,6 +41,16 @@ services:
   - name: seller-service
     url: http://seller-service:8080
     routes:
+      - name: seller-preflight
+        paths: [ "/seller" ]
+        methods: [ "OPTIONS" ]
+        strip_path: false
+
+      - name: seller-public
+        paths: [ "/seller/shop/public-information", "/seller/shop/shipping-information" ]
+        methods: [ "GET", "POST" ]
+        strip_path: false
+
       - name: seller-protected
         paths: [ "/seller" ]
         strip_path: false
@@ -54,8 +72,8 @@ services:
       - name: media-preflight
         paths: [ "/media" ]
         methods: [ "OPTIONS" ]
-        strip_path: false                      
-                      
+        strip_path: false
+
       - name: media-uploads-protected
         paths: [ "/media/uploads" ]
         methods: [ "POST" ]
@@ -68,6 +86,16 @@ services:
         methods: [ "POST" ]
         strip_path: false
 
+      - name: media-asset-public
+        paths: [ "/media/assets" ]
+        methods: [ "GET" ]
+        strip_path: false
+
+      - name: media-assets-by-owner-role-bulk-public
+        paths: [ "/media/assets/by-owner-role/bulk" ]
+        methods: [ "POST" ]
+        strip_path: false
+
   - name: product-catalog-service
     url: http://product-catalog-service:8080
     routes:
@@ -75,7 +103,7 @@ services:
         paths: [ "/product-catalog" ]
         methods: [ "OPTIONS" ]
         strip_path: false
-        
+
       - name: product-catalog-public
         paths: [ "/product-catalog" ]
         methods: [ "GET" ]
@@ -84,6 +112,13 @@ services:
       - name: product-catalog-protected
         paths: [ "/product-catalog" ]
         methods: [ "POST", "PUT", "PATCH", "DELETE" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+            
+      - name: product-catalog-seller-protected
+        paths: ["/product-catalog/products/shop/me"]
+        methods: ["GET"]
         strip_path: false
         plugins:
           - name: jwt
@@ -155,7 +190,7 @@ services:
         plugins:
           - name: jwt
             config:
-              anonymous: anonymous-consumer  
+              anonymous: anonymous-consumer
 
       - name: review-protected
         paths: [ "/review" ]
@@ -180,6 +215,10 @@ services:
         strip_path: false
         plugins:
           - name: jwt
+            config:
+              uri_param_names:
+                - token
+                - jwt
 
 consumers:
   - username: auth-service-issuer
@@ -197,7 +236,7 @@ consumers:
           CwIDAQAB
           -----END PUBLIC KEY-----
         secret: "unused"
-        
+
   - username: anonymous-consumer
 
 plugins:
@@ -238,9 +277,19 @@ plugins:
               if shopName then
                 kong.service.request.set_header("X-Shop-Name", shopName)
               end
+          
+              local exp = jwt_obj.claims["exp"]
+              if exp then
+                kong.service.request.set_header("X-Token-Exp", tostring(exp))
+              end
+          
+              local iat = jwt_obj.claims["iat"]
+              if iat then
+                kong.service.request.set_header("X-Token-Iat", tostring(iat))
+              end
             end
           end
-          
+
   - name: cors
     config:
       origins:

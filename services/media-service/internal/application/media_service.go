@@ -152,6 +152,69 @@ func (s *MediaService) GetAssets(ctx context.Context, ids []string) (map[string]
 	return result, nil
 }
 
+func (s *MediaService) GetAssetsByOwnerRole(ctx context.Context, ownerService, ownerType string, pairs []OwnerRolePair) ([]OwnerRoleAssetResult, error) {
+	if ownerService == "" || ownerType == "" {
+		return nil, fmt.Errorf("%w: owner_service and owner_type are required", domain.ErrInvalidInput)
+	}
+	if len(pairs) == 0 {
+		return []OwnerRoleAssetResult{}, nil
+	}
+
+	attachments, err := s.repo.GetAttachmentsByOwnerRoles(ctx, ownerService, ownerType, pairs)
+	if err != nil {
+		return nil, fmt.Errorf("get attachments: %w", err)
+	}
+
+	attByPair := make(map[string]*domain.MediaAttachment, len(attachments))
+	assetIDSet := make(map[string]struct{}, len(attachments))
+	for _, a := range attachments {
+		key := pairKey(a.OwnerID, a.Role)
+		if _, exists := attByPair[key]; !exists {
+			attByPair[key] = a
+			assetIDSet[a.MediaAssetID] = struct{}{}
+		}
+	}
+
+	assetIDs := make([]string, 0, len(assetIDSet))
+	for id := range assetIDSet {
+		assetIDs = append(assetIDs, id)
+	}
+	assets, err := s.repo.GetAssetsByIDs(ctx, assetIDs)
+	if err != nil {
+		return nil, fmt.Errorf("get assets: %w", err)
+	}
+	assetByID := make(map[string]*domain.MediaAsset, len(assets))
+	for _, a := range assets {
+		assetByID[a.ID] = a
+	}
+
+	results := make([]OwnerRoleAssetResult, 0, len(pairs))
+	for _, p := range pairs {
+		att, ok := attByPair[pairKey(p.OwnerID, p.Role)]
+		if !ok {
+			results = append(results, OwnerRoleAssetResult{OwnerID: p.OwnerID, Role: p.Role, Found: false})
+			continue
+		}
+		asset, ok := assetByID[att.MediaAssetID]
+		if !ok {
+			results = append(results, OwnerRoleAssetResult{OwnerID: p.OwnerID, Role: p.Role, Found: false})
+			continue
+		}
+		publicURL := ""
+		if asset.Status == domain.StatusReady {
+			publicURL = s.storage.GetPublicURL(asset.Bucket, asset.ObjectKey)
+		}
+		results = append(results, OwnerRoleAssetResult{
+			OwnerID: p.OwnerID, Role: p.Role, Found: true, Asset: asset, PublicURL: publicURL,
+		})
+	}
+	return results, nil
+}
+
+func pairKey(ownerID, role string) string {
+	return ownerID + "|" + role
+}
+
 func (s *MediaService) CreateAttachment(ctx context.Context, in CreateAttachmentInput) (*domain.MediaAttachment, error) {
 	if in.MediaAssetID == "" || in.OwnerService == "" || in.OwnerType == "" || in.OwnerID == "" || in.Role == "" {
 		return nil, fmt.Errorf("%w: media_asset_id, owner_service, owner_type, owner_id, role are required", domain.ErrInvalidInput)

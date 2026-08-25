@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProductCatalogService.Infrastructure.Caching;
 using ProductCatalogService.Infrastructure.Data;
 
 namespace ProductCatalogService.Infrastructure;
@@ -29,5 +30,10 @@ public static class DependencyInjection
         builder.Services.AddScoped<MongoIndexInitializer>();
 
         builder.Services.AddSingleton(TimeProvider.System);
+
+        string? redisConnectionString = builder.Configuration["Redis:ConnectionString"];
+        Guard.Against.NullOrEmpty(redisConnectionString, message: "Redis connection string not found.");
+        builder.Services.AddSingleton<IConnectionMultiplexer>(ConnectionMultiplexer.Connect(redisConnectionString));
+        builder.Services.AddSingleton<ICacheService, RedisCacheService>();
     }
 }

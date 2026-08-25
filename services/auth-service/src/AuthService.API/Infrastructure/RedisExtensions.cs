@@ -18,6 +18,8 @@ public static class RedisExtensions
 
         services.AddScoped<IOtpStore, RedisOtpStore>();
 
+        services.AddScoped<IOAuthStateStore, RedisOAuthStateStore>();
+
         return services;
     }
 }

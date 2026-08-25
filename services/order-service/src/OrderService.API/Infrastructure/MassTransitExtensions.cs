@@ -15,6 +15,8 @@ public static class MassTransitExtensions
         services.AddMassTransit(x =>
         {
             x.AddConsumer<CancelOrderConsumer>();
+            x.AddConsumer<OrderDeliveredConsumer>();
+            x.AddConsumer<ShipmentCreatedConsumer>();
 
             x.UsingInMemory((context, cfg) =>
             {
@@ -24,6 +26,8 @@ public static class MassTransitExtensions
             x.AddRider(rider =>
             {
                 rider.AddConsumer<CancelOrderConsumer>();
+                rider.AddConsumer<OrderDeliveredConsumer>();
+                rider.AddConsumer<ShipmentCreatedConsumer>();
 
                 rider.AddSagaStateMachine<CheckoutSaga, CheckoutSagaState>()
                     .EntityFrameworkRepository(r =>
@@ -53,6 +57,7 @@ public static class MassTransitExtensions
                 rider.AddProducer<OrderStockReservationFailed>("order.stock-reservation-failed.v1");
                 rider.AddProducer<CreateShipment>("shipping.create-shipment.v1");
                 rider.AddProducer<CancelOrder>("order.cancel-order.v1");
+                rider.AddProducer<OrderCompleted>("order.order-completed.v1");
 
                 rider.UsingKafka((context, k) =>
                 {
@@ -146,7 +151,10 @@ public static class MassTransitExtensions
                     k.TopicEndpoint<ShipmentCreated>(
                         "shipping.shipment-created.v1", "order-service-group", e =>
                         {
+                            e.ConfigureConsumer<ShipmentCreatedConsumer>(context);
                             e.ConfigureSaga<OrderReservationSagaState>(context);
+                            
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
                         });
 
                     k.TopicEndpoint<ShipmentCreationFailed>(
@@ -161,6 +169,13 @@ public static class MassTransitExtensions
                             e.ConfigureConsumer<CancelOrderConsumer>(context);
                             e.ConfigureSaga<OrderReservationSagaState>(context);
 
+                            e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
+                        });
+
+                    k.TopicEndpoint<OrderDelivered>(
+                        "shipping.order-delivered.v1", "order-service-group", e =>
+                        {
+                            e.ConfigureConsumer<OrderDeliveredConsumer>(context);
                             e.UseMessageRetry(r => r.Interval(3, TimeSpan.FromSeconds(5)));
                         });
 

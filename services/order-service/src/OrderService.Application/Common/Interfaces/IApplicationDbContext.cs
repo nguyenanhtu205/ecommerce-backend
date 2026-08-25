@@ -2,7 +2,7 @@
 
 namespace OrderService.Application.Common.Interfaces;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IOutboxDbContext
 {
     DbSet<Order> Orders { get; }
 
@@ -15,8 +15,6 @@ public interface IApplicationDbContext
     DbSet<OrderStatusHistory> OrderStatusHistories { get; }
 
     DbSet<OrderVoucher> OrderVouchers { get; }
-    
-    DbSet<CheckoutSagaState> CheckoutSagaStates { get; }
 
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+    DbSet<CheckoutSagaState> CheckoutSagaStates { get; }
 }

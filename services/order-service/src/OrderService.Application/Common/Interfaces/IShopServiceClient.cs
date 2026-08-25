@@ -5,4 +5,8 @@ public interface IShopServiceClient
     Task<ShopPickupAddressResult> GetPickupAddressAsync(Guid shopId, CancellationToken cancellationToken);
 }
 
-public record ShopPickupAddressResult(bool IsValid, AddressSnapshot? PickupAddressSnapshot, string? FailureReason);
+public record ShopPickupAddressResult(
+    bool IsValid,
+    string ShopName,
+    AddressSnapshot? PickupAddressSnapshot,
+    string? FailureReason);

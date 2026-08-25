@@ -1,7 +1,9 @@
 ﻿namespace ShippingService.Domain.Entities;
 
-public class Carrier : BaseEntity
+public class Carrier
 {
+    public required Guid Id { get; init; }
+
     public required string Code { get; init; }
 
     public required string Name { get; init; }

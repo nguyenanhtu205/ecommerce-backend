@@ -29,6 +29,7 @@ func (uc *CartUseCase) AddItem(ctx context.Context, userId string, req AddItemRe
 		IsSelected:    req.IsSelected,
 		PriceSnapshot: req.PriceSnapshot,
 		AddedAt:       time.Now().UTC().Format(time.RFC3339),
+		ShippingInfo:  req.ShippingInfo,
 	}
 	return uc.repo.AddOrIncrementItem(ctx, userId, req.CombinationId, item)
 }
@@ -73,24 +74,27 @@ func (uc *CartUseCase) GetSelectedSummary(ctx context.Context, userId string) ([
 		return nil, err
 	}
 	grouped := make(map[string][]CheckoutItem)
+	shopNames := make(map[string]string)
 	for combinationId, it := range items {
 		if !it.IsSelected {
 			continue
 		}
+		shopNames[it.ShopId] = it.ShopName
 		grouped[it.ShopId] = append(grouped[it.ShopId], CheckoutItem{
-			ShopId:        it.ShopId,
 			CombinationId: combinationId,
 			Quantity:      it.Quantity,
 			ProductId:     it.ProductId,
 			ProductName:   it.ProductName,
+			PriceSnapshot: it.PriceSnapshot,
 			ThumbnailUrl:  it.ThumbnailUrl,
 			Variation:     it.Variation,
+			ShippingInfo:  it.ShippingInfo,
 		})
 	}
 	shopIds := sortedKeysCheckout(grouped)
 	result := make([]ShopCheckoutInfo, 0, len(shopIds))
 	for _, shopId := range shopIds {
-		result = append(result, ShopCheckoutInfo{ShopId: shopId, Items: grouped[shopId]})
+		result = append(result, ShopCheckoutInfo{ShopId: shopId, ShopName: shopNames[shopId], Items: grouped[shopId]})
 	}
 	return result, nil
 }

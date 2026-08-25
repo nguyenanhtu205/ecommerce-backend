@@ -30,6 +30,7 @@ public static class MassTransitExtensions
 
                 rider.AddProducer<StockReserved>("inventory.stock-reserved.v1");
                 rider.AddProducer<StockReservationFailed>("inventory.stock-reservation-failed.v1");
+                rider.AddProducer<StockCommited>("inventory.stock-commited.v1");
 
                 rider.UsingKafka((context, k) =>
                 {

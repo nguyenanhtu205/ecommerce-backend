@@ -8,6 +8,13 @@ public class ReleaseVoucherConsumer(IApplicationDbContext dbContext) : IConsumer
 
     public async Task Consume(ConsumeContext<ReleaseVoucher> context)
     {
+        string eventId = $"{nameof(ReleaseVoucher)}-{string.Join(",", context.Message.OrderIds.OrderBy(id => id))}";
+
+        if (await dbContext.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
+        {
+            return;
+        }
+
         for (int attempt = 0; attempt < MaxConcurrencyRetries; attempt++)
         {
             List<VoucherRedemption> redemptions = await dbContext.VoucherRedemptions
@@ -22,6 +29,19 @@ public class ReleaseVoucherConsumer(IApplicationDbContext dbContext) : IConsumer
                 voucher?.QuantityUsed = Math.Max(0, voucher.QuantityUsed - 1);
 
                 dbContext.VoucherRedemptions.Remove(redemption);
+            }
+
+            bool alreadyProcessed = await dbContext.ProcessedEvents
+                .AnyAsync(e => e.EventId == eventId, context.CancellationToken);
+            if (!alreadyProcessed)
+            {
+                dbContext.ProcessedEvents.Add(new ProcessedEvent
+                {
+                    Id = Guid.CreateVersion7(),
+                    EventId = eventId,
+                    EventType = nameof(ReleaseVoucher),
+                    ProcessedAt = DateTimeOffset.UtcNow
+                });
             }
 
             try

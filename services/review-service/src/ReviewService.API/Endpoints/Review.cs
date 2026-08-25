@@ -42,6 +42,18 @@ public class Review : IEndpointGroup
 
         groupBuilder.MapPatch(ReplyToReview, "{id}/reply")
             .RequireRateLimiting("post");
+
+        groupBuilder.MapGet(GetShopReviewCounts, "shop/counts")
+            .Produces<ReviewCountsDto>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapPost("shop", GetShopReviews)
+            .Produces<List<ShopReviewDto>>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetShopReviewStats, "shop/stats")
+            .Produces<ShopReviewStatsDto>()
+            .RequireRateLimiting("get");
     }
 
     [EndpointSummary("Create review")]
@@ -124,6 +136,28 @@ public class Review : IEndpointGroup
         ISender sender, CancellationToken cancellationToken)
     {
         List<ReviewableOrderItemDto> result = await sender.Send(new GetPendingReviewsQuery(), cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get shop review counts")]
+    public static async Task<IResult> GetShopReviewCounts(ISender sender, CancellationToken cancellationToken)
+    {
+        ReviewCountsDto result = await sender.Send(new GetShopReviewCountsQuery(), cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get shop reviews")]
+    public static async Task<IResult> GetShopReviews(GetShopReviewsQuery query, ISender sender,
+        CancellationToken cancellationToken)
+    {
+        List<ShopReviewDto> result = await sender.Send(query, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get shop review stats")]
+    public static async Task<IResult> GetShopReviewStats(ISender sender, CancellationToken cancellationToken)
+    {
+        ShopReviewStatsDto result = await sender.Send(new GetShopReviewStatsQuery(), cancellationToken);
         return Results.Ok(result);
     }
 }

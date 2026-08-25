@@ -12,3 +12,8 @@ public record PickupAddressSnapshotUpdated(
     decimal? Longitude,
     string AddressType
 );
+
+public record AvatarMediaAttached(
+    string UserId,
+    List<MediaAttachmentItem> MediaAttachments,
+    DateTimeOffset OccurredAt);

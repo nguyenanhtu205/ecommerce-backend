@@ -1,6 +1,6 @@
 ﻿namespace PaymentService.Application.Common.Interfaces;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IOutboxDbContext
 {
     DbSet<Payment> Payments { get; }
 
@@ -13,6 +13,4 @@ public interface IApplicationDbContext
     DbSet<ShopWallet> ShopWallets { get; }
 
     DbSet<ShopWalletTransaction> ShopWalletTransactions { get; }
-
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

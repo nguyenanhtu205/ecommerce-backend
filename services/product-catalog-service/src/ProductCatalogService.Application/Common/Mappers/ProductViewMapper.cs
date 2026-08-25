@@ -2,7 +2,7 @@
 
 public static class ProductViewMapper
 {
-    public static ProductViewDto ToDto(ProductListingView view)
+    public static ProductViewDto ToDto(ProductListingView view, Product product)
     {
         return new ProductViewDto
         {
@@ -59,7 +59,8 @@ public static class ProductViewMapper
             SoldCount = view.SoldCount,
             SyncedAt = view.SyncedAt,
             IsPreOrder = view.IsPreOrder,
-            PreOrderDays = view.PreOrderDays
+            PreOrderDays = view.PreOrderDays,
+            ShippingInfo = product.ShippingInfo
         };
     }
 }

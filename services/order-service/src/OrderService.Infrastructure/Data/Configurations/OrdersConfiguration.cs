@@ -20,6 +20,10 @@ public class OrdersConfiguration : IEntityTypeConfiguration<Order>
             .HasColumnName("shop_id")
             .IsRequired();
 
+        builder.Property(x => x.ShopName)
+            .HasColumnName("shop_name")
+            .IsRequired();
+
         builder.Property(x => x.CheckoutBatchId)
             .HasColumnName("checkout_batch_id")
             .IsRequired();

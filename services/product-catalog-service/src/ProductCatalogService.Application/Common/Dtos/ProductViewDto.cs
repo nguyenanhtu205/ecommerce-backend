@@ -53,10 +53,12 @@ public class ProductViewDto
     public long SoldCount { get; set; }
 
     public DateTimeOffset SyncedAt { get; set; }
-    
+
     public required bool IsPreOrder { get; set; }
-    
-    public int? PreOrderDays { get; set; } 
+
+    public int? PreOrderDays { get; set; }
+
+    public required ShippingInfo ShippingInfo { get; set; }
 }
 
 public class ListingSpecificationDto

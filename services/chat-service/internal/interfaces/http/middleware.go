@@ -27,6 +27,7 @@ func CurrentUserMiddleware(next echo.HandlerFunc) echo.HandlerFunc {
 
 		c.Set("userId", userID)
 		c.Set("role", string(role))
+		c.Set("shopId", c.Request().Header.Get("X-Shop-Id"))
 
 		return next(c)
 	}

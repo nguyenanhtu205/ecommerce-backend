@@ -10,13 +10,13 @@ public class EscrowHold : BaseEntity
 
     public required int Amount { get; init; }
 
-    public required EscrowStatus Status { get; init; }
+    public required EscrowStatus Status { get; set; }
 
     public required DateTimeOffset HeldAt { get; init; }
 
     public required DateTimeOffset ReleaseDueAt { get; init; }
 
-    public DateTimeOffset? ReleasedAt { get; init; }
+    public DateTimeOffset? ReleasedAt { get; set; }
 
     public Payment? Payment { get; init; }
 

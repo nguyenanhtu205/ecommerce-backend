@@ -13,6 +13,11 @@ type AttachmentFilter struct {
 	Role         string
 }
 
+type OwnerRolePair struct {
+	OwnerID string
+	Role    string
+}
+
 type MediaRepository interface {
 	CreateAsset(ctx context.Context, asset *domain.MediaAsset) error
 
@@ -29,6 +34,8 @@ type MediaRepository interface {
 	GetAttachmentByID(ctx context.Context, id string) (*domain.MediaAttachment, error)
 
 	ListAttachments(ctx context.Context, filter AttachmentFilter) ([]*domain.MediaAttachment, error)
+
+	GetAttachmentsByOwnerRoles(ctx context.Context, ownerService, ownerType string, pairs []OwnerRolePair) ([]*domain.MediaAttachment, error)
 
 	DeleteAttachment(ctx context.Context, id string) error
 }

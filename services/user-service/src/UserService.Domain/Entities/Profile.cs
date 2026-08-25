@@ -8,9 +8,9 @@ public class Profile
 
     public string? AvatarUrl { get; set; }
 
-    public Gender? Gender { get; init; }
+    public Gender? Gender { get; set; }
 
-    public DateOnly? DateOfBirth { get; init; }
+    public DateOnly? DateOfBirth { get; set; }
 
     public required DateTimeOffset CreatedAt { get; init; }
 

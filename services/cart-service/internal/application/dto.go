@@ -1,16 +1,19 @@
 package application
 
+import "cart-service/internal/domain"
+
 type AddItemRequest struct {
-	CombinationId string  `json:"combinationId"`
-	ProductId     string  `json:"productId"`
-	ShopId        string  `json:"shopId"`
-	ShopName      string  `json:"shopName"`
-	ProductName   string  `json:"productName"`
-	ThumbnailUrl  string  `json:"thumbnailUrl"`
-	Variation     *string `json:"variation"`
-	Quantity      int     `json:"quantity"`
-	PriceSnapshot int     `json:"priceSnapshot"`
-	IsSelected    bool    `json:"isSelected"`
+	CombinationId string              `json:"combinationId"`
+	ProductId     string              `json:"productId"`
+	ShopId        string              `json:"shopId"`
+	ShopName      string              `json:"shopName"`
+	ProductName   string              `json:"productName"`
+	ThumbnailUrl  string              `json:"thumbnailUrl"`
+	Variation     *string             `json:"variation"`
+	Quantity      int                 `json:"quantity"`
+	IsSelected    bool                `json:"isSelected"`
+	PriceSnapshot int                 `json:"priceSnapshot"`
+	ShippingInfo  domain.ShippingInfo `json:"shippingInfo"`
 }
 
 type UpdateItemRequest struct {
@@ -42,16 +45,18 @@ type ShopCartGroup struct {
 }
 
 type CheckoutItem struct {
-	ShopId        string  `json:"shopId"`
-	CombinationId string  `json:"combinationId"`
-	Quantity      int     `json:"quantity"`
-	ProductId     string  `json:"productId"`
-	ProductName   string  `json:"productName"`
-	ThumbnailUrl  string  `json:"thumbnailUrl"`
-	Variation     *string `json:"variation"`
+	CombinationId string              `json:"combinationId"`
+	Quantity      int                 `json:"quantity"`
+	ProductId     string              `json:"productId"`
+	ProductName   string              `json:"productName"`
+	PriceSnapshot int                 `json:"priceSnapshot"`
+	ThumbnailUrl  string              `json:"thumbnailUrl"`
+	Variation     *string             `json:"variation"`
+	ShippingInfo  domain.ShippingInfo `json:"shippingInfo"`
 }
 
 type ShopCheckoutInfo struct {
-	ShopId string         `json:"shopId"`
-	Items  []CheckoutItem `json:"items"`
+	ShopName string         `json:"shopName"`
+	ShopId   string         `json:"shopId"`
+	Items    []CheckoutItem `json:"items"`
 }

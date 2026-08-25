@@ -2,7 +2,8 @@
 
 namespace InventoryService.Application.Consumers;
 
-public class CommitStockCommandConsumer(IApplicationDbContext dbContext) : IConsumer<CommitStockCommand>
+public class CommitStockCommandConsumer(IApplicationDbContext dbContext, IOutboxWriter outboxWriter)
+    : IConsumer<CommitStockCommand>
 {
     private const int MaxConcurrencyRetries = 3;
 
@@ -14,12 +15,14 @@ public class CommitStockCommandConsumer(IApplicationDbContext dbContext) : ICons
         {
             return;
         }
-        
+
         for (int attempt = 0; attempt < MaxConcurrencyRetries; attempt++)
         {
             List<StockReservation> reservations = await dbContext.StockReservations
                 .Where(r => r.OrderId == context.Message.OrderId && r.Status == StockReservationStatus.Reserved)
                 .ToListAsync(context.CancellationToken);
+
+            List<StockCommitedItem> committedItems = new();
 
             foreach (StockReservation reservation in reservations)
             {
@@ -32,14 +35,27 @@ public class CommitStockCommandConsumer(IApplicationDbContext dbContext) : ICons
                     combination.ReservedStock = Math.Max(0, combination.ReservedStock - reservation.Quantity);
                     combination.Version += 1;
                     combination.UpdatedAt = DateTimeOffset.UtcNow;
+
+                    committedItems.Add(new StockCommitedItem(
+                        combination.ProductId,
+                        combination.Id,
+                        reservation.Quantity));
                 }
 
                 reservation.Status = StockReservationStatus.Commited;
             }
 
+            if (committedItems.Count > 0)
+            {
+                outboxWriter.Enqueue(new StockCommited(committedItems));
+            }
+
             dbContext.ProcessedEvents.Add(new ProcessedEvent
             {
-                EventId = eventId, EventType = nameof(CommitStockCommand), ProcessedAt = DateTimeOffset.UtcNow
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CommitStockCommand),
+                ProcessedAt = DateTimeOffset.UtcNow
             });
 
             try

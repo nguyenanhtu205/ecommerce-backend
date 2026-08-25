@@ -1,5 +1,6 @@
 ﻿using Common.API;
 using Common.API.RateLimiting;
+using ReviewService.API.Infrastructure;
 using ReviewService.API.Services;
 
 namespace ReviewService.API;
@@ -15,6 +16,7 @@ public static class DependencyInjection
 
         builder.Services.AddAuthentication();
 
+        builder.Services.AddReviewServiceMassTransit(builder.Configuration);
 
         builder.Services.AddCommonRateLimiter(
             new RateLimitPolicy(30, 10, 5),

@@ -8,7 +8,7 @@ public record ConfirmVnPayPaymentCommand(
 public class ConfirmVnPayPaymentCommandHandler(
     IVnPaySignatureVerifier signatureVerifier,
     IApplicationDbContext dbContext,
-    ITopicProducer<VnPayPaymentConfirmed> vnPayPaymentConfirmedProducer)
+    IOutboxWriter outboxWriter)
     : IRequestHandler<ConfirmVnPayPaymentCommand, ConfirmVnPayPaymentResult>
 {
     public async Task<ConfirmVnPayPaymentResult> Handle(
@@ -58,14 +58,48 @@ public class ConfirmVnPayPaymentCommandHandler(
         payment.ProviderTransactionId = providerTransactionId;
         payment.UpdatedAt = DateTimeOffset.UtcNow;
 
+        if (isSuccess)
+        {
+            await CreateEscrowHoldsAsync(checkoutBatchId, cancellationToken);
+        }
+
+        outboxWriter.Enqueue(new VnPayPaymentConfirmed(
+            checkoutBatchId, isSuccess, providerTransactionId,
+            isSuccess ? null : $"VNPay response code: {responseCode}"));
+
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        await vnPayPaymentConfirmedProducer.Produce(
-            new VnPayPaymentConfirmed(
-                checkoutBatchId, isSuccess, providerTransactionId,
-                isSuccess ? null : $"VNPay response code: {responseCode}"),
-            cancellationToken);
-
         return new ConfirmVnPayPaymentResult("00", "Confirm Success");
+    }
+
+    private async Task CreateEscrowHoldsAsync(Guid checkoutBatchId, CancellationToken cancellationToken)
+    {
+        List<PaymentOrderLink> links = await dbContext.PaymentOrderLinks
+            .Include(l => l.Payment)
+            .Where(l => l.Payment!.CheckoutBatchId == checkoutBatchId)
+            .ToListAsync(cancellationToken);
+
+        DateTimeOffset now = DateTimeOffset.UtcNow;
+
+        foreach (PaymentOrderLink link in links)
+        {
+            bool alreadyHeld = await dbContext.EscrowHolds
+                .AnyAsync(e => e.OrderId == link.OrderId, cancellationToken);
+            if (alreadyHeld)
+            {
+                continue;
+            }
+
+            dbContext.EscrowHolds.Add(new EscrowHold
+            {
+                OrderId = link.OrderId,
+                PaymentId = link.PaymentId,
+                ShopId = link.ShopId,
+                Amount = link.Amount,
+                Status = EscrowStatus.Held,
+                HeldAt = now,
+                ReleaseDueAt = now.AddDays(7)
+            });
+        }
     }
 }

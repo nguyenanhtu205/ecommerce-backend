@@ -1,0 +1,28 @@
+syntax = "proto3";
+option csharp_namespace = "Common.Contracts.Grpc.User";
+package user;
+
+service UserGrpcService {
+  rpc GetUserShippingAddresses (GetUserShippingAddressesRequest) returns (GetUserShippingAddressesResponse);
+}
+
+message GetUserShippingAddressesRequest {
+  string user_id = 1;
+}
+
+message ShippingAddressItem {
+  string id = 1;
+  string full_name = 2;
+  string phone = 3;
+  string province = 4;
+  string ward = 5;
+  string address_detail = 6;
+  string full_address_text = 7;
+  optional string latitude = 8;
+  optional string longitude = 9;
+  string address_type = 10;
+}
+
+message GetUserShippingAddressesResponse {
+  repeated ShippingAddressItem items = 1;
+}

@@ -6,6 +6,8 @@ public class Order : BaseEntity
 
     public required Guid ShopId { get; init; }
 
+    public required string ShopName { get; init; }
+
     public required Guid CheckoutBatchId { get; init; }
 
     public required OrderStatus Status { get; set; }

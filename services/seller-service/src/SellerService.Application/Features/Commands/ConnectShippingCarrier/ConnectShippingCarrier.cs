@@ -33,12 +33,21 @@ public class ConnectShippingCarrierCommandHandler(IApplicationDbContext context,
             .FirstOrDefaultAsync(
                 c => c.ShopId == request.ShopId && c.CarrierId == request.CarrierId, cancellationToken);
 
+        string carrierCode = request.CarrierId == Guid.Parse("11111111-1111-1111-1111-111111111111")
+            ? "mock"
+            : request.CarrierId == Guid.Parse("22222222-2222-2222-2222-222222222222")
+                ? "ghn"
+                : request.CarrierId == Guid.Parse("33333333-3333-3333-3333-333333333333")
+                    ? "ghtk"
+                    : "unknown";
+
         if (connection == null)
         {
             connection = new ShopShippingCarrierConnection
             {
                 ShopId = request.ShopId,
                 CarrierId = request.CarrierId,
+                CarrierCode = carrierCode,
                 Status = ShopShippingCarrierConnectionStatus.Connected,
                 ConnectedAt = DateTimeOffset.UtcNow
             };

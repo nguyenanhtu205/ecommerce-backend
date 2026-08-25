@@ -6,4 +6,4 @@ public interface IInventoryServiceClient
         CancellationToken cancellationToken);
 }
 
-public record CombinationPriceInfo(Guid CombinationId, Guid ShopId, int Price);
+public record CombinationPriceInfo(Guid CombinationId, Guid ShopId, Guid ProductId, int Price);

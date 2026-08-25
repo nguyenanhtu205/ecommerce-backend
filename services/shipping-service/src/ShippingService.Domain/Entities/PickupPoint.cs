@@ -1,7 +1,9 @@
 ﻿namespace ShippingService.Domain.Entities;
 
-public class PickupPoint : BaseEntity
+public class PickupPoint
 {
+    public required Guid Id { get; init; }
+
     public required Guid CarrierId { get; init; }
 
     public required string Name { get; init; }

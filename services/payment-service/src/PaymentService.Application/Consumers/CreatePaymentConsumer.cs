@@ -3,21 +3,28 @@
 public class CreatePaymentConsumer(
     IApplicationDbContext dbContext,
     IPaymentGatewayClient paymentGatewayClient,
-    ITopicProducer<PaymentRedirectCreated> paymentRedirectCreatedProducer) : IConsumer<CreatePayment>
+    IOutboxWriter outboxWriter) : IConsumer<CreatePayment>
 {
     public async Task Consume(ConsumeContext<CreatePayment> context)
     {
-        if (string.Equals(context.Message.Method, "Cod", StringComparison.OrdinalIgnoreCase))
+        string eventId = $"{nameof(CreatePayment)}-{context.Message.CheckoutBatchId}";
+
+        if (await dbContext.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
         {
-            await HandleCodAsync(context);
+            return;
+        }
+
+        if (string.Equals(context.Message.Method, "cod", StringComparison.OrdinalIgnoreCase))
+        {
+            await HandleCodAsync(context, eventId);
         }
         else
         {
-            await HandleVnPayAsync(context);
+            await HandleVnPayAsync(context, eventId);
         }
     }
 
-    private async Task HandleCodAsync(ConsumeContext<CreatePayment> context)
+    private async Task HandleCodAsync(ConsumeContext<CreatePayment> context, string eventId)
     {
         foreach (OrderPaymentShare share in context.Message.OrderShares)
         {
@@ -45,14 +52,22 @@ public class CreatePaymentConsumer(
 
             dbContext.PaymentOrderLinks.Add(new PaymentOrderLink
             {
-                PaymentId = payment.Id, OrderId = share.OrderId, Amount = share.Amount
+                PaymentId = payment.Id, OrderId = share.OrderId, ShopId = share.ShopId, Amount = share.Amount
             });
         }
+
+        dbContext.ProcessedEvents.Add(new ProcessedEvent
+        {
+            Id = Guid.CreateVersion7(),
+            EventId = eventId,
+            EventType = nameof(CreatePayment),
+            ProcessedAt = DateTimeOffset.UtcNow
+        });
 
         await dbContext.SaveChangesAsync(context.CancellationToken);
     }
 
-    private async Task HandleVnPayAsync(ConsumeContext<CreatePayment> context)
+    private async Task HandleVnPayAsync(ConsumeContext<CreatePayment> context, string eventId)
     {
         string idempotencyKey = context.Message.CheckoutBatchId.ToString();
 
@@ -63,11 +78,19 @@ public class CreatePaymentConsumer(
         {
             if (!string.IsNullOrEmpty(existing.RedirectUrl))
             {
-                await paymentRedirectCreatedProducer.Produce(
-                    new PaymentRedirectCreated(context.Message.CheckoutBatchId, existing.RedirectUrl),
-                    context.CancellationToken);
+                outboxWriter.Enqueue(
+                    new PaymentRedirectCreated(context.Message.CheckoutBatchId, existing.RedirectUrl));
             }
 
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CreatePayment),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
+
+            await dbContext.SaveChangesAsync(context.CancellationToken);
             return;
         }
 
@@ -92,12 +115,20 @@ public class CreatePaymentConsumer(
         {
             dbContext.PaymentOrderLinks.Add(new PaymentOrderLink
             {
-                PaymentId = payment.Id, OrderId = share.OrderId, Amount = share.Amount
+                PaymentId = payment.Id, OrderId = share.OrderId, ShopId = share.ShopId, Amount = share.Amount
             });
         }
 
+        outboxWriter.Enqueue(new PaymentRedirectCreated(context.Message.CheckoutBatchId, redirectUrl));
+
+        dbContext.ProcessedEvents.Add(new ProcessedEvent
+        {
+            Id = Guid.CreateVersion7(),
+            EventId = eventId,
+            EventType = nameof(CreatePayment),
+            ProcessedAt = DateTimeOffset.UtcNow
+        });
+
         await dbContext.SaveChangesAsync(context.CancellationToken);
-        await paymentRedirectCreatedProducer.Produce(
-            new PaymentRedirectCreated(context.Message.CheckoutBatchId, redirectUrl), context.CancellationToken);
     }
 }

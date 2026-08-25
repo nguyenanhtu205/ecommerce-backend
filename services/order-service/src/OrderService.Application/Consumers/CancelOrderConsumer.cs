@@ -4,6 +4,14 @@ public class CancelOrderConsumer(IApplicationDbContext db) : IConsumer<CancelOrd
 {
     public async Task Consume(ConsumeContext<CancelOrder> context)
     {
+        string eventId = context.MessageId?.ToString()
+                         ?? throw new InvalidOperationException("CancelOrder message thiếu MessageId.");
+
+        if (await db.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
+        {
+            return;
+        }
+
         Order? order = await db.Orders
             .FirstOrDefaultAsync(o => o.Id == context.Message.OrderId, context.CancellationToken);
 
@@ -14,6 +22,14 @@ public class CancelOrderConsumer(IApplicationDbContext db) : IConsumer<CancelOrd
 
         if (order.Status == OrderStatus.Cancelled)
         {
+            db.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CancelOrder),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
+            await db.SaveChangesAsync(context.CancellationToken);
             return;
         }
 
@@ -26,6 +42,14 @@ public class CancelOrderConsumer(IApplicationDbContext db) : IConsumer<CancelOrd
             Status = OrderStatus.Cancelled,
             ChangedAt = DateTimeOffset.UtcNow,
             ChangedBy = context.Message.InitiatedBy
+        });
+
+        db.ProcessedEvents.Add(new ProcessedEvent
+        {
+            Id = Guid.CreateVersion7(),
+            EventId = eventId,
+            EventType = nameof(CancelOrder),
+            ProcessedAt = DateTimeOffset.UtcNow
         });
 
         await db.SaveChangesAsync(context.CancellationToken);

@@ -234,6 +234,9 @@ const docTemplate = `{
                 "quantity": {
                     "type": "integer"
                 },
+                "shippingInfo": {
+                    "$ref": "#/definitions/domain.ShippingInfo"
+                },
                 "shopId": {
                     "type": "string"
                 },
@@ -289,6 +292,9 @@ const docTemplate = `{
                 "combinationId": {
                     "type": "string"
                 },
+                "priceSnapshot": {
+                    "type": "integer"
+                },
                 "productId": {
                     "type": "string"
                 },
@@ -298,8 +304,8 @@ const docTemplate = `{
                 "quantity": {
                     "type": "integer"
                 },
-                "shopId": {
-                    "type": "string"
+                "shippingInfo": {
+                    "$ref": "#/definitions/domain.ShippingInfo"
                 },
                 "thumbnailUrl": {
                     "type": "string"
@@ -348,6 +354,9 @@ const docTemplate = `{
                 },
                 "shopId": {
                     "type": "string"
+                },
+                "shopName": {
+                    "type": "string"
                 }
             }
         },
@@ -359,6 +368,31 @@ const docTemplate = `{
                 },
                 "quantity": {
                     "type": "integer"
+                }
+            }
+        },
+        "domain.Dimensions": {
+            "type": "object",
+            "properties": {
+                "height": {
+                    "type": "number"
+                },
+                "length": {
+                    "type": "number"
+                },
+                "width": {
+                    "type": "number"
+                }
+            }
+        },
+        "domain.ShippingInfo": {
+            "type": "object",
+            "properties": {
+                "dimensions": {
+                    "$ref": "#/definitions/domain.Dimensions"
+                },
+                "weightGrams": {
+                    "type": "number"
                 }
             }
         }

@@ -3,4 +3,5 @@
     <Project Path="Common.Application/Common.Application.csproj"/>
     <Project Path="Common.Contracts/Common.Contracts.csproj"/>
     <Project Path="Common.Domain/Common.Domain.csproj"/>
+    <Project Path="Common.Outbox/Common.Outbox.csproj"/>
 </Solution>

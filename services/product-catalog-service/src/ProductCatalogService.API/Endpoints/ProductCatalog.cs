@@ -4,12 +4,16 @@ using ProductCatalogService.Application.Features.Commands.CreateCategory;
 using ProductCatalogService.Application.Features.Commands.CreateCategoryAttributes;
 using ProductCatalogService.Application.Features.Commands.CreateProduct;
 using ProductCatalogService.Application.Features.Commands.UpdateProduct;
+using ProductCatalogService.Application.Features.Queries.GetAllCategories;
 using ProductCatalogService.Application.Features.Queries.GetCategories;
+using ProductCatalogService.Application.Features.Queries.GetCategoriesByShop;
 using ProductCatalogService.Application.Features.Queries.GetCategoryAttributes;
-using ProductCatalogService.Application.Features.Queries.GetProductById;
-using ProductCatalogService.Application.Features.Queries.GetProductListings;
-using ProductCatalogService.Application.Features.Queries.GetProductsByShop;
+using ProductCatalogService.Application.Features.Queries.GetCategorySidebar;
+using ProductCatalogService.Application.Features.Queries.GetProductsForSeller;
 using ProductCatalogService.Application.Features.Queries.GetProductViewById;
+using ProductCatalogService.Application.Features.Queries.GetProductViewsByCondition;
+using ProductCatalogService.Application.Features.Queries.GetProductViewsByShop;
+using ProductCatalogService.Application.Features.Queries.GetSimilarProducts;
 
 namespace ProductCatalogService.API.Endpoints;
 
@@ -34,16 +38,28 @@ public class ProductCatalog : IEndpointGroup
         groupBuilder.MapPost(CreateCategoryAttribute, "category-attribute")
             .RequireRateLimiting("post");
 
-        groupBuilder.MapGet(GetProductById, "products/{id}")
-            .Produces<ProductDto>()
+        groupBuilder.MapGet(GetCategorySidebar, "categories/sidebar/{slug}")
+            .Produces<CategorySidebarDto>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetAllCategories, "categories/all")
+            .Produces<List<CategoryDto>>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetCategoriesByShop, "categories/shop/{shopId}")
+            .Produces<List<CategoryByShop>>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetProductViewById, "products/view/{id}")
             .Produces<ProductViewDto>()
             .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetProductsByShop, "products/shop/{shopId}")
-            .Produces<PagedResult<ProductDto>>()
+        groupBuilder.MapGet(GetProductViewsByShop, "products/shop/{shopId}")
+            .Produces<PagedResult<ProductViewsDto>>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetProductViewsByCondition, "products/condition")
+            .Produces<PagedResult<ProductViewsDto>>()
             .RequireRateLimiting("get");
 
         groupBuilder.MapGet(GetCategories, "categories")
@@ -54,13 +70,16 @@ public class ProductCatalog : IEndpointGroup
             .Produces<List<CategoryAttributeDto>>()
             .RequireRateLimiting("get");
 
-        groupBuilder.MapGet(GetProductListings, "listings")
-            .Produces<PagedResult<ProductListingDto>>()
+        groupBuilder.MapGet(GetProductsForSeller, "products/shop/me")
+            .Produces<List<GetProductsForSellerResponse>>()
+            .RequireRateLimiting("get");
+
+        groupBuilder.MapGet(GetSimilarProducts, "products/{productId}/similar")
+            .Produces<List<ProductViewsDto>>()
             .RequireRateLimiting("get");
     }
 
     [EndpointSummary("Create product")]
-    [EndpointDescription("Seller creates a new product. Status defaults to Draft.")]
     public static async Task<IResult> CreateProduct(
         CreateProductCommand command, ISender sender, CancellationToken cancellationToken)
     {
@@ -84,6 +103,29 @@ public class ProductCatalog : IEndpointGroup
         return Results.NoContent();
     }
 
+    [EndpointSummary("Get category sidebar")]
+    public static async Task<IResult> GetCategorySidebar(
+        [AsParameters] GetCategorySidebarQuery query, ISender sender, CancellationToken cancellationToken)
+    {
+        CategorySidebarDto result = await sender.Send(query, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get categories by shop")]
+    public static async Task<IResult> GetCategoriesByShop([AsParameters] GetCategoriesByShopQuery query,
+        ISender sender, CancellationToken cancellationToken)
+    {
+        List<CategoryByShop> result = await sender.Send(query, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get all categories")]
+    public static async Task<IResult> GetAllCategories(ISender sender, CancellationToken cancellationToken)
+    {
+        List<CategoryDto> result = await sender.Send(new GetAllCategoriesQuery(), cancellationToken);
+        return Results.Ok(result);
+    }
+
     [EndpointSummary("Update product")]
     public static async Task<IResult> UpdateProduct(
         string id, UpdateProductCommand command, ISender sender, CancellationToken cancellationToken)
@@ -97,14 +139,6 @@ public class ProductCatalog : IEndpointGroup
         return Results.Ok(result);
     }
 
-    [EndpointSummary("Get product by id")]
-    public static async Task<IResult> GetProductById(
-        [AsParameters] GetProductByIdQuery query, ISender sender, CancellationToken cancellationToken)
-    {
-        ProductDto result = await sender.Send(query, cancellationToken);
-        return Results.Ok(result);
-    }
-
     [EndpointSummary("Get product view by id")]
     public static async Task<IResult> GetProductViewById(
         [AsParameters] GetProductViewByIdQuery query, ISender sender, CancellationToken cancellationToken)
@@ -113,17 +147,23 @@ public class ProductCatalog : IEndpointGroup
         return Results.Ok(result);
     }
 
-    [EndpointSummary("Get products by shop")]
-    [EndpointDescription("Used by seller dashboard to list products of a shop.")]
-    public static async Task<IResult> GetProductsByShop(
-        [AsParameters] GetProductsByShopQuery query, ISender sender, CancellationToken cancellationToken)
+    [EndpointSummary("Get product views by shop")]
+    public static async Task<IResult> GetProductViewsByShop(
+        [AsParameters] GetProductViewsByShopQuery query, ISender sender, CancellationToken cancellationToken)
     {
-        PagedResult<ProductDto> result = await sender.Send(query, cancellationToken);
+        PagedResult<ProductViewsDto> result = await sender.Send(query, cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get product views by condition")]
+    public static async Task<IResult> GetProductViewsByCondition(
+        [AsParameters] GetProductViewsByConditionQuery query, ISender sender, CancellationToken cancellationToken)
+    {
+        PagedResult<ProductViewsDto> result = await sender.Send(query, cancellationToken);
         return Results.Ok(result);
     }
 
     [EndpointSummary("Get categories")]
-    [EndpointDescription("Returns root categories when parentId is omitted, or child categories otherwise.")]
     public static async Task<IResult> GetCategories(
         [AsParameters] GetCategoriesQuery query, ISender sender, CancellationToken cancellationToken)
     {
@@ -139,12 +179,19 @@ public class ProductCatalog : IEndpointGroup
         return Results.Ok(result);
     }
 
-    [EndpointSummary("Get product listings")]
-    [EndpointDescription("Buyer-facing search/browse endpoint, backed by product_listing_view.")]
-    public static async Task<IResult> GetProductListings(
-        [AsParameters] GetProductListingsQuery query, ISender sender, CancellationToken cancellationToken)
+    [EndpointSummary("Get products for seller")]
+    public static async Task<IResult> GetProductsForSeller(ISender sender, CancellationToken cancellationToken)
     {
-        PagedResult<ProductListingDto> result = await sender.Send(query, cancellationToken);
+        List<GetProductsForSellerResponse> result =
+            await sender.Send(new GetProductsForSellerQuery(), cancellationToken);
+        return Results.Ok(result);
+    }
+
+    [EndpointSummary("Get similar products")]
+    public static async Task<IResult> GetSimilarProducts(string productId, ISender sender,
+        CancellationToken cancellationToken)
+    {
+        List<ProductViewsDto> result = await sender.Send(new GetSimilarProductsQuery(productId), cancellationToken);
         return Results.Ok(result);
     }
 }

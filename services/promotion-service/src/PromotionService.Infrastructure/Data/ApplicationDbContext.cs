@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
-using MassTransit;
 
 namespace PromotionService.Infrastructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    public DbSet<ProcessedEvent> ProcessedEvents => Set<ProcessedEvent>();
+
     public DbSet<Voucher> Vouchers => Set<Voucher>();
 
     public DbSet<VoucherRedemption> VoucherRedemptions => Set<VoucherRedemption>();

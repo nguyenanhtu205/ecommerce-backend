@@ -4,16 +4,32 @@ namespace ShippingService.Application.Consumers;
 
 public class CreateShipmentConsumer(
     IApplicationDbContext dbContext,
-    TimeProvider timeProvider,
-    ITopicProducer<ShipmentCreated> shipmentCreatedProducer,
-    ITopicProducer<ShipmentCreationFailed> shipmentCreationFailedProducer) : IConsumer<CreateShipment>
+    ICarrierAdapterFactory adapterFactory,
+    IOutboxWriter outboxWriter) : IConsumer<CreateShipment>
 {
+    private const int DefaultWeightGram = 500;
+
     public async Task Consume(ConsumeContext<CreateShipment> context)
     {
+        string eventId = $"{nameof(CreateShipment)}-{context.Message.OrderId}";
+
+        if (await dbContext.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
+        {
+            return;
+        }
+
         bool exists = await dbContext.Shipments
             .AnyAsync(s => s.OrderId == context.Message.OrderId, context.CancellationToken);
         if (exists)
         {
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CreateShipment),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
+            await dbContext.SaveChangesAsync(context.CancellationToken);
             return;
         }
 
@@ -22,10 +38,41 @@ public class CreateShipmentConsumer(
 
         if (carrier is null)
         {
-            await shipmentCreationFailedProducer.Produce(
-                new ShipmentCreationFailed(
-                    context.Message.OrderId, $"Carrier {context.Message.CarrierId} does not exist."),
-                context.CancellationToken);
+            outboxWriter.Enqueue(new ShipmentCreationFailed(context.Message.OrderId,
+                $"Carrier {context.Message.CarrierId} does not exist."));
+
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CreateShipment),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
+            await dbContext.SaveChangesAsync(context.CancellationToken);
+            return;
+        }
+
+        AddressSnapshot pickup = AddressMapper.ToDomain(context.Message.PickupAddressSnapshot);
+        AddressSnapshot delivery = AddressMapper.ToDomain(context.Message.DeliveryAddressSnapshot);
+        ICarrierShippingAdapter adapter = adapterFactory.GetAdapter(carrier.Code);
+
+        CarrierCreateOrderResult orderResult = await adapter.CreateOrderAsync(
+            new CarrierCreateOrderRequest(context.Message.OrderId, pickup, delivery, DefaultWeightGram, 0, null),
+            context.CancellationToken);
+
+        if (!orderResult.Success)
+        {
+            outboxWriter.Enqueue(new ShipmentCreationFailed(context.Message.OrderId,
+                orderResult.FailureReason ?? "Carrier create order failed"));
+
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(CreateShipment),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
+            await dbContext.SaveChangesAsync(context.CancellationToken);
             return;
         }
 
@@ -33,40 +80,26 @@ public class CreateShipmentConsumer(
         {
             OrderId = context.Message.OrderId,
             CarrierId = context.Message.CarrierId,
+            TrackingCode = orderResult.TrackingCode,
             Status = ShipmentStatus.Pending,
-            PickupAddressSnapshot =
-                new AddressSnapshot
-                {
-                    AddressDetail = context.Message.PickupAddressSnapshot.AddressDetail,
-                    AddressType = context.Message.PickupAddressSnapshot.AddressType,
-                    FullAddressText = context.Message.PickupAddressSnapshot.FullAddressText,
-                    FullName = context.Message.PickupAddressSnapshot.FullName,
-                    Latitude = context.Message.PickupAddressSnapshot.Latitude,
-                    Longitude = context.Message.PickupAddressSnapshot.Longitude,
-                    Phone = context.Message.PickupAddressSnapshot.Phone,
-                    Province = context.Message.PickupAddressSnapshot.Province,
-                    UserId = context.Message.PickupAddressSnapshot.UserId,
-                    Ward = context.Message.PickupAddressSnapshot.Ward
-                },
-            DeliveryAddressSnapshot = new AddressSnapshot
-            {
-                AddressDetail = context.Message.DeliveryAddressSnapshot.AddressDetail,
-                AddressType = context.Message.DeliveryAddressSnapshot.AddressType,
-                FullAddressText = context.Message.DeliveryAddressSnapshot.FullAddressText,
-                FullName = context.Message.DeliveryAddressSnapshot.FullName,
-                Latitude = context.Message.DeliveryAddressSnapshot.Latitude,
-                Longitude = context.Message.DeliveryAddressSnapshot.Longitude,
-                Phone = context.Message.DeliveryAddressSnapshot.Phone,
-                Province = context.Message.DeliveryAddressSnapshot.Province,
-                UserId = context.Message.DeliveryAddressSnapshot.UserId,
-                Ward = context.Message.DeliveryAddressSnapshot.Ward
-            },
-            CreatedAt = timeProvider.GetUtcNow().UtcDateTime,
-            UpdatedAt = timeProvider.GetUtcNow().UtcDateTime
+            PickupAddressSnapshot = pickup,
+            DeliveryAddressSnapshot = delivery,
+            EstimatedDeliveryStart = orderResult.EstimatedStart,
+            EstimatedDeliveryEnd = orderResult.EstimatedEnd,
+            CreatedAt = DateTimeOffset.UtcNow,
+            UpdatedAt = DateTimeOffset.UtcNow
+        });
+
+        outboxWriter.Enqueue(new ShipmentCreated(context.Message.OrderId));
+
+        dbContext.ProcessedEvents.Add(new ProcessedEvent
+        {
+            Id = Guid.CreateVersion7(),
+            EventId = eventId,
+            EventType = nameof(CreateShipment),
+            ProcessedAt = DateTimeOffset.UtcNow
         });
 
         await dbContext.SaveChangesAsync(context.CancellationToken);
-        await shipmentCreatedProducer.Produce(
-            new ShipmentCreated(context.Message.OrderId), context.CancellationToken);
     }
 }

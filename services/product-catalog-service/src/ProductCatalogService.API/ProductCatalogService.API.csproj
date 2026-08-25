@@ -15,12 +15,17 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.80.0"/>
     <PackageReference Include="MassTransit" Version="8.5.10"/>
     <PackageReference Include="MassTransit.Kafka" Version="8.5.10"/>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.3"/>
     <PackageReference Include="Microsoft.OpenApi" Version="2.7.5"/>
     <PackageReference Include="Scalar.AspNetCore" Version="2.16.15"/>
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.19.2"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Protobuf Include="Protos/product.proto" GrpcServices="Server"/>
   </ItemGroup>
 
 </Project>

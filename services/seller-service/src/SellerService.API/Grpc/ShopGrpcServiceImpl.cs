@@ -3,7 +3,7 @@ using Common.Contracts.Grpc.Shop;
 using Grpc.Core;
 using Microsoft.EntityFrameworkCore;
 using SellerService.Application.Common.Interfaces;
-using AddressSnapshot = SellerService.Domain.Common.AddressSnapshot;
+using SellerService.Domain.Entities;
 
 namespace SellerService.API.Grpc;
 
@@ -14,40 +14,42 @@ public class ShopGrpcServiceImpl(IApplicationDbContext dbContext) : ShopGrpcServ
     {
         Guid shopId = Guid.Parse(request.ShopId);
 
-        AddressSnapshot? pickupAddress = await dbContext.Shops
+        Shop? shop = await dbContext.Shops
+            .AsNoTracking()
             .Where(s => s.Id == shopId)
-            .Select(s => s.PickupAddressSnapshot)
             .FirstOrDefaultAsync(context.CancellationToken);
 
-        if (pickupAddress is null)
+        if (shop is null)
         {
             return new GetPickupAddressResponse
             {
-                IsValid = false, FailureReason = "Shop does not exist or has not configured a pickup address."
+                IsValid = false,
+                ShopName = "Unknown",
+                FailureReason = "Shop does not exist or has not configured a pickup address."
             };
         }
 
-        Common.Contracts.Grpc.Shop.AddressSnapshot snapshot = new()
+        AddressSnapshot snapshot = new()
         {
-            UserId = pickupAddress.UserId.ToString(),
-            FullName = pickupAddress.FullName,
-            Phone = pickupAddress.Phone,
-            Province = pickupAddress.Province,
-            Ward = pickupAddress.Ward,
-            AddressDetail = pickupAddress.AddressDetail,
-            FullAddressText = pickupAddress.FullAddressText,
-            AddressType = pickupAddress.AddressType
+            UserId = shop.PickupAddressSnapshot.UserId.ToString(),
+            FullName = shop.PickupAddressSnapshot.FullName,
+            Phone = shop.PickupAddressSnapshot.Phone,
+            Province = shop.PickupAddressSnapshot.Province,
+            Ward = shop.PickupAddressSnapshot.Ward,
+            AddressDetail = shop.PickupAddressSnapshot.AddressDetail,
+            FullAddressText = shop.PickupAddressSnapshot.FullAddressText,
+            AddressType = shop.PickupAddressSnapshot.AddressType
         };
-        if (pickupAddress.Latitude.HasValue)
+        if (shop.PickupAddressSnapshot.Latitude.HasValue)
         {
-            snapshot.Latitude = pickupAddress.Latitude.Value.ToString(CultureInfo.InvariantCulture);
+            snapshot.Latitude = shop.PickupAddressSnapshot.Latitude.Value.ToString(CultureInfo.InvariantCulture);
         }
 
-        if (pickupAddress.Longitude.HasValue)
+        if (shop.PickupAddressSnapshot.Longitude.HasValue)
         {
-            snapshot.Longitude = pickupAddress.Longitude.Value.ToString(CultureInfo.InvariantCulture);
+            snapshot.Longitude = shop.PickupAddressSnapshot.Longitude.Value.ToString(CultureInfo.InvariantCulture);
         }
 
-        return new GetPickupAddressResponse { IsValid = true, PickupAddressSnapshot = snapshot };
+        return new GetPickupAddressResponse { IsValid = true, PickupAddressSnapshot = snapshot, ShopName = shop.Name };
     }
 }

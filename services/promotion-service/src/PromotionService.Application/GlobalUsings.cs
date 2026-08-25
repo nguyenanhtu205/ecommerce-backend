@@ -1,6 +1,7 @@
 ﻿global using Common.Application.Interfaces;
 global using Common.Domain.Exceptions;
 global using Common.Contracts.Events;
+global using Common.Outbox;
 global using FluentValidation;
 global using MassTransit;
 global using MediatR;

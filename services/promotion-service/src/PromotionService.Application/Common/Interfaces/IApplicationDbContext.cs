@@ -2,7 +2,7 @@
 
 namespace PromotionService.Application.Common.Interfaces;
 
-public interface IApplicationDbContext
+public interface IApplicationDbContext : IOutboxDbContext
 {
     DbSet<Voucher> Vouchers { get; }
 
@@ -15,6 +15,4 @@ public interface IApplicationDbContext
     DbSet<QuantityDiscount> QuantityDiscounts { get; }
 
     ChangeTracker ChangeTracker { get; }
-
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

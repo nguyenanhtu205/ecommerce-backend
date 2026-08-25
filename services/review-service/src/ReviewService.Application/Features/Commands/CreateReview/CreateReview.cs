@@ -120,8 +120,11 @@ public class CreateReview(
                 orderItem.ProductId, aggregate.RatingAverage, aggregate.RatingCount, aggregateUpdatedAt),
             cancellationToken);
 
-        await mediaAttachedProducer.Produce(new ReviewMediaAttached(reviewId, review.BuyerId, request.MediaAttachments,
-            now), cancellationToken);
+        if (request.MediaAttachments.Count > 0)
+        {
+            await mediaAttachedProducer.Produce(new ReviewMediaAttached(reviewId, review.BuyerId,
+                request.MediaAttachments, now), cancellationToken);
+        }
 
         return ReviewMapper.ToDto(review, false);
     }

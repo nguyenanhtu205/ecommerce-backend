@@ -1,15 +1,19 @@
 ﻿namespace PromotionService.Application.Consumers;
 
-public class RedeemVoucherConsumer(
-    IApplicationDbContext dbContext,
-    TimeProvider timeProvider,
-    ITopicProducer<VoucherRedeemed> voucherRedeemedProducer,
-    ITopicProducer<VoucherRedemptionFailed> voucherRedemptionFailedProducer) : IConsumer<RedeemVoucher>
+public class RedeemVoucherConsumer(IApplicationDbContext dbContext, IOutboxWriter outboxWriter)
+    : IConsumer<RedeemVoucher>
 {
     private const int MaxConcurrencyRetries = 3;
 
     public async Task Consume(ConsumeContext<RedeemVoucher> context)
     {
+        string eventId = $"{nameof(RedeemVoucher)}-{context.Message.CheckoutBatchId}";
+
+        if (await dbContext.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
+        {
+            return;
+        }
+
         for (int attempt = 0; attempt < MaxConcurrencyRetries; attempt++)
         {
             string? failureReason = null;
@@ -45,24 +49,42 @@ public class RedeemVoucherConsumer(
                     OrderId = shopVoucher.OrderId,
                     UserId = context.Message.BuyerId,
                     DiscountAmount = shopVoucher.DiscountAmount,
-                    RedeemedAt = timeProvider.GetUtcNow().UtcDateTime
+                    RedeemedAt = DateTimeOffset.UtcNow
                 });
                 voucher.QuantityUsed += 1;
             }
 
             if (failureReason is not null)
             {
-                await voucherRedemptionFailedProducer.Produce(
-                    new VoucherRedemptionFailed(context.Message.CheckoutBatchId, failureReason),
-                    context.CancellationToken);
+                dbContext.ChangeTracker.Clear();
+
+                outboxWriter.Enqueue(new VoucherRedemptionFailed(context.Message.CheckoutBatchId, failureReason));
+
+                dbContext.ProcessedEvents.Add(new ProcessedEvent
+                {
+                    Id = Guid.CreateVersion7(),
+                    EventId = eventId,
+                    EventType = nameof(RedeemVoucher),
+                    ProcessedAt = DateTimeOffset.UtcNow
+                });
+
+                await dbContext.SaveChangesAsync(context.CancellationToken);
                 return;
             }
+
+            outboxWriter.Enqueue(new VoucherRedeemed(context.Message.CheckoutBatchId));
+
+            dbContext.ProcessedEvents.Add(new ProcessedEvent
+            {
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(RedeemVoucher),
+                ProcessedAt = DateTimeOffset.UtcNow
+            });
 
             try
             {
                 await dbContext.SaveChangesAsync(context.CancellationToken);
-                await voucherRedeemedProducer.Produce(
-                    new VoucherRedeemed(context.Message.CheckoutBatchId), context.CancellationToken);
                 return;
             }
             catch (DbUpdateConcurrencyException)

@@ -13,8 +13,12 @@ public class RequestOtpCommandHandler(
 
     public async Task Handle(RequestOtpCommand request, CancellationToken cancellationToken)
     {
-        bool emailExists = await context.Users.AnyAsync(u => u.Email == request.Email, cancellationToken);
-        if (emailExists)
+        bool hasPassword = await context.Users
+            .Where(u => u.Email == request.Email)
+            .Join(context.AuthCredentials, u => u.Id, c => c.UserId, (u, c) => u)
+            .AnyAsync(cancellationToken);
+
+        if (hasPassword)
         {
             throw new ConflictException("Email is already registered.");
         }

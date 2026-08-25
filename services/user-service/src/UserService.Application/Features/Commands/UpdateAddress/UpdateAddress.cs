@@ -1,7 +1,7 @@
 ﻿namespace UserService.Application.Features.Commands.UpdateAddress;
 
 public record UpdateAddressCommand(
-    Guid Id,
+    string Id,
     string? FullName,
     string? Phone,
     string? Province,
@@ -10,9 +10,7 @@ public record UpdateAddressCommand(
     string? FullAddressText,
     decimal? Latitude,
     decimal? Longitude,
-    AddressType? AddressType,
-    bool? IsDefault,
-    bool? IsPickupAddress) : IRequest;
+    AddressType? AddressType) : IRequest;
 
 public class UpdateAddress(
     IApplicationDbContext context,
@@ -28,14 +26,16 @@ public class UpdateAddress(
             throw new UnauthorizedAccessException();
         }
 
-        Address? address = await context.Addresses
-            .FirstOrDefaultAsync(
-                x => x.Id == request.Id && x.UserId == userId,
-                cancellationToken);
+        Address? address = await context.Addresses.FindAsync([Guid.Parse(request.Id)], cancellationToken);
 
         if (address == null)
         {
             throw new NotFoundException("Address not found");
+        }
+
+        if (address.UserId != userId)
+        {
+            throw new ForbiddenAccessException();
         }
 
         address.FullName = request.FullName ?? address.FullName;
@@ -47,25 +47,6 @@ public class UpdateAddress(
         address.Latitude = request.Latitude ?? address.Latitude;
         address.Longitude = request.Longitude ?? address.Longitude;
         address.AddressType = request.AddressType ?? address.AddressType;
-        address.IsPickupAddress = request.IsPickupAddress ?? address.IsPickupAddress;
-        
-        if (request.IsDefault == true)
-        {
-            List<Address> defaultAddresses = await context.Addresses
-                .Where(x => x.UserId == userId && x.Id != address.Id && x.IsDefault)
-                .ToListAsync(cancellationToken);
-
-            foreach (Address item in defaultAddresses)
-            {
-                item.IsDefault = false;
-            }
-
-            address.IsDefault = true;
-        }
-        else if (request.IsDefault.HasValue)
-        {
-            address.IsDefault = request.IsDefault.Value;
-        }
 
         await context.SaveChangesAsync(cancellationToken);
     }

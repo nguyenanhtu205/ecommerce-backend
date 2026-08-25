@@ -10,10 +10,10 @@ public class ProductCreatedConsumer(IApplicationDbContext db) : IConsumer<Produc
 
         string eventId = $"{nameof(ProductCreated)}-{message.ProductId}-{message.CreatedAt:O}";
 
-        db.ProcessedEvents.Add(new ProcessedEvent
+        if (await db.ProcessedEvents.AnyAsync(e => e.EventId == eventId, context.CancellationToken))
         {
-            EventId = eventId, EventType = nameof(ProductCreated), ProcessedAt = DateTimeOffset.UtcNow
-        });
+            return;
+        }
 
         foreach (VariantCombinationInit combination in message.VariantCombinations)
         {
@@ -30,6 +30,14 @@ public class ProductCreatedConsumer(IApplicationDbContext db) : IConsumer<Produc
                 UpdatedAt = DateTimeOffset.UtcNow
             });
         }
+
+        db.ProcessedEvents.Add(new ProcessedEvent
+        {
+            Id = Guid.CreateVersion7(),
+            EventId = eventId,
+            EventType = nameof(ProductCreated),
+            ProcessedAt = DateTimeOffset.UtcNow
+        });
 
         try
         {

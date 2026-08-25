@@ -83,9 +83,9 @@ public class ShippingInfoDto
 {
     public int WeightGrams { get; init; }
 
-    public double Length { get; init; }
+    public int Length { get; init; }
 
-    public double Width { get; init; }
+    public int Width { get; init; }
 
-    public double Height { get; init; }
+    public int Height { get; init; }
 }

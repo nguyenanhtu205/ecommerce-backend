@@ -74,42 +74,35 @@ public class CheckoutSaga : MassTransitStateMachine<CheckoutSagaState>
                 })
                 .IfElse(context => context.Saga.ReservedOrderIds.Count >= context.Saga.OrderIds.Count,
                     allReserved => allReserved
-                        .ThenAsync(async context =>
+                        .Then(context =>
                         {
-                            ITopicProducer<RedeemVoucher> producer = context.GetPayload<IServiceProvider>()
-                                .GetRequiredService<ITopicProducer<RedeemVoucher>>();
-                            await producer.Produce(
-                                new RedeemVoucher(
-                                    context.Saga.CorrelationId,
-                                    context.Saga.BuyerId,
-                                    context.Saga.PlatformVoucherCode,
-                                    context.Saga.ShopVouchers,
-                                    context.Saga.OrderShares),
-                                context.CancellationToken);
+                            IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                                .GetRequiredService<IOutboxWriter>();
+                            outboxWriter.Enqueue(new RedeemVoucher(
+                                context.Saga.CorrelationId,
+                                context.Saga.BuyerId,
+                                context.Saga.PlatformVoucherCode,
+                                context.Saga.ShopVouchers,
+                                context.Saga.OrderShares));
                         })
                         .TransitionTo(AwaitingVoucherRedemption),
                     stillWaiting => stillWaiting),
             When(OrderStockReservationFailedEvent)
                 .Then(context => context.Saga.FailReason = context.Message.Reason)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    IServiceProvider provider = context.GetPayload<IServiceProvider>();
-                    ITopicProducer<ReleaseStockCommand> releaseStockProducer =
-                        provider.GetRequiredService<ITopicProducer<ReleaseStockCommand>>();
-                    ITopicProducer<CancelOrder> cancelOrderProducer =
-                        provider.GetRequiredService<ITopicProducer<CancelOrder>>();
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
 
                     foreach (Guid orderId in context.Saga.ReservedOrderIds)
                     {
-                        await releaseStockProducer.Produce(
-                            new ReleaseStockCommand(orderId), context.CancellationToken);
+                        outboxWriter.Enqueue(new ReleaseStockCommand(orderId));
                     }
 
                     foreach (Guid orderId in context.Saga.OrderIds)
                     {
-                        await cancelOrderProducer.Produce(
-                            new CancelOrder(orderId, context.Saga.FailReason ?? "stock reservation failed", "system"),
-                            context.CancellationToken);
+                        outboxWriter.Enqueue(new CancelOrder(
+                            orderId, context.Saga.FailReason ?? "stock reservation failed", "system"));
                     }
                 })
                 .TransitionTo(Cancelled)
@@ -118,55 +111,46 @@ public class CheckoutSaga : MassTransitStateMachine<CheckoutSagaState>
         During(AwaitingVoucherRedemption,
             When(VoucherRedeemedEvent)
                 .Then(context => context.Saga.VoucherRedeemed = true)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    ITopicProducer<CreatePayment> producer = context.GetPayload<IServiceProvider>()
-                        .GetRequiredService<ITopicProducer<CreatePayment>>();
-                    await producer.Produce(
-                        new CreatePayment(
-                            context.Saga.CorrelationId,
-                            context.Saga.BuyerId,
-                            context.Saga.TotalAmount,
-                            context.Saga.PaymentMethod,
-                            context.Saga.OrderShares),
-                        context.CancellationToken);
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
+                    outboxWriter.Enqueue(new CreatePayment(
+                        context.Saga.CorrelationId,
+                        context.Saga.BuyerId,
+                        context.Saga.TotalAmount,
+                        context.Saga.PaymentMethod,
+                        context.Saga.OrderShares));
                 })
-                .IfElse(context => context.Saga.PaymentMethod == "Cod",
+                .IfElse(context => context.Saga.PaymentMethod == "cod",
                     cod => cod
-                        .ThenAsync(async context =>
+                        .Then(context =>
                         {
-                            ITopicProducer<OrderPaymentSucceeded> producer = context.GetPayload<IServiceProvider>()
-                                .GetRequiredService<ITopicProducer<OrderPaymentSucceeded>>();
+                            IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                                .GetRequiredService<IOutboxWriter>();
                             foreach (Guid orderId in context.Saga.OrderIds)
                             {
-                                await producer.Produce(
-                                    new OrderPaymentSucceeded(context.Saga.CorrelationId, orderId),
-                                    context.CancellationToken);
+                                outboxWriter.Enqueue(new OrderPaymentSucceeded(context.Saga.CorrelationId, orderId));
                             }
                         })
                         .TransitionTo(Completed),
                     vnpay => vnpay.TransitionTo(AwaitingPayment)),
             When(VoucherRedemptionFailedEvent)
                 .Then(context => context.Saga.FailReason = context.Message.Reason)
-                .ThenAsync(async context =>
+                .Then(context =>
                 {
-                    IServiceProvider provider = context.GetPayload<IServiceProvider>();
-                    ITopicProducer<ReleaseStockCommand> releaseStockProducer =
-                        provider.GetRequiredService<ITopicProducer<ReleaseStockCommand>>();
-                    ITopicProducer<CancelOrder> cancelOrderProducer =
-                        provider.GetRequiredService<ITopicProducer<CancelOrder>>();
+                    IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                        .GetRequiredService<IOutboxWriter>();
 
                     foreach (Guid orderId in context.Saga.OrderIds)
                     {
-                        await releaseStockProducer.Produce(
-                            new ReleaseStockCommand(orderId), context.CancellationToken);
+                        outboxWriter.Enqueue(new ReleaseStockCommand(orderId));
                     }
 
                     foreach (Guid orderId in context.Saga.OrderIds)
                     {
-                        await cancelOrderProducer.Produce(
-                            new CancelOrder(orderId, context.Saga.FailReason ?? "voucher redemption failed", "system"),
-                            context.CancellationToken);
+                        outboxWriter.Enqueue(new CancelOrder(
+                            orderId, context.Saga.FailReason ?? "voucher redemption failed", "system"));
                     }
                 })
                 .TransitionTo(Cancelled)
@@ -178,58 +162,44 @@ public class CheckoutSaga : MassTransitStateMachine<CheckoutSagaState>
             When(VnPayPaymentConfirmedEvent)
                 .IfElse(context => context.Message.Success,
                     success => success
-                        .ThenAsync(async context =>
+                        .Then(context =>
                         {
-                            ITopicProducer<OrderPaymentSucceeded> producer = context.GetPayload<IServiceProvider>()
-                                .GetRequiredService<ITopicProducer<OrderPaymentSucceeded>>();
+                            IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                                .GetRequiredService<IOutboxWriter>();
                             foreach (Guid orderId in context.Saga.OrderIds)
                             {
-                                await producer.Produce(
-                                    new OrderPaymentSucceeded(context.Saga.CorrelationId, orderId),
-                                    context.CancellationToken);
+                                outboxWriter.Enqueue(new OrderPaymentSucceeded(context.Saga.CorrelationId, orderId));
                             }
                         })
                         .TransitionTo(Completed),
                     failed => failed
                         .Then(context => context.Saga.FailReason = context.Message.Reason)
-                        .ThenAsync(async context =>
+                        .Then(context =>
                         {
-                            IServiceProvider provider = context.GetPayload<IServiceProvider>();
-                            ITopicProducer<OrderPaymentFailed> orderPaymentFailedProducer =
-                                provider.GetRequiredService<ITopicProducer<OrderPaymentFailed>>();
-                            ITopicProducer<ReleaseVoucher> releaseVoucherProducer =
-                                provider.GetRequiredService<ITopicProducer<ReleaseVoucher>>();
-                            ITopicProducer<ReleaseStockCommand> releaseStockProducer =
-                                provider.GetRequiredService<ITopicProducer<ReleaseStockCommand>>();
-                            ITopicProducer<CancelOrder> cancelOrderProducer =
-                                provider.GetRequiredService<ITopicProducer<CancelOrder>>();
+                            IOutboxWriter outboxWriter = context.GetPayload<IServiceProvider>()
+                                .GetRequiredService<IOutboxWriter>();
 
                             foreach (Guid orderId in context.Saga.OrderIds)
                             {
-                                await orderPaymentFailedProducer.Produce(
-                                    new OrderPaymentFailed(context.Saga.CorrelationId, orderId,
-                                        context.Saga.FailReason ?? "vnpay failed"),
-                                    context.CancellationToken);
+                                outboxWriter.Enqueue(new OrderPaymentFailed(
+                                    context.Saga.CorrelationId, orderId, context.Saga.FailReason ?? "vnpay failed"));
                             }
 
                             if (context.Saga.VoucherRedeemed)
                             {
-                                await releaseVoucherProducer.Produce(
-                                    new ReleaseVoucher(context.Saga.CorrelationId, context.Saga.OrderIds),
-                                    context.CancellationToken);
+                                outboxWriter.Enqueue(new ReleaseVoucher(context.Saga.CorrelationId,
+                                    context.Saga.OrderIds));
                             }
 
                             foreach (Guid orderId in context.Saga.OrderIds)
                             {
-                                await releaseStockProducer.Produce(
-                                    new ReleaseStockCommand(orderId), context.CancellationToken);
+                                outboxWriter.Enqueue(new ReleaseStockCommand(orderId));
                             }
 
                             foreach (Guid orderId in context.Saga.OrderIds)
                             {
-                                await cancelOrderProducer.Produce(
-                                    new CancelOrder(orderId, context.Saga.FailReason ?? "vnpay failed", "system"),
-                                    context.CancellationToken);
+                                outboxWriter.Enqueue(new CancelOrder(
+                                    orderId, context.Saga.FailReason ?? "vnpay failed", "system"));
                             }
                         })
                         .TransitionTo(Cancelled))

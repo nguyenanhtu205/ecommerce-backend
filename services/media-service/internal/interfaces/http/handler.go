@@ -270,6 +270,53 @@ func (h *Handler) DeleteAttachment(c echo.Context) error {
 	return c.NoContent(http.StatusNoContent)
 }
 
+// GetAssetsByOwnerRoleBulk godoc
+//
+//	@Summary		Get assets by owner+role
+//	@Description	Resolve multiple (ownerId, role) pairs to their currently-attached asset in one call — e.g. fetch the thumbnail for many products on a listing page. Response items preserve the exact order of the requested items, including pairs that resolve to nothing (found=false)
+//	@Tags			Asset
+//	@Accept			json
+//	@Produce		json
+//	@Param			payload	body		bulkAssetsByOwnerRoleRequest	true	"Owner service/type + list of (ownerId, role) pairs (max 100)"
+//	@Success		200		{object}	bulkAssetsByOwnerRoleResponse
+//	@Failure		400		{object}	errorResponse
+//	@Failure		500		{object}	errorResponse
+//	@Router			/assets/by-owner-role/bulk [post]
+func (h *Handler) GetAssetsByOwnerRoleBulk(c echo.Context) error {
+	var req bulkAssetsByOwnerRoleRequest
+	if err := c.Bind(&req); err != nil {
+		return respondError(c, domain.ErrInvalidInput)
+	}
+	if len(req.Items) == 0 {
+		return c.JSON(http.StatusOK, bulkAssetsByOwnerRoleResponse{Items: []bulkAssetsByOwnerRoleItem{}})
+	}
+	if len(req.Items) > 100 {
+		return respondError(c, fmt.Errorf("%w: items exceeds max of %d", domain.ErrInvalidInput, 100))
+	}
+
+	pairs := make([]application.OwnerRolePair, 0, len(req.Items))
+	for _, item := range req.Items {
+		pairs = append(pairs, application.OwnerRolePair{OwnerID: item.OwnerID, Role: item.Role})
+	}
+
+	results, err := h.svc.GetAssetsByOwnerRole(c.Request().Context(), req.OwnerService, req.OwnerType, pairs)
+	if err != nil {
+		return respondError(c, err)
+	}
+
+	items := make([]bulkAssetsByOwnerRoleItem, 0, len(results))
+	for _, r := range results {
+		if !r.Found {
+			items = append(items, bulkAssetsByOwnerRoleItem{OwnerID: r.OwnerID, Role: r.Role, Found: false})
+			continue
+		}
+		resp := toAssetResponse(r.Asset, r.PublicURL)
+		items = append(items, bulkAssetsByOwnerRoleItem{OwnerID: r.OwnerID, Role: r.Role, Found: true, Asset: &resp})
+	}
+
+	return c.JSON(http.StatusOK, bulkAssetsByOwnerRoleResponse{Items: items})
+}
+
 func toAssetResponse(a *domain.MediaAsset, publicURL string) assetResponse {
 	return assetResponse{
 		ID:              a.ID,

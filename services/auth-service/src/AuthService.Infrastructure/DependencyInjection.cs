@@ -12,6 +12,11 @@ public static class DependencyInjection
 {
     public static void AddInfrastructureServices(this IHostApplicationBuilder builder)
     {
+        builder.Services.Configure<GoogleOAuthOptions>(
+            builder.Configuration.GetSection(GoogleOAuthOptions.SectionName));
+
+        builder.Services.AddHttpClient<IGoogleOAuthService, GoogleOAuthService>();
+
         string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
         Guard.Against.Null(connectionString, message: "Connection string not found.");
 

@@ -193,6 +193,55 @@ func (r *MediaRepository) ListAttachments(ctx context.Context, filter applicatio
 	return result, rows.Err()
 }
 
+func (r *MediaRepository) GetAttachmentsByOwnerRoles(ctx context.Context, ownerService, ownerType string, pairs []application.OwnerRolePair) ([]*domain.MediaAttachment, error) {
+	if len(pairs) == 0 {
+		return nil, nil
+	}
+
+	idSet := make(map[string]struct{}, len(pairs))
+	roleSet := make(map[string]struct{}, len(pairs))
+	for _, p := range pairs {
+		idSet[p.OwnerID] = struct{}{}
+		roleSet[p.Role] = struct{}{}
+	}
+	ids := make([]string, 0, len(idSet))
+	for id := range idSet {
+		ids = append(ids, id)
+	}
+	roles := make([]string, 0, len(roleSet))
+	for role := range roleSet {
+		roles = append(roles, role)
+	}
+
+	const q = `
+		SELECT id, media_asset_id, owner_service, owner_type, owner_id, role, position,
+		       created_at, updated_at
+		FROM media_attachments
+		WHERE owner_service=$1 AND owner_type=$2 AND owner_id = ANY($3) AND role = ANY($4)
+		ORDER BY position ASC, created_at ASC`
+
+	rows, err := r.db.QueryContext(ctx, q, ownerService, ownerType, ids, roles)
+	if err != nil {
+		return nil, err
+	}
+	defer func(rows *sql.Rows) {
+		err := rows.Close()
+		if err != nil {
+		}
+	}(rows)
+
+	var result []*domain.MediaAttachment
+	for rows.Next() {
+		var a domain.MediaAttachment
+		if err := rows.Scan(&a.ID, &a.MediaAssetID, &a.OwnerService, &a.OwnerType, &a.OwnerID,
+			&a.Role, &a.Position, &a.CreatedAt, &a.UpdatedAt); err != nil {
+			return nil, err
+		}
+		result = append(result, &a)
+	}
+	return result, rows.Err()
+}
+
 func (r *MediaRepository) DeleteAttachment(ctx context.Context, id string) error {
 	const q = `DELETE FROM media_attachments WHERE id=$1`
 	res, err := r.db.ExecContext(ctx, q, id)

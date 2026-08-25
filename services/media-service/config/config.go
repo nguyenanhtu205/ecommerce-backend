@@ -19,6 +19,8 @@ type Config struct {
 	KafkaTopic                string
 	ProductMediaAttachedTopic string
 	ReviewMediaAttachedTopic  string
+	ChatMediaAttachedTopic    string
+	AvatarMediaAttachedTopic  string
 	MediaConsumerGroupID      string
 }
 
@@ -36,6 +38,8 @@ func Load() Config {
 		KafkaBrokers:              splitAndTrim(os.Getenv("KAFKA_BROKERS")),
 		KafkaTopic:                getEnv("KAFKA_TOPIC", "media-events"),
 		ProductMediaAttachedTopic: getEnv("KAFKA_PRODUCT_MEDIA_ATTACHED_TOPIC", "product-catalog.product-media-attached.v1"),
+		ChatMediaAttachedTopic:    getEnv("KAFKA_CHAT_MEDIA_ATTACHED_TOPIC", "chat.message-media-attached.v1"),
+		AvatarMediaAttachedTopic:  getEnv("KAFKA_AVATAR_MEDIA_ATTACHED_TOPIC", "user.avatar-media-attached.v1"),
 		ReviewMediaAttachedTopic:  getEnv("KAFKA_REVIEW_MEDIA_ATTACHED_TOPIC", "review.review-media-attached.v1"),
 		MediaConsumerGroupID:      getEnv("KAFKA_CONSUMER_GROUP_ID", "media-service-group"),
 	}

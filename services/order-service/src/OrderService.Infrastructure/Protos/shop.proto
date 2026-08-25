@@ -27,4 +27,5 @@ message GetPickupAddressResponse {
   bool is_valid = 1;
   AddressSnapshot pickup_address_snapshot = 2;
   optional string failure_reason = 3;
+  string shop_name = 4;
 }

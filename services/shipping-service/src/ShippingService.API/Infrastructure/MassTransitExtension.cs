@@ -25,6 +25,7 @@ public static class MassTransitExtension
 
                 rider.AddProducer<ShipmentCreated>("shipping.shipment-created.v1");
                 rider.AddProducer<ShipmentCreationFailed>("shipping.shipment-creation-failed.v1");
+                rider.AddProducer<OrderDelivered>("shipping.order-delivered.v1");
 
                 rider.UsingKafka((context, k) =>
                 {

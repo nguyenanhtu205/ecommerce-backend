@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Common.Contracts.Grpc.Shipping;
-using AddressSnapshot = OrderService.Domain.Common.AddressSnapshot;
-using GrpcAddressSnapshot = Common.Contracts.Grpc.Shipping.AddressSnapshot;
+using GrpcShippingFeeItem = Common.Contracts.Grpc.Shipping.ShippingFeeItem;
+using AppShippingFeeItem = OrderService.Application.Common.Interfaces.ShippingFeeItem;
 
 namespace OrderService.Infrastructure.Services;
 
@@ -13,10 +13,13 @@ public class ShippingServiceClient(
     {
         CalculateFeeRequest grpcRequest = new()
         {
-            CarrierId = request.CarrierId.ToString(),
-            PickupAddressSnapshot = ToGrpc(request.PickupAddressSnapshot),
-            DeliveryAddressSnapshot = ToGrpc(request.DeliveryAddressSnapshot)
+            CarrierCode = request.CarrierCode,
+            PickupProvince = request.PickupProvince,
+            PickupWard = request.PickupWard,
+            DeliveryProvince = request.DeliveryProvince,
+            DeliveryWard = request.DeliveryWard
         };
+        grpcRequest.Items.AddRange(request.Items.Select(ToGrpcShippingFeeItem));
 
         CalculateFeeResponse response = await grpcClient.CalculateFeeAsync(
             grpcRequest, deadline: DateTime.UtcNow.AddSeconds(3), cancellationToken: cancellationToken);
@@ -24,7 +27,7 @@ public class ShippingServiceClient(
         if (!response.IsValid)
         {
             return new ShippingFeeResult(
-                false, 0, null, null, null,
+                false, 0, null, null,
                 response.HasFailureReason ? response.FailureReason : null);
         }
 
@@ -33,33 +36,18 @@ public class ShippingServiceClient(
             response.Fee,
             response.HasEstimatedStart ? DateOnly.Parse(response.EstimatedStart, CultureInfo.InvariantCulture) : null,
             response.HasEstimatedEnd ? DateOnly.Parse(response.EstimatedEnd, CultureInfo.InvariantCulture) : null,
-            response.HasCarrierName ? response.CarrierName : null,
             null);
     }
 
-    private static GrpcAddressSnapshot ToGrpc(AddressSnapshot address)
+    private static GrpcShippingFeeItem ToGrpcShippingFeeItem(AppShippingFeeItem item)
     {
-        GrpcAddressSnapshot snapshot = new()
+        return new GrpcShippingFeeItem
         {
-            UserId = address.UserId.ToString(),
-            FullName = address.FullName,
-            Phone = address.Phone,
-            Province = address.Province,
-            Ward = address.Ward,
-            AddressDetail = address.AddressDetail,
-            FullAddressText = address.FullAddressText,
-            AddressType = address.AddressType
+            Quantity = item.Quantity,
+            WeightGram = item.WeightGram,
+            Length = item.Length,
+            Width = item.Width,
+            Height = item.Height
         };
-        if (address.Latitude.HasValue)
-        {
-            snapshot.Latitude = address.Latitude.Value.ToString(CultureInfo.InvariantCulture);
-        }
-
-        if (address.Longitude.HasValue)
-        {
-            snapshot.Longitude = address.Longitude.Value.ToString(CultureInfo.InvariantCulture);
-        }
-
-        return snapshot;
     }
 }

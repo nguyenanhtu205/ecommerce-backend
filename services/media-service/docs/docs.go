@@ -61,6 +61,52 @@ const docTemplate = `{
                 }
             }
         },
+        "/assets/by-owner-role/bulk": {
+            "post": {
+                "description": "Resolve multiple (ownerId, role) pairs to their currently-attached asset in one call — e.g. fetch the thumbnail for many products on a listing page. Response items preserve the exact order of the requested items, including pairs that resolve to nothing (found=false)",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Asset"
+                ],
+                "summary": "Get assets by owner+role",
+                "parameters": [
+                    {
+                        "description": "Owner service/type + list of (ownerId, role) pairs (max 100)",
+                        "name": "payload",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.bulkAssetsByOwnerRoleRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.bulkAssetsByOwnerRoleResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.errorResponse"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/httpapi.errorResponse"
+                        }
+                    }
+                }
+            }
+        },
         "/assets/{id}": {
             "get": {
                 "description": "Get detail information of media asset by ID",
@@ -463,6 +509,51 @@ const docTemplate = `{
                 }
             }
         },
+        "httpapi.bulkAssetsByOwnerRoleItem": {
+            "type": "object",
+            "properties": {
+                "asset": {
+                    "$ref": "#/definitions/httpapi.assetResponse"
+                },
+                "found": {
+                    "type": "boolean"
+                },
+                "ownerId": {
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                }
+            }
+        },
+        "httpapi.bulkAssetsByOwnerRoleRequest": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/httpapi.ownerRolePairRequest"
+                    }
+                },
+                "ownerService": {
+                    "type": "string"
+                },
+                "ownerType": {
+                    "type": "string"
+                }
+            }
+        },
+        "httpapi.bulkAssetsByOwnerRoleResponse": {
+            "type": "object",
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/httpapi.bulkAssetsByOwnerRoleItem"
+                    }
+                }
+            }
+        },
         "httpapi.bulkAssetsRequest": {
             "type": "object",
             "properties": {
@@ -526,6 +617,17 @@ const docTemplate = `{
             "type": "object",
             "properties": {
                 "error": {
+                    "type": "string"
+                }
+            }
+        },
+        "httpapi.ownerRolePairRequest": {
+            "type": "object",
+            "properties": {
+                "ownerId": {
+                    "type": "string"
+                },
+                "role": {
                     "type": "string"
                 }
             }

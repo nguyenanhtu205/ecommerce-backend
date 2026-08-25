@@ -1,4 +1,5 @@
 ﻿global using Common.Contracts.Events;
+global using Common.Outbox;
 global using OrderService.Application.Common.Interfaces;
 global using OrderService.Application.Sagas.Checkout;
 global using OrderService.Application.Sagas.OrderReservation;

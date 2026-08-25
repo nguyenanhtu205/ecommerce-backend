@@ -2,10 +2,7 @@
 
 namespace InventoryService.Application.Consumers;
 
-public class ReserveStockConsumer(
-    IApplicationDbContext dbContext,
-    ITopicProducer<StockReserved> stockReservedProducer,
-    ITopicProducer<StockReservationFailed> stockReservationFailedProducer) : IConsumer<ReserveStock>
+public class ReserveStockConsumer(IApplicationDbContext dbContext, IOutboxWriter outboxWriter) : IConsumer<ReserveStock>
 {
     private const int ReservationTtlMinutes = 15;
     private const int MaxConcurrencyRetries = 3;
@@ -59,21 +56,35 @@ public class ReserveStockConsumer(
 
             if (failureReason is not null)
             {
-                await stockReservationFailedProducer.Produce(
-                    new StockReservationFailed(context.Message.OrderId, failureReason), context.CancellationToken);
+                dbContext.ChangeTracker.Clear();
+
+                outboxWriter.Enqueue(new StockReservationFailed(context.Message.OrderId, failureReason));
+
+                dbContext.ProcessedEvents.Add(new ProcessedEvent
+                {
+                    Id = Guid.CreateVersion7(),
+                    EventId = eventId,
+                    EventType = nameof(ReserveStock),
+                    ProcessedAt = DateTimeOffset.UtcNow
+                });
+
+                await dbContext.SaveChangesAsync(context.CancellationToken);
                 return;
             }
 
+            outboxWriter.Enqueue(new StockReserved(context.Message.OrderId));
+
             dbContext.ProcessedEvents.Add(new ProcessedEvent
             {
-                EventId = eventId, EventType = nameof(ReserveStock), ProcessedAt = DateTimeOffset.UtcNow
+                Id = Guid.CreateVersion7(),
+                EventId = eventId,
+                EventType = nameof(ReserveStock),
+                ProcessedAt = DateTimeOffset.UtcNow
             });
 
             try
             {
                 await dbContext.SaveChangesAsync(context.CancellationToken);
-                await stockReservedProducer.Produce(
-                    new StockReserved(context.Message.OrderId), context.CancellationToken);
                 return;
             }
             catch (DbUpdateConcurrencyException)

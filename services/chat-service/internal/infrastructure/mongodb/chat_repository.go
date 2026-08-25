@@ -76,6 +76,18 @@ func (r *ChatRepository) GetOrCreateConversation(ctx context.Context, buyerID, s
 	return conv, nil
 }
 
+func (r *ChatRepository) GetConversationByID(ctx context.Context, id string) (*domain.Conversation, error) {
+	var conv domain.Conversation
+	err := r.conversations.FindOne(ctx, bson.M{"_id": id}).Decode(&conv)
+	if err != nil {
+		if errors.Is(err, mongo.ErrNoDocuments) {
+			return nil, application.ErrConversationNotFound
+		}
+		return nil, err
+	}
+	return &conv, nil
+}
+
 func (r *ChatRepository) InsertMessage(ctx context.Context, msg *domain.Message) error {
 	if msg.ID == "" {
 		msg.ID = uuid.NewString()
@@ -98,7 +110,7 @@ func (r *ChatRepository) UpdateConversationOnNewMessage(ctx context.Context, con
 	err := r.conversations.FindOneAndUpdate(ctx,
 		bson.M{"_id": conversationID},
 		bson.M{
-			"$set": bson.M{"lastMessage": lastMessage, "lastMessageAt": time.Now().UTC()},
+			"$set": bson.M{"lastMessage": lastMessage, "lastMessageAt": time.Now().UTC(), "lastMessageSenderType": sender},
 			"$inc": bson.M{unreadField: 1},
 		},
 		options.FindOneAndUpdate().SetReturnDocument(after),
@@ -156,7 +168,7 @@ func (r *ChatRepository) GetMessageHistory(ctx context.Context, conversationID s
 		}
 	}(cursor, ctx)
 
-	var result []*domain.Message
+	result := make([]*domain.Message, 0)
 	if err := cursor.All(ctx, &result); err != nil {
 		return nil, err
 	}

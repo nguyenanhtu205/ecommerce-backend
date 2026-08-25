@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
-using MassTransit;
 
 namespace ShippingService.Infrastructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    public DbSet<ProcessedEvent> ProcessedEvents => Set<ProcessedEvent>();
+
     public DbSet<Carrier> Carriers => Set<Carrier>();
 
     public DbSet<PickupPoint> PickupPoints => Set<PickupPoint>();

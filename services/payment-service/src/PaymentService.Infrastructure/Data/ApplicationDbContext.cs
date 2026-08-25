@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
-using MassTransit;
 
 namespace PaymentService.Infrastructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    public DbSet<ProcessedEvent> ProcessedEvents => Set<ProcessedEvent>();
+
     public DbSet<Payment> Payments => Set<Payment>();
 
     public DbSet<Refund> Refunds => Set<Refund>();

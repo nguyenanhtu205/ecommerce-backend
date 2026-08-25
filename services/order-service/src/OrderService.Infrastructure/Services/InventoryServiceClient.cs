@@ -19,6 +19,7 @@ public class InventoryServiceClient(
             item => new CombinationPriceInfo(
                 Guid.Parse(item.CombinationId),
                 Guid.Parse(item.ShopId),
+                Guid.Parse(item.ProductId),
                 item.Price));
     }
 }

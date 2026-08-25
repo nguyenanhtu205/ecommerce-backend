@@ -23,6 +23,77 @@ namespace OrderService.Infrastructure.Data.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Common.Outbox.OutboxMessage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AttemptCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("attempt_count");
+
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("created_at");
+
+                    b.Property<string>("Error")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MessageType")
+                        .IsRequired()
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("message_type");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasColumnType("jsonb")
+                        .HasColumnName("payload");
+
+                    b.Property<DateTimeOffset?>("ProcessedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("processed_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProcessedAt", "CreatedAt");
+
+                    b.ToTable("outbox_messages", (string)null);
+                });
+
+            modelBuilder.Entity("Common.Outbox.ProcessedEvent", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("EventId")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)")
+                        .HasColumnName("event_id");
+
+                    b.Property<string>("EventType")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("character varying(150)")
+                        .HasColumnName("event_type");
+
+                    b.Property<DateTimeOffset>("ProcessedAt")
+                        .HasColumnType("timestamptz")
+                        .HasColumnName("processed_at");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId")
+                        .IsUnique();
+
+                    b.HasIndex("EventType");
+
+                    b.ToTable("processed_events", (string)null);
+                });
+
             modelBuilder.Entity("OrderService.Application.Sagas.Checkout.CheckoutSagaState", b =>
                 {
                     b.Property<Guid>("CorrelationId")
@@ -190,6 +261,11 @@ namespace OrderService.Infrastructure.Data.Migrations
                     b.Property<Guid>("ShopId")
                         .HasColumnType("uuid")
                         .HasColumnName("shop_id");
+
+                    b.Property<string>("ShopName")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("shop_name");
 
                     b.Property<string>("Status")
                         .IsRequired()

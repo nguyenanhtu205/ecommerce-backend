@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"net/http"
 	"strings"
 
 	es "github.com/elastic/go-elasticsearch/v8"
@@ -30,11 +31,19 @@ func (r *ESSearchRepository) Upsert(ctx context.Context, doc domain.ProductListi
 		return fmt.Errorf("marshal document: %w", err)
 	}
 
+	version, err := doc.SyncedAtUnixNano()
+	if err != nil {
+		return fmt.Errorf("compute version: %w", err)
+	}
+	v := int(version)
+
 	req := esapi.IndexRequest{
-		Index:      r.index,
-		DocumentID: doc.DocumentID(),
-		Body:       bytes.NewReader(body),
-		Refresh:    "false",
+		Index:       r.index,
+		DocumentID:  doc.DocumentID(),
+		Body:        bytes.NewReader(body),
+		Refresh:     "false",
+		VersionType: "external",
+		Version:     &v,
 	}
 
 	res, err := req.Do(ctx, r.client)
@@ -46,6 +55,10 @@ func (r *ESSearchRepository) Upsert(ctx context.Context, doc domain.ProductListi
 		if err != nil {
 		}
 	}(res.Body)
+
+	if res.StatusCode == http.StatusConflict {
+		return nil
+	}
 
 	if res.IsError() {
 		b, _ := io.ReadAll(res.Body)

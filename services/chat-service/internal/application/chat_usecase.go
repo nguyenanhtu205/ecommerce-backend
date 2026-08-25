@@ -1,63 +1,160 @@
 package application
 
 import (
+	"chat-service/internal/domain"
 	"context"
 	"encoding/json"
 	"log"
-
-	"chat-service/internal/domain"
+	"time"
 )
 
 type ChatUseCase struct {
-	repo      ChatRepository
-	publisher EventPublisher
-	pusher    RealtimePusher
+	repo                 ChatRepository
+	shopChatSettingsRepo ShopChatSettingsRepository
+	publisher            EventPublisher
+	pusher               RealtimePusher
 }
 
-func NewChatUseCase(repo ChatRepository, publisher EventPublisher, pusher RealtimePusher) *ChatUseCase {
-	return &ChatUseCase{repo: repo, publisher: publisher, pusher: pusher}
+func NewChatUseCase(repo ChatRepository, shopChatSettingsRepo ShopChatSettingsRepository, publisher EventPublisher, pusher RealtimePusher) *ChatUseCase {
+	return &ChatUseCase{repo: repo, shopChatSettingsRepo: shopChatSettingsRepo, publisher: publisher, pusher: pusher}
+}
+
+func (uc *ChatUseCase) authorize(ctx context.Context, conversationID, userID, shopID string, role domain.SenderType) (*domain.Conversation, error) {
+	conv, err := uc.repo.GetConversationByID(ctx, conversationID)
+	if err != nil {
+		return nil, err
+	}
+
+	switch role {
+	case domain.SenderBuyer:
+		if conv.BuyerID != userID {
+			return nil, ErrForbidden
+		}
+	case domain.SenderShop:
+		if shopID == "" || conv.ShopID != shopID {
+			return nil, ErrForbidden
+		}
+	default:
+		return nil, ErrForbidden
+	}
+
+	return conv, nil
+}
+
+func (uc *ChatUseCase) AuthorizeConversationAccess(ctx context.Context, conversationID, userID, shopID string, role domain.SenderType) error {
+	_, err := uc.authorize(ctx, conversationID, userID, shopID, role)
+	return err
 }
 
 func (uc *ChatUseCase) GetOrCreateConversation(ctx context.Context, buyerID, shopID string) (*domain.Conversation, error) {
 	return uc.repo.GetOrCreateConversation(ctx, buyerID, shopID)
 }
 
-func (uc *ChatUseCase) ListConversations(ctx context.Context, userID string, role domain.SenderType) ([]*domain.Conversation, error) {
-	return uc.repo.ListConversations(ctx, userID, role)
+func (uc *ChatUseCase) ListConversations(ctx context.Context, userID, shopID string, role domain.SenderType) ([]*domain.Conversation, error) {
+	filterID := userID
+	if role == domain.SenderShop {
+		filterID = shopID
+	}
+	return uc.repo.ListConversations(ctx, filterID, role)
 }
 
-func (uc *ChatUseCase) GetMessageHistory(ctx context.Context, conversationID string, page int) ([]*domain.Message, error) {
+func (uc *ChatUseCase) GetMessageHistory(ctx context.Context, conversationID, userID, shopID string, role domain.SenderType, page int) ([]*domain.Message, error) {
+	if _, err := uc.authorize(ctx, conversationID, userID, shopID, role); err != nil {
+		return nil, err
+	}
+
 	const pageSize = 20
 	return uc.repo.GetMessageHistory(ctx, conversationID, page, pageSize)
 }
 
-func (uc *ChatUseCase) MarkAsRead(ctx context.Context, conversationID string, reader domain.SenderType) error {
+func (uc *ChatUseCase) MarkAsRead(ctx context.Context, conversationID, userID, shopID string, reader domain.SenderType) error {
+	if _, err := uc.authorize(ctx, conversationID, userID, shopID, reader); err != nil {
+		return err
+	}
 	return uc.repo.MarkAsRead(ctx, conversationID, reader)
+}
+
+type MediaAttachmentInput struct {
+	MediaAssetID string
+	Role         string
 }
 
 type SendMessageInput struct {
 	ConversationID string
+	UserID         string
+	ShopID         string
 	SenderType     domain.SenderType
 	Content        string
-	AttachmentIDs  []string
+	Attachments    []MediaAttachmentInput
 }
 
 func (uc *ChatUseCase) SendMessage(ctx context.Context, in SendMessageInput) (*domain.Message, error) {
+	conv, err := uc.authorize(ctx, in.ConversationID, in.UserID, in.ShopID, in.SenderType)
+	if err != nil {
+		return nil, err
+	}
+
+	isBuyerFirstMessage := in.SenderType == domain.SenderBuyer && conv.LastMessage == "" && conv.LastMessageAt.IsZero()
+
+	msg, updatedConv, err := uc.persistAndBroadcast(ctx, in.ConversationID, in.SenderType, in.Content, in.Attachments, false)
+	if err != nil {
+		return nil, err
+	}
+
+	if isBuyerFirstMessage {
+		go func() {
+			bgCtx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+			defer cancel()
+			uc.tryAutoReply(bgCtx, updatedConv)
+		}()
+	}
+
+	return msg, nil
+}
+
+func (uc *ChatUseCase) tryAutoReply(ctx context.Context, conv *domain.Conversation) {
+	if uc.shopChatSettingsRepo == nil {
+		return
+	}
+
+	settings, err := uc.shopChatSettingsRepo.GetByShopID(ctx, conv.ShopID)
+	if err != nil {
+		log.Printf("chat-service: get shop chat settings failed: %v", err)
+		return
+	}
+
+	content := settings.AutoReplyContent(time.Now().UTC())
+	if content == "" {
+		return
+	}
+
+	if _, _, err := uc.persistAndBroadcast(ctx, conv.ID, domain.SenderShop, content, nil, true); err != nil {
+		log.Printf("chat-service: send auto-reply failed: %v", err)
+	}
+}
+
+func (uc *ChatUseCase) persistAndBroadcast(ctx context.Context, conversationID string, sender domain.SenderType, content string, attachmentsIn []MediaAttachmentInput, isAutoGenerated bool) (*domain.Message, *domain.Conversation, error) {
+	attachmentIDs := make([]string, 0, len(attachmentsIn))
+	for _, a := range attachmentsIn {
+		attachmentIDs = append(attachmentIDs, a.MediaAssetID)
+	}
+
 	msg := &domain.Message{
-		ConversationID:          in.ConversationID,
-		SenderType:              in.SenderType,
-		Content:                 in.Content,
-		AttachmentMediaAssetIDs: in.AttachmentIDs,
+		ConversationID:          conversationID,
+		SenderType:              sender,
+		Content:                 content,
+		AttachmentMediaAssetIDs: attachmentIDs,
+		IsAutoGenerated:         isAutoGenerated,
 		IsRead:                  false,
 	}
 
 	if err := uc.repo.InsertMessage(ctx, msg); err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	conv, err := uc.repo.UpdateConversationOnNewMessage(ctx, in.ConversationID, in.Content, in.SenderType)
+	conv, err := uc.repo.UpdateConversationOnNewMessage(ctx, conversationID, content, sender)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
 	if uc.publisher != nil {
@@ -73,6 +170,26 @@ func (uc *ChatUseCase) SendMessage(ctx context.Context, in SendMessageInput) (*d
 		if err := uc.publisher.PublishMessageSent(ctx, event); err != nil {
 			log.Printf("chat-service: publish MessageSent event failed: %v", err)
 		}
+
+		if len(attachmentsIn) > 0 {
+			ownerID := conv.BuyerID
+			if sender == domain.SenderShop {
+				ownerID = conv.ShopID
+			}
+			items := make([]MediaAttachmentItem, 0, len(attachmentsIn))
+			for i, a := range attachmentsIn {
+				items = append(items, MediaAttachmentItem{MediaAssetID: a.MediaAssetID, Role: a.Role, Position: i})
+			}
+			mediaEvent := ChatMediaAttachedEvent{
+				MessageID:        msg.ID,
+				OwnerID:          ownerID,
+				MediaAttachments: items,
+				OccurredAt:       time.Now().UTC(),
+			}
+			if err := uc.publisher.PublishMediaAttached(ctx, mediaEvent); err != nil {
+				log.Printf("chat-service: publish ChatMediaAttached event failed: %v", err)
+			}
+		}
 	}
 
 	if uc.pusher != nil {
@@ -81,5 +198,5 @@ func (uc *ChatUseCase) SendMessage(ctx context.Context, in SendMessageInput) (*d
 		}
 	}
 
-	return msg, nil
+	return msg, conv, nil
 }

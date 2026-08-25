@@ -1,14 +1,12 @@
 ﻿using System.Reflection;
-using MassTransit;
 
 namespace OrderService.Infrastructure.Data;
 
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
     : DbContext(options), IApplicationDbContext
 {
-    public DbSet<CheckoutSagaState> CheckoutSagaStates => Set<CheckoutSagaState>();
-
     public DbSet<OrderReservationSagaState> OrderReservationSagaStates => Set<OrderReservationSagaState>();
+    public DbSet<CheckoutSagaState> CheckoutSagaStates => Set<CheckoutSagaState>();
 
     public DbSet<Order> Orders => Set<Order>();
 
@@ -21,6 +19,10 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<OrderStatusHistory> OrderStatusHistories => Set<OrderStatusHistory>();
 
     public DbSet<OrderVoucher> OrderVouchers => Set<OrderVoucher>();
+
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+
+    public DbSet<ProcessedEvent> ProcessedEvents => Set<ProcessedEvent>();
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

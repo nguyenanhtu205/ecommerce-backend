@@ -23,6 +23,7 @@ public static class MassTransitExtensions
                 rider.AddConsumer<UserRegisteredConsumer>();
 
                 rider.AddProducer<PickupAddressSnapshotUpdated>("user.pickup-address-snapshot-updated.v1");
+                rider.AddProducer<AvatarMediaAttached>("user.avatar-media-attached.v1");
 
                 rider.UsingKafka((context, k) =>
                 {

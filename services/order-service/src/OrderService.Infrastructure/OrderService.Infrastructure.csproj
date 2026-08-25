@@ -10,6 +10,7 @@
     <ProjectReference Include="..\OrderService.Application\OrderService.Application.csproj"/>
     <ProjectReference Include="..\OrderService.Domain\OrderService.Domain.csproj"/>
     <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Contracts\Common.Contracts.csproj"/>
+    <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Outbox\Common.Outbox.csproj"/>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +33,11 @@
 
   <ItemGroup>
     <Protobuf Include="Protos/inventory.proto" GrpcServices="Client"/>
+    <Protobuf Include="Protos/product.proto" GrpcServices="Client"/>
     <Protobuf Include="Protos/promotion.proto" GrpcServices="Client"/>
     <Protobuf Include="Protos/shipping.proto" GrpcServices="Client"/>
     <Protobuf Include="Protos/shop.proto" GrpcServices="Client"/>
+    <Protobuf Include="Protos/user.proto" GrpcServices="Client"/>
   </ItemGroup>
 
 </Project>

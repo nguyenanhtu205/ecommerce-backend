@@ -26,6 +26,13 @@ public class ShopsConfiguration : IEntityTypeConfiguration<Shop>
             .HasMaxLength(255)
             .IsRequired();
 
+        builder.Property(x => x.Description)
+            .HasColumnName("description")
+            .HasColumnType("text");
+
+        builder.Property(x => x.ShopAvatarUrl)
+            .HasColumnName("shop_avatar_url");
+
         builder.Property(x => x.PickupAddressId)
             .HasColumnName("pickup_address_id");
 

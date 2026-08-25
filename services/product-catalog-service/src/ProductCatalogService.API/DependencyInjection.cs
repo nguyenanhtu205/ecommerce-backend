@@ -27,5 +27,7 @@ public static class DependencyInjection
         builder.Services.AddAuthorization();
 
         builder.Services.AddCommonApi();
+
+        builder.Services.AddGrpc();
     }
 }

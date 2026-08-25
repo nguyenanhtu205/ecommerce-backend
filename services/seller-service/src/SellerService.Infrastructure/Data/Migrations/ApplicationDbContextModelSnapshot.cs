@@ -33,6 +33,10 @@ namespace SellerService.Infrastructure.Data.Migrations
                         .HasColumnType("timestamptz")
                         .HasColumnName("created_at");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(255)
@@ -63,6 +67,10 @@ namespace SellerService.Infrastructure.Data.Migrations
                         .IsRequired()
                         .HasColumnType("jsonb")
                         .HasColumnName("pickup_address_snapshot");
+
+                    b.Property<string>("ShopAvatarUrl")
+                        .HasColumnType("text")
+                        .HasColumnName("shop_avatar_url");
 
                     b.Property<string>("Status")
                         .IsRequired()
@@ -210,6 +218,11 @@ namespace SellerService.Infrastructure.Data.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<string>("CarrierCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("carrier_code");
 
                     b.Property<Guid>("CarrierId")
                         .HasColumnType("uuid")

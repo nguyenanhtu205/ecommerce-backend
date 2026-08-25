@@ -9,6 +9,8 @@
   <ItemGroup>
     <ProjectReference Include="..\InventoryService.Application\InventoryService.Application.csproj"/>
     <ProjectReference Include="..\InventoryService.Domain\InventoryService.Domain.csproj"/>
+    <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Contracts\Common.Contracts.csproj"/>
+    <ProjectReference Include="..\..\..\..\libs\dotnet-common\Common.Outbox\Common.Outbox.csproj"/>
   </ItemGroup>
 
   <ItemGroup>

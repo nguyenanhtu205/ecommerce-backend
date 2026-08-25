@@ -1,16 +1,5 @@
 ﻿namespace OrderService.Application.Features.Commands.Checkout;
 
-public record CheckoutItem(
-    Guid ShopId,
-    Guid CombinationId,
-    int Quantity,
-    Guid ProductId,
-    string ProductName,
-    string ThumbnailUrl,
-    string? Variation);
-
-public record ShopCheckoutInfo(Guid ShopId, Guid CarrierId, string? ShopVoucherCode, string? Note);
-
 public record CheckoutResult(
     bool Success,
     Guid CheckoutBatchId,
@@ -19,23 +8,35 @@ public record CheckoutResult(
     string? RedirectUrl,
     string? FailureReason);
 
+public record CheckoutItem(Guid CombinationId, int Quantity, string Variation);
+
+public record ShopCheckoutInfo(Guid ShopId, string CarrierCode, string? ShopVoucherCode, string? Note);
+
 public record CheckoutCommand(
     List<CheckoutItem> CartItems,
     List<ShopCheckoutInfo> ShopInfos,
-    AddressSnapshot ShippingAddressSnapshot,
+    Guid ShippingAddressId,
     string PaymentMethod,
     string? PlatformVoucherCode) : IRequest<CheckoutResult>;
 
-public class CheckoutCommandHandler(
+public class Checkout(
     IInventoryServiceClient inventoryClient,
+    IProductServiceClient productServiceClient,
+    IUserServiceClient userServiceClient,
     IPromotionServiceClient promotionClient,
     IShippingServiceClient shippingClient,
     IShopServiceClient shopClient,
     IApplicationDbContext context,
-    ITopicProducer<CheckoutInitiated> checkoutInitiatedProducer,
-    ITopicProducer<ReserveOrderStock> reserveOrderStockProducer,
+    IOutboxWriter outboxWriter,
     ICurrentUser currentUser) : IRequestHandler<CheckoutCommand, CheckoutResult>
 {
+    private static readonly Dictionary<string, (Guid Id, string Name)> Carriers = new()
+    {
+        ["mock"] = (Guid.Parse("11111111-1111-1111-1111-111111111111"), "Giao Hàng Thử Nghiệm"),
+        ["ghn"] = (Guid.Parse("22222222-2222-2222-2222-222222222222"), "Giao Hàng Nhanh"),
+        ["ghtk"] = (Guid.Parse("33333333-3333-3333-3333-333333333333"), "Giao Hàng Tiết Kiệm")
+    };
+
     public async Task<CheckoutResult> Handle(CheckoutCommand command, CancellationToken cancellationToken)
     {
         if (currentUser.UserId == null)
@@ -50,15 +51,7 @@ public class CheckoutCommandHandler(
             return new CheckoutResult(false, Guid.Empty, [], null, null, "Empty cart");
         }
 
-        Dictionary<Guid, List<CheckoutItem>> itemsByShop =
-            command.CartItems.GroupBy(i => i.ShopId).ToDictionary(g => g.Key, g => g.ToList());
         Dictionary<Guid, ShopCheckoutInfo> infoByShop = command.ShopInfos.ToDictionary(s => s.ShopId);
-
-        if (itemsByShop.Keys.Any(shopId => !infoByShop.ContainsKey(shopId)))
-        {
-            return new CheckoutResult(false, Guid.Empty, [], null, null,
-                "Missing carrier/voucher information for one shop in the cart.");
-        }
 
         IEnumerable<Guid> combinationIds = command.CartItems.Select(i => i.CombinationId).Distinct();
         IReadOnlyDictionary<Guid, CombinationPriceInfo> priceMap =
@@ -68,6 +61,41 @@ public class CheckoutCommandHandler(
             return new CheckoutResult(false, Guid.Empty, [], null, null,
                 "Some products no longer exist or are no longer available for sale.");
         }
+
+        Dictionary<Guid, List<CheckoutItem>> itemsByShop = command.CartItems
+            .GroupBy(i => priceMap[i.CombinationId].ShopId)
+            .ToDictionary(g => g.Key, g => g.ToList());
+
+        if (itemsByShop.Keys.Any(shopId => !infoByShop.ContainsKey(shopId)))
+        {
+            return new CheckoutResult(false, Guid.Empty, [], null, null,
+                "Missing carrier/voucher information for one shop in the cart, or ShopId mismatch.");
+        }
+
+        List<Guid> productIds =
+        [
+            .. command.CartItems
+                .Select(i => priceMap[i.CombinationId].ProductId).Distinct()
+        ];
+        IReadOnlyDictionary<Guid, ProductInfo> productInfoMap =
+            await productServiceClient.GetProductInfosAsync(productIds, cancellationToken);
+        if (productIds.Any(id => !productInfoMap.ContainsKey(id)))
+        {
+            return new CheckoutResult(false, Guid.Empty, [], null, null,
+                "Some products no longer exist or are no longer available for sale.");
+        }
+
+        IReadOnlyCollection<UserShippingAddress> userAddresses =
+            await userServiceClient.GetUserShippingAddressesAsync(buyerId, cancellationToken);
+        UserShippingAddress? matchedAddress = userAddresses
+            .FirstOrDefault(a => a.Id == command.ShippingAddressId);
+        if (matchedAddress is null)
+        {
+            return new CheckoutResult(false, Guid.Empty, [], null, null,
+                "Shipping address does not belong to this user or does not exist.");
+        }
+
+        AddressSnapshot deliveryAddress = matchedAddress.ShippingAddressSnapshot;
 
         Guid checkoutBatchId = Guid.NewGuid();
         List<Guid> orderIds = [];
@@ -79,6 +107,7 @@ public class CheckoutCommandHandler(
         Dictionary<Guid, ShippingFeeResult> shopShippingFees = new();
         Dictionary<Guid, int> shopDiscounts = new();
         Dictionary<Guid, AddressSnapshot> shopPickupAddresses = new();
+        Dictionary<Guid, string> shopNames = new();
 
         foreach ((Guid shopId, List<CheckoutItem> items) in itemsByShop)
         {
@@ -95,9 +124,26 @@ public class CheckoutCommandHandler(
             }
 
             shopPickupAddresses[shopId] = pickupAddressResult.PickupAddressSnapshot;
+            shopNames[shopId] = pickupAddressResult.ShopName;
+
+            List<ShippingFeeItem> shippingItems =
+            [
+                .. items.Select(i =>
+                {
+                    ProductInfo product = productInfoMap[priceMap[i.CombinationId].ProductId];
+                    return new ShippingFeeItem(i.Quantity, product.WeightGram, product.Length, product.Width,
+                        product.Height);
+                })
+            ];
 
             ShippingFeeResult feeResult = await shippingClient.CalculateFeeAsync(
-                new ShippingFeeRequest(info.CarrierId, shopPickupAddresses[shopId], command.ShippingAddressSnapshot),
+                new ShippingFeeRequest(
+                    info.CarrierCode,
+                    pickupAddressResult.PickupAddressSnapshot.Province,
+                    pickupAddressResult.PickupAddressSnapshot.Ward,
+                    deliveryAddress.Province,
+                    deliveryAddress.Ward,
+                    shippingItems),
                 cancellationToken);
             if (!feeResult.IsValid)
             {
@@ -135,7 +181,7 @@ public class CheckoutCommandHandler(
             if (!dryRun.IsValid)
             {
                 return new CheckoutResult(false, Guid.Empty, [], null, null,
-                    $"Voucher platform không hợp lệ: {dryRun.FailureReason}");
+                    $"Voucher platform invalid: {dryRun.FailureReason}");
             }
 
             platformDiscount = dryRun.DiscountAmount;
@@ -159,6 +205,7 @@ public class CheckoutCommandHandler(
             {
                 BuyerId = buyerId,
                 ShopId = shopId,
+                ShopName = shopNames[shopId],
                 CheckoutBatchId = checkoutBatchId,
                 Status = OrderStatus.PendingPayment,
                 MerchandiseSubtotal = subtotal,
@@ -166,7 +213,7 @@ public class CheckoutCommandHandler(
                 VoucherDiscount = totalDiscount,
                 XuDiscount = 0,
                 TotalPayment = totalPayment,
-                ShippingAddressSnapshot = command.ShippingAddressSnapshot,
+                ShippingAddressSnapshot = deliveryAddress,
                 Note = info.Note,
                 CreatedAt = DateTimeOffset.UtcNow,
                 UpdatedAt = DateTimeOffset.UtcNow
@@ -177,26 +224,29 @@ public class CheckoutCommandHandler(
 
             foreach (CheckoutItem item in items)
             {
-                CombinationPriceInfo priceInfo = priceMap[item.CombinationId];
+                CombinationPriceInfo combinationInfo = priceMap[item.CombinationId];
+                ProductInfo product = productInfoMap[combinationInfo.ProductId];
                 context.OrderItems.Add(new OrderItem
                 {
                     OrderId = order.Id,
-                    ProductId = item.ProductId,
+                    ProductId = combinationInfo.ProductId,
                     CombinationId = item.CombinationId,
-                    ProductName = item.ProductName,
-                    ThumbnailUrl = item.ThumbnailUrl,
+                    ProductName = product.ProductName,
+                    ThumbnailUrl = product.ThumbnailUrl,
                     Variation = item.Variation,
                     Quantity = item.Quantity,
-                    Price = priceInfo.Price,
+                    Price = combinationInfo.Price,
                     OriginalPrice = null
                 });
             }
 
+            (Guid CarrierId, string CarrierName) carrier = Carriers[info.CarrierCode];
+
             context.OrderShippingSnapshots.Add(new OrderShippingSnapshot
             {
                 OrderId = order.Id,
-                CarrierId = info.CarrierId,
-                CarrierName = shopShippingFees[shopId].CarrierName ?? string.Empty,
+                CarrierId = carrier.CarrierId,
+                CarrierName = carrier.CarrierName,
                 Fee = shippingFee,
                 EstimatedDeliveryStart = shopShippingFees[shopId].EstimatedStart,
                 EstimatedDeliveryEnd = shopShippingFees[shopId].EstimatedEnd
@@ -233,26 +283,26 @@ public class CheckoutCommandHandler(
                 ChangedBy = "buyer"
             });
 
-            orderShares.Add(new OrderPaymentShare(order.Id, totalPayment));
+            orderShares.Add(new OrderPaymentShare(order.Id, shopId, totalPayment));
 
             reserveCommandsPerOrder.Add(new ReserveOrderStock(
                 checkoutBatchId, order.Id,
                 [.. items.Select(i => new OrderReadyItem(i.CombinationId, i.Quantity))],
-                info.CarrierId,
+                Carriers[info.CarrierCode].Id,
                 AddressMapper.ToCheckoutAddressSnapshot(shopPickupAddresses[shopId]),
-                AddressMapper.ToCheckoutAddressSnapshot(command.ShippingAddressSnapshot)
+                AddressMapper.ToCheckoutAddressSnapshot(deliveryAddress)
             ));
         }
 
         int totalAmount = orderShares.Sum(s => s.Amount);
 
-        await checkoutInitiatedProducer.Produce(new CheckoutInitiated(
+        outboxWriter.Enqueue(new CheckoutInitiated(
             checkoutBatchId, buyerId, orderIds, command.PaymentMethod, totalAmount,
-            orderShares, command.PlatformVoucherCode, shopVouchers), cancellationToken);
+            orderShares, command.PlatformVoucherCode, shopVouchers));
 
         foreach (ReserveOrderStock reserveCommand in reserveCommandsPerOrder)
         {
-            await reserveOrderStockProducer.Produce(reserveCommand, cancellationToken);
+            outboxWriter.Enqueue(reserveCommand);
         }
 
         await context.SaveChangesAsync(cancellationToken);

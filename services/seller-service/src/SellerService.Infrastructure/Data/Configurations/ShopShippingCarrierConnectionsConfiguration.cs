@@ -20,6 +20,10 @@ public class ShopShippingCarrierConnectionsConfiguration : IEntityTypeConfigurat
             .HasColumnName("carrier_id")
             .IsRequired();
 
+        builder.Property(x => x.CarrierCode)
+            .HasColumnName("carrier_code")
+            .IsRequired();
+
         builder.Property(x => x.Status)
             .HasColumnName("status")
             .HasConversion<string>()

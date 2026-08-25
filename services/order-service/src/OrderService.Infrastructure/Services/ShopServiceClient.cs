@@ -18,7 +18,7 @@ public class ShopServiceClient(
 
         if (!response.IsValid || response.PickupAddressSnapshot is null)
         {
-            return new ShopPickupAddressResult(false, null, response.FailureReason);
+            return new ShopPickupAddressResult(false, response.ShopName, null, response.FailureReason);
         }
 
         PickupAddressSnapshot p = response.PickupAddressSnapshot;
@@ -36,6 +36,6 @@ public class ShopServiceClient(
             AddressType = p.AddressType
         };
 
-        return new ShopPickupAddressResult(true, snapshot, null);
+        return new ShopPickupAddressResult(true, response.ShopName, snapshot, null);
     }
 }

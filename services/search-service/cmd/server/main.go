@@ -10,6 +10,7 @@ import (
 	"os/signal"
 	"strings"
 	"syscall"
+	"time"
 
 	_ "search-service/docs"
 
@@ -44,17 +45,24 @@ func main() {
 
 	repo := elasticsearch.NewESSearchRepository(esClient, cfg.ESIndex)
 
+	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
+	defer stop()
+
 	var trendingRepo application.TrendingRepository
+	var searchCacheRepo application.SearchCacheRepository
+	var trendingKeywordSet *application.TrendingKeywordSet
+
 	if cfg.RedisAddr != "" {
 		redisClient := goredis.NewClient(&goredis.Options{Addr: cfg.RedisAddr})
 		trendingRepo = redisinfra.NewRedisTrendingRepository(redisClient)
+		searchCacheRepo = redisinfra.NewRedisSearchCacheRepository(redisClient)
+
+		trendingKeywordSet = application.NewTrendingKeywordSet(trendingRepo, 20, 60*time.Second)
+		go trendingKeywordSet.StartRefreshing(ctx)
 	}
 
 	ingestUseCase := application.NewIngestUseCase(repo)
-	searchUseCase := application.NewSearchUseCase(repo, trendingRepo)
-
-	ctx, stop := signal.NotifyContext(context.Background(), syscall.SIGINT, syscall.SIGTERM)
-	defer stop()
+	searchUseCase := application.NewSearchUseCase(repo, trendingRepo, searchCacheRepo, trendingKeywordSet)
 
 	consumer := kafkainfra.NewConsumer(
 		strings.Split(cfg.KafkaBrokers, ","),

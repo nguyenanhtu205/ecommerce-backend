@@ -83,7 +83,15 @@ func main() {
 		cfg.KafkaBrokers, cfg.ReviewMediaAttachedTopic, cfg.MediaConsumerGroupID,
 		kafkainfra.NewReviewMediaAttachedHandler(svc))
 
-	consumers := []*kafkainfra.Consumer{productConsumer, reviewConsumer}
+	chatConsumer := kafkainfra.NewConsumer(
+		cfg.KafkaBrokers, cfg.ChatMediaAttachedTopic, cfg.MediaConsumerGroupID,
+		kafkainfra.NewChatMediaAttachedHandler(svc))
+
+	avatarConsumer := kafkainfra.NewConsumer(
+		cfg.KafkaBrokers, cfg.AvatarMediaAttachedTopic, cfg.MediaConsumerGroupID,
+		kafkainfra.NewAvatarMediaAttachedHandler(svc))
+
+	consumers := []*kafkainfra.Consumer{productConsumer, reviewConsumer, chatConsumer, avatarConsumer}
 	for _, cons := range consumers {
 		go func(c *kafkainfra.Consumer) {
 			const retryDelay = 5 * time.Second
