@@ -35,6 +35,9 @@ services:
       - '27017:27017'
     volumes:
       - mongodata:/data/db
+      - ./infra/mongo/init-import-catalog.sh:/docker-entrypoint-initdb.d/init-import-catalog.sh
+      - ./infra/mongo/data/product_catalog_db_categories.json:/docker-entrypoint-initdb.d/data/product_catalog_db_categories.json
+      - ./infra/mongo/data/product_catalog_db_category_attributes.json:/docker-entrypoint-initdb.d/data/product_catalog_db_category_attributes.json
 
   redis:
     image: redis:7-alpine

@@ -90,3 +90,4 @@ docker compose up --build order-service
 - If a service fails to start because a dependency is not ready yet, simply run `docker compose up --build` again; most services will retry their connection automatically.
 - If you change the database schema for a service, you may need to remove its volume and restart so migrations run cleanly: `docker compose down -v` followed by `docker compose up --build`.
 - If port conflicts occur, check `docker-compose.yml` for the port mappings and make sure nothing else on your machine is using the same ports.
+- If MongoDB does not seed initial data (categories / category attributes) on first run, the init script may have lost its execute permission after cloning (common on Windows checkouts, or if the executable bit wasn't committed). Fix it with `chmod +x infra/mongo/init-import-catalog.sh`, then reset the volume and restart: `docker compose down -v` followed by `docker compose up --build`.

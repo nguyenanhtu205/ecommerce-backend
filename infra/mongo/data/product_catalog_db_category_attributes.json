@@ -1,0 +1,60 @@
+[{
+  "_id": "019fe99c-8524-72f8-9fb7-bd3ff765fd01",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "Thương hiệu",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 5,
+  "sortOrder": 1
+},
+{
+  "_id": "019fe99d-1e6c-77ca-ae31-ed1e0f53ab2a",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "RAM",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 5,
+  "sortOrder": 2
+},
+{
+  "_id": "019fe99d-3bb8-7e08-9b83-b4761b2d1978",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "CPU",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 5,
+  "sortOrder": 3
+},
+{
+  "_id": "019fe99d-771e-749b-980d-3205e02dd3e4",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "Ổ cứng",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 4,
+  "sortOrder": 4
+},
+{
+  "_id": "019fe99d-ad71-71f8-bab1-daa979f107e8",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "Card màn hình",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 4,
+  "sortOrder": 5
+},
+{
+  "_id": "019fe99d-fd14-7780-95e7-87a02922bb18",
+  "categoryId": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "Mainboard",
+  "required": true,
+  "inputType": "text",
+  "options": [],
+  "completionWeight": 4,
+  "sortOrder": 6
+}]

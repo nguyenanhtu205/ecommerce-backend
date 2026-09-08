@@ -1,0 +1,7278 @@
+[{
+  "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "name": "Thời Trang Nam",
+  "slug": "thoi-trang-nam",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:37:54.768Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218830747682819"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "name": "Thời Trang Nữ",
+  "slug": "thoi-trang-nu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:04.111Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218830841116258"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "name": "Điện Thoại & Phụ Kiện",
+  "slug": "dien-thoai-phu-kien",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:13.753Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218830937532327"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "name": "Mẹ & Bé",
+  "slug": "me-be",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:21.110Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831011108124"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "name": "Thiết Bị Điện Tử",
+  "slug": "thiet-bi-dien-tu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:28.432Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831084320623"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "name": "Nhà Cửa & Đời Sống",
+  "slug": "nha-cua-doi-song",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:38.977Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831189775653"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "name": "Máy Tính & Laptop",
+  "slug": "may-tinh-laptop",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:47.247Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831272474016"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "name": "Sắc Đẹp",
+  "slug": "sac-dep",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:38:55.025Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831350254350"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "name": "Máy Ảnh & Máy Quay Phim",
+  "slug": "may-anh-may-quay-phim",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:02.897Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831428972566"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "name": "Sức Khỏe",
+  "slug": "suc-khoe",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:11.168Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831511680920"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "name": "Đồng Hồ",
+  "slug": "dong-ho",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:19.430Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831594304052"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "name": "Giày Dép Nữ",
+  "slug": "giay-dep-nu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:31.144Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831711443801"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "name": "Giày Dép Nam",
+  "slug": "giay-dep-nam",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:37.863Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831778632071"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "name": "Túi Ví Nữ",
+  "slug": "tui-vi-nu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:46.223Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831862238467"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "name": "Thiết Bị Điện Gia Dụng",
+  "slug": "thiet-bi-dien-gia-dung",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:39:53.526Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218831935268351"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "name": "Phụ Kiện & Trang Sức Nữ",
+  "slug": "phu-kien-trang-suc-nu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:00.792Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832007922927"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "name": "Thể Thao & Du Lịch",
+  "slug": "the-thao-du-lich",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:07.099Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832070994234"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "name": "Bách Hóa Online",
+  "slug": "bach-hoa-online",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:13.886Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832138868105"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "name": "Ô Tô & Xe Máy & Xe Đạp",
+  "slug": "o-to-xe-may-xe-dap",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:21.122Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832211221179"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "name": "Nhà Sách Online",
+  "slug": "nha-sach-online",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:29.024Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832290242492"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "name": "Balo & Túi Ví Nam",
+  "slug": "balo-tui-vi-nam",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:36.346Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832363467622"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "name": "Thời Trang Trẻ Em",
+  "slug": "thoi-trang-tre-em",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:43.589Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832435891346"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "name": "Đồ Chơi",
+  "slug": "do-choi",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:40:51.597Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218832515972981"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "name": "Giặt Giũ & Chăm Sóc Nhà Cửa",
+  "slug": "giat-giu-cham-soc-nha-cua",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:41:51.832Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218833118328768"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "name": "Chăm Sóc Thú Cưng",
+  "slug": "cham-soc-thu-cung",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:41:59.605Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218833196051867"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "name": "Voucher & Dịch Vụ",
+  "slug": "voucher-dich-vu",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:42:06.314Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218833263142303"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "name": "Dụng Cụ & Thiết Bị Tiện Ích",
+  "slug": "dung-cu-thiet-bi-tien-ich",
+  "parentId": null,
+  "path": [],
+  "level": 1,
+  "isLeaf": false,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T14:42:15.756Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218833357564022"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-01ae-7fe3-b8f4-a127795d92bd",
+  "name": "Áo Khoác",
+  "slug": "ao-khoac",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:26:33.390Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218859933903908"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-2b01-77b7-b110-42373b1e5f70",
+  "name": "Áo Vest và Blazer",
+  "slug": "ao-vest-va-blazer",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:26:43.969Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860039690974"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-54cd-75de-b083-8f4ff1ee9ebe",
+  "name": "Áo Hoodie, Áo Len & Áo Nỉ",
+  "slug": "ao-hoodie-ao-len-ao-ni",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:26:54.669Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860146693284"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-7c1c-7a13-8215-509a0bf8663c",
+  "name": "Quần Jeans",
+  "slug": "quan-jeans",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:27:04.733Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860247331964"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-c5dd-7284-b88b-8bd67ccfb2b7",
+  "name": "Quần Dài/Quần Âu",
+  "slug": "quan-dai-quan-au",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:27:23.613Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860436135879"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe722-f8ff-7db0-8dc1-92efc942f786",
+  "name": "Quần Short",
+  "slug": "quan-short",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:27:36.703Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860567034983"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-1f85-7158-beff-ed0c6a371e27",
+  "name": "Áo",
+  "slug": "ao",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:27:46.565Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860665658093"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-473e-7a43-92c7-82598c154f6c",
+  "name": "Áo Ba Lỗ",
+  "slug": "ao-ba-lo",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:27:56.734Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860767345397"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-64ef-73b1-993d-fad821d4ae5f",
+  "name": "Đồ Lót",
+  "slug": "do-lot",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:04.335Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860843353786"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-88f8-77e3-9e2d-cb4a8e14e3ac",
+  "name": "Đồ Ngủ",
+  "slug": "do-ngu",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:13.560Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218860935607801"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-a83e-7cde-9d35-4e38b1e5e496",
+  "name": "Đồ Bộ",
+  "slug": "do-bo",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:21.566Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861015661557"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-ce26-7ba7-8ffa-ffcb7e575cc9",
+  "name": "Vớ/Tất",
+  "slug": "vo-tat",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:31.270Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861112703572"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe723-f1c8-7973-a7c4-d0014ed6a030",
+  "name": "Trang Phục Truyền Thống",
+  "slug": "trang-phuc-truyen-thong",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:40.392Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861203924336"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-1468-772c-83de-25ed8c243565",
+  "name": "Đồ Hóa Trang",
+  "slug": "do-hoa-trang",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:49.256Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861292565751"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-3478-73ce-9904-58b973b166cc",
+  "name": "Trang Phục Ngành Nghề",
+  "slug": "trang-phuc-nganh-nghe",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:28:57.464Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861374648594"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-8fc4-72e8-a252-26752d2356a2",
+  "name": "Khác",
+  "slug": "thoi-trang-nam-khac",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:29:20.836Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861608369065"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-bbef-7601-b1f7-966ae61d5d64",
+  "name": "Trang Sức Nam",
+  "slug": "trang-suc-nam",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:29:32.143Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861721430326"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-de26-776d-ba1a-f662e982a684",
+  "name": "Kính Mắt Nam",
+  "slug": "kinh-mat-nam",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:29:40.902Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861809022049"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe724-fff0-7d8c-a0dd-0971ae239392",
+  "name": "Thắt Lưng Nam",
+  "slug": "that-lung-nam",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:29:49.552Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861895527809"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe725-2359-7b04-9b1e-a899087584ca",
+  "name": "Cà vạt & Nơ cổ",
+  "slug": "ca-vat-no-co",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:29:58.617Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218861986176083"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe725-4646-7fe7-b6cb-ed0cc895f7af",
+  "name": "Phụ Kiện Nam",
+  "slug": "phu-kien-nam",
+  "parentId": "019fe6f5-78d0-7837-8586-6399d8310b27",
+  "path": [
+    {
+      "_id": "019fe6f5-78d0-7837-8586-6399d8310b27",
+      "slug": "thoi-trang-nam",
+      "name": "Thời Trang Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:30:07.558Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218862075583680"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe736-aa43-74a8-ae60-db3d30ce79eb",
+  "name": "Quần",
+  "slug": "quan",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:49:07.267Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218873472677045"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe736-aa43-7005-9f0b-076eb9fe550a",
+  "name": "Quần đùi",
+  "slug": "quan-dui",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:49:07.267Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218873472677298"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe736-aa43-7398-bbfc-10e634aaf36c",
+  "name": "Chân váy",
+  "slug": "chan-vay",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:49:07.267Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218873472677303"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-71f8-8c21-d286c908f700",
+  "name": "Quần jeans",
+  "slug": "quan-jeans-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990443"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-78f1-b11b-8a651b9a5d5d",
+  "name": "Đầm/Váy",
+  "slug": "dam-vay",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990449"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7518-902c-9510fb038672",
+  "name": "Váy cưới",
+  "slug": "vay-cuoi",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990451"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7679-9766-5bde7ed313c3",
+  "name": "Đồ liền thân",
+  "slug": "do-lien-than",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990454"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7132-a632-bfcff5ac78a8",
+  "name": "Áo khoác, Áo choàng & Vest",
+  "slug": "ao-khoac-ao-choang-vest",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990456"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7479-91e0-85e31210d773",
+  "name": "Áo len & Cardigan",
+  "slug": "ao-len-cardigan",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990458"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7bbe-b633-ebddf2c273f5",
+  "name": "Hoodie và Áo nỉ",
+  "slug": "hoodie-va-ao-ni",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990461"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7a4d-9457-6bd5762d7f1a",
+  "name": "Bộ",
+  "slug": "bo",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990463"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-74af-8474-c6fd82dd7a93",
+  "name": "Đồ lót",
+  "slug": "do-lot-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990494"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7aff-b827-bee108dc36bf",
+  "name": "Đồ ngủ",
+  "slug": "do-ngu-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990497"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-765b-9401-ed3325e6b745",
+  "name": "Áo",
+  "slug": "ao-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990499"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7ac4-9c39-19919bfa0c74",
+  "name": "Đồ tập",
+  "slug": "do-tap",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990501"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7766-ba66-6d277c05ef7b",
+  "name": "Đồ Bầu",
+  "slug": "do-bau",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990504"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7368-9490-a2d55bdc08f5",
+  "name": "Đồ truyền thống",
+  "slug": "do-truyen-thong-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990506"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-73d4-943e-5e98dc532b5e",
+  "name": "Đồ hóa trang",
+  "slug": "do-hoa-trang-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990508"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-72f9-9adf-23441321a5f9",
+  "name": "Vải",
+  "slug": "vai",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990511"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7671-a54d-56bfad329eaf",
+  "name": "Vớ/ Tất",
+  "slug": "vo-tat-nu",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990516"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe73d-c2cb-7331-95bd-901b36bf2a8d",
+  "name": "Khác",
+  "slug": "thoi-trang-nu-khac",
+  "parentId": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+  "path": [
+    {
+      "_id": "019fe6f5-9d4f-76d3-84a0-91418dbc19a1",
+      "slug": "thoi-trang-nu",
+      "name": "Thời Trang Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T15:56:52.299Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218878122990518"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7bf6-9109-e2101e09da7c",
+  "name": "Điện thoại",
+  "slug": "dien-thoai",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631275"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-78d4-bef1-c063a2c5e553",
+  "name": "Máy tính bảng",
+  "slug": "may-tinh-bang",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631280"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7351-9301-52e137679526",
+  "name": "Pin Dự Phòng",
+  "slug": "pin-du-phong",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631283"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7b8c-932d-6a5c5c89dfd2",
+  "name": "Pin Gắn Trong, Cáp và Bộ Sạc",
+  "slug": "pin-gan-trong-cap-va-bo-sac",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631285"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7e99-a9a4-26872301c8ad",
+  "name": "Ốp lưng, bao da, Miếng dán điện thoại",
+  "slug": "op-lung-bao-da-mieng-dan-dien-thoai",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631310"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-776e-9a4a-3e93865688a3",
+  "name": "Bảo vệ màn hình",
+  "slug": "bao-ve-man-hinh",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631315"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7b52-838b-0d97ca0a224e",
+  "name": "Đế giữ điện thoại",
+  "slug": "de-giu-dien-thoai",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631317"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-731a-a400-ba8f52b13d56",
+  "name": "Thẻ nhớ",
+  "slug": "the-nho",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631320"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-720c-ad3e-cd530448a373",
+  "name": "Sim",
+  "slug": "sim",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631340"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-7fdc-a933-f1b5315eb93b",
+  "name": "Phụ kiện khác",
+  "slug": "phu-kien-khac",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631377"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe740-fff3-705c-95e9-3eed4909d9b7",
+  "name": "Thiết bị khác",
+  "slug": "thiet-bi-khac",
+  "parentId": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+  "path": [
+    {
+      "_id": "019fe6f5-c2f9-7ed4-a75a-e9e5932148f4",
+      "slug": "dien-thoai-phu-kien",
+      "name": "Điện Thoại & Phụ Kiện"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:00:24.563Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218880245631379"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-731c-8774-0fcc08970d59",
+  "name": "Đồ dùng du lịch cho bé",
+  "slug": "do-dung-du-lich-cho-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136552"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-78a4-93c4-8fd0eae5aee0",
+  "name": "Đồ dùng ăn dặm cho bé",
+  "slug": "do-dung-an-dam-cho-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136557"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7dd0-834a-df32eb6be3ca",
+  "name": "Phụ kiện cho mẹ",
+  "slug": "phu-kien-cho-me",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136559"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7ed6-8329-8f4224d1701a",
+  "name": "Chăm sóc sức khỏe mẹ",
+  "slug": "cham-soc-suc-khoe-me",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136561"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7744-a56d-c407da813cc8",
+  "name": "Đồ dùng phòng tắm & Chăm sóc cơ thể bé",
+  "slug": "do-dung-phong-tam-cham-soc-co-the-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136563"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7e6b-b6d2-408134fcf1e9",
+  "name": "Đồ dùng phòng ngủ cho bé",
+  "slug": "do-dung-phong-ngu-cho-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136566"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7719-9e58-f1c8399c1a95",
+  "name": "An toàn cho bé",
+  "slug": "an-toan-cho-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136568"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7d62-84fa-d15b6d5f7730",
+  "name": "Thực phẩm cho bé",
+  "slug": "thuc-pham-cho-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136570"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-720f-8fa5-1b6b637b69cd",
+  "name": "Chăm sóc sức khỏe bé",
+  "slug": "cham-soc-suc-khoe-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136589"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe742-eead-7e1d-bab1-6fb0ed18606b",
+  "name": "Tã & bô em bé",
+  "slug": "ta-bo-em-be",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:02:31.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218881512136591"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe744-2d72-7d8b-ae51-0d73ef27c2e5",
+  "name": "Đồ chơi",
+  "slug": "me-be-do-choi",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:03:52.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218882328184363"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe744-2d72-74ea-9b8b-fa0b2ea234ce",
+  "name": "Bộ & Gói quà tặng",
+  "slug": "bo-goi-qua-tang",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:03:52.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218882328184368"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe744-2d72-750d-a055-add56af0b180",
+  "name": "Khác",
+  "slug": "me-be-khac",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:03:52.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218882328184371"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe744-2d72-7311-9658-93c71e577ae6",
+  "name": "Sữa công thức trên 24 tháng",
+  "slug": "sua-cong-thuc-tren-24-thang",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:03:52.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218882328184374"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe744-2d72-7b90-914a-4a79a2eeae1c",
+  "name": "Sữa công thức 0-24 tháng tuổi",
+  "slug": "sua-cong-thuc-0-24-thang-tuoi",
+  "parentId": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+  "path": [
+    {
+      "_id": "019fe6f5-dfb6-7cef-bf43-ced9b58f5466",
+      "slug": "me-be",
+      "name": "Mẹ & Bé"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:03:52.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218882328184377"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7705-a1f3-4399e4e6eb5a",
+  "name": "Phụ kiện tivi",
+  "slug": "phu-kien-tivi",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135362"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7bd5-8126-4d57da4db455",
+  "name": "Máy Game Console",
+  "slug": "may-game-console",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135369"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7a6c-85dd-05c62062ab03",
+  "name": "Phụ kiện Console",
+  "slug": "phu-kien-console",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135372"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7fae-9b51-bdc4e1f27dfc",
+  "name": "Đĩa game",
+  "slug": "dia-game",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135374"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-79d6-a4a9-75aaa88f7acf",
+  "name": "Linh phụ kiện",
+  "slug": "linh-phu-kien",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135377"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-725f-85ea-6761b5115080",
+  "name": "Tai nghe nhét tai",
+  "slug": "tai-nghe-nhet-tai",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135379"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7d85-af30-43ce547675e6",
+  "name": "Loa",
+  "slug": "loa",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135382"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-755a-80b0-fee30b3d8903",
+  "name": "Tivi",
+  "slug": "tivi",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135384"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7482-9b2b-f029b0ad9d0a",
+  "name": "Tivi Box",
+  "slug": "tivi-box",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135390"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe745-b7f5-7469-a3b7-ba85d48e72ab",
+  "name": "Headphones",
+  "slug": "headphones",
+  "parentId": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+  "path": [
+    {
+      "_id": "019fe6f5-fc50-705c-9881-28b1f5e70048",
+      "slug": "thiet-bi-dien-tu",
+      "name": "Thiết Bị Điện Tử"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:05:33.813Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218883338135393"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe749-6a64-7859-93e8-c2f14efbdc88",
+  "name": "Chăn, Ga, Gối & Nệm",
+  "slug": "chan-ga-goi-nem",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:09:36.100Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218885761002296"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe749-6a64-7e26-bd5b-9df6aa8885f4",
+  "name": "Đồ nội thất",
+  "slug": "do-noi-that",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:09:36.100Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218885761002301"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe749-6a64-7c96-a2cf-a27ed2092184",
+  "name": "Trang trí nhà cửa",
+  "slug": "trang-tri-nha-cua",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:09:36.100Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218885761002303"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7112-ba81-239e76f82c70",
+  "name": "Đồ dùng nhà bếp và hộp đựng thực phẩm",
+  "slug": "do-dung-nha-bep-va-hop-dung-thuc-pham",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381227"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-799e-b448-97bf22b7749c",
+  "name": "Đèn",
+  "slug": "den",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381232"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7b9f-aa70-9feaf9b4658b",
+  "name": "Ngoài trời & Sân vườn",
+  "slug": "ngoai-troi-san-vuon",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381234"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-75fd-b089-39aecc38e9b9",
+  "name": "Đồ dùng phòng tắm",
+  "slug": "do-dung-phong-tam",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381237"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7b1a-9802-d42fcd2905c1",
+  "name": "Vật phẩm thờ cúng",
+  "slug": "vat-pham-tho-cung",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381239"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-710e-9b11-0c0df674ffbd",
+  "name": "Đồ trang trí tiệc",
+  "slug": "do-trang-tri-tiec",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381264"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7c94-a255-139dd8ae0e0f",
+  "name": "Chăm sóc nhà cửa và giặt ủi",
+  "slug": "cham-soc-nha-cua-va-giat-ui",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381269"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7931-a51e-e5d3885262a3",
+  "name": "Sắp xếp nhà cửa",
+  "slug": "sap-xep-nha-cua",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381271"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-77cd-9b42-b7fa18cd18ad",
+  "name": "Dụng cụ pha chế",
+  "slug": "dung-cu-pha-che",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381273"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-7086-bd69-57330d55026f",
+  "name": "Tinh dầu thơm phòng",
+  "slug": "tinh-dau-thom-phong",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381276"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74a-c1e6-77d9-a4b9-a5535a7cbae1",
+  "name": "Đồ dùng phòng ăn",
+  "slug": "do-dung-phong-an",
+  "parentId": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+  "path": [
+    {
+      "_id": "019fe6f6-2581-7aff-bdf0-9a089120b0c3",
+      "slug": "nha-cua-doi-song",
+      "name": "Nhà Cửa & Đời Sống"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:11:04.038Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218886640381278"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2344-7e06-b84c-07be957cc0c6",
+  "name": "Máy Tính Bàn",
+  "slug": "may-tinh-ban",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010022"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7ac3-aa63-a367b77aae65",
+  "name": "Màn Hình",
+  "slug": "man-hinh",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010027"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7faf-8004-1e8324610e8f",
+  "name": "Linh Kiện Máy Tính",
+  "slug": "linh-kien-may-tinh",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010031"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7cd6-bddb-8248a936cdeb",
+  "name": "Thiết Bị Lưu Trữ",
+  "slug": "thiet-bi-luu-tru",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010034"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7796-87f7-d0b92e45c563",
+  "name": "Thiết Bị Mạng",
+  "slug": "thiet-bi-mang",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010036"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-72b2-b8ab-375c33ba57cd",
+  "name": "Máy In, Máy Scan & Máy Chiếu",
+  "slug": "may-in-may-scan-may-chieu",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010039"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7cda-b3ee-2b9d3298018e",
+  "name": "Phụ Kiện Máy Tính",
+  "slug": "phu-kien-may-tinh",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010059"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7cce-9d5a-f99f04cee4d6",
+  "name": "Laptop",
+  "slug": "laptop",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010061"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7e80-8331-2ac578415970",
+  "name": "Khác",
+  "slug": "may-tinh-laptop-khac",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010064"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74c-2345-7723-afc6-e6cf53d6dfb7",
+  "name": "Gaming",
+  "slug": "gaming",
+  "parentId": "019fe6f6-45cf-789a-b860-2efe01096d39",
+  "path": [
+    {
+      "_id": "019fe6f6-45cf-789a-b860-2efe01096d39",
+      "slug": "may-tinh-laptop",
+      "name": "Máy Tính & Laptop"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:12:34.501Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218887545010066"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7c4b-b767-86f8fa7e5bf1",
+  "name": "Chăm sóc da mặt",
+  "slug": "cham-soc-da-mat",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164148"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7761-a7a0-20fa4da6b9ef",
+  "name": "Tắm & chăm sóc cơ thể",
+  "slug": "tam-cham-soc-co-the",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164160"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7c11-875f-1d3928aebc76",
+  "name": "Trang điểm",
+  "slug": "trang-diem",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164165"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-78e8-8daa-e14458b96c4d",
+  "name": "Chăm sóc tóc",
+  "slug": "cham-soc-toc",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164198"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-71b7-bbd4-57aa454bfe21",
+  "name": "Dụng cụ & Phụ kiện Làm đẹp",
+  "slug": "dung-cu-phu-kien-lam-dep",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164204"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7669-9253-6afa269deb84",
+  "name": "Vệ sinh răng miệng",
+  "slug": "ve-sinh-rang-mieng",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164209"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-705c-9787-ef244f9d738c",
+  "name": "Nước hoa",
+  "slug": "nuoc-hoa",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164214"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7287-9395-f634200a6119",
+  "name": "Chăm sóc nam giới",
+  "slug": "cham-soc-nam-gioi",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164219"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7128-b254-86f46b426390",
+  "name": "Khác",
+  "slug": "sac-dep-khac",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164223"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7b07-a2d8-f1417592c3f8",
+  "name": "Chăm sóc phụ nữ",
+  "slug": "cham-soc-phu-nu",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164228"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74d-83ac-7164-ac4f-7eb5e8cef860",
+  "name": "Bộ sản phẩm làm đẹp",
+  "slug": "bo-san-pham-lam-dep",
+  "parentId": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+  "path": [
+    {
+      "_id": "019fe6f6-6431-70a5-b28f-4c1f5fb0b31b",
+      "slug": "sac-dep",
+      "name": "Sắc Đẹp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:14:04.716Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218888447164233"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74f-69ed-70a1-a098-0dd335c81e5c",
+  "name": "Máy ảnh - quay phim",
+  "slug": "may-anh-quay-phim",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:09.197Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218889691978176"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe74f-69ed-7ef5-967f-fe114ddfcbe2",
+  "name": "Camera giám sát & Camera hệ thống",
+  "slug": "camera-giam-sat-camera-he-thong",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:09.197Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218889691978181"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe750-034b-7cf1-8e85-2c77bb11932f",
+  "name": "Thẻ nhớ",
+  "slug": "the-nho-may-anh-quay-phim",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:48.459Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218890084599856"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe750-034b-763a-9b44-fde9adc3d796",
+  "name": "Ống kính",
+  "slug": "ong-kinh",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:48.459Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218890084599865"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe750-034b-74a7-b6a5-2014a0332ed8",
+  "name": "Phụ kiện máy ảnh",
+  "slug": "phu-kien-may-anh",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:48.459Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218890084599870"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe750-034b-7ab0-ba1b-3c468cd10b77",
+  "name": "Máy bay camera & Phụ kiện",
+  "slug": "may-bay-camera-phu-kien",
+  "parentId": "019fe6f6-82f1-765e-9478-c627ff89f934",
+  "path": [
+    {
+      "_id": "019fe6f6-82f1-765e-9478-c627ff89f934",
+      "slug": "may-anh-may-quay-phim",
+      "name": "Máy Ảnh & Máy Quay Phim"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:16:48.459Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218890084599875"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7c57-a163-a1e32aafa116",
+  "name": "Vật tư y tế",
+  "slug": "vat-tu-y-te",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862009"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7467-aec1-eaf8eff027fa",
+  "name": "Chống muỗi & xua đuổi côn trùng",
+  "slug": "chong-muoi-xua-duoi-con-trung",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862017"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7ff8-9079-12ca4d9b68d5",
+  "name": "Thực phẩm chức năng",
+  "slug": "thuc-pham-chuc-nang",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862020"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7f86-bcf2-2bfa64f61fc5",
+  "name": "Tã người lớn",
+  "slug": "ta-nguoi-lon",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862022"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7d63-8f2e-dc70f728316a",
+  "name": "Hỗ trợ làm đẹp",
+  "slug": "ho-tro-lam-dep",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862041"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-74a8-a132-09be031fae7c",
+  "name": "Hỗ trợ tình dục",
+  "slug": "ho-tro-tinh-duc",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862043"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-7a7e-8e4b-7089b9c41309",
+  "name": "Dụng cụ massage và trị liệu",
+  "slug": "dung-cu-massage-va-tri-lieu",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862046"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe751-70a2-772b-9011-93aa1afea0e9",
+  "name": "Khác",
+  "slug": "suc-khoe-khac",
+  "parentId": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+  "path": [
+    {
+      "_id": "019fe6f6-a340-7504-993a-4cdaf1905ef0",
+      "slug": "suc-khoe",
+      "name": "Sức Khỏe"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:18:21.986Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891019862048"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e2f-7f37-ab48-a877924003be",
+  "name": "Đồng Hồ Nam",
+  "slug": "dong-ho-nam",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840005"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e30-7e26-aacb-3b8863800e20",
+  "name": "Đồng Hồ Nữ",
+  "slug": "dong-ho-nu",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840017"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e30-74eb-b321-8caf6a67322a",
+  "name": "Bộ Đồng Hồ & Đồng Hồ Cặp",
+  "slug": "bo-dong-ho-dong-ho-cap",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840023"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e30-7039-9a62-0b2ce692c3ce",
+  "name": "Đồng Hồ Trẻ Em",
+  "slug": "dong-ho-tre-em",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840029"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e30-75f4-bc69-caa790dc3397",
+  "name": "Phụ Kiện Đồng Hồ",
+  "slug": "phu-kien-dong-ho",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840069"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe752-9e30-741a-bc50-d7e84263a071",
+  "name": "Khác",
+  "slug": "dong-ho-khac",
+  "parentId": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+  "path": [
+    {
+      "_id": "019fe6f6-c386-7351-b8f3-022029bf6ec2",
+      "slug": "dong-ho",
+      "name": "Đồng Hồ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:19:39.184Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218891791840074"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-744d-b6dc-7a67569ac60e",
+  "name": "Bốt",
+  "slug": "bot-nu",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217407"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-7d68-a85a-94c83e56b39b",
+  "name": "Giày Thể Thao/ Sneaker",
+  "slug": "giay-the-thao-sneaker-nu",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217417"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-74b7-8379-6005bb25784d",
+  "name": "Giày Đế Bằng",
+  "slug": "giay-de-bang",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217422"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-7db7-af6d-022abaddedb4",
+  "name": "Giày Cao Gót",
+  "slug": "giay-cao-got",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217454"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-767f-8406-0915e9df390c",
+  "name": "Giày Đế Xuồng",
+  "slug": "giay-de-xuong",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217461"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-7e37-8d55-a2400b933638",
+  "name": "Xăng-đan Và Dép",
+  "slug": "xang-dan-va-dep-nu",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217465"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-788f-8307-1a7a1fbead2e",
+  "name": "Phụ Kiện Giày Dép",
+  "slug": "phu-kien-giay-dep-nu",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217470"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe756-ac39-7010-abb4-e8297bada75d",
+  "name": "Khác",
+  "slug": "giay-dep-nu-khac",
+  "parentId": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+  "path": [
+    {
+      "_id": "019fe6f6-f148-77d6-9700-66421d05ab4f",
+      "slug": "giay-dep-nu",
+      "name": "Giày Dép Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-09T16:24:04.921Z"
+    },
+    "Ticks": {
+      "$numberLong": "639218894449217474"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-764a-96f6-a7a0935c4af3",
+  "name": "Bốt",
+  "slug": "bot-nam",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557601"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-7127-8f88-00c97023c89f",
+  "name": "Giày Thể Thao/ Sneakers",
+  "slug": "giay-the-thao-sneakers-nam",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557862"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-721c-89ea-d38a95e65150",
+  "name": "Giày Sục",
+  "slug": "giay-suc",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557867"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-7ff1-b98b-daed2cda5408",
+  "name": "Giày Tây Lười",
+  "slug": "giay-tay-luoi",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557870"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-7ae5-9d5c-0e7a5b3e8de3",
+  "name": "Giày Oxfords & Giày Buộc Dây",
+  "slug": "giay-oxfords-giay-buoc-day",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557892"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-7797-ac76-21ef965ee1e2",
+  "name": "Xăng-đan và Dép",
+  "slug": "xang-dan-va-dep-nam",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557896"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-7d5e-93b9-6e6edb3073f7",
+  "name": "Phụ kiện giày dép",
+  "slug": "phu-kien-giay-dep-nam",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557899"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe974-d233-76a4-99bb-ed1500795042",
+  "name": "Khác",
+  "slug": "giay-dep-nam-khac",
+  "parentId": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+  "path": [
+    {
+      "_id": "019fe6f7-0b87-7564-96b0-a754181a2dc8",
+      "slug": "giay-dep-nam",
+      "name": "Giày Dép Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:16:15.155Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219249751557902"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-7b74-96a7-f27b5fc7a214",
+  "name": "Ba Lô Nữ",
+  "slug": "ba-lo-nu",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335192"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-741c-b82d-e60fd09ccc2d",
+  "name": "Cặp Laptop",
+  "slug": "cap-laptop",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335216"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-7bad-9456-79811c262a23",
+  "name": "Ví Dự Tiệc & Ví Cầm Tay",
+  "slug": "vi-du-tiec-vi-cam-tay",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335222"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-7883-a986-2c2af0fa15ac",
+  "name": "Túi Đeo Hông & Túi Đeo Ngực",
+  "slug": "tui-deo-hong-tui-deo-nguc",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335226"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-75d6-be0e-cdf8e4ac3689",
+  "name": "Túi Tote",
+  "slug": "tui-tote",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335244"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-75a4-a5a3-d2ed2d3625ed",
+  "name": "Túi Quai Xách",
+  "slug": "tui-quai-xach",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335249"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-70b2-b520-68d9c74b9883",
+  "name": "Túi Đeo Chéo & Túi Đeo Vai",
+  "slug": "tui-deo-cheo-tui-deo-vai",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335252"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-7564-9411-1d2e16ba75a3",
+  "name": "Ví/Bóp Nữ",
+  "slug": "vi-bop-nu",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335256"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-7b64-8a01-c7039888b1e2",
+  "name": "Phụ Kiện Túi",
+  "slug": "phu-kien-tui",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335260"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe976-4855-735e-81c1-1df5014644d5",
+  "name": "Khác",
+  "slug": "tui-vi-nu-khac",
+  "parentId": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+  "path": [
+    {
+      "_id": "019fe6f7-2c2f-7c87-9156-13231fcfd2ee",
+      "slug": "tui-vi-nu",
+      "name": "Túi Ví Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:17:50.933Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219250709335266"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-7c64-9586-28293e3094b7",
+  "name": "Đồ gia dụng nhà bếp",
+  "slug": "do-gia-dung-nha-bep",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458667"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-76ec-83fb-1fdf9b970938",
+  "name": "Đồ gia dụng lớn",
+  "slug": "do-gia-dung-lon",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458674"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-70d9-b4db-a840ec1468fd",
+  "name": "Máy hút bụi & Thiết bị làm sạch",
+  "slug": "may-hut-bui-thiet-bi-lam-sach",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458677"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-7754-8a00-838a8b6bc79d",
+  "name": "Quạt & Máy nóng lạnh",
+  "slug": "quat-may-nong-lanh",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458681"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-767e-8702-4d6a3683f7bb",
+  "name": "Thiết bị chăm sóc quần áo",
+  "slug": "thiet-bi-cham-soc-quan-ao",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458684"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-7bcf-880c-8778087897f0",
+  "name": "Khác",
+  "slug": "thiet-bi-dien-gia-dung-khac",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458687"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-7ab9-8cbd-a6ef9d19ee5d",
+  "name": "Máy xay, ép, máy đánh trứng trộn bột, máy xay thực phẩm",
+  "slug": "may-xay-ep-may-danh-trung-tron-bot-may-xay-thuc-pham",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458693"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe978-086d-7f34-808c-cbbd2a563407",
+  "name": "Bếp điện",
+  "slug": "bep-dien",
+  "parentId": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+  "path": [
+    {
+      "_id": "019fe6f7-48b6-7741-b1ec-13edc80e9588",
+      "slug": "thiet-bi-dien-gia-dung",
+      "name": "Thiết Bị Điện Gia Dụng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:19:45.645Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219251856458696"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-747d-8b15-ecdd4049de19",
+  "name": "Nhẫn",
+  "slug": "nhan",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030661"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-715c-b6df-28cd7ae8c040",
+  "name": "Bông tai",
+  "slug": "bong-tai",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030667"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-768f-8a9b-e875c80fe75a",
+  "name": "Khăn choàng",
+  "slug": "khan-choang",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030688"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-7cc3-ac30-d77032149de4",
+  "name": "Găng tay",
+  "slug": "gang-tay",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030691"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-730b-bf30-0d657381d5c3",
+  "name": "Phụ kiện tóc",
+  "slug": "phu-kien-toc",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030693"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-70b4-8d48-1b9077d66b88",
+  "name": "Vòng tay & Lắc tay",
+  "slug": "vong-tay-lac-tay",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030696"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-77d4-809f-d058cb6463e6",
+  "name": "Lắc chân",
+  "slug": "lac-chan",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030698"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-772f-8adf-dacb6456a13e",
+  "name": "Mũ",
+  "slug": "mu",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030701"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-70ed-80f7-a78480d19f3f",
+  "name": "Dây chuyền",
+  "slug": "day-chuyen",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030704"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-7484-b0d9-14fa759839b0",
+  "name": "Kính mắt",
+  "slug": "kinh-mat",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030706"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-7f35-a6b9-068d320f2a79",
+  "name": "Kim loại quý",
+  "slug": "kim-loai-quy",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030712"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97a-d0c3-74dd-8c3f-617d15de4d07",
+  "name": "Thắt lưng",
+  "slug": "that-lung",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:22:48.003Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219253680030736"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97b-efde-7521-b409-231e1b69be41",
+  "name": "Cà vạt & Nơ cổ",
+  "slug": "ca-vat-no-co-nu",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:24:01.502Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219254415026261"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97b-efde-7f08-b12c-786f03d2c406",
+  "name": "Phụ kiện thêm",
+  "slug": "phu-kien-them",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:24:01.502Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219254415026266"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97b-efde-72ea-8874-752b15c39e7a",
+  "name": "Bộ phụ kiện",
+  "slug": "bo-phu-kien",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:24:01.502Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219254415026285"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97b-efde-7076-8b3c-9f4643d11dfd",
+  "name": "Khác",
+  "slug": "phu-kien-trang-suc-nu-khac",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:24:01.502Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219254415026287"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97b-efde-78f8-bdfb-d8ea4b6bd95d",
+  "name": "Ô/Dù",
+  "slug": "o-du",
+  "parentId": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+  "path": [
+    {
+      "_id": "019fe6f7-6518-7b91-992d-e170a1aaf48b",
+      "slug": "phu-kien-trang-suc-nu",
+      "name": "Phụ Kiện & Trang Sức Nữ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:24:01.502Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219254415026290"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-7754-b0d3-d2de8dab0b2f",
+  "name": "Vali",
+  "slug": "vali",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787076"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-7973-9a87-1681cbfc3202",
+  "name": "Túi du lịch",
+  "slug": "tui-du-lich",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787083"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-71f1-9b0f-b57f2108bd37",
+  "name": "Phụ kiện du lịch",
+  "slug": "phu-kien-du-lich",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787086"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-76b6-8e6d-1105419c3135",
+  "name": "Dụng Cụ Thể Thao & Dã Ngoại",
+  "slug": "dung-cu-the-thao-da-ngoai",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787108"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-7c05-a580-80df5c143a7c",
+  "name": "Giày Thể Thao",
+  "slug": "giay-the-thao",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787111"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-7c7f-af00-aa16f0da9e23",
+  "name": "Thời Trang Thể Thao & Dã Ngoại",
+  "slug": "thoi-trang-the-thao-da-ngoai",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787113"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-714c-913e-bc1840e698ed",
+  "name": "Phụ Kiện Thể Thao & Dã Ngoại",
+  "slug": "phu-kien-the-thao-da-ngoai",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787116"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97d-bd1a-759e-8c23-42fa8609e5c7",
+  "name": "Khác",
+  "slug": "the-thao-du-lich-khac",
+  "parentId": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+  "path": [
+    {
+      "_id": "019fe6f7-7dbb-76f2-b881-6ec9cbcf2667",
+      "slug": "the-thao-du-lich",
+      "name": "Thể Thao & Du Lịch"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:25:59.578Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219255595787118"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-78ec-8d2e-a6d041aba0ed",
+  "name": "Đồ ăn vặt",
+  "slug": "do-an-vat",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139562"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7529-8dcd-8e67c227fe0f",
+  "name": "Đồ chế biến sẵn",
+  "slug": "do-che-bien-san",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139567"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7d08-ba0e-b73199e1d9d3",
+  "name": "Nhu yếu phẩm",
+  "slug": "nhu-yeu-pham",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139571"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7b80-98a1-840cdd3d7a7f",
+  "name": "Nguyên liệu nấu ăn",
+  "slug": "nguyen-lieu-nau-an",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139595"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-751d-be25-5c8bfcc765dd",
+  "name": "Đồ làm bánh",
+  "slug": "do-lam-banh",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139598"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-737a-9cc5-1f70169a1083",
+  "name": "Sữa - trứng",
+  "slug": "sua-trung",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139600"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7305-88b6-4718e082ba97",
+  "name": "Đồ uống",
+  "slug": "do-uong",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139602"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7d18-8632-b64067e1eefa",
+  "name": "Ngũ cốc & mứt",
+  "slug": "ngu-coc-mut",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139604"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7c93-a27b-c022e2e70015",
+  "name": "Các loại bánh",
+  "slug": "cac-loai-banh",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139607"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7640-98fb-32674ec2ea4c",
+  "name": "Đồ uống có cồn",
+  "slug": "do-uong-co-con",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139609"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7397-8a6e-81bf0e441848",
+  "name": "Bộ quà tặng",
+  "slug": "bo-qua-tang",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139611"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7666-8b9e-d019f88957ac",
+  "name": "Thực phẩm tươi sống và thực phẩm đông lạnh",
+  "slug": "thuc-pham-tuoi-song-va-thuc-pham-dong-lanh",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139617"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe97f-2ec5-7bfb-9426-9767fdebb69f",
+  "name": "Khác",
+  "slug": "bach-hoa-online-khac",
+  "parentId": "019fe6f7-983e-708e-a191-701b1d0c2511",
+  "path": [
+    {
+      "_id": "019fe6f7-983e-708e-a191-701b1d0c2511",
+      "slug": "bach-hoa-online",
+      "name": "Bách Hóa Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:27:34.213Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219256542139619"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7117-b6f8-9b52ac835b25",
+  "name": "Xe đạp, xe điện",
+  "slug": "xe-dap-xe-dien",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854503"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-768f-b136-69dffd9b3f36",
+  "name": "Mô tô, xe máy",
+  "slug": "mo-to-xe-may",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854510"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7a36-948f-abc0a4e97c1b",
+  "name": "Xe Ô tô",
+  "slug": "xe-o-to",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854513"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-76a7-9ec3-975e70f73fd7",
+  "name": "Mũ bảo hiểm",
+  "slug": "mu-bao-hiem",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854526"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7d2d-afbe-752bd6e296d6",
+  "name": "Phụ kiện xe máy",
+  "slug": "phu-kien-xe-may",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854539"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7387-b3c8-0671b504cee9",
+  "name": "Phụ kiện xe đạp",
+  "slug": "phu-kien-xe-dap",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854541"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7d9b-93cb-dbce14c52219",
+  "name": "Phụ kiện bên trong ô tô",
+  "slug": "phu-kien-ben-trong-o-to",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854544"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7775-84b7-1a37a241b89d",
+  "name": "Dầu nhớt & dầu nhờn",
+  "slug": "dau-nhot-dau-nhon",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854565"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7173-9d1d-bb34426796f6",
+  "name": "Phụ tùng ô tô",
+  "slug": "phu-tung-o-to",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854567"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-79c4-aa9b-20d12029fa26",
+  "name": "Phụ tùng xe máy",
+  "slug": "phu-tung-xe-may",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854569"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7fd0-a3cd-728b1df4917d",
+  "name": "Phụ kiện bên ngoài ô tô",
+  "slug": "phu-kien-ben-ngoai-o-to",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854571"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7df0-9a1c-09b35bd59bdc",
+  "name": "Chăm sóc ô tô",
+  "slug": "cham-soc-o-to",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854574"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe980-3e25-7151-9e71-8fbe7f66eae4",
+  "name": "Dịch vụ cho xe",
+  "slug": "dich-vu-cho-xe",
+  "parentId": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+  "path": [
+    {
+      "_id": "019fe6f7-b482-7c5d-bb95-048ccdec6bca",
+      "slug": "o-to-xe-may-xe-dap",
+      "name": "Ô Tô & Xe Máy & Xe Đạp"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:28:43.685Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257236854576"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-7b65-b573-a1e9441e6139",
+  "name": "Sách Tiếng Việt",
+  "slug": "sach-tieng-viet",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554071"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-79a4-87ee-02c3c0481131",
+  "name": "Sách ngoại văn",
+  "slug": "sach-ngoai-van",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554077"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-7944-a4d1-2fa390b3c13e",
+  "name": "Gói Quà",
+  "slug": "goi-qua",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554079"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-7c3e-9c2f-8f3165f5458c",
+  "name": "Bút viết",
+  "slug": "but-viet",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554082"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-725f-b545-c5056e8c312f",
+  "name": "Dụng cụ học sinh & văn phòng",
+  "slug": "dung-cu-hoc-sinh-van-phong",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554084"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-7480-8898-e504cb194e12",
+  "name": "Màu, Họa Cụ và Đồ Thủ Công",
+  "slug": "mau-hoa-cu-va-do-thu-cong",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554086"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-79e1-9fe4-347c6481ff78",
+  "name": "Sổ và Giấy Các Loại",
+  "slug": "so-va-giay-cac-loai",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554088"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-76c1-9a96-67b1f41b102f",
+  "name": "Quà Lưu Niệm",
+  "slug": "qua-luu-niem",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554091"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe981-5cbf-7da4-8b0d-a762cf9d1f3b",
+  "name": "Nhạc cụ và phụ kiện âm nhạc",
+  "slug": "nhac-cu-va-phu-kien-am-nhac",
+  "parentId": "019fe6f7-d360-7331-9f56-a27938a3165d",
+  "path": [
+    {
+      "_id": "019fe6f7-d360-7331-9f56-a27938a3165d",
+      "slug": "nha-sach-online",
+      "name": "Nhà Sách Online"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:29:57.055Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219257970554096"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-753f-ae59-eca0a6ab1b8d",
+  "name": "Ba Lô Nam",
+  "slug": "ba-lo-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295577"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7ec4-a17e-32de84efb437",
+  "name": "Ba Lô Laptop Nam",
+  "slug": "ba-lo-laptop-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295596"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-700b-9511-a5c248ca9cc5",
+  "name": "Túi & Cặp Đựng Laptop",
+  "slug": "tui-cap-dung-laptop",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295599"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-74c2-ad56-53379397de20",
+  "name": "Túi Chống Sốc Laptop Nam",
+  "slug": "tui-chong-soc-laptop-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295601"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7a3c-bada-21d2482bdf7e",
+  "name": "Túi Tote Nam",
+  "slug": "tui-tote-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295603"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7d15-8feb-f58e0b024ea4",
+  "name": "Cặp Xách Công Sở Nam",
+  "slug": "cap-xach-cong-so-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295606"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7b84-9d9d-299a89a88e40",
+  "name": "Ví Cầm Tay Nam",
+  "slug": "vi-cam-tay-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295608"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7882-a460-167745e180cd",
+  "name": "Túi Đeo Hông & Túi Đeo Ngực Nam",
+  "slug": "tui-deo-hong-tui-deo-nguc-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295610"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7aeb-a808-2bf93219b5a0",
+  "name": "Túi Đeo Chéo Nam",
+  "slug": "tui-deo-cheo-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295615"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-77c7-b7d3-3fe6483b640e",
+  "name": "Bóp/Ví Nam",
+  "slug": "bop-vi-nam",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295631"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe982-bfb9-7e56-8be1-caacde087e5d",
+  "name": "Khác",
+  "slug": "balo-tui-vi-nam-khac",
+  "parentId": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+  "path": [
+    {
+      "_id": "019fe6f7-effa-7c91-9637-c9d0fff60728",
+      "slug": "balo-tui-vi-nam",
+      "name": "Balo & Túi Ví Nam"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:31:27.929Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219258879295633"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-7f6e-9eda-bcbd0a354a43",
+  "name": "Trang phục bé trai",
+  "slug": "trang-phuc-be-trai",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207023"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-7483-a55b-72224fe569ea",
+  "name": "Trang phục bé gái",
+  "slug": "trang-phuc-be-gai",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207030"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-7dfc-92c6-dbd5f59c8dc7",
+  "name": "Giày dép bé trai",
+  "slug": "giay-dep-be-trai",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207035"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-705f-9bab-66367fa90dc7",
+  "name": "Giày dép bé gái",
+  "slug": "giay-dep-be-gai",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207042"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-72a7-b6ce-3e0de84ae673",
+  "name": "Khác",
+  "slug": "thoi-trang-tre-em-khac",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207045"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-7398-a668-87f4c1f213bc",
+  "name": "Quần áo em bé",
+  "slug": "quan-ao-em-be",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207073"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-762b-bf5f-606b57ed1666",
+  "name": "Giày tập đi & Tất sơ sinh",
+  "slug": "giay-tap-di-tat-so-sinh",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207078"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe983-d634-7256-a012-f3c5496d9cd9",
+  "name": "Phụ kiện trẻ em",
+  "slug": "phu-kien-tre-em",
+  "parentId": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+  "path": [
+    {
+      "_id": "019fe6f8-0c45-7d66-9263-6c17dba59902",
+      "slug": "thoi-trang-tre-em",
+      "name": "Thời Trang Trẻ Em"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:32:39.220Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219259592207081"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-7a59-92b5-47530a27e994",
+  "name": "Sở thích & Sưu tầm",
+  "slug": "so-thich-suu-tam",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366753998"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-7a71-9bca-521bb60116c3",
+  "name": "Đồ chơi giải trí",
+  "slug": "do-choi-giai-tri",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366754004"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-728b-aa01-d6f40f4a7eab",
+  "name": "Đồ chơi giáo dục",
+  "slug": "do-choi-giao-duc",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366754007"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-7ef0-9d61-e70d71d9971d",
+  "name": "Đồ chơi cho trẻ sơ sinh & trẻ nhỏ",
+  "slug": "do-choi-cho-tre-so-sinh-tre-nho",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366754009"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-7afa-8cdc-3bd524096d30",
+  "name": "Đồ chơi vận động & ngoài trời",
+  "slug": "do-choi-van-dong-ngoai-troi",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366754032"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe985-04c3-7d3a-a81a-3d46f4a1cae9",
+  "name": "Búp bê & Đồ chơi nhồi bông",
+  "slug": "bup-be-do-choi-nhoi-bong",
+  "parentId": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+  "path": [
+    {
+      "_id": "019fe6f8-2b8d-707d-a2c5-479f2127ea18",
+      "slug": "do-choi",
+      "name": "Đồ Chơi"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:33:56.675Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219260366754034"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-7a1f-bc68-ef1598471087",
+  "name": "Giấy vệ sinh, khăn giấy",
+  "slug": "giay-ve-sinh-khan-giay",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605650"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-74ed-9588-1dea2e818e79",
+  "name": "Vệ sinh nhà cửa",
+  "slug": "ve-sinh-nha-cua",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605661"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-7ae7-b18c-f53370774079",
+  "name": "Vệ sinh bát đĩa",
+  "slug": "ve-sinh-bat-dia",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605666"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-7509-8aed-5bfe891a1bde",
+  "name": "Dụng cụ vệ sinh",
+  "slug": "dung-cu-ve-sinh",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605672"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-79d3-883e-1fe52c9241e2",
+  "name": "Chất khử mùi, làm thơm",
+  "slug": "chat-khu-mui-lam-thom",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605677"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-73c4-b686-0d17a11497c0",
+  "name": "Thuốc diệt côn trùng",
+  "slug": "thuoc-diet-con-trung",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605682"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-7bee-a7e6-eb745fe19524",
+  "name": "Túi, màng bọc thực phẩm",
+  "slug": "tui-mang-boc-thuc-pham",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605697"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe986-39b0-7370-8661-0556aaebd0d8",
+  "name": "Bao bì, túi đựng rác",
+  "slug": "bao-bi-tui-dung-rac",
+  "parentId": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+  "path": [
+    {
+      "_id": "019fe6f9-16d8-7839-8b6d-c353cc7aa5c2",
+      "slug": "giat-giu-cham-soc-nha-cua",
+      "name": "Giặt Giũ & Chăm Sóc Nhà Cửa"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:35:15.760Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261157605702"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-792f-9931-3006354c8423",
+  "name": "Thức ăn cho thú cưng",
+  "slug": "thuc-an-cho-thu-cung",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085073"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-77c1-9964-cf99bc3aa31e",
+  "name": "Phụ kiện cho thú cưng",
+  "slug": "phu-kien-cho-thu-cung",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085082"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-7c6b-8592-db6ee8c781b8",
+  "name": "Vệ sinh cho thú cưng",
+  "slug": "ve-sinh-cho-thu-cung",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085088"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-7f99-b9ea-8e2729e7b059",
+  "name": "Quần áo thú cưng",
+  "slug": "quan-ao-thu-cung",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085094"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-7cd7-97eb-32d4c9572d9c",
+  "name": "Chăm sóc sức khỏe",
+  "slug": "cham-soc-suc-khoe",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085136"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-744b-884d-54f18665d9a6",
+  "name": "Làm đẹp cho thú cưng",
+  "slug": "lam-dep-cho-thu-cung",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085142"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe987-4bb4-724d-8328-7a46383e4b4a",
+  "name": "Khác",
+  "slug": "cham-soc-thu-cung-khac",
+  "parentId": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+  "path": [
+    {
+      "_id": "019fe6f9-3535-79fd-b3ed-3860a12ff3d7",
+      "slug": "cham-soc-thu-cung",
+      "name": "Chăm Sóc Thú Cưng"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:36:25.908Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219261859085147"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7252-9832-91e1bc692646",
+  "name": "Nhà hàng & Ăn uống",
+  "slug": "nha-hang-an-uong",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209203"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7713-8685-1a9d354638a0",
+  "name": "Sự kiện & Giải trí",
+  "slug": "su-kien-giai-tri",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209209"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-71b1-8ac4-0d651d778c93",
+  "name": "Nạp tiền tài khoản",
+  "slug": "nap-tien-tai-khoan",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209212"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-722f-aac2-215b1803c35e",
+  "name": "Sức khỏe & Làm đẹp",
+  "slug": "suc-khoe-lam-dep",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209233"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7e91-90f5-305dd8a87368",
+  "name": "Gọi xe",
+  "slug": "goi-xe",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209236"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7102-8b8c-1ff3b8fb2998",
+  "name": "Khóa học",
+  "slug": "khoa-hoc",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209238"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7fa4-aa4e-94505f51c510",
+  "name": "Du lịch & Khách sạn",
+  "slug": "du-lich-khach-san",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209241"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7370-972f-f428baefb5fa",
+  "name": "Mua sắm",
+  "slug": "mua-sam",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209243"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7c08-9f53-54b2eb0ccd98",
+  "name": "Mã quà tặng Shopee",
+  "slug": "ma-qua-tang-shopee",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209246"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7fa9-878e-1c7197f6e377",
+  "name": "Thanh toán hóa đơn",
+  "slug": "thanh-toan-hoa-don",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209249"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe988-617c-7eb6-92fe-f1dbf34c605a",
+  "name": "Dịch vụ khác",
+  "slug": "dich-vu-khac",
+  "parentId": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+  "path": [
+    {
+      "_id": "019fe6f9-4f6a-746f-954f-360a78a3dc23",
+      "slug": "voucher-dich-vu",
+      "name": "Voucher & Dịch Vụ"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:37:37.020Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219262570209251"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe989-df82-71ec-8bdf-535f279f6784",
+  "name": "Dụng cụ cầm tay",
+  "slug": "dung-cu-cam-tay",
+  "parentId": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "path": [
+    {
+      "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+      "slug": "dung-cu-thiet-bi-tien-ich",
+      "name": "Dụng Cụ & Thiết Bị Tiện Ích"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:39:14.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219263548188908"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe989-df82-7a30-a912-00f4c1c6f713",
+  "name": "Dụng cụ điện và thiết bị lớn",
+  "slug": "dung-cu-dien-va-thiet-bi-lon",
+  "parentId": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "path": [
+    {
+      "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+      "slug": "dung-cu-thiet-bi-tien-ich",
+      "name": "Dụng Cụ & Thiết Bị Tiện Ích"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:39:14.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219263548188921"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe989-df82-77e6-b739-8eb6eddc3cdd",
+  "name": "Thiết bị mạch điện",
+  "slug": "thiet-bi-mach-dien",
+  "parentId": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "path": [
+    {
+      "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+      "slug": "dung-cu-thiet-bi-tien-ich",
+      "name": "Dụng Cụ & Thiết Bị Tiện Ích"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:39:14.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219263548188927"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe989-df82-7569-9875-8138d457b1af",
+  "name": "Vật liệu xây dựng",
+  "slug": "vat-lieu-xay-dung",
+  "parentId": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "path": [
+    {
+      "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+      "slug": "dung-cu-thiet-bi-tien-ich",
+      "name": "Dụng Cụ & Thiết Bị Tiện Ích"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:39:14.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219263548188933"
+    },
+    "Offset": 0
+  }
+},
+{
+  "_id": "019fe989-df82-714f-b419-7eb54ac42a14",
+  "name": "Thiết bị và phụ kiện xây dựng",
+  "slug": "thiet-bi-va-phu-kien-xay-dung",
+  "parentId": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+  "path": [
+    {
+      "_id": "019fe6f9-744c-74dc-93b3-cc3cf0fec455",
+      "slug": "dung-cu-thiet-bi-tien-ich",
+      "name": "Dụng Cụ & Thiết Bị Tiện Ích"
+    }
+  ],
+  "level": 2,
+  "isLeaf": true,
+  "createdAt": {
+    "DateTime": {
+      "$date": "2026-08-10T02:39:14.818Z"
+    },
+    "Ticks": {
+      "$numberLong": "639219263548188938"
+    },
+    "Offset": 0
+  }
+}]
