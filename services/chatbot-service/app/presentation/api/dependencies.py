@@ -3,6 +3,8 @@ from functools import lru_cache
 
 import asyncpg
 from fastapi import Request
+from fastapi import Header, HTTPException
+from uuid import UUID
 
 from app.infrastructure.config.settings import Settings, get_settings
 from app.infrastructure.persistence.pgvector_repository import PgVectorRepository
@@ -125,3 +127,11 @@ def build_app_state_factory():
         }
 
     return _build
+
+def get_current_user_id(x_user_id: str | None = Header(default=None, alias="X-User-Id")) -> UUID:
+    if not x_user_id:
+        raise HTTPException(status_code=401, detail="Missing X-User-Id header")
+    try:
+        return UUID(x_user_id)
+    except ValueError:
+        raise HTTPException(status_code=401, detail="Invalid X-User-Id header") from None

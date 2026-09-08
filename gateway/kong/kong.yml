@@ -219,6 +219,28 @@ services:
               uri_param_names:
                 - token
                 - jwt
+  
+  - name: chatbot-service
+    url: http://chatbot-service:8080
+    routes:
+      - name: chatbot-preflight
+        paths: [ "/chatbot" ]
+        methods: [ "OPTIONS" ]
+        strip_path: false
+
+      - name: chatbot-ask-protected
+        paths: [ "/chatbot/chat/ask" ]
+        methods: [ "POST" ]
+        strip_path: false
+        plugins:
+          - name: jwt
+
+      - name: chatbot-history-protected
+        paths: [ "/chatbot/chat/history" ]
+        methods: [ "GET" ]
+        strip_path: false
+        plugins:
+          - name: jwt
 
 consumers:
   - username: auth-service-issuer

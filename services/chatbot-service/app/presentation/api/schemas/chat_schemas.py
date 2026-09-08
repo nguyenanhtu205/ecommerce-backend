@@ -1,10 +1,10 @@
 from __future__ import annotations
+from uuid import UUID
 from pydantic import BaseModel, Field
 
 
 class AskRequest(BaseModel):
     question: str = Field(..., min_length=1)
-    session_id: str = Field(..., min_length=1)
 
 
 class SourceSchema(BaseModel):
@@ -17,3 +17,13 @@ class SourceSchema(BaseModel):
 class AskResponse(BaseModel):
     answer: str
     sources: list[SourceSchema]
+
+
+class ChatMessageSchema(BaseModel):
+    role: str
+    content: str
+
+
+class ChatHistoryResponse(BaseModel):
+    user_id: UUID
+    messages: list[ChatMessageSchema]
