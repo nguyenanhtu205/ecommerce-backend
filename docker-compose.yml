@@ -540,6 +540,12 @@ services:
       RETRIEVAL_TOP_K: 4
     ports:
       - '5016:8080'
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8080/health', timeout=3)"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 5s
     depends_on:
       chatbot-migrate:
         condition: service_completed_successfully
@@ -547,6 +553,26 @@ services:
         condition: service_completed_successfully
       redis:
         condition: service_started
+        
+  chatbot-seed:
+    image: postgres:18-alpine
+    volumes:
+      - ./services/chatbot-service/seed-docs/user-guide.md:/seed/user-guide.md:ro
+      - ./infra/chatbot/seed-ingest.sh:/seed-ingest.sh:ro
+    environment:
+      POSTGRES_DSN: postgresql://root:root@postgres-chatbot:5432/chatbot_db
+      CHATBOT_SERVICE_URL: http://chatbot-service:8080
+      SEED_FILE: /seed/user-guide.md
+      SEED_SOURCE_NAME: user-guide.md
+    depends_on:
+      chatbot-service:
+        condition: service_healthy
+      postgres-chatbot:
+        condition: service_healthy
+    entrypoint:
+      - /bin/sh
+      - -c
+      - "apk add --no-cache curl >/dev/null 2>&1 && sh /seed-ingest.sh"
 
 volumes:
   pgdata:

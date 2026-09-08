@@ -12,7 +12,7 @@ import_if_empty() {
   count=$(mongosh --quiet "$DB_NAME" --eval "db.getCollection('${collection}').countDocuments({})")
 
   if [ "$count" -gt 0 ]; then
-    echo "[init-import-catalog] Bỏ qua '${collection}': đã có ${count} document."
+    echo "[init-import-catalog] Skipping '${collection}': it already contains ${count} documents."
     return
   fi
 
@@ -24,7 +24,7 @@ import_if_empty() {
     --upsertFields=_id \
     --file "$file"
 
-  echo "[init-import-catalog] Đã import '${collection}' từ ${file}."
+  echo "[init-import-catalog] Successfully imported '${collection}' from ${file}."
 }
 
 import_if_empty "categories" "${DATA_DIR}/product_catalog_db_categories.json"

@@ -9,8 +9,11 @@ from app.domain.entities.document import Document
 from app.application.interfaces.vector_store_repository import VectorStoreRepository
 from app.application.interfaces.embedding_service import EmbeddingService
 from app.application.interfaces.file_storage_service import FileStorageService
+from app.infrastructure.ingestion.markdown_section_splitter import split_markdown_sections
 
 logger = logging.getLogger(__name__)
+
+MARKDOWN_CONTENT_TYPES = {"text/markdown", "text/x-markdown"}
 
 
 class DocumentRegistry:
@@ -38,6 +41,7 @@ class IngestDocumentUseCase:
         self._embedding_service = embedding_service
         self._vector_store = vector_store
         self._registry = document_registry
+        self._chunk_size = chunk_size
         self._splitter = RecursiveCharacterTextSplitter(
             chunk_size=chunk_size, chunk_overlap=chunk_overlap
         )
@@ -53,6 +57,35 @@ class IngestDocumentUseCase:
         self._registry.save(document)
         return document
 
+    def _build_chunk_texts(self, raw_text: str, content_type: str) -> tuple[list[str], list[str]]:
+        if content_type not in MARKDOWN_CONTENT_TYPES:
+            texts = self._splitter.split_text(raw_text)
+            return texts, [""] * len(texts)
+
+        sections = split_markdown_sections(raw_text)
+        texts: list[str] = []
+        headings: list[str] = []
+
+        for section in sections:
+            heading = section["heading"]
+            body = section["content"].strip()
+            if not body:
+                continue
+
+            prefix = f"{heading}\n" if heading else ""
+            full_text = f"{prefix}{body}"
+
+            if len(full_text) <= self._chunk_size:
+                texts.append(full_text)
+                headings.append(heading)
+                continue
+
+            for sub in self._splitter.split_text(body):
+                texts.append(f"{prefix}{sub}" if prefix else sub)
+                headings.append(heading)
+
+        return texts, headings
+
     async def run(self, document_id: UUID, raw_text: str) -> None:
         document = self._registry.get(document_id)
         if document is None:
@@ -63,7 +96,7 @@ class IngestDocumentUseCase:
             document.mark_processing()
             self._registry.save(document)
 
-            texts = self._splitter.split_text(raw_text)
+            texts, headings = self._build_chunk_texts(raw_text, document.content_type)
             if not texts:
                 raise ValueError("Document produced 0 chunks after splitting")
 
@@ -76,9 +109,14 @@ class IngestDocumentUseCase:
                     chunk_index=idx,
                     source=document.filename,
                     embedding=embedding,
-                    metadata={"content_type": document.content_type},
+                    metadata={
+                        "content_type": document.content_type,
+                        **({"heading": heading} if heading else {}),
+                    },
                 )
-                for idx, (text, embedding) in enumerate(zip(texts, embeddings))
+                for idx, (text, heading, embedding) in enumerate(
+                    zip(texts, headings, embeddings)
+                )
             ]
 
             await self._vector_store.add_chunks(chunks)

@@ -1,4 +1,5 @@
 from __future__ import annotations
+from pathlib import Path
 from uuid import UUID
 
 from fastapi import APIRouter, Depends, UploadFile, File, BackgroundTasks, HTTPException
@@ -11,6 +12,20 @@ from app.domain.exceptions import UnsupportedFileTypeError
 
 router = APIRouter(prefix="/documents", tags=["ingest"])
 
+_EXTENSION_CONTENT_TYPES = {
+    ".md": "text/markdown",
+    ".markdown": "text/markdown",
+    ".txt": "text/plain",
+    ".pdf": "application/pdf",
+}
+
+
+def _resolve_content_type(filename: str, provided_content_type: str | None) -> str:
+    if provided_content_type and provided_content_type != "application/octet-stream":
+        return provided_content_type
+    ext = Path(filename).suffix.lower()
+    return _EXTENSION_CONTENT_TYPES.get(ext, "text/plain")
+
 
 @router.post("/upload", response_model=UploadResponse)
 async def upload_document(
@@ -19,13 +34,13 @@ async def upload_document(
     use_case: IngestDocumentUseCase = Depends(get_ingest_use_case),
 ):
     file_bytes = await file.read()
-    content_type = file.content_type or "text/plain"
     filename = file.filename
     if not filename:
         raise HTTPException(
             status_code=400,
             detail="Filename is required",
         )
+    content_type = _resolve_content_type(filename, file.content_type)
 
     document = await use_case.register_pending(
         filename=filename,
