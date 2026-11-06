@@ -1,5 +1,9 @@
 # Ecommerce Backend
 
+## System Architecture
+
+![Ecommerce Microservices Architecture](architecture.jpg)
+
 This repository contains the backend services for the ecommerce platform, built with a microservices architecture. Each service owns its own database and communicates with other services through gRPC (synchronous) and Kafka (asynchronous) messaging.
 
 ## Prerequisites
